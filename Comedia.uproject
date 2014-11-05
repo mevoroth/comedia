@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{31C463DB-4110-AC7A-4D91-88ACBCEFA3B5}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Comedia",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
