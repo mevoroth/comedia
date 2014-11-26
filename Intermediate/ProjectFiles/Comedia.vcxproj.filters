@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<None Include="..\..\Comedia.uproject" />
+		<Filter Include="Source">
+			<UniqueIdentifier>{C17E62B2-142E-4DC8-B87F-93AC85A3D7D5}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\Comedia.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<None Include="..\..\Source\ComediaEditor.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<Filter Include="Config">
+			<UniqueIdentifier>{516D6F17-8C3D-4AB0-A516-49C15B2CA8E1}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Config\DefaultEditor.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEngine.ini">
+			<Filter>Config</Filter>
+		</None >
+		<Filter Include="Source\Comedia">
+			<UniqueIdentifier>{003C1E67-E479-4A9D-9671-575C73126007}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\Comedia\Comedia.Build.cs">
+			<Filter>Source\Comedia</Filter>
+		</None >
+		<ClCompile Include="..\..\Source\Comedia\Comedia.cpp">
+			<Filter>Source\Comedia</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\Comedia\Comedia.h">
+			<Filter>Source\Comedia</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\Comedia\ComediaGameMode.cpp">
+			<Filter>Source\Comedia</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\Comedia\ComediaGameMode.h">
+			<Filter>Source\Comedia</Filter>
+		</ClInclude >
+		<Filter Include="Source\Comedia\Actors">
+			<UniqueIdentifier>{31703F7E-6458-45B9-AF03-95F816DC16E0}</UniqueIdentifier>
+		</Filter>
+		<ClCompile Include="..\..\Source\Comedia\Actors\ScriptedCameraActor.cpp">
+			<Filter>Source\Comedia\Actors</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\Comedia\Actors\ScriptedCameraActor.h">
+			<Filter>Source\Comedia\Actors</Filter>
+		</ClInclude >
+		<Filter Include="Source\Comedia\Resources">
+			<UniqueIdentifier>{2CF79301-27BC-4FAA-AC1E-7194963A36E5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Comedia\Resources\Windows">
+			<UniqueIdentifier>{4D0388CA-BA9F-4159-AE49-15C92E0C3C8A}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\Comedia\Resources\Windows\Comedia.ico">
+			<Filter>Source\Comedia\Resources\Windows</Filter>
+		</None >
+		<ResourceCompile Include="..\..\Source\Comedia\Resources\Windows\Comedia.rc">
+			<Filter>Source\Comedia\Resources\Windows</Filter>
+		</ResourceCompile >
+	</ItemGroup>
+</Project>

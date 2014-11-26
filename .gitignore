@@ -215,5 +215,8 @@ FakesAssemblies/
 
 /Binaries
 /DerivedDataCache
-/Intermediate
+/Intermediate/Build
+/Intermediate/Shaders
+/Intermediate/CachedAssetRegistry.bin
+
 /Saved
