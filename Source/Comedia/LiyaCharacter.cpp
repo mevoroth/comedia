@@ -25,12 +25,11 @@ void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	
 	InputComponent->BindAxis("MoveForward", this, &ALiyaCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ALiyaCharacter::MoveRight);
-	//InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	//InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 
-	InputComponent->BindAxis("Turn", this, &ALiyaCharacter::AddControllerYawInput);
-	InputComponent->BindAxis("LookUp", this, &ALiyaCharacter::AddControllerRollInput);
-	InputComponent->BindAxis("LookDown", this, &ALiyaCharacter::AddControllerRollInput);
+	//InputComponent->BindAxis("Turn", this, &ALiyaCharacter::AddControllerYawInput);
+	//InputComponent->BindAxis("LookUp", this, &ALiyaCharacter::AddControllerRollInput);
+	//InputComponent->BindAxis("LookDown", this, &ALiyaCharacter::AddControllerRollInput);
 }
 
 void ALiyaCharacter::MoveForward(float Val)
