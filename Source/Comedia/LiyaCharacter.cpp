@@ -28,9 +28,13 @@ void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	//InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	//InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
+	/*******************************************/
+	/*           <3 MONSEIGNEUR LOUIS LOUIS    */
+	/*******************************************/
+
 	InputComponent->BindAxis("Turn", this, &ALiyaCharacter::AddControllerYawInput);
-	InputComponent->BindAxis("LookUp", this, &ALiyaCharacter::AddControllerRollInput);
-	InputComponent->BindAxis("LookDown", this, &ALiyaCharacter::AddControllerRollInput);
+	InputComponent->BindAxis("LookUp", this, &ALiyaCharacter::AddCameraPitch);
+	//InputComponent->BindAxis("LookDown", this, &ALiyaCharacter::AddControllerPitchInput);
 }
 
 void ALiyaCharacter::MoveForward(float Val)
@@ -51,12 +55,21 @@ void ALiyaCharacter::MoveRight(float Val)
 
 void ALiyaCharacter::AddControllerYawInput(float Val)
 {
-	Super::AddControllerYawInput(Val * Camera->GetCameraSpeed());
-
+	Super::AddControllerYawInput(Val * GetWorld()->GetDeltaSeconds() * CameraSpeed);
 }
 
-void ALiyaCharacter::AddControllerRollInput(float Val)
+void ALiyaCharacter::AddCameraPitch(float Val)
 {
-	Super::AddControllerRollInput(Val * Camera->GetCameraSpeed());
-	Camera->AddRoll(Val);
+	Camera->AddRelativeRotation(FRotator(
+		Val * GetWorld()->GetDeltaSeconds() * CameraSpeed, 0.f, 0.f
+	));
+
+	if (Camera->RelativeRotation.Pitch < MinCamPitch)
+	{
+		Camera->RelativeRotation.Pitch = MinCamPitch;
+	}
+	else if (Camera->RelativeRotation.Pitch > MaxCamPitch)
+	{
+		Camera->RelativeRotation.Pitch = MaxCamPitch;
+	}
 }
