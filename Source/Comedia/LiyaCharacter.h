@@ -15,20 +15,37 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Camera)
-	ULiyaCamera* Camera;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Camera Settings")
+	float CameraSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Camera Settings")
+	float MinCamPitch;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Camera Settings")
+	float MaxCamPitch;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
+	USceneComponent* Camera;
+
+	inline float GetCameraSpeed() const
+	{
+		return CameraSpeed;
+	}
+	//ULiyaCamera* Camera;
 
 protected:
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
-	/** Handles stafing movement, left and right */
+	/** Handles strafing movement, left and right */
 	void MoveRight(float Val);
 
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
 
-	virtual void AddControllerRollInput(float Val) override;
+	/** Controls Mouse Y axis */
+	void AddCameraPitch(float Val);
+	/** Controls Mouse X axis */
 	virtual void AddControllerYawInput(float Val) override;
 };
