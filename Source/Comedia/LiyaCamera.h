@@ -13,14 +13,9 @@ class COMEDIA_API ULiyaCamera : public UCameraComponent
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Settings")
-	float CameraSpeed;
+	//virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	inline float GetCameraSpeed() const
-	{
-		return CameraSpeed;
-	}
-	void AddRoll(float Val);
+	//void AddRoll(float Val);
+	//void AddYaw(float Val);
+	//void Reset();
 };

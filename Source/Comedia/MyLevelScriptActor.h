@@ -23,11 +23,14 @@ class COMEDIA_API AMyLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TweakingValues")
 	float DelayBetweenKnifeSpawn;
 
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
 private:
 	/** Class to instance when spawning Knife character */
 	TSubclassOf<AKnifeCharacter> KnifeClass;
-
 	float TotalElapsedTime;
+	ACharacter* PlayerCharacter;
+
+	void KnifeSpawning(float ComputedRadiusSpawnKnifeArea);
 };

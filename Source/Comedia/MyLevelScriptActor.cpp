@@ -15,6 +15,14 @@ AMyLevelScriptActor::AMyLevelScriptActor(const class FPostConstructInitializePro
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+void AMyLevelScriptActor::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//Get player character
+	PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
+}
+
 void AMyLevelScriptActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -22,30 +30,40 @@ void AMyLevelScriptActor::Tick(float DeltaSeconds)
 	//Increase total elapsed time
 	TotalElapsedTime += DeltaSeconds;
 
-	//Draw spawn area around the player
-	ACharacter* PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
-	float ComputedRadiusSpawnKnifeArea = PlayerCharacter->CapsuleComponent->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
-	DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
-
 	//Spawn a knife
 	if (TotalElapsedTime > DelayFirstKnifeSpawn) //FIXME: Will spawn when previous knife done
 	{
 		TotalElapsedTime -= DelayFirstKnifeSpawn; //FIXME: Will spawn when previous knife done
 
-		//Spawn knife
-		AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(KnifeClass);
-		SpawnedKnifeCharacter->SetActorLocation(PlayerCharacter->GetActorLocation() + FVector::UpVector * 500.0f);
-		SpawnedKnifeCharacter->SpawnDefaultController();
+		//Draw spawn area around the player
+		float ComputedRadiusSpawnKnifeArea = PlayerCharacter->CapsuleComponent->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
+		DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
 
-		//Rotate to a random angle
-		FRotator RotationKnife(0.0f, FMath::FRand() * 360.0f, 0.0f);
-		SpawnedKnifeCharacter->SetActorRelativeRotation(RotationKnife);
-
-		//Move to border of the area
-		SpawnedKnifeCharacter->SetActorLocation(SpawnedKnifeCharacter->GetActorLocation() + SpawnedKnifeCharacter->GetActorForwardVector() * ComputedRadiusSpawnKnifeArea);
-
-		//Look at player character
-		FRotator RotationBackKnife(0.0f, 180.0f, 0.0f);
-		SpawnedKnifeCharacter->AddActorLocalRotation(RotationBackKnife);
+		KnifeSpawning(ComputedRadiusSpawnKnifeArea);
 	}
+}
+
+void AMyLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
+{
+	//Spawn knife
+	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(KnifeClass);
+	SpawnedKnifeCharacter->SetActorLocation(PlayerCharacter->GetActorLocation() + FVector::UpVector * 500.0f);
+	SpawnedKnifeCharacter->SpawnDefaultController();
+
+	//Rotate to a random angle
+	FRotator RotationKnife(0.0f, FMath::FRand() * 360.0f, 0.0f);
+	SpawnedKnifeCharacter->SetActorRelativeRotation(RotationKnife);
+
+	//Move to border of the area
+	SpawnedKnifeCharacter->SetActorLocation(SpawnedKnifeCharacter->GetActorLocation() + SpawnedKnifeCharacter->GetActorForwardVector() * ComputedRadiusSpawnKnifeArea);
+
+	//Look at player character
+	FRotator RotationBackKnife(0.0f, 180.0f, 0.0f);
+	SpawnedKnifeCharacter->AddActorLocalRotation(RotationBackKnife);
+
+	//Set character velocity
+	FVector DirectionKnifeCharacter = PlayerCharacter->GetActorLocation() - SpawnedKnifeCharacter->GetActorLocation();
+	DirectionKnifeCharacter.Normalize();
+	float KnifeCharacterVelocity = 10000.0f;
+	SpawnedKnifeCharacter->CharacterMovement->RequestDirectMove(DirectionKnifeCharacter * KnifeCharacterVelocity, false);
 }
