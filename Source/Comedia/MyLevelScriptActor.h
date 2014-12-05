@@ -14,14 +14,23 @@ class COMEDIA_API AMyLevelScriptActor : public ALevelScriptActor
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TweakingValues")
-	float RadiusSpawnKnifeArea;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TweakingValues")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifePhase")
 	float DelayFirstKnifeSpawn;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TweakingValues")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifePhase")
 	float DelayBetweenKnifeSpawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifePhase")
+	float RadiusSpawnKnifeArea;
+
+	UPROPERTY(BlueprintReadOnly, Category = "KnifePhase")
+	int32 NbSpawnedKnife;
+
+	/** ComputedRadiusSpawnKnifeArea depending of player character height */
+	float ComputedRadiusSpawnKnifeArea;
+
+	/** true indicates a knife is present */
+	bool bHasKnifeSpawned;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -29,7 +38,7 @@ class COMEDIA_API AMyLevelScriptActor : public ALevelScriptActor
 private:
 	/** Class to instance when spawning Knife character */
 	TSubclassOf<AKnifeCharacter> KnifeClass;
-	float TotalElapsedTime;
+	float RemainingTime;
 	ACharacter* PlayerCharacter;
 
 	void KnifeSpawning(float ComputedRadiusSpawnKnifeArea);

@@ -13,6 +13,11 @@ class COMEDIA_API AKnifeCharacter : public ACharacter
 {
 	GENERATED_UCLASS_BODY()
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
+	float KnifeSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
+	float MaxRotationSpeed;
+
 	virtual void Tick(float DeltaSeconds) override;
-	
 };
