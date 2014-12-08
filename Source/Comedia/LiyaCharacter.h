@@ -4,6 +4,8 @@
 
 #include "LiyaCamera.h"
 
+#include "LowPassFilterComponent.h"
+
 #include "GameFramework/Character.h"
 #include "LiyaCharacter.generated.h"
 
@@ -15,23 +17,38 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Camera Settings")
+	/** How many footsteps to buffer for filtering footsteps height */
+	const int FOOTSTEP_LATENCY = 3;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Settings")
+	float CharacterSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Settings")
 	float CameraSpeed;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Camera Settings")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Settings")
 	float MinCamPitch;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Camera Settings")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Comedia Settings")
 	float MaxCamPitch;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Comedia Settings")
 	USceneComponent* Camera;
 
 	inline float GetCameraSpeed() const
 	{
 		return CameraSpeed;
 	}
-	//ULiyaCamera* Camera;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
+	virtual void LeftFootStep();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
+	virtual void RightFootStep();
+
+	/** Handle footsteps in Tick event */
+	void FootSteps(/*float DeltaSeconds*/);
+
+	virtual void Tick(float DeltaSeconds) override;
 
 protected:
 	/** Handles moving forward/backward */
@@ -48,4 +65,21 @@ protected:
 	void AddCameraPitch(float Val);
 	/** Controls Mouse X axis */
 	virtual void AddControllerYawInput(float Val) override;
+private:
+
+	/** Previous Z diff left */
+	float DeltaZLeft;
+	/** Previous Z diff right */
+	float DeltaZRight;
+	/** Previous Z diff derivative left */
+	float DeltaDerivZLeft;
+	/** Previous Z diff derivative right */
+	float DeltaDerivZRight;
+
+	/** Low Pass Filter for left footstep Z */
+	TSubobjectPtr<ULowPassFilterComponent> LeftFootFiltered;
+	/** Low Pass Filter for right footstep Z */
+	TSubobjectPtr<ULowPassFilterComponent> RightFootFiltered;
+
+	bool Internal_CheckFootstep(const FVector& Footstep, TSubobjectPtr<ULowPassFilterComponent>& Filter, float& oldZ, float& oldZDerivative);
 };

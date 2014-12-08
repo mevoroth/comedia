@@ -2,16 +2,19 @@
 
 #include "Comedia.h"
 #include "LiyaCharacter.h"
+#include "DamonFalconActor.h"
 
 
 ALiyaCharacter::ALiyaCharacter(const class FPostConstructInitializeProperties& PCIP)
 	: Super(PCIP)
+	, Camera(0)
+	, DeltaZLeft(0)
+	, DeltaZRight(0)
 {
-	Camera = 0;
-	//Camera = PCIP.CreateDefaultSubobject<ULiyaCamera>(this, TEXT("Camera"));
-	//Camera->SetRelativeLocation(FVector(-190.f, 0.f, 190.f));
-	//Camera->SetRelativeRotation(FRotator(0.f, -40.f, 0.f));
-	//Camera->AttachTo(RootComponent);
+	LeftFootFiltered = PCIP.CreateDefaultSubobject<ULowPassFilterComponent>(this, "Left Foot (low pass-filtered)");
+	RightFootFiltered = PCIP.CreateDefaultSubobject<ULowPassFilterComponent>(this, "Right Foot (right pass-filtered)");
+	LeftFootFiltered->InitRecord(FOOTSTEP_LATENCY);
+	RightFootFiltered->InitRecord(FOOTSTEP_LATENCY);
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -40,7 +43,7 @@ void ALiyaCharacter::MoveForward(float Val)
 {
 	if (Val != 0.0f)
 	{
-		AddMovementInput(GetActorForwardVector(), Val);
+		AddMovementInput(GetActorForwardVector(), Val * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
 	}
 }
 
@@ -48,7 +51,7 @@ void ALiyaCharacter::MoveRight(float Val)
 {
 	if (Val != 0.0f)
 	{
-		AddMovementInput(GetActorRightVector(), Val);
+		AddMovementInput(GetActorRightVector(), Val * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
 	}
 }
 
@@ -59,6 +62,8 @@ void ALiyaCharacter::AddControllerYawInput(float Val)
 
 void ALiyaCharacter::AddCameraPitch(float Val)
 {
+	check(Camera); // Camera not set in BP
+
 	Camera->AddRelativeRotation(FRotator(
 		Val * GetWorld()->GetDeltaSeconds() * CameraSpeed, 0.f, 0.f
 	));
@@ -71,4 +76,57 @@ void ALiyaCharacter::AddCameraPitch(float Val)
 	{
 		Camera->RelativeRotation.Pitch = MaxCamPitch;
 	}
+}
+
+void ALiyaCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	FootSteps(/*DeltaSeconds*/);
+}
+
+bool ALiyaCharacter::Internal_CheckFootstep(const FVector& FootPos, TSubobjectPtr<ULowPassFilterComponent>& Filter, float& oldZ, float& oldZDerivative)
+{
+	FHitResult Hit(ForceInit);
+	FCollisionQueryParams Trace(TEXT("FootStepTrace"), false, GetOwner());
+
+	GetWorld()->LineTraceSingle(Hit, FootPos, FootPos + FVector::UpVector * -100.f, ECC_Visibility, Trace);
+
+	Filter->Push(FootPos.Z - Hit.Location.Z);
+	float currentZ = Filter->GetCurrentRecord();
+	float currentZDerivative = currentZ - oldZ;
+
+	bool bFootStep = currentZDerivative >= 0 && oldZDerivative < 0;
+	
+	oldZ = currentZ;
+	oldZDerivative = currentZDerivative;
+
+	UE_LOG(LogGPCode, Warning, TEXT("%f;%f;%s"), currentZ, currentZDerivative, (bFootStep ? TEXT("YES") : TEXT("NO")));
+
+	return bFootStep;
+}
+//
+//void ALiyaCharacter::LeftFootStep()
+//{
+//	UE_LOG(LogGPCode, Warning, TEXT("Internal Code Left Foot"));
+//}
+//
+//void ALiyaCharacter::RightFootStep()
+//{
+//	UE_LOG(LogGPCode, Warning, TEXT("Internal Code Right Foot"));
+//}
+
+void ALiyaCharacter::FootSteps(/*float DeltaSeconds*/)
+{
+	FVector Pos;
+	//Mesh->GetSocketWorldLocationAndRotation(TEXT("LeftFootSocket"), Pos, Rot);
+	//UE_LOG(LogGPCode, Warning, TEXT("%f"), Mesh->GetSocketLocation(TEXT("LeftFootSocket")).Z);
+	if (Internal_CheckFootstep(Mesh->GetSocketLocation(TEXT("LeftFootSocket")), LeftFootFiltered, DeltaZLeft, DeltaDerivZLeft))
+	{
+		LeftFootStep();
+	}
+	//else if (Internal_CheckFootstep(Mesh->GetSocketLocation(TEXT("RightFootSocket")), DeltaZLeft, DeltaDerivZLeft))
+	//{
+	//	RightFootStep();
+	//}
 }
