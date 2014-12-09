@@ -38,6 +38,7 @@ class COMEDIA_API AMyLevelScriptActor : public ALevelScriptActor
 private:
 	/** Class to instance when spawning Knife character */
 	TSubclassOf<AKnifeCharacter> KnifeClass;
+
 	float RemainingTime;
 	ACharacter* PlayerCharacter;
 

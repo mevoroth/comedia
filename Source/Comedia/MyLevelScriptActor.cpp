@@ -77,4 +77,6 @@ void AMyLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 	//Look at player character
 	FRotator RotationBackKnife(0.0f, 180.0f, 0.0f);
 	SpawnedKnifeCharacter->AddActorLocalRotation(RotationBackKnife);
+
+	SpawnedKnifeCharacter->InitOriginalPosition();
 }
