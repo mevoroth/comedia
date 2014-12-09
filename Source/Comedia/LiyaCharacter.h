@@ -66,6 +66,11 @@ protected:
 	/** Controls Mouse X axis */
 	virtual void AddControllerYawInput(float Val) override;
 private:
+	enum FootAnimationState
+	{
+		DOWN, // Foot is reaching the ground
+		UP // Foot is leaving the ground
+	};
 
 	/** Previous Z diff left */
 	float DeltaZLeft;
@@ -76,10 +81,13 @@ private:
 	/** Previous Z diff derivative right */
 	float DeltaDerivZRight;
 
+	FootAnimationState LeftFootState;
+	FootAnimationState RightFootState;
+
 	/** Low Pass Filter for left footstep Z */
 	TSubobjectPtr<ULowPassFilterComponent> LeftFootFiltered;
 	/** Low Pass Filter for right footstep Z */
 	TSubobjectPtr<ULowPassFilterComponent> RightFootFiltered;
 
-	bool Internal_CheckFootstep(const FVector& Footstep, TSubobjectPtr<ULowPassFilterComponent>& Filter, float& oldZ, float& oldZDerivative);
+	bool Internal_CheckFootstep(const FVector& Footstep, TSubobjectPtr<ULowPassFilterComponent>& Filter, FootAnimationState& FootState, float& oldZ, float& oldZDerivative);
 };

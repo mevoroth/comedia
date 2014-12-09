@@ -18,33 +18,34 @@ ULowPassFilterComponent::~ULowPassFilterComponent()
 	LastValues = 0;
 }
 
-void ULowPassFilterComponent::InitRecord(int Latency)
+void ULowPassFilterComponent::InitRecord(uint32 Latency)
 {
 	check(!LastValues); // Multiple Call at Init
 	LastValues = new TCircularBuffer<float>(Latency);
-	UE_LOG(LogGPCode, Warning, TEXT("SIZEOF CIRCULAR BUFFER : %d"), LastValues->Capacity());
+	this->Latency = Latency;
+	//UE_LOG(LogGPCode, Warning, TEXT("SIZEOF CIRCULAR BUFFER : %d"), LastValues->Capacity());
 	check(LastValues); // Buffer overflow
 }
 void ULowPassFilterComponent::Push(float Value)
 {
 	check(LastValues);
 	CurrentInd = LastValues->GetNextIndex(CurrentInd);
-	LastValues[CurrentInd] = Value;
+	(*LastValues)[CurrentInd] = Value;
 	++FrameCount;
 }
 float ULowPassFilterComponent::GetCurrentRecord() const
 {
 	check(LastValues && CurrentInd >= 0);
 
-	if (FrameCount < LastValues->Capacity())
+	if (FrameCount < Latency)
 	{
 		return (*LastValues)[CurrentInd];
 	}
 
 	float record = 0.f;
-	for (uint32 i = 0; i < LastValues->Capacity(); ++i)
+	for (uint32 i = 0; i < Latency; ++i)
 	{
 		record += (*LastValues)[i];
 	}
-	return record / (float)LastValues->Capacity();
+	return record / (float)Latency;
 }

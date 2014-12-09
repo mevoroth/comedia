@@ -85,7 +85,7 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	FootSteps(/*DeltaSeconds*/);
 }
 
-bool ALiyaCharacter::Internal_CheckFootstep(const FVector& FootPos, TSubobjectPtr<ULowPassFilterComponent>& Filter, float& oldZ, float& oldZDerivative)
+bool ALiyaCharacter::Internal_CheckFootstep(const FVector& FootPos, TSubobjectPtr<ULowPassFilterComponent>& Filter, FootAnimationState& FootState, float& oldZ, float& oldZDerivative)
 {
 	FHitResult Hit(ForceInit);
 	FCollisionQueryParams Trace(TEXT("FootStepTrace"), false, GetOwner());
@@ -96,7 +96,7 @@ bool ALiyaCharacter::Internal_CheckFootstep(const FVector& FootPos, TSubobjectPt
 	float currentZ = Filter->GetCurrentRecord();
 	float currentZDerivative = currentZ - oldZ;
 
-	bool bFootStep = currentZDerivative >= 0 && oldZDerivative < 0;
+	bool bFootStep = currentZDerivative >= 0 && oldZDerivative < 0 && currentZ < Threshold;
 	
 	oldZ = currentZ;
 	oldZDerivative = currentZDerivative;
