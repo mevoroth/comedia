@@ -6,9 +6,12 @@ public class Comedia : ModuleRules
 {
 	public Comedia(TargetInfo Target)
 	{
+		//PublicIncludePaths.AddRange(new string[] { "PaperSurface/Public" });
+		//PrivateIncludePaths.AddRange(new string[] { "PaperSurface/Private" });
+
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "RHI", "RenderCore", "ShaderCore" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
