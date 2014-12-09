@@ -41,12 +41,12 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	}
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
-	virtual void LeftFootStep();
+	virtual void LeftFootStep(const FVector& Pos);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
-	virtual void RightFootStep();
+	virtual void RightFootStep(const FVector& Pos);
 
 	/** Handle footsteps in Tick event */
-	void FootSteps(/*float DeltaSeconds*/);
+	void FootSteps(float DeltaSeconds);
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -72,6 +72,13 @@ private:
 		UP // Foot is leaving the ground
 	};
 
+	static const float WAIT_BEFORE_THRESHOLD;
+	
+	float ElapsedTime;
+	/** Last time left foot emits sound+particle */
+	float LeftFootLastTime;
+	/** Last time right foot emits sound+particle */
+	float RightFootLastTime;
 	/** Previous Z diff left */
 	float DeltaZLeft;
 	/** Previous Z diff right */
@@ -81,6 +88,9 @@ private:
 	/** Previous Z diff derivative right */
 	float DeltaDerivZRight;
 
+	float LeftFootThreshold;
+	float RightFootThreshold;
+
 	FootAnimationState LeftFootState;
 	FootAnimationState RightFootState;
 
@@ -89,5 +99,6 @@ private:
 	/** Low Pass Filter for right footstep Z */
 	TSubobjectPtr<ULowPassFilterComponent> RightFootFiltered;
 
-	bool Internal_CheckFootstep(const FVector& Footstep, TSubobjectPtr<ULowPassFilterComponent>& Filter, FootAnimationState& FootState, float& oldZ, float& oldZDerivative);
+	bool Internal_CheckFootstep(const FVector& Footstep, float Threshold, TSubobjectPtr<ULowPassFilterComponent>& Filter, FootAnimationState& FootState, float& oldZ, float& oldZDerivative);
+	float Internal_FootStepDistance(const FVector& FootPos) const;
 };
