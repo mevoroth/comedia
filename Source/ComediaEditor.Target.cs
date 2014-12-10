@@ -20,6 +20,6 @@ public class ComediaEditorTarget : TargetRules
 		ref List<string> OutExtraModuleNames
 		)
 	{
-		OutExtraModuleNames.AddRange( new string[] { "Comedia" } );
+		OutExtraModuleNames.AddRange( new string[] { "Comedia", "ComediaEngine" } );
 	}
 }
