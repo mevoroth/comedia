@@ -16,6 +16,7 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 
 	bHasKnifeSpawned = false;
 	NbSpawnedKnife = 0;
+	CurrentNbLightning = 0;
 }
 
 void AIwacLevelScriptActor::BeginPlay()
@@ -26,13 +27,32 @@ void AIwacLevelScriptActor::BeginPlay()
 	PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
 
 	//Init remaining time with DelayFirstKnifeSpawn
-	RemainingTime = DelayFirstKnifeSpawn;
+	RemainingTime = DelayFirstSpawn;
 }
 
 void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	//Tick current torture phase
+	switch (TorturePhase)
+	{
+		case ETorturePhase::TP_KnifePhase:
+			TickKnifePhase(DeltaSeconds);
+			break;
+
+		case ETorturePhase::TP_LightningPhase:
+			TickLightningPhase(DeltaSeconds);
+			break;
+
+		case ETorturePhase::TP_EmptyPhase:
+		default:
+			break;
+	}
+}
+
+void AIwacLevelScriptActor::TickKnifePhase(float DeltaSeconds)
+{
 	//Draw spawn area around the player
 	ComputedRadiusSpawnKnifeArea = PlayerCharacter->CapsuleComponent->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
 	DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
@@ -49,6 +69,11 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 			KnifeSpawning(ComputedRadiusSpawnKnifeArea);
 		}
 	}
+}
+
+void AIwacLevelScriptActor::TickLightningPhase(float DeltaSeconds)
+{
+	 
 }
 
 void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
