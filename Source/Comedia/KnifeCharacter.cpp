@@ -3,7 +3,7 @@
 #include "Comedia.h"
 #include "KnifeCharacter.h"
 #include "LiyaCharacter.h"
-#include "MyLevelScriptActor.h"
+#include "IwacLevelScriptActor.h"
 
 
 AKnifeCharacter::AKnifeCharacter(const class FPostConstructInitializeProperties& PCIP)
@@ -42,11 +42,11 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 	CharacterMovement->RequestDirectMove(GetActorForwardVector(), true);
 
 	//Check knife destroyed
-	AMyLevelScriptActor* MyLevelScript = Cast<AMyLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-	if (MyLevelScript)
+	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (IwacLevelScript)
 	{
 		//Check if distance player/knife more than ComputedRadiusSpawnKnifeArea and if player is behind knife
-		if ((GetWorld()->GetFirstPlayerController()->GetCharacter()->GetActorLocation() - GetActorLocation()).Size() > MyLevelScript->ComputedRadiusSpawnKnifeArea && AngleForwardToPlayer > 90.0f)
+		if ((GetWorld()->GetFirstPlayerController()->GetCharacter()->GetActorLocation() - GetActorLocation()).Size() > IwacLevelScript->ComputedRadiusSpawnKnifeArea && AngleForwardToPlayer > 90.0f)
 		{
 			DestroyKnife();
 		}
@@ -57,6 +57,14 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 	{
 		SpawnDecal();
 	}
+
+	//Update position to be on ground with trace
+	FHitResult Hit(ForceInit);
+	FCollisionQueryParams Trace(TEXT("KnifeTrace"), false, GetOwner());
+	GetWorld()->LineTraceSingle(Hit, GetActorLocation(), GetActorLocation() + FVector::UpVector * -1000.0f, ECC_Visibility, Trace);
+	FVector CurrentKnifePosition = GetActorLocation();
+	CurrentKnifePosition.Z = Hit.Location.Z + CapsuleComponent->GetScaledCapsuleHalfHeight();
+	SetActorLocation(CurrentKnifePosition);
 }
 
 void AKnifeCharacter::ReceiveHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
@@ -78,11 +86,11 @@ void AKnifeCharacter::InitOriginalPosition()
 
 void AKnifeCharacter::DestroyKnife()
 {
-	AMyLevelScriptActor* MyLevelScript = Cast<AMyLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-	if (MyLevelScript)
+	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (IwacLevelScript)
 	{
 		UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
-		MyLevelScript->bHasKnifeSpawned = false;
+		IwacLevelScript->bHasKnifeSpawned = false;
 		GetWorld()->DestroyActor(this);
 	}
 }
