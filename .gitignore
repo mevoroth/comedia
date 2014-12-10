@@ -216,5 +216,6 @@ FakesAssemblies/
 /Binaries
 /DerivedDataCache
 /Intermediate
-
 /Saved
+
+*.sln
