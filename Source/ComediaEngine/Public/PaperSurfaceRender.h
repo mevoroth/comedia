@@ -5,6 +5,8 @@
 
 struct FPaperSurfaceDynamicData
 {
+	TArray<FVector4> ComputedColors;
+	FTexture2DRHIRef TextureRes;
 };
 
 class FPaperSurfaceSceneProxy : public FPrimitiveSceneProxy
@@ -14,14 +16,19 @@ public:
 	FPaperSurfaceSceneProxy(UPaperSurfaceComponent* Component);
 
 	void ExecComputeShader();
+	void DebugColors();
 
 	virtual void DrawDynamicElements(FPrimitiveDrawInterface* PDI, const FSceneView* View) override;
+	virtual FPrimitiveViewRelevance GetViewRelevance(const FSceneView* View) override;
+	void SetDynamicData_RenderThread(FPaperSurfaceDynamicData* NewDynamicData);
 
 	virtual uint32_t GetMemoryFootprint() const;
 
 	FUnorderedAccessViewRHIRef PaperSurfaceUAV;
 
+	TArray<FVector4> ComputedColors;
 	FTexture2DRHIRef TextureRes;
 	UTexture2D* Tex;
-	volatile void* resource;
+
+	FPaperSurfaceDynamicData* DynamicData;
 };

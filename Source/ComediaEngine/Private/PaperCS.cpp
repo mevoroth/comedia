@@ -6,6 +6,11 @@
 //
 //}
 
+FPaperCS::FPaperCS()
+{
+	UE_LOG(LogEngineCode, Warning, TEXT("TEST"));
+}
+
 FPaperCS::FPaperCS(const ShaderMetaType::CompiledShaderInitializerType& Initializer)
 	: FGlobalShader(Initializer)
 {
@@ -17,6 +22,7 @@ void FPaperCS::SetOutput(FRHICommandList& RHICmdList, FUnorderedAccessViewRHIRef
 	FComputeShaderRHIParamRef ComputeShaderRHI = GetComputeShader();
 	if (OutTextureFile.IsBound())
 	{
+		UE_LOG(LogEngineCode, Warning, TEXT("BINDING OUTPUT"));
 		RHICmdList.SetUAVParameter(ComputeShaderRHI, OutTextureFile.GetBaseIndex(), OutTextureFileUAV);
 	}
 }

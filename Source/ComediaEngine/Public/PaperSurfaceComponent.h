@@ -3,6 +3,7 @@
 #pragma once
 
 #include "PrimitiveSceneProxy.h"
+#include "PaperSurfaceRender.h"
 
 #include "Components/MeshComponent.h"
 #include "PaperSurfaceComponent.generated.h"
@@ -19,6 +20,8 @@ class UPaperSurfaceComponent : public UMeshComponent
 	virtual FPrimitiveSceneProxy* CreateSceneProxy();
 	virtual void SendRenderDynamicData_Concurrent() override;
 
+	bool jobdone;
+
 private:
-	void* Data;
+	FPaperSurfaceDynamicData* Data;
 };

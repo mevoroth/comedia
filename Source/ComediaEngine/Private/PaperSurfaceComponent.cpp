@@ -7,11 +7,12 @@ UPaperSurfaceComponent::UPaperSurfaceComponent(const class FPostConstructInitial
 {
 	UE_LOG(LogEngineCode, Warning, TEXT("test"));
 	PrimaryComponentTick.bCanEverTick = true;
+	jobdone = false;
 }
 
 FPrimitiveSceneProxy* UPaperSurfaceComponent::CreateSceneProxy()
 {
-	return new FPaperSurfaceSceneProxy(this);
+	//return new FPaperSurfaceSceneProxy(this);
 	return Data ? new FPaperSurfaceSceneProxy(this) : 0;
 	return 0;
 }
@@ -22,11 +23,14 @@ void UPaperSurfaceComponent::SendRenderDynamicData_Concurrent()
 	ENQUEUE_UNIQUE_RENDER_COMMAND_TWOPARAMETER(
 		FSendPaperSurfaceDynamicData,
 		FPaperSurfaceSceneProxy*, PaperSurfaceSceneProxy, (FPaperSurfaceSceneProxy*)SceneProxy,
-		FPaperSurfaceDynamicData*, DynamicData, 0,
+		FPaperSurfaceDynamicData*, DynamicData, DynamicData,
 		{
-			//PaperSurfaceSceneProxy->SetDynamicData_RenderThread(DynamicData);
-			PaperSurfaceSceneProxy->ExecComputeShader();
+			PaperSurfaceSceneProxy->SetDynamicData_RenderThread(DynamicData);
+			//PaperSurfaceSceneProxy->ExecComputeShader();
 		});
+	ENQUEUE_UNIQUE_RENDER_COMMAND_THREEPARAMETER(
+		FGetPaperSurfaceData
+		);
 }
 
 void UPaperSurfaceComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)

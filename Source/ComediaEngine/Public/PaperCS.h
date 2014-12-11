@@ -5,7 +5,7 @@
 class FPaperCS : public FGlobalShader
 {
 	DECLARE_SHADER_TYPE(FPaperCS, Global);
-	FPaperCS() {}
+	FPaperCS();
 	explicit FPaperCS(const ShaderMetaType::CompiledShaderInitializerType& Initializer);
 	//	: FGlobalShader(Initializer);
 
@@ -17,7 +17,16 @@ class FPaperCS : public FGlobalShader
 	virtual bool Serialize(FArchive& Ar) override
 	{
 		bool bShaderHasOutdatedParams = FGlobalShader::Serialize(Ar);
+
+		Ar << OutTextureFile;
+
 		return bShaderHasOutdatedParams;
+	}
+
+	static void ModifyCompilationEnvironment(EShaderPlatform Platform, FShaderCompilerEnvironment& OutEnvironment)
+	{
+		FGlobalShader::ModifyCompilationEnvironment(Platform, OutEnvironment);
+		OutEnvironment.CompilerFlags.Add(CFLAG_StandardOptimization);
 	}
 
 	void UnbindBuffers(FRHICommandList& RHICmdList);
