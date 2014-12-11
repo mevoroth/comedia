@@ -15,6 +15,7 @@ class UPaperSurfaceComponent : public UMeshComponent
 {
 	GENERATED_UCLASS_BODY()
 
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual FPrimitiveSceneProxy* CreateSceneProxy();
 	virtual void SendRenderDynamicData_Concurrent() override;
 

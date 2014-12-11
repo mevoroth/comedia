@@ -2,7 +2,7 @@
 
 #pragma once
 
-//#include "PaperSurfaceComponent.h"
+#include "PaperSurfaceComponent.h"
 #include "GameFramework/Actor.h"
 #include "PaperActor.generated.h"
 
@@ -14,7 +14,7 @@ class COMEDIA_API APaperActor : public AActor
 {
 	GENERATED_UCLASS_BODY()
 
-		//UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Paper Surface")
-		//UPaperSurfaceComponent* PaperSurface;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Paper Surface")
+	UPaperSurfaceComponent* PaperSurface;
 	
 };
