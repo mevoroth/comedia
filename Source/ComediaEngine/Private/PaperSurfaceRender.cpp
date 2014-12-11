@@ -47,7 +47,7 @@ uint32_t FPaperSurfaceSceneProxy::GetMemoryFootprint() const
 
 void FPaperSurfaceSceneProxy::DrawDynamicElements(FPrimitiveDrawInterface* PDI, const FSceneView* View)
 {
-
+	UE_LOG(LogEngineCode, Warning, TEXT("test"));
 }
 
 void FPaperSurfaceSceneProxy::ExecComputeShader()
@@ -62,6 +62,4 @@ void FPaperSurfaceSceneProxy::ExecComputeShader()
 	PaperCS->SetOutput(RHICmdList, PaperSurfaceUAV);
 	DispatchComputeShader(RHICmdList, *PaperCS, 8, 1, 1);
 	PaperCS->UnbindBuffers(RHICmdList);
-	//FRHITexture2D* tex = TextureRes->GetTexture2D();
-	//TextureRes->GetNativeResource();
 }

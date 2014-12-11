@@ -3,6 +3,10 @@
 #include "PrimitiveSceneProxy.h"
 #include "PaperSurfaceComponent.h"
 
+struct FPaperSurfaceDynamicData
+{
+};
+
 class FPaperSurfaceSceneProxy : public FPrimitiveSceneProxy
 {
 public:
@@ -19,4 +23,5 @@ public:
 
 	FTexture2DRHIRef TextureRes;
 	UTexture2D* Tex;
+	volatile void* resource;
 };
