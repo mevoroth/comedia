@@ -89,7 +89,7 @@ void AKnifeCharacter::DestroyKnife()
 	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 	if (IwacLevelScript)
 	{
-		UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
+		//UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
 		IwacLevelScript->bHasKnifeSpawned = false;
 		GetWorld()->DestroyActor(this);
 	}
@@ -113,7 +113,7 @@ void AKnifeCharacter::SpawnDecal()
 	NewDecal->AddActorLocalRotation(RotationDecal);
 
 	//Set decal material
-	NewDecal->Decal->SetDecalMaterial(DecalMaterial);
+	NewDecal->GetDecal()->SetDecalMaterial(DecalMaterial);
 
 	LastDecalPosition = GetActorLocation();
 }

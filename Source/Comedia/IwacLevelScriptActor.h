@@ -3,7 +3,8 @@
 #pragma once
 
 #include "Engine/LevelScriptActor.h"
-#include "Comedia/KnifeCharacter.h"
+#include "KnifeCharacter.h"
+#include "LightningActor.h"
 #include "IwacLevelScriptActor.generated.h"
 
 /**
@@ -27,12 +28,15 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 {
 	GENERATED_UCLASS_BODY()
 
+#pragma region TorturePhase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TorturePhase")
 	TEnumAsByte<ETorturePhase::Type> TorturePhase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TorturePhase")
 	float DelayFirstSpawn;
+#pragma endregion TorturePhase
 
+#pragma region KnifePhase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifePhase")
 	float DelayBetweenKnifeSpawn;
 
@@ -42,6 +46,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "KnifePhase")
 	int32 NbSpawnedKnife;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "KnifePhase")
+	int32 MaxNbSpawnedKnife;
+
 	/** ComputedRadiusSpawnKnifeArea depending of player character height */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "KnifePhase")
 	float ComputedRadiusSpawnKnifeArea;
@@ -49,9 +56,14 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	/** true indicates a knife is present */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "KnifePhase")
 	bool bHasKnifeSpawned;
+#pragma endregion KnifePhase
 
+#pragma region Lightning
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
 	int32 MaxNbLightning;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	float TimeSpendLightningPhase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
 	float LengthLightningPhase;
@@ -76,14 +88,20 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LightningPhase")
 	int32 CurrentNbLightning;
+#pragma endregion Lightning
 
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
 private:
+	TEnumAsByte<ETorturePhase::Type> PreviousTorturePhase;
+
 	/** Class to instance when spawning Knife character */
 	TSubclassOf<AKnifeCharacter> KnifeClass;
+
+	/** Class to instance when spawning Lightning */
+	TSubclassOf<ALightningActor> LightningClass;
 
 	float RemainingTime;
 	ACharacter* PlayerCharacter;
@@ -91,4 +109,5 @@ private:
 	void TickKnifePhase(float DeltaSeconds);
 	void TickLightningPhase(float DeltaSeconds);
 	void KnifeSpawning(float ComputedRadiusSpawnKnifeArea);
+	void LightningSpawning(float ComputedRadiusSpawnLightningArea);
 };
