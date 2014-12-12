@@ -1,0 +1,113 @@
+RWTexture2D<float4> OutTex;
+
+Texture2D<float4> InTex0;
+Texture2D<float4> InTex1;
+Texture2D<float4> InTex2;
+Texture2D<float4> InTex3;
+/**
+[] {
+rotate,	// Rotate
+sX, sY	// Scale
+dX, dY,	// Translate
+}
+*/
+Buffer<float> InNoise;
+Texture2D<float4> RippedNoise;
+int2 Size;
+
+float ThresholdCutoff;
+
+//RTexture2D<float4> InTex4;
+//RTexture2D<float4> InTex5;
+//RTexture2D<float4> InTex6;
+//RTexture2D<float4> InTex7;
+
+
+[numthreads(32, 32, 1)]
+void PaperSurfaceCS( uint3 ThreadId : SV_DispatchThreadID )
+{
+	float4 col = float4(0, 0, 0, 0);
+	//float2 SizeDiv2 = Size / 2;
+	int2 UV = ThreadId.xy / (float2)Size;
+	float2 RandomedUV;
+	float sinR;
+	float cosR;
+	float tmp;
+
+	float2 AA, AB, BA, BB, dXY;
+
+	for (int tex = 15; tex >= 0; --tex)
+	{	
+		tmp = InNoise[tex * 5] * 6.28318530718; // 2*PI
+		cosR = cos(tmp);
+		sinR = sin(tmp);
+
+		// Scale, rotate, translate then translate back to origin
+		RandomedUV = mul(UV, float2(
+			InNoise[tex * 5 + 1], InNoise[tex * 5 + 2]
+		));
+		RandomedUV = float2(
+			RandomedUV.x * cosR - RandomedUV.y * sinR,
+			RandomedUV.y * cosR + RandomedUV.x * sinR
+		) + float2(InNoise[tex * 5 + 3], InNoise[tex * 5 + 4])
+		+ float2(0.5, 0.5);
+
+		int currTex = tex & 3; // (0x2 | 0x1); means %4
+
+		AA = floor(RandomedUV.xy) * Size;
+		BB = ceil(RandomedUV.xy) * Size;
+		AB = float2(AA.x, BB.y) * Size;
+		BA = float2(AA.y, BB.x) * Size;
+
+		dXY = float2(
+			RandomedUV.x - AA.x,
+			RandomedUV.y - AA.y
+		);
+
+		if (AA.x < 0 || BB.x >= Size.x
+			|| AA.y < 0 || BB.y >= Size.y)
+		{
+			continue;
+		}
+		else
+		{
+			float4 paper = lerp(
+				lerp(RippedNoise[AA], RippedNoise[BA], dXY.x),
+				lerp(RippedNoise[AB], RippedNoise[BB], dXY.x),
+				dXY.y
+			);
+
+			paper.w = (paper.w >= ThresholdCutoff ? paper.w : 0);
+
+			if (paper.w == 0)
+			{
+				continue;
+			}
+
+			Texture2D<float4> tmpTex;
+
+			if (currTex == 0) { tmpTex = InTex0; }
+			else if (currTex == 1) { tmpTex = InTex1; }
+			else if (currTex == 2) { tmpTex = InTex2; }
+			else { tmpTex = InTex3; }
+
+			paper *= lerp(
+				lerp(tmpTex[AA], tmpTex[BA], dXY.x),
+				lerp(tmpTex[AB], tmpTex[BB], dXY.x),
+				dXY.y
+			);
+
+			if (paper.w == 0)
+			{
+				continue;
+			}
+
+			paper.xyz *= paper.w;
+			col = paper;
+
+			break;
+		}
+	}
+
+	OutTex[ThreadId.xy] = col;
+}
