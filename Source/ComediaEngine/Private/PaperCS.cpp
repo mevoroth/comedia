@@ -22,7 +22,6 @@ void FPaperCS::SetOutput(FRHICommandList& RHICmdList, FUnorderedAccessViewRHIRef
 	FComputeShaderRHIParamRef ComputeShaderRHI = GetComputeShader();
 	if (OutTextureFile.IsBound())
 	{
-		UE_LOG(LogEngineCode, Warning, TEXT("BINDING OUTPUT"));
 		RHICmdList.SetUAVParameter(ComputeShaderRHI, OutTextureFile.GetBaseIndex(), OutTextureFileUAV);
 	}
 }

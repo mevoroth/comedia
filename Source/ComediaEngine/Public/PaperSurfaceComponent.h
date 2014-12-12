@@ -3,25 +3,30 @@
 #pragma once
 
 #include "PrimitiveSceneProxy.h"
-#include "PaperSurfaceRender.h"
 
 #include "Components/MeshComponent.h"
 #include "PaperSurfaceComponent.generated.h"
 
+struct FPaperSurfaceDynamicData;
+
 /**
 *
 */
-UCLASS(ClassGroup = (Rendering, Common), HideCategories = (Object, LOD, Physics, Activation, "Components|Activation"), EditInLineNew, Meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (Rendering, Common), HideCategories = (Object, LOD, Physics, Activation, "Components|Activation"), EditInLineNew, Meta = (BlueprintSpawnableComponent), MinimalAPI)
 class UPaperSurfaceComponent : public UMeshComponent
 {
 	GENERATED_UCLASS_BODY()
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
-	virtual FPrimitiveSceneProxy* CreateSceneProxy();
+	//virtual FPrimitiveSceneProxy* CreateSceneProxy();
 	virtual void SendRenderDynamicData_Concurrent() override;
+	FPaperSurfaceDynamicData* CreateDynamicData();
 
 	bool jobdone;
 
 private:
-	FPaperSurfaceDynamicData* Data;
+
+	FUnorderedAccessViewRHIRef PaperSurfaceUAV;
+	TResourceArray<FVector4> ComputedColors;
+	FTexture2DRHIRef TextureRes;
 };

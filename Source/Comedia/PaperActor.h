@@ -14,7 +14,9 @@ class COMEDIA_API APaperActor : public AActor
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Paper Surface")
-	UPaperSurfaceComponent* PaperSurface;
-	
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Paper Surface")
+	TSubobjectPtr<UPaperSurfaceComponent> PaperSurface;
+	//UPaperSurfaceComponent* PaperSurface;
+
+	//virtual void Tick(float DeltaSeconds) override;
 };

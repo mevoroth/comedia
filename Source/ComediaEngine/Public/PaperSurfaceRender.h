@@ -5,7 +5,7 @@
 
 struct FPaperSurfaceDynamicData
 {
-	TArray<FVector4> ComputedColors;
+	TResourceArray<FVector4> ComputedColors;
 	FTexture2DRHIRef TextureRes;
 };
 
