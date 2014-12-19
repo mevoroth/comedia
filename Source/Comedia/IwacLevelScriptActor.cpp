@@ -129,8 +129,9 @@ void AIwacLevelScriptActor::TickLightningPhase(float DeltaSeconds)
 void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 {
 	//UE_LOG(LogGPCode, Log, TEXT("Spawn Knife"));
-	bHasKnifeSpawned = true;
+	
 	NbSpawnedKnife++;
+	bHasKnifeSpawned = true;
 
 	//Set remaining time with DelayBetweenKnifeSpawn for next knife spawn
 	RemainingTime = DelayBetweenKnifeSpawn;

@@ -63,9 +63,6 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	int32 MaxNbLightning;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
-	float TimeSpendLightningPhase;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
 	float LengthLightningPhase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
@@ -85,6 +82,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
 	float RadiusDamageLightningArea;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LightningPhase")
+	float TimeSpendLightningPhase;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LightningPhase")
 	int32 CurrentNbLightning;
