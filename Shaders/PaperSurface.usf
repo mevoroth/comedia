@@ -1,9 +1,22 @@
+#include "GeneratedUniformBuffers.usf" 
+
+/*
+Uniform buffers
+
+Size
+ThresholdCutoff
+*/
+
 RWTexture2D<float4> OutTex;
 
-Texture2D<float4> InTex0;
-Texture2D<float4> InTex1;
-Texture2D<float4> InTex2;
-Texture2D<float4> InTex3;
+Texture2D InTex0;
+SamplerState InTex0Sampler;
+Texture2D InTex1;
+SamplerState InTex1Sampler;
+Texture2D InTex2;
+SamplerState InTex2Sampler;
+Texture2D InTex3;
+SamplerState InTex3Sampler;
 /**
 [] {
 rotate,	// Rotate
@@ -12,10 +25,8 @@ dX, dY,	// Translate
 }
 */
 Buffer<float> InNoise;
-Texture2D<float4> RippedNoise;
-int2 Size;
-
-float ThresholdCutoff;
+Texture2D RippedNoise;
+SamplerState RippedNoiseSampler;
 
 //RTexture2D<float4> InTex4;
 //RTexture2D<float4> InTex5;
@@ -28,74 +39,74 @@ void PaperSurfaceCS( uint3 ThreadId : SV_DispatchThreadID )
 {
 	float4 col = float4(0, 0, 0, 0);
 	//float2 SizeDiv2 = Size / 2;
-	int2 UV = ThreadId.xy / (float2)Size;
+	float2 UV = float2(
+		ThreadId.x / (PaperSurfaceParameters.Size.x - 1),
+		ThreadId.y / (PaperSurfaceParameters.Size.y - 1)
+	);
+	//float2 UV = ThreadId.xy / (float2)PaperSurfaceParameters.Size;
 	float2 RandomedUV;
 	float sinR;
 	float cosR;
 	float tmp;
 
-	float2 AA, AB, BA, BB, dXY;
+	int texInd = 15 * 5;
 
 	for (int tex = 15; tex >= 0; --tex)
 	{	
-		tmp = InNoise[tex * 5] * 6.28318530718; // 2*PI
+		tmp = InNoise[texInd] * 6.28318530718; // 2*PI
 		cosR = cos(tmp);
 		sinR = sin(tmp);
 
 		// Scale, rotate, translate then translate back to origin
-		RandomedUV = mul(UV, float2(
-			InNoise[tex * 5 + 1], InNoise[tex * 5 + 2]
-		));
+		RandomedUV = UV - float2(0.5, 0.5);
+		RandomedUV = float2(
+			RandomedUV.x * InNoise[texInd + 1],
+			RandomedUV.y * InNoise[texInd + 2]
+		);
 		RandomedUV = float2(
 			RandomedUV.x * cosR - RandomedUV.y * sinR,
 			RandomedUV.y * cosR + RandomedUV.x * sinR
-		) + float2(InNoise[tex * 5 + 3], InNoise[tex * 5 + 4])
-		+ float2(0.5, 0.5);
+		);
+		RandomedUV += float2(InNoise[texInd + 3], InNoise[texInd + 4]);
+		RandomedUV += float2(0.5, 0.5);
 
 		int currTex = tex & 3; // (0x2 | 0x1); means %4
 
-		AA = floor(RandomedUV.xy) * Size;
-		BB = ceil(RandomedUV.xy) * Size;
-		AB = float2(AA.x, BB.y) * Size;
-		BA = float2(AA.y, BB.x) * Size;
+		texInd -= 5;
 
-		dXY = float2(
-			RandomedUV.x - AA.x,
-			RandomedUV.y - AA.y
-		);
-
-		if (AA.x < 0 || BB.x >= Size.x
-			|| AA.y < 0 || BB.y >= Size.y)
+		if (RandomedUV.x < 0 || RandomedUV.x > 1
+			|| RandomedUV.y < 0 || RandomedUV.y > 1)
 		{
 			continue;
 		}
 		else
 		{
-			float4 paper = lerp(
-				lerp(RippedNoise[AA], RippedNoise[BA], dXY.x),
-				lerp(RippedNoise[AB], RippedNoise[BB], dXY.x),
-				dXY.y
-			);
-
-			paper.w = (paper.w >= ThresholdCutoff ? paper.w : 0);
+			//float4 paper = Texture2DSample(RippedNoise, RippedNoiseSampler, RandomedUV);
+			float4 paper = RippedNoise.SampleLevel(RippedNoiseSampler, RandomedUV, 0);
+			
+			paper.w = (paper.x >= PaperSurfaceParameters.ThresholdCutoff ? paper.x : 0);
 
 			if (paper.w == 0)
 			{
 				continue;
 			}
 
-			Texture2D<float4> tmpTex;
-
-			if (currTex == 0) { tmpTex = InTex0; }
-			else if (currTex == 1) { tmpTex = InTex1; }
-			else if (currTex == 2) { tmpTex = InTex2; }
-			else { tmpTex = InTex3; }
-
-			paper *= lerp(
-				lerp(tmpTex[AA], tmpTex[BA], dXY.x),
-				lerp(tmpTex[AB], tmpTex[BB], dXY.x),
-				dXY.y
-			);
+			if (currTex == 0)
+			{
+				paper *= InTex0.SampleLevel(InTex0Sampler, RandomedUV, 0);
+			}
+			else if (currTex == 1)
+			{
+				paper *= InTex1.SampleLevel(InTex1Sampler, RandomedUV, 0);
+			}
+			else if (currTex == 2)
+			{
+				paper *= InTex2.SampleLevel(InTex2Sampler, RandomedUV, 0);
+			}
+			else
+			{
+				paper *= InTex3.SampleLevel(InTex3Sampler, RandomedUV, 0);
+			}
 
 			if (paper.w == 0)
 			{
@@ -103,6 +114,7 @@ void PaperSurfaceCS( uint3 ThreadId : SV_DispatchThreadID )
 			}
 
 			paper.xyz *= paper.w;
+
 			col = paper;
 
 			break;
@@ -110,4 +122,6 @@ void PaperSurfaceCS( uint3 ThreadId : SV_DispatchThreadID )
 	}
 
 	OutTex[ThreadId.xy] = col;
+	//OutTex[ThreadId.xy] = RippedNoise.SampleLevel(RippedNoiseSampler, RandomedUV, 0);
+	//OutTex[ThreadId.xy] = float4(InNoise[0], InNoise[1], InNoise[2], InNoise[3]);
 }
