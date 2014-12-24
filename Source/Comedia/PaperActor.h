@@ -16,7 +16,9 @@ class COMEDIA_API APaperActor : public AActor
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Paper Surface")
 	TSubobjectPtr<UPaperSurfaceComponent> PaperSurface;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Paper Surface")
+	TSubobjectPtr<UBillboardComponent> BillboardComponent;
 	//UPaperSurfaceComponent* PaperSurface;
 
-	//virtual void Tick(float DeltaSeconds) override;
+	virtual void Tick(float DeltaSeconds) override;
 };

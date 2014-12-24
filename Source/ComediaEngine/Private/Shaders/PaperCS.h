@@ -25,7 +25,18 @@ class FPaperCS : public FGlobalShader
 	{
 		bool bShaderHasOutdatedParams = FGlobalShader::Serialize(Ar);
 
-		Ar << OutTextureRes;
+		Ar << OutTextureRes
+			<< InTex0Res
+			<< InTex0SamplerRes
+			<< InTex1Res
+			<< InTex1SamplerRes
+			<< InTex2Res
+			<< InTex2SamplerRes
+			<< InTex3Res
+			<< InTex3SamplerRes
+			<< InNoiseRes
+			<< InRippedNoiseRes
+			<< InRippedNoiseSamplerRes;
 
 		return bShaderHasOutdatedParams;
 	}
@@ -39,21 +50,36 @@ class FPaperCS : public FGlobalShader
 	void UnbindBuffers(FRHICommandList& RHICmdList);
 	void SetOutput(FRHICommandList& RHICmdList, FUnorderedAccessViewRHIRef OutPaperSurfaceUAV);
 	void SetParameters(FRHICommandList& RHICmdList,
-		FUnorderedAccessViewRHIRef InTex0UAV,
-		FUnorderedAccessViewRHIRef InTex1UAV,
-		FUnorderedAccessViewRHIRef InTex2UAV,
-		FUnorderedAccessViewRHIRef InTex3UAV,
-		FUnorderedAccessViewRHIRef InRippedNoise,
-		FUnorderedAccessViewRHIRef InNoiseUAV);
+		const FTexture* InTex0Tex,
+		const FTexture* InTex1Tex,
+		const FTexture* InTex2Tex,
+		const FTexture* InTex3Tex,
+		const FTexture* InRippedNoiseTex
+		);
+	void SetParameters(FRHICommandList& RHICmdList,
+		FShaderResourceViewRHIRef InNoiseSRV);
+	void SetParameters(FRHICommandList& RHICmdList,
+		FSamplerStateRHIParamRef InTex0SamplerStateRHI, FTextureRHIParamRef InTex0RHI,
+		FSamplerStateRHIParamRef InTex1SamplerStateRHI, FTextureRHIParamRef InTex1RHI, 
+		FSamplerStateRHIParamRef InTex2SamplerStateRHI, FTextureRHIParamRef InTex2RHI, 
+		FSamplerStateRHIParamRef InTex3SamplerStateRHI, FTextureRHIParamRef InTex3RHI,
+		FSamplerStateRHIParamRef InRippedNoiseSamplerStateRHI, FTextureRHIParamRef InRippedNoiseRHI);
 	void SetUniformBuffers(FRHICommandList& RHICmdList, FPaperSurfaceParameters& PaperSurfaceParams);
 
 private:
 	FShaderResourceParameter OutTextureRes;
 
 	FShaderResourceParameter InTex0Res;
+	FShaderResourceParameter InTex0SamplerRes;
 	FShaderResourceParameter InTex1Res;
+	FShaderResourceParameter InTex1SamplerRes;
 	FShaderResourceParameter InTex2Res;
+	FShaderResourceParameter InTex2SamplerRes;
 	FShaderResourceParameter InTex3Res;
+	FShaderResourceParameter InTex3SamplerRes;
 	FShaderResourceParameter InNoiseRes;
 	FShaderResourceParameter InRippedNoiseRes;
+	FShaderResourceParameter InRippedNoiseSamplerRes;
+	FShaderResourceParameter InSize;
+	FShaderResourceParameter InThresholdCutoff;
 };
