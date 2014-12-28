@@ -80,6 +80,4 @@ private:
 	FShaderResourceParameter InNoiseRes;
 	FShaderResourceParameter InRippedNoiseRes;
 	FShaderResourceParameter InRippedNoiseSamplerRes;
-	FShaderResourceParameter InSize;
-	FShaderResourceParameter InThresholdCutoff;
 };
