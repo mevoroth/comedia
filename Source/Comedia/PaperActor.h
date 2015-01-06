@@ -18,6 +18,8 @@ class COMEDIA_API APaperActor : public AActor
 	TSubobjectPtr<UPaperSurfaceComponent> PaperSurface;
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Paper Surface")
 	TSubobjectPtr<UBillboardComponent> BillboardComponent;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Paper Surface")
+	UStaticMeshComponent* StaticMeshComponent;
 	//UPaperSurfaceComponent* PaperSurface;
 
 	virtual void Tick(float DeltaSeconds) override;
