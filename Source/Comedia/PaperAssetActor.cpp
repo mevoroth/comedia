@@ -28,8 +28,9 @@ void APaperAssetActor::Tick(float DeltaSeconds)
 		Mip.BulkData.Unlock();
 		MainTex->UpdateResource();
 		Updated = true;
+
+		UTexture* Tex;
+		MeshComponent->GetMaterial(0)->GetTextureParameterValue(TEXT("MainTex"), Tex);
+		MeshComponent->GetMaterial(0)->OverrideTexture(Tex, MainTex, ERHIFeatureLevel::SM5);
 	}
-	UTexture* Tex;
-	MeshComponent->GetMaterial(0)->GetTextureParameterValue(TEXT("MainTex"), Tex);
-	MeshComponent->GetMaterial(0)->OverrideTexture(Tex, MainTex, ERHIFeatureLevel::SM5);
 }
