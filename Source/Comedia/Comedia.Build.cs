@@ -9,7 +9,7 @@ public class Comedia : ModuleRules
 		//PublicIncludePaths.AddRange(new string[] { "PaperSurface/Public" });
 		//PrivateIncludePaths.AddRange(new string[] { "PaperSurface/Private" });
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ComediaEngine" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "RHI", "RenderCore", "ShaderCore" });
 

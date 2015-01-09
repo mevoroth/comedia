@@ -5,6 +5,11 @@
 	"Description": "",
 	"Modules": [
 		{
+			"Name": "ComediaEngine",
+			"Type": "Runtime",
+			"LoadingPhase": "PostConfigInit"
+		},
+		{
 			"Name": "Comedia",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"

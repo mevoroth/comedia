@@ -1,0 +1,145 @@
+#include "GeneratedUniformBuffers.usf" 
+
+/*
+Uniform buffers
+
+Size
+ThresholdCutoff
+*/
+
+RWTexture2D<float4> OutTex;
+
+Texture2D InTex0;
+SamplerState InTex0Sampler;
+Texture2D InTex1;
+SamplerState InTex1Sampler;
+Texture2D InTex2;
+SamplerState InTex2Sampler;
+Texture2D InTex3;
+SamplerState InTex3Sampler;
+/**
+[] {
+rotate,	// Rotate
+sX, sY	// Scale
+dX, dY,	// Translate
+}
+*/
+Buffer<float> InNoise;
+Texture2D RippedNoise;
+SamplerState RippedNoiseSampler;
+
+//RTexture2D<float4> InTex4;
+//RTexture2D<float4> InTex5;
+//RTexture2D<float4> InTex6;
+//RTexture2D<float4> InTex7;
+
+
+[numthreads(1, 1, 1)]
+void PaperSurfaceCS( uint3 ThreadId : SV_DispatchThreadID )
+{
+	float4 col = float4(0, 0, 0, 0);
+
+	float2 UV = float2(
+		ThreadId.x / (PaperSurfaceParameters.Size.x - 1),
+		ThreadId.y / (PaperSurfaceParameters.Size.y - 1)
+	);
+	float2 RandomedUV;
+	float sinR;
+	float cosR;
+	float tmp;
+
+	int texInd = 0;
+
+	for (int tex = 0; tex < 16; ++tex)
+	{	
+		tmp = InNoise[texInd] * 6.28318530718; // 2*PI
+		cosR = cos(tmp);
+		sinR = sin(tmp);
+
+		// Scale, rotate, translate then translate back to origin
+		RandomedUV = UV - float2(0.5, 0.5);
+		RandomedUV = float2(
+			RandomedUV.x * InNoise[texInd + 1],
+			RandomedUV.y * InNoise[texInd + 2]
+		);
+		RandomedUV = float2(
+			RandomedUV.x * cosR - RandomedUV.y * sinR,
+			RandomedUV.y * cosR + RandomedUV.x * sinR
+		);
+		RandomedUV += float2(InNoise[texInd + 3], InNoise[texInd + 4]);
+		RandomedUV += float2(0.5, 0.5);
+
+		int currTex = tex & 3; // (0x2 | 0x1); means %4
+
+		texInd += 5;
+
+		if (RandomedUV.x < 0 || RandomedUV.x > 1
+			|| RandomedUV.y < 0 || RandomedUV.y > 1)
+		{
+			continue;
+		}
+		else
+		{
+			//float4 paper = Texture2DSample(RippedNoise, RippedNoiseSampler, RandomedUV);
+			float4 paper = RippedNoise.SampleLevel(RippedNoiseSampler, RandomedUV, 0);
+			//float4 paper = float4(1, 1, 1, 1);
+			//float opacity = RippedNoise.SampleLevel(RippedNoiseSampler, RandomedUV, 0).x;
+			
+			paper.w = min((paper.x >= PaperSurfaceParameters.ThresholdCutoff ? paper.x : 0) * 2, 1);
+			//float2 border = abs(float2(0.5 - RandomedUV.x, 0.5 - RandomedUV.y)) * 2;
+			//border = clamp(border / 5, 0, 1);
+			//border.x *= border.x;
+			//border.y *= border.y;
+			//border = 1 - border;
+			//paper.w *= border.x * border.y;
+			//float opacity;
+			//opacity = paper.w < 0.15 ? 0.15 - paper.w : 0;
+			//if (paper.w >= 0.15)
+			//{
+			//	paper.w = 1;
+			//}
+
+			if (paper.w == 0)
+			{
+				continue;
+			}
+
+			if (currTex == 0)
+			{
+				paper *= InTex0.SampleLevel(InTex0Sampler, RandomedUV, 0);
+			}
+			else if (currTex == 1)
+			{
+				paper *= InTex1.SampleLevel(InTex1Sampler, RandomedUV, 0);
+			}
+			else if (currTex == 2)
+			{
+				paper *= InTex2.SampleLevel(InTex2Sampler, RandomedUV, 0);
+			}
+			else
+			{
+				paper *= InTex3.SampleLevel(InTex3Sampler, RandomedUV, 0);
+			}
+
+			//if (opacity > 0)
+			//{
+			//	paper.xyz = 0.7;
+			//	paper.w = max(min(opacity * 10 + 0.5, 1) - 0.5, 0);
+			//}
+			
+			//paper.xyz *= paper.w;
+			col = float4(paper.xyz * paper.w + col.xyz * (1 - paper.w),
+				paper.w * paper.w + col.w * (1 - paper.w));
+		}
+	}
+
+	OutTex[ThreadId.xy] = col;
+	//OutTex[ThreadId.xy] = float4(ThreadId.x, ThreadId.y, 0, 1);
+	//OutTex[ThreadId.xy] = float4(UV.x, UV.y, 0, 1);
+	//float width, height, elements, depth, numberoflevels, numberofsamples;
+	//InTex0.GetDimensions(1, width, height, numberoflevels);
+	//OutTex[ThreadId.xy] = float4(width, height, numberoflevels, 1);
+	//OutTex[ThreadId.xy] = InTex0.SampleLevel(InTex0Sampler, UV, 0);
+	//OutTex[ThreadId.xy] = RippedNoise.SampleLevel(RippedNoiseSampler, RandomedUV, 0);
+	//OutTex[ThreadId.xy] = float4(InNoise[0], InNoise[1], InNoise[2], InNoise[3]);
+}
