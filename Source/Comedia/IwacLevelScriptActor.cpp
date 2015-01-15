@@ -82,6 +82,10 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 		default:
 			break;
 	}
+
+	if (SunDirectionalLightActor)
+		SunDirectionalLightActor->AddActorWorldRotation(FRotator(0.0f, SunRotationSpeed * DeltaSeconds, 0.0f));
+
 }
 
 void AIwacLevelScriptActor::TickKnifePhase(float DeltaSeconds)

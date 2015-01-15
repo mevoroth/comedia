@@ -58,7 +58,7 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	bool bHasKnifeSpawned;
 #pragma endregion KnifePhase
 
-#pragma region Lightning
+#pragma region LightningPhase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
 	int32 MaxNbLightning;
 
@@ -88,7 +88,15 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LightningPhase")
 	int32 CurrentNbLightning;
-#pragma endregion Lightning
+#pragma endregion LightningPhase
+
+#pragma region SunPhase
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SunPhase")
+	AActor* SunDirectionalLightActor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SunPhase")
+	float SunRotationSpeed;
+#pragma endregion SunPhase
 
 
 	virtual void BeginPlay() override;
