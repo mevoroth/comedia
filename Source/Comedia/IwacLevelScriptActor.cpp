@@ -9,19 +9,18 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 {
 	//Get blueprint class for knife instantiation
 	static ConstructorHelpers::FClassFinder<AKnifeCharacter> KnifeCharacterClassFinder(TEXT("/Game/Blueprints/Knife"));
-	KnifeClass = KnifeCharacterClassFinder.Class;
+	_KnifeClass = KnifeCharacterClassFinder.Class;
 
 	//Get blueprint class for lightning instantiation
 	static ConstructorHelpers::FClassFinder<ALightningActor> LightningActorClassFinder(TEXT("/Game/Blueprints/Lightning"));
-	LightningClass = LightningActorClassFinder.Class;
+	_LightningClass = LightningActorClassFinder.Class;
 
 	//Enable tick function
 	PrimaryActorTick.bCanEverTick = true;
 
-	PreviousTorturePhase = ETorturePhase::TP_EmptyPhase;
+	_PreviousTorturePhase = ETorturePhase::TP_EmptyPhase;
 
 	bHasKnifeSpawned = false;
-	NbSpawnedKnife = 0;
 	CurrentNbLightning = 0;
 }
 
@@ -30,10 +29,10 @@ void AIwacLevelScriptActor::BeginPlay()
 	Super::BeginPlay();
 
 	//Get player character
-	PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
+	_PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
 
 	//Init remaining time with DelayFirstKnifeSpawn
-	RemainingTime = DelayFirstSpawn;
+	_RemainingTime = DelayFirstSpawn;
 }
 
 void AIwacLevelScriptActor::Tick(float DeltaSeconds)
@@ -41,7 +40,7 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	//Check if phase changed
-	if (TorturePhase != PreviousTorturePhase)
+	if (TorturePhase != _PreviousTorturePhase)
 	{
 		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ETorturePhase"), true);
 		if (EnumPtr)
@@ -59,60 +58,64 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 					TimeSpendLightningPhase = 0.0f;
 					break;
 
+				case ETorturePhase::TP_IronPhase:
+					TimeSpendIronPhase = 0.0f;
+					break;
+
 				case ETorturePhase::TP_EmptyPhase:
 				default:
 					break;
 			}
 		}
-		PreviousTorturePhase = TorturePhase;
+		_PreviousTorturePhase = TorturePhase;
 	}
 
 	//Tick current torture phase
 	switch (TorturePhase)
 	{
 		case ETorturePhase::TP_KnifePhase:
-			TickKnifePhase(DeltaSeconds);
+			_TickKnifePhase(DeltaSeconds);
 			break;
 
 		case ETorturePhase::TP_LightningPhase:
-			TickLightningPhase(DeltaSeconds);
+			_TickLightningPhase(DeltaSeconds);
+			break;
+
+		case ETorturePhase::TP_IronPhase:
+			_TickIronPhase(DeltaSeconds);
 			break;
 
 		case ETorturePhase::TP_EmptyPhase:
 		default:
 			break;
 	}
-
-	if (SunDirectionalLightActor)
-		SunDirectionalLightActor->AddActorWorldRotation(FRotator(0.0f, SunRotationSpeed * DeltaSeconds, 0.0f));
-
 }
 
-void AIwacLevelScriptActor::TickKnifePhase(float DeltaSeconds)
+void AIwacLevelScriptActor::_TickKnifePhase(float DeltaSeconds)
 {
 	//Draw spawn area around the player
-	ComputedRadiusSpawnKnifeArea = PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
-	DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
+	ComputedRadiusSpawnKnifeArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
+	DrawDebugSphere(GetWorld(), _PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
 
 	//Check if no knife spawned
 	if (!bHasKnifeSpawned)
 	{
 		//Decreased remaining time before next knife spawn
-		RemainingTime -= DeltaSeconds;
+		_RemainingTime -= DeltaSeconds;
 
 		//Knife spawn when no more remaining time
-		if (RemainingTime <= 0.0f)
+		if (_RemainingTime <= 0.0f)
 		{
-			KnifeSpawning(ComputedRadiusSpawnKnifeArea);
+			_KnifeSpawning(ComputedRadiusSpawnKnifeArea);
 		}
 	}
 }
 
-void AIwacLevelScriptActor::TickLightningPhase(float DeltaSeconds)
+void AIwacLevelScriptActor::_TickLightningPhase(float DeltaSeconds)
 {
 	 //Draw spawn area around the player
-	float ComputedRadiusSpawnLightningArea = PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnLightningArea;
-	DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnLightningArea, 32, FColor::Blue);
+	float ComputedRadiusSpawnLightningArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnLightningArea;
+	DrawDebugSphere(GetWorld(), _PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnLightningArea, 32, FColor::Blue);
 
 	//Increase time spend in lightning phase
 	TimeSpendLightningPhase += DeltaSeconds;
@@ -121,16 +124,28 @@ void AIwacLevelScriptActor::TickLightningPhase(float DeltaSeconds)
 	if (CurrentNbLightning < MaxNbLightning)
 	{
 		//Decrease remaining time before next lightning spawn
-		RemainingTime -= DeltaSeconds;
+		_RemainingTime -= DeltaSeconds;
 
-		if (RemainingTime <= 0.0f)
+		if (_RemainingTime <= 0.0f)
 		{
-			LightningSpawning(ComputedRadiusSpawnLightningArea);
+			_LightningSpawning(ComputedRadiusSpawnLightningArea);
 		}
 	}
 }
 
-void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
+void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
+{
+	//Increase time spend in Iron Phase
+	TimeSpendIronPhase += DeltaSeconds;
+
+	//Make the sun rotate
+	/*
+	if (SunDirectionalLightActor)
+		SunDirectionalLightActor->AddActorWorldRotation(FRotator(0.0f, SunRotationSpeed * DeltaSeconds, 0.0f));
+	*/
+}
+
+void AIwacLevelScriptActor::_KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 {
 	//UE_LOG(LogGPCode, Log, TEXT("Spawn Knife"));
 	
@@ -138,11 +153,11 @@ void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 	bHasKnifeSpawned = true;
 
 	//Set remaining time with DelayBetweenKnifeSpawn for next knife spawn
-	RemainingTime = DelayBetweenKnifeSpawn;
+	_RemainingTime = DelayBetweenKnifeSpawn;
 
 	//Spawn knife
-	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(KnifeClass);
-	FVector SpawningKnifePosition = PlayerCharacter->GetActorLocation();
+	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(_KnifeClass);
+	FVector SpawningKnifePosition = _PlayerCharacter->GetActorLocation();
 	SpawnedKnifeCharacter->SetActorLocation(SpawningKnifePosition);
 	SpawnedKnifeCharacter->SpawnDefaultController();
 
@@ -158,19 +173,19 @@ void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 	SpawnedKnifeCharacter->InitOriginalPosition();
 }
 
-void AIwacLevelScriptActor::LightningSpawning(float ComputedRadiusSpawnLightningArea)
+void AIwacLevelScriptActor::_LightningSpawning(float ComputedRadiusSpawnLightningArea)
 {
 	//UE_LOG(LogGPCode, Log, TEXT("Spawn Lightning"));
 	CurrentNbLightning++;
 
 	//Set remaining time with MinCooldownLightning and MaxCooldownLightning for the next lightning spawn
-	RemainingTime = FMath::FRandRange(MinCooldownLightning, MaxCooldownLightning);
+	_RemainingTime = FMath::FRandRange(MinCooldownLightning, MaxCooldownLightning);
 
 	//Spawn lightning
-	ALightningActor* SpawnedLightningActor = GetWorld()->SpawnActor<ALightningActor>(LightningClass);
+	ALightningActor* SpawnedLightningActor = GetWorld()->SpawnActor<ALightningActor>(_LightningClass);
 	SpawnedLightningActor->SetLifeSpan(DelayDamageLightning);
-	float ComputedRadiusDamageLightningArea = PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusDamageLightningArea;
-	SpawnedLightningActor->SetActorLocation(PlayerCharacter->GetActorLocation());
+	float ComputedRadiusDamageLightningArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusDamageLightningArea;
+	SpawnedLightningActor->SetActorLocation(_PlayerCharacter->GetActorLocation());
 	SpawnedLightningActor->SetDecalsScale(ComputedRadiusDamageLightningArea, ComputedRadiusDamageLightningArea);
 
 	//Check if critical lightning

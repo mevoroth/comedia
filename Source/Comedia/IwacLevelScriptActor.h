@@ -29,93 +29,100 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	GENERATED_UCLASS_BODY()
 
 #pragma region TorturePhase
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TorturePhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
 	TEnumAsByte<ETorturePhase::Type> TorturePhase;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TorturePhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
 	float DelayFirstSpawn;
 #pragma endregion TorturePhase
 
 #pragma region KnifePhase
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifePhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifePhase")
 	float DelayBetweenKnifeSpawn;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifePhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifePhase")
 	float RadiusSpawnKnifeArea;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "KnifePhase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
 	int32 NbSpawnedKnife;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "KnifePhase")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
 	int32 MaxNbSpawnedKnife;
 
 	/** ComputedRadiusSpawnKnifeArea depending of player character height */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "KnifePhase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
 	float ComputedRadiusSpawnKnifeArea;
 
 	/** true indicates a knife is present */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "KnifePhase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
 	bool bHasKnifeSpawned;
 #pragma endregion KnifePhase
 
 #pragma region LightningPhase
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	int32 MaxNbLightning;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float LengthLightningPhase;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float RadiusSpawnLightningArea;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float PercentCriticalLightning;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float MinCooldownLightning;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float MaxCooldownLightning;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float DelayDamageLightning;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LightningPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float RadiusDamageLightningArea;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LightningPhase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] LightningPhase")
 	float TimeSpendLightningPhase;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "LightningPhase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] LightningPhase")
 	int32 CurrentNbLightning;
 #pragma endregion LightningPhase
 
-#pragma region SunPhase
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SunPhase")
+#pragma region IronPhase
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	AActor* SunDirectionalLightActor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SunPhase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	float SunRotationSpeed;
-#pragma endregion SunPhase
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float LengthIronPhase;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
+	float TimeSpendIronPhase;
+#pragma endregion IronPhase
 
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
 private:
-	TEnumAsByte<ETorturePhase::Type> PreviousTorturePhase;
+	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;
 
 	/** Class to instance when spawning Knife character */
-	TSubclassOf<AKnifeCharacter> KnifeClass;
+	TSubclassOf<AKnifeCharacter> _KnifeClass;
 
 	/** Class to instance when spawning Lightning */
-	TSubclassOf<ALightningActor> LightningClass;
+	TSubclassOf<ALightningActor> _LightningClass;
 
-	float RemainingTime;
-	ACharacter* PlayerCharacter;
+	float _RemainingTime;
+	ACharacter* _PlayerCharacter;
 
-	void TickKnifePhase(float DeltaSeconds);
-	void TickLightningPhase(float DeltaSeconds);
-	void KnifeSpawning(float ComputedRadiusSpawnKnifeArea);
-	void LightningSpawning(float ComputedRadiusSpawnLightningArea);
+	void _TickKnifePhase(float DeltaSeconds);
+	void _TickLightningPhase(float DeltaSeconds);
+	void _TickIronPhase(float DeltaSeconds);
+	void _KnifeSpawning(float ComputedRadiusSpawnKnifeArea);
+	void _LightningSpawning(float ComputedRadiusSpawnLightningArea);
 };
