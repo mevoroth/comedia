@@ -13,23 +13,14 @@ class COMEDIA_API AKnifeCharacter : public ACharacter
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifeParams")
 	float KnifeSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifeParams")
 	float MaxRotationSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
-	float DecalWidth;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
-	float DecalLength;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
-	UMaterial* DecalMaterial;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "KnifeParams")
-	float DecalLifeSpan;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifeParams")
+	float RatioTrailLength = 1.0f;
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -38,11 +29,13 @@ class COMEDIA_API AKnifeCharacter : public ACharacter
 	void InitOriginalPosition();
 
 private:
-	TSubclassOf<ADecalActor> DecalClass;
+	TSubclassOf<AActor> _TrailClass;
 
-	FVector LastDecalPosition;
+	FVector _LastDecalPosition;
 
-	void DestroyKnife();
+	float _TrailLength;
 
-	void SpawnDecal();
+	void _DestroyKnife();
+
+	void _SpawnTrail();
 };
