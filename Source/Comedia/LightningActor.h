@@ -14,13 +14,13 @@ class COMEDIA_API ALightningActor : public AActor
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningParams")
 	UParticleSystem* LightningParticleSystem;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] LightningParams")
 	UDecalComponent* LightningFullDecal;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] LightningParams")
 	UDecalComponent* LightningTimerDecal;
 
 	ALightningActor(const FObjectInitializer& ObjectInitializer);
@@ -29,7 +29,7 @@ public:
 	virtual void LifeSpanExpired();
 
 private:
-	float ComputedRadiusDamageLightningArea;
+	float _ComputedRadiusDamageLightningArea;
 
-	float GetRatioRemainingTime();
+	float _GetRatioRemainingTime();
 };

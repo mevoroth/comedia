@@ -27,9 +27,9 @@ ALightningActor::ALightningActor(const FObjectInitializer& ObjectInitializer)
 
 void ALightningActor::SetDecalsScale(float Width, float Height)
 {
-	ComputedRadiusDamageLightningArea = (Width + Height) / 2.0f;
+	_ComputedRadiusDamageLightningArea = (Width + Height) / 2.0f;
 	LightningFullDecal->SetWorldScale3D(FVector(LightningFullDecal->GetComponentScale().X, Width, Height));
-	float RatioRemainingTime = GetRatioRemainingTime();
+	float RatioRemainingTime = _GetRatioRemainingTime();
 	LightningTimerDecal->SetWorldScale3D(FVector(LightningTimerDecal->GetComponentScale().X, Width * RatioRemainingTime, Height * RatioRemainingTime));
 }
 
@@ -38,7 +38,7 @@ void ALightningActor::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	//Rescale timer decal
-	float RatioRemainingTime = GetRatioRemainingTime();
+	float RatioRemainingTime = _GetRatioRemainingTime();
 	LightningTimerDecal->SetWorldScale3D(FVector(LightningFullDecal->GetComponentScale().X, LightningFullDecal->GetComponentScale().Y * RatioRemainingTime, LightningFullDecal->GetComponentScale().Z * RatioRemainingTime));
 }
 
@@ -58,7 +58,7 @@ void ALightningActor::LifeSpanExpired()
 		FVector LightningPosition = GetActorLocation();
 		PlayerPosition.Z = LightningPosition.Z = 0.0f;
 		float DistanceLightningPlayer = FVector::Dist(PlayerPosition, LightningPosition);
-		if (DistanceLightningPlayer <= ComputedRadiusDamageLightningArea)
+		if (DistanceLightningPlayer <= _ComputedRadiusDamageLightningArea)
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Player touch by lightning"));
 			//Spawn particle emitter
@@ -77,7 +77,7 @@ void ALightningActor::LifeSpanExpired()
 	}
 }
 
-float ALightningActor::GetRatioRemainingTime()
+float ALightningActor::_GetRatioRemainingTime()
 {
 	return (1 - GetLifeSpan() / InitialLifeSpan);
 }
