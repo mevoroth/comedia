@@ -45,6 +45,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
 	virtual void RightFootStep(const FVector& Pos);
 
+	virtual void Tick(float DeltaSeconds) override;
+
+
 protected:
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
@@ -60,4 +63,8 @@ protected:
 	void AddCameraPitch(float Val);
 	/** Controls Mouse X axis */
 	void AddCameraRoll(float Val);
+
+private:
+	FVector2D Accel;
+	float Rotation;
 };
