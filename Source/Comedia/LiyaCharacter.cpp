@@ -25,10 +25,6 @@ void ALiyaCharacter::MoveForward(float Val)
 {
 	if (Val != 0.0f)
 	{
-		//Mesh->SetRelativeRotation(FRotator(
-		//	0.f, Camera->GetComponentRotation().Yaw, 0.f
-		//));
-		//AddMovementInput(Camera->GetForwardVector(), Val * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
 		Accel.X = Val;
 	}
 }
@@ -38,10 +34,6 @@ void ALiyaCharacter::MoveRight(float Val)
 	if (Val != 0.0f)
 	{
 		Accel.Y = Val;
-		//Mesh->SetRelativeRotation(FRotator(
-		//	0.f, Camera->GetComponentRotation().Yaw, 0.f
-		//));
-		//AddMovementInput(Camera->GetRightVector(), Val * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
 	}
 }
 
@@ -82,7 +74,7 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	AddMovementInput(Camera->GetForwardVector(), Accel.X * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
 	AddMovementInput(Camera->GetRightVector(), Accel.Y * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
 
-	if (Accel.X != 0.f && Accel.Y != 0.f)
+	if (!(Accel.X == 0.f && Accel.Y == 0.f))
 	{
 		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Accel.Y, Accel.X) * 180.f / PI - 90.f;
 	}
