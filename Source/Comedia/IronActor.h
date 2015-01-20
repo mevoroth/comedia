@@ -17,6 +17,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronParams")
 	float RotationSpeed = 1.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronParams")
+	AActor* TreeActor;
+
 	AIronActor(const FObjectInitializer& ObjectInitializer);
 	virtual void Tick(float DeltaSeconds);
 };
