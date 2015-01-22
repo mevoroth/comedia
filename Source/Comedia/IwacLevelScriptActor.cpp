@@ -7,6 +7,7 @@
 AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializeProperties& PCIP)
 	: Super(PCIP)
 {
+
 	//Get blueprint class for knife instantiation
 	static ConstructorHelpers::FClassFinder<AKnifeCharacter> KnifeCharacterClassFinder(TEXT("/Game/Blueprints/Knife"));
 	_KnifeClass = KnifeCharacterClassFinder.Class;
@@ -14,6 +15,10 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 	//Get blueprint class for lightning instantiation
 	static ConstructorHelpers::FClassFinder<ALightningActor> LightningActorClassFinder(TEXT("/Game/Blueprints/Lightning"));
 	_LightningClass = LightningActorClassFinder.Class;
+
+	//Get blueprint class for Iron instantiation
+	static ConstructorHelpers::FClassFinder<AIronActor> IronActorClassFinder(TEXT("/Game/Blueprints/BP_Iron"));
+	_IronClass = IronActorClassFinder.Class;
 
 	//Enable tick function
 	PrimaryActorTick.bCanEverTick = true;
@@ -27,6 +32,9 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 void AIwacLevelScriptActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//Check if TreeActor set in Level blueprint
+	check(TreeActor);
 
 	//Get player character
 	_PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
@@ -60,6 +68,7 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 
 				case ETorturePhase::TP_IronPhase:
 					TimeSpendIronPhase = 0.0f;
+					_IronSpawning();
 					break;
 
 				case ETorturePhase::TP_EmptyPhase:
@@ -135,14 +144,24 @@ void AIwacLevelScriptActor::_TickLightningPhase(float DeltaSeconds)
 
 void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 {
+	check(_SpawnedIronActor); //Check if IronActor has spawned
+
 	//Increase time spend in Iron Phase
 	TimeSpendIronPhase += DeltaSeconds;
 
-	//Make the sun rotate
-	/*
-	if (SunDirectionalLightActor)
-		SunDirectionalLightActor->AddActorWorldRotation(FRotator(0.0f, SunRotationSpeed * DeltaSeconds, 0.0f));
-	*/
+	//Increase rotation speed depending of time spend in Iron phase
+	_SpawnedIronActor->RotationSpeed = FMath::Lerp(LightRotationSpeedMin, LightRotationSpeedMax, TimeSpendIronPhase / LengthIronPhase);
+
+	//Raycast from Iron point light to player to check if player is behind the tree
+	FHitResult Hit(ForceInit);
+	FCollisionQueryParams Trace(TEXT("IronTrace"), false, GetOwner());
+	FVector IronPointLightPosition = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation();
+	GetWorld()->LineTraceSingle(Hit, IronPointLightPosition, _PlayerCharacter->GetActorLocation(), ECC_Visibility, Trace);
+
+	if (Hit.Actor == NULL || Hit.Actor != TreeActor)
+	{
+		UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
+	}
 }
 
 void AIwacLevelScriptActor::_KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
@@ -204,4 +223,14 @@ void AIwacLevelScriptActor::_LightningSpawning(float ComputedRadiusSpawnLightnin
 	{
 		//UE_LOG(LogGPCode, Log, TEXT("Critical!"));
 	}
+}
+
+void AIwacLevelScriptActor::_IronSpawning()
+{
+	//Spawn Iron actor and set location on tree, to rotate around it
+	_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
+	_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
+
+	//Set initial rotation speed
+	_SpawnedIronActor->RotationSpeed = LightRotationSpeedMin;
 }

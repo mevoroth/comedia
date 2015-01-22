@@ -13,7 +13,5 @@ void AIronActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	UE_LOG(LogGPCode, Log, TEXT("YOLO!"));
-
 	AddActorLocalRotation(FRotator(0.0f, RotationSpeed * DeltaSeconds, 0.0f));
 }

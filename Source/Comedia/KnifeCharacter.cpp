@@ -132,7 +132,7 @@ void AKnifeCharacter::_SpawnTrail()
 	NewTrailDirection.Normalize();
 	float AngleNewTrail = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(NewTrailDirection, FVector::ForwardVector)));
 	float SignAngleNewTrail = FMath::Sign<float>(FVector::CrossProduct(FVector::ForwardVector, NewTrailDirection).Z);
-	FRotator RotationNewTrail = FRotator(0.0f, 90.0f + (AngleNewTrail * SignAngleNewTrail), 0.0f);
+	FRotator RotationNewTrail = FRotator(0.0f, -90.0f + (AngleNewTrail * SignAngleNewTrail), 0.0f);
 	NewTrail->SetActorRelativeRotation(RotationNewTrail);
 
 	_LastDecalPosition = GetActorLocation();

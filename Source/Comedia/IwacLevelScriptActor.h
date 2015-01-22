@@ -5,6 +5,7 @@
 #include "Engine/LevelScriptActor.h"
 #include "KnifeCharacter.h"
 #include "LightningActor.h"
+#include "IronActor.h"
 #include "IwacLevelScriptActor.generated.h"
 
 /**
@@ -29,6 +30,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	GENERATED_UCLASS_BODY()
 
 #pragma region TorturePhase
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] Torture Phase")
+	AActor* TreeActor;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
 	TEnumAsByte<ETorturePhase::Type> TorturePhase;
 
@@ -92,10 +96,10 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 #pragma region IronPhase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
-	AActor* SunDirectionalLightActor;
+	float LightRotationSpeedMin;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
-	float SunRotationSpeed;
+	float LightRotationSpeedMax;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	float LengthIronPhase;
@@ -103,7 +107,6 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	float TimeSpendIronPhase;
 #pragma endregion IronPhase
-
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -117,12 +120,17 @@ private:
 	/** Class to instance when spawning Lightning */
 	TSubclassOf<ALightningActor> _LightningClass;
 
+	/** Class to instance when spawning Iron Actor */
+	TSubclassOf<AIronActor> _IronClass;
+
 	float _RemainingTime;
 	ACharacter* _PlayerCharacter;
+	AIronActor* _SpawnedIronActor;
 
 	void _TickKnifePhase(float DeltaSeconds);
 	void _TickLightningPhase(float DeltaSeconds);
 	void _TickIronPhase(float DeltaSeconds);
 	void _KnifeSpawning(float ComputedRadiusSpawnKnifeArea);
 	void _LightningSpawning(float ComputedRadiusSpawnLightningArea);
+	void _IronSpawning();
 };
