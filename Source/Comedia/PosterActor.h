@@ -56,7 +56,5 @@ private:
 	FTransform* _BonesInit;
 
 	UPROPERTY()
-	FTransform _HandsTransform;
-	UPROPERTY()
 	bool _Grabbed;
 };

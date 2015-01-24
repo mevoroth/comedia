@@ -88,33 +88,22 @@ void APosterActor::UpdateChain()
 	}
 	
 	// Effector further than poster range
-	//if (FVector::Dist(_Effector.GetLocation(), PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(First))) > _MaxDistance)
 	if (FVector::Dist(_Effector.GetLocation(), _BonesBuff[First - 1].GetLocation()) > _MaxDistance)
 	{
-		//FVector Dir = (_Effector.GetLocation() - PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(First))).UnsafeNormal();
 		FVector Dir = (_Effector.GetLocation() - _BonesBuff[First - 1].GetLocation()).UnsafeNormal();
 		for (int32 BoneIndex = Second; BoneIndex != End; BoneIndex += It)
 		{
-			//FVector Parent = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex - It));
 			FVector Parent = _BonesBuff[BoneIndex - It - 1].GetLocation();
 
-			//PosterMesh->SetBoneLocationByName(
-			//	PosterMesh->GetBoneName(BoneIndex),
-			//	Parent + Dir * (*Dist)[BoneIndex - 1],
-			//	EBoneSpaces::WorldSpace
-			//);
 			_BonesBuff[BoneIndex - 1].SetLocation(Parent + Dir * (*Dist)[BoneIndex - 1]);
-			//_BonesBuff[BoneIndex - 1].SetRotation(_BonesInit[BoneIndex - 1].GetRotation());
 		}
 		bBonesUpdated = true;
 	}
 	else // Effector within poster range
 	{
-		//float Slop = FVector::Dist(_Effector.GetLocation(), PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(Last)));
 		float Slop = FVector::Dist(_Effector.GetLocation(), _BonesBuff[Last - 1].GetLocation());
 		if (Slop > Precision)
 		{
-			//PosterMesh->SetBoneLocationByName(PosterMesh->GetBoneName(Last), _Effector.GetLocation(), EBoneSpaces::WorldSpace);
 			_BonesBuff[Last - 1].SetLocation(_Effector.GetLocation());
 
 			int32 IterationsCount = 0;
@@ -123,49 +112,27 @@ void APosterActor::UpdateChain()
 				// FW Reaching
 				for (int32 BoneIndex = Last - It; BoneIndex != First; BoneIndex -= It)
 				{
-					//FVector Current = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex));
-					//FVector Child = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex + It));
 					FVector Current = _BonesBuff[BoneIndex - 1].GetLocation();
 					FVector Child = _BonesBuff[BoneIndex + It - 1].GetLocation();
 
-					//PosterMesh->SetBoneLocationByName(
-					//	PosterMesh->GetBoneName(BoneIndex),
-					//	Current + (Current - Child).UnsafeNormal() * (*Dist)[BoneIndex + It - 1],
-					//	EBoneSpaces::WorldSpace
-					//);
 					_BonesBuff[BoneIndex - 1].SetLocation(Child - (Child - Current).UnsafeNormal() * (*Dist)[BoneIndex - 1]);
 				}
 
 				// BW Reaching
 				for (int32 BoneIndex = Second; BoneIndex != Last; BoneIndex += It)
 				{
-					//FVector Current = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex));
-					//FVector Parent = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex - It));
 					FVector Current = _BonesBuff[BoneIndex - 1].GetLocation();
 					FVector Parent = _BonesBuff[BoneIndex - It - 1].GetLocation();
 
-					//PosterMesh->SetBoneLocationByName(
-					//	PosterMesh->GetBoneName(BoneIndex),
-					//	Current + (Parent - Current).UnsafeNormal() * (*Dist)[BoneIndex - 1],
-					//	EBoneSpaces::WorldSpace
-					//);
 					_BonesBuff[BoneIndex - 1].SetLocation(Parent + (Current - Parent).UnsafeNormal() * (*Dist)[BoneIndex - 1]);
 				}
 
-				//Slop = FMath::Abs((*Dist)[Last - 1] - FVector::Dist(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(Last - It)), _Effector.GetLocation()));
 				Slop = FMath::Abs((*Dist)[Last - 1] - FVector::Dist(_BonesBuff[Last - It - 1].GetLocation(), _Effector.GetLocation()));
 
 				{
-					//FVector Current = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(Last));
-					//FVector Parent = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(Last - It));
 					FVector Current = _BonesBuff[Last - 1].GetLocation();
 					FVector Parent = _BonesBuff[Last - It - 1].GetLocation();
 
-					//PosterMesh->SetBoneLocationByName(
-					//	PosterMesh->GetBoneName(Last - It),
-					//	Parent + (Current - Parent).UnsafeNormal() * (*Dist)[Last - 1],
-					//	EBoneSpaces::WorldSpace
-					//);
 					_BonesBuff[Last - 1].SetLocation(Parent + (Current - Parent).UnsafeNormal() * (*Dist)[Last - 1]);
 				}
 			}
@@ -184,14 +151,8 @@ void APosterActor::UpdateChain()
 		UE_LOG(LogGPCode, Warning, TEXT("First : %d; End : %d; HEAD IS ROOT : %d"), First, Last, _HeadIsRoot ? 1 : 0);
 		for (int32 BoneIndex = First, BoneLast = Last; BoneIndex != BoneLast; BoneIndex += It)
 		{
-			//PosterMesh->ResetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex));
-			//PosterMesh->ResetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + It));
-			//FVector Current = _BonesBuff[BoneIndex - 1].GetLocation();
-			//FVector Child = _BonesBuff[BoneIndex + It - 1].GetLocation();
 			FVector Current = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex));
 			FVector Child = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex + It));
-			//FVector Current = _BonesInit[BoneIndex - 1].GetLocation();
-			//FVector Child = _BonesInit[BoneIndex + It - 1].GetLocation();
 			FVector OldDir = (Child - Current).UnsafeNormal();
 
 			Current = _BonesBuff[BoneIndex - 1].GetLocation();
@@ -203,23 +164,7 @@ void APosterActor::UpdateChain()
 			FQuat DeltaRotation = FQuat(RotationAxis, RotationAngle);
 			check(DeltaRotation.IsNormalized());
 
-			//UE_LOG(LogGPCode, Warning, TEXT("Before: %s"), *_BonesBuff[BoneIndex - 1].GetRotation().Rotator().ToString());
 			_BonesBuff[BoneIndex - 1].SetRotation(DeltaRotation * _BonesBuff[BoneIndex - 1].GetRotation());
-			//UE_LOG(LogGPCode, Warning, TEXT("After: %s"), *_BonesBuff[BoneIndex - 1].GetRotation().Rotator().ToString());
-
-			//PosterMesh->SetBoneLocationByName(PosterMesh->GetBoneName(BoneIndex), _BonesBuff[BoneIndex - 1].GetLocation(), EBoneSpaces::WorldSpace);
-			//PosterMesh->SetBoneRotationByName(PosterMesh->GetBoneName(BoneIndex), (DeltaRotation * _BonesBuff[BoneIndex + It - 1].GetRotation()).Rotator(), EBoneSpaces::WorldSpace);
-
-			//FTransform& CurrentBoneTransform = OutBoneTransforms[CurrentLink.TransformIndex].Transform;
-			//CurrentBoneTransform.SetRotation(DeltaRotation * CurrentBoneTransform.GetRotation());
-
-			//// Update zero length children if any
-			//int32 const NumChildren = CurrentLink.ChildZeroLengthTransformIndices.Num();
-			//for (int32 ChildIndex = 0; ChildIndex < NumChildren; ChildIndex++)
-			//{
-			//	FTransform& ChildBoneTransform = OutBoneTransforms[CurrentLink.ChildZeroLengthTransformIndices[ChildIndex]].Transform;
-			//	ChildBoneTransform.SetRotation(DeltaRotation * ChildBoneTransform.GetRotation());
-			//}
 		}
 	}
 }
