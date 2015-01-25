@@ -10,8 +10,13 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, MaxIterations(10)
 	, _DistanceFromHead(0)
 	, _DistanceFromTail(0)
-	, _HeadIsRoot(true)
+	, _HeadIsRoot(false)
+	, Grabbed(false)
 {
+	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
+	PosterMesh->Activate(true);
+	RootComponent = PosterMesh;
+
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -148,7 +153,7 @@ void APosterActor::UpdateChain()
 			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
-		UE_LOG(LogGPCode, Warning, TEXT("First : %d; End : %d; HEAD IS ROOT : %d"), First, Last, _HeadIsRoot ? 1 : 0);
+
 		for (int32 BoneIndex = First, BoneLast = Last; BoneIndex != BoneLast; BoneIndex += It)
 		{
 			FVector Current = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(BoneIndex));
@@ -174,19 +179,42 @@ void APosterActor::SetEffector(const FTransform& Effector)
 	_Effector = Effector;
 }
 
-void APosterActor::Grab(bool Grabbed, bool HeadIsRoot)
+void APosterActor::Grabbing(bool Grabbing)
 {
-	_Grabbed = Grabbed;
-	_HeadIsRoot = HeadIsRoot;
+	Grabbed = false;
+	if (GrabEnabled)
+	{
+		Grabbed = Grabbing;
+	}
+}
+
+void APosterActor::InRange(bool HeadIsRoot)
+{
+	if (!Grabbed)
+	{
+		_HeadIsRoot = HeadIsRoot;
+		GrabEnabled = true;
+	}
+}
+
+void APosterActor::OutRange()
+{
+	if (!Grabbed)
+	{
+		GrabEnabled = false;
+	}
 }
 
 void APosterActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	_UpdateEffector();
+	if (Grabbed)
+	{
+		_UpdateEffector();
 
-	UpdateChain();
+		UpdateChain();
+	}
 }
 
 void APosterActor::_UpdateEffector()

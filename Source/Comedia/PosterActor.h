@@ -13,14 +13,20 @@ class COMEDIA_API APosterActor : public AActor
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+private_subobject:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
 
+public:
 	void UpdateChain();
 
 	void SetEffector(const FTransform& Effector);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
-	void Grab(bool Grabbed, bool HeadIsRoot);
+	void Grabbing(bool Grabbing);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	void InRange(bool HeadIsRoot);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	void OutRange();
 
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
@@ -33,6 +39,14 @@ class COMEDIA_API APosterActor : public AActor
 	/** Max Iterations */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float MaxIterations;
+
+	/** If grab is used */
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
+	bool Grabbed;
+
+	/** If grab is enabled */
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
+	bool GrabEnabled;
 
 private:
 	/** Root to target distance */
@@ -54,7 +68,4 @@ private:
 
 	FTransform* _BonesBuff;
 	FTransform* _BonesInit;
-
-	UPROPERTY()
-	bool _Grabbed;
 };
