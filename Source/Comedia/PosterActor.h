@@ -18,6 +18,9 @@ private_subobject:
 	UPoseableMeshComponent* PosterMesh;
 
 public:
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	bool IsDetached() const;
+
 	void UpdateChain();
 
 	void SetEffector(const FTransform& Effector);

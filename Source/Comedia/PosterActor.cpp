@@ -72,6 +72,16 @@ void APosterActor::BeginDestroy()
 		delete[] _DistanceFromTail;
 		_DistanceFromTail = 0;
 	}
+	if (_BonesInit)
+	{
+		delete[] _BonesInit;
+		_BonesInit = 0;
+	}
+	if (_BonesBuff)
+	{
+		delete[] _BonesBuff;
+		_BonesBuff = 0;
+	}
 }
 
 void APosterActor::UpdateChain()
@@ -237,4 +247,19 @@ void APosterActor::_UpdateEffector()
 			FVector(1.f)
 		));
 	}
+}
+
+bool APosterActor::IsDetached() const
+{
+	float Dist = 0.f;
+	int c = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
+	for (int32 i = 1; i < c; ++i)
+	{
+		FVector a = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(i));
+		a.Z = 0;
+		FVector b = _BonesInit[i - 1].GetLocation();
+		b.Z = 0;
+		Dist += FVector::Dist(a, b);
+	}
+	return Dist / c > 100.f;
 }
