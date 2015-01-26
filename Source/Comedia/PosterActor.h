@@ -43,6 +43,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float MaxIterations;
 
+	/** Reset Du */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float ResetSpeed;
+
 	/** If grab is used */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
 	bool Grabbed;
@@ -50,6 +54,8 @@ public:
 	/** If grab is enabled */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
 	bool GrabEnabled;
+
+	bool Sticked;
 
 private:
 	/** Root to target distance */
@@ -68,6 +74,10 @@ private:
 
 	/** Set Liya's Hands Socket to effector */
 	void _UpdateEffector();
+
+	/** Reset Poster to origin */
+	void _Reset(float DeltaSeconds);
+	float _ResetAlpha;
 
 	FTransform* _BonesBuff;
 	FTransform* _BonesInit;

@@ -12,6 +12,8 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _DistanceFromTail(0)
 	, _HeadIsRoot(false)
 	, Grabbed(false)
+	, ResetSpeed(1.f)
+	, _ResetAlpha(1.f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
@@ -191,11 +193,16 @@ void APosterActor::SetEffector(const FTransform& Effector)
 
 void APosterActor::Grabbing(bool Grabbing)
 {
-	Grabbed = false;
-	if (GrabEnabled)
+	if (Grabbed != Grabbing && !Grabbing)
 	{
-		Grabbed = Grabbing;
+		for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+		{
+			_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
+		}
+
+		_ResetAlpha = 0.f;
 	}
+	Grabbed = GrabEnabled && Grabbing;
 }
 
 void APosterActor::InRange(bool HeadIsRoot)
@@ -224,6 +231,10 @@ void APosterActor::Tick(float DeltaSeconds)
 		_UpdateEffector();
 
 		UpdateChain();
+	}
+	else
+	{
+		_Reset(DeltaSeconds);
 	}
 }
 
@@ -262,4 +273,22 @@ bool APosterActor::IsDetached() const
 		Dist += FVector::Dist(a, b);
 	}
 	return Dist / c > 100.f;
+}
+
+void APosterActor::_Reset(float DeltaSeconds)
+{
+	float ResetAlphaNormalized = _ResetAlpha / ResetSpeed;
+	for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+	{
+		PosterMesh->SetBoneTransformByName(
+			PosterMesh->GetBoneName(BoneIndex + 1),
+			FTransform(
+				FQuat::Slerp(_BonesBuff[BoneIndex].GetRotation(), _BonesInit[BoneIndex].GetRotation(), ResetAlphaNormalized),
+				FMath::Lerp(_BonesBuff[BoneIndex].GetLocation(), _BonesInit[BoneIndex].GetLocation(), ResetAlphaNormalized),
+				FMath::Lerp(_BonesBuff[BoneIndex].GetScale3D(), _BonesInit[BoneIndex].GetScale3D(), ResetAlphaNormalized)
+			),
+			EBoneSpaces::WorldSpace
+		);
+	}
+	_ResetAlpha = FMath::Clamp(_ResetAlpha + DeltaSeconds, 0.f, ResetSpeed);
 }
