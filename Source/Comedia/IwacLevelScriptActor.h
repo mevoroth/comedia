@@ -111,6 +111,15 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	virtual void PlayerTouchByKnife();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	virtual void PlayerTouchByLightning();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	virtual void PlayerTouchByIron();
+
 private:
 	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;
 

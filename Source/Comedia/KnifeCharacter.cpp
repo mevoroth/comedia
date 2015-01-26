@@ -79,6 +79,14 @@ void AKnifeCharacter::ReceiveHit(class UPrimitiveComponent* MyComp, AActor* Othe
 	if (Cast<ALiyaCharacter>(Other))
 	{
 		UE_LOG(LogGPCode, Log, TEXT("Knife collide with player"));
+
+		//Call PlayerTouchByKnife event in LevelBlueprint
+		AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		if (IwacLevelScript)
+		{
+			IwacLevelScript->PlayerTouchByKnife();
+		}
+
 		_DestroyKnife();
 	}
 }

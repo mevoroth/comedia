@@ -77,6 +77,16 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 			}
 		}
 		_PreviousTorturePhase = TorturePhase;
+
+		//Destroy _SpawnedIronActor if existing and not in Iron Phase
+		if (_SpawnedIronActor && TorturePhase != ETorturePhase::TP_IronPhase)
+		{
+			GetWorld()->DestroyActor(_SpawnedIronActor);
+			_SpawnedIronActor = nullptr;
+		}
+
+		//Reinit delay first spawn
+		_RemainingTime = DelayFirstSpawn;
 	}
 
 	//Tick current torture phase
@@ -161,6 +171,7 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 	if (Hit.Actor == NULL || Hit.Actor != TreeActor)
 	{
 		UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
+		PlayerTouchByIron();
 	}
 }
 
@@ -227,10 +238,13 @@ void AIwacLevelScriptActor::_LightningSpawning(float ComputedRadiusSpawnLightnin
 
 void AIwacLevelScriptActor::_IronSpawning()
 {
-	//Spawn Iron actor and set location on tree, to rotate around it
-	_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
-	_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
+	if (!_SpawnedIronActor)
+	{
+		//Spawn Iron actor and set location on tree, to rotate around it
+		_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
+		_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
 
-	//Set initial rotation speed
-	_SpawnedIronActor->RotationSpeed = LightRotationSpeedMin;
+		//Set initial rotation speed
+		_SpawnedIronActor->RotationSpeed = LightRotationSpeedMin;
+	}
 }

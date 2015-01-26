@@ -64,6 +64,13 @@ void ALightningActor::LifeSpanExpired()
 			//Spawn particle emitter
 			UParticleSystemComponent* ParticleSystem = UGameplayStatics::SpawnEmitterAtLocation(this, LightningParticleSystem, GetActorLocation() + FVector::UpVector * 1000.0f);
 			ParticleSystem->SetBeamTargetPoint(0, PlayerCharacter->GetActorLocation() - FVector::UpVector * PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), 0);
+
+			//Call PlayerTouchByLightning event in LevelBlueprint
+			AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+			if (IwacLevelScript)
+			{
+				IwacLevelScript->PlayerTouchByLightning();
+			}
 		}
 		else
 		{
