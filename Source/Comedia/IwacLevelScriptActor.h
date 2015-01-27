@@ -6,6 +6,7 @@
 #include "KnifeCharacter.h"
 #include "LightningActor.h"
 #include "IronActor.h"
+#include "Matinee/MatineeActor.h"
 #include "IwacLevelScriptActor.generated.h"
 
 /**
@@ -38,6 +39,18 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
 	float DelayFirstSpawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
+	AMatineeActor* MatineeIntro;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
+	AMatineeActor* MatineeLightningToIron;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
+	AMatineeActor* MatineeKnifeToLightning;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
+	AMatineeActor* MatineeOutro;
 #pragma endregion TorturePhase
 
 #pragma region KnifePhase

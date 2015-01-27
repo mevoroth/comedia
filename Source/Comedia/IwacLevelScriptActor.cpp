@@ -36,11 +36,19 @@ void AIwacLevelScriptActor::BeginPlay()
 	//Check if TreeActor set in Level blueprint
 	check(TreeActor);
 
+	//Check if Matinees set in Level Blueprint
+	check(MatineeKnifeToLightning);
+	check(MatineeLightningToIron);
+	check(MatineeIntro);
+	check(MatineeOutro);
+
 	//Get player character
 	_PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
 
 	//Init remaining time with DelayFirstKnifeSpawn
 	_RemainingTime = DelayFirstSpawn;
+
+	MatineeIntro->Play();
 }
 
 void AIwacLevelScriptActor::Tick(float DeltaSeconds)
@@ -64,11 +72,13 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 
 				case ETorturePhase::TP_LightningPhase:
 					TimeSpendLightningPhase = 0.0f;
+					MatineeKnifeToLightning->Play();
 					break;
 
 				case ETorturePhase::TP_IronPhase:
 					TimeSpendIronPhase = 0.0f;
 					_IronSpawning();
+					MatineeLightningToIron->Play();
 					break;
 
 				case ETorturePhase::TP_EmptyPhase:
@@ -89,24 +99,34 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 		_RemainingTime = DelayFirstSpawn;
 	}
 
-	//Tick current torture phase
-	switch (TorturePhase)
+	//Don't tick phases when MatineeIntro or MatineeOutro playing
+	if (!MatineeIntro->bIsPlaying && !MatineeOutro->bIsPlaying)
 	{
+		//Tick current torture phase
+		switch (TorturePhase)
+		{
 		case ETorturePhase::TP_KnifePhase:
 			_TickKnifePhase(DeltaSeconds);
 			break;
 
 		case ETorturePhase::TP_LightningPhase:
-			_TickLightningPhase(DeltaSeconds);
+			if (!MatineeKnifeToLightning->bIsPlaying)
+			{
+				_TickLightningPhase(DeltaSeconds);
+			}
 			break;
 
 		case ETorturePhase::TP_IronPhase:
-			_TickIronPhase(DeltaSeconds);
+			if (!MatineeLightningToIron->bIsPlaying)
+			{
+				_TickIronPhase(DeltaSeconds);
+			}
 			break;
 
 		case ETorturePhase::TP_EmptyPhase:
 		default:
 			break;
+		}
 	}
 }
 
@@ -170,7 +190,7 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 
 	if (Hit.Actor == NULL || Hit.Actor != TreeActor)
 	{
-		UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
+		//UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
 		PlayerTouchByIron();
 	}
 }
@@ -244,7 +264,19 @@ void AIwacLevelScriptActor::_IronSpawning()
 		_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
 		_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
 
+		//Rotate it to be at the opposite side of the player
+		//Compute angle
+		FVector VectTreeIron = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation() - TreeActor->GetActorLocation();
+		FVector VectTreePlayer = _PlayerCharacter->GetActorLocation() - TreeActor->GetActorLocation();
+		VectTreeIron.Z = VectTreePlayer.Z = 0.0f;
+		VectTreeIron.Normalize();
+		VectTreePlayer.Normalize();
+		float AngleIronPlayer = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(VectTreeIron, VectTreePlayer)));
+		float SignAngleIronPlayer = FMath::Sign<float>(FVector::CrossProduct(VectTreePlayer, VectTreeIron).Z);
+		//Rotate
+		_SpawnedIronActor->AddActorWorldRotation(FRotator(0.0f, 180.0f - AngleIronPlayer * SignAngleIronPlayer, 0.0f));
+
 		//Set initial rotation speed
-		_SpawnedIronActor->RotationSpeed = LightRotationSpeedMin;
+		_SpawnedIronActor->RotationSpeed = 0.0f;
 	}
 }
