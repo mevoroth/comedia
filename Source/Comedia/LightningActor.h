@@ -17,6 +17,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningParams")
 	UParticleSystem* LightningParticleSystem;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningParams")
+	UParticleSystem* PreThunderParticleSystem;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] LightningParams")
 	UDecalComponent* LightningFullDecal;
 
@@ -25,10 +28,12 @@ public:
 
 	ALightningActor(const FObjectInitializer& ObjectInitializer);
 	void SetDecalsScale(float Width, float Height);
-	virtual void Tick(float DeltaSeconds);
-	virtual void LifeSpanExpired();
+	virtual void Tick(float DeltaSeconds) override;
+	virtual void LifeSpanExpired() override;
+	void InitImpactTarget();
 
 private:
+	FVector _ImpactPosition;
 	float _ComputedRadiusDamageLightningArea;
 
 	float _GetRatioRemainingTime();

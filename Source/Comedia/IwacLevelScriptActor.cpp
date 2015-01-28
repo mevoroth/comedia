@@ -254,6 +254,9 @@ void AIwacLevelScriptActor::_LightningSpawning(float ComputedRadiusSpawnLightnin
 	{
 		//UE_LOG(LogGPCode, Log, TEXT("Critical!"));
 	}
+
+	//Init impact target position and prethunder emitter
+	SpawnedLightningActor->InitImpactTarget();
 }
 
 void AIwacLevelScriptActor::_IronSpawning()
