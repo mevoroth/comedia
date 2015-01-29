@@ -31,7 +31,7 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	GENERATED_UCLASS_BODY()
 
 #pragma region TorturePhase
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] Torture Phase")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
 	AActor* TreeActor;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
@@ -51,6 +51,12 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
 	AMatineeActor* MatineeOutro;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] TorturePhase")
+	AMatineeActor* MatineePlayerFailed;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] TorturePhase")
+	bool bPlayerHasFailed;
 #pragma endregion TorturePhase
 
 #pragma region KnifePhase
@@ -65,6 +71,12 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
 	int32 MaxNbSpawnedKnife;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
+	int32 CurrentNbHitKnife;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifePhase")
+	int32 NbHitKnifeBeforeDie;
 
 	/** ComputedRadiusSpawnKnifeArea depending of player character height */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] KnifePhase")
@@ -100,6 +112,12 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float RadiusDamageLightningArea;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
+	int32 CurrentNbHitLightning;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] LightningPhase")
+	int32 NbHitLightningBeforeDie;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] LightningPhase")
 	float TimeSpendLightningPhase;
 
@@ -117,6 +135,12 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	float LengthIronPhase;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] IronPhase")
+	float CurrentTimeHitIron;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] IronPhase")
+	float TimeHitIronBeforeDie;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	float TimeSpendIronPhase;
 #pragma endregion IronPhase
@@ -124,14 +148,17 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
-	virtual void PlayerTouchByKnife();
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia] Events")
+	void PlayerTouchByKnife();
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
-	virtual void PlayerTouchByLightning();
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia] Events")
+	void PlayerTouchByLightning();
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
-	virtual void PlayerTouchByIron();
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia] Events")
+	void PlayerTouchByIron();
+
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia] Events")
+	void PlayerFailed();
 
 private:
 	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;

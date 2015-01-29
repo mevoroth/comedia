@@ -25,6 +25,7 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 
 	_PreviousTorturePhase = ETorturePhase::TP_EmptyPhase;
 
+	bPlayerHasFailed = false;
 	bHasKnifeSpawned = false;
 	CurrentNbLightning = 0;
 }
@@ -41,6 +42,7 @@ void AIwacLevelScriptActor::BeginPlay()
 	check(MatineeLightningToIron);
 	check(MatineeIntro);
 	check(MatineeOutro);
+	check(MatineePlayerFailed);
 
 	//Get player character
 	_PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
@@ -58,6 +60,15 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 	//Check if phase changed
 	if (TorturePhase != _PreviousTorturePhase)
 	{
+		bPlayerHasFailed = false;
+
+		//Destroy _SpawnedIronActor if existing and phase switching
+		if (_SpawnedIronActor)
+		{
+			GetWorld()->DestroyActor(_SpawnedIronActor);
+			_SpawnedIronActor = nullptr;
+		}
+
 		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ETorturePhase"), true);
 		if (EnumPtr)
 		{
@@ -68,14 +79,17 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 			{
 				case ETorturePhase::TP_KnifePhase:
 					NbSpawnedKnife = 0;
+					CurrentNbHitKnife = 0;
 					break;
 
 				case ETorturePhase::TP_LightningPhase:
+					CurrentNbHitLightning = 0;
 					TimeSpendLightningPhase = 0.0f;
 					MatineeKnifeToLightning->Play();
 					break;
 
 				case ETorturePhase::TP_IronPhase:
+					CurrentTimeHitIron = 0.0f;
 					TimeSpendIronPhase = 0.0f;
 					_IronSpawning();
 					MatineeLightningToIron->Play();
@@ -88,19 +102,12 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 		}
 		_PreviousTorturePhase = TorturePhase;
 
-		//Destroy _SpawnedIronActor if existing and not in Iron Phase
-		if (_SpawnedIronActor && TorturePhase != ETorturePhase::TP_IronPhase)
-		{
-			GetWorld()->DestroyActor(_SpawnedIronActor);
-			_SpawnedIronActor = nullptr;
-		}
-
 		//Reinit delay first spawn
 		_RemainingTime = DelayFirstSpawn;
 	}
 
 	//Don't tick phases when MatineeIntro or MatineeOutro playing
-	if (!MatineeIntro->bIsPlaying && !MatineeOutro->bIsPlaying)
+	if (!MatineeIntro->bIsPlaying && !MatineeOutro->bIsPlaying && !MatineePlayerFailed->bIsPlaying)
 	{
 		//Tick current torture phase
 		switch (TorturePhase)
@@ -128,6 +135,44 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 			break;
 		}
 	}
+}
+
+void AIwacLevelScriptActor::PlayerTouchByKnife_Implementation()
+{
+	CurrentNbHitKnife++;
+
+	if (CurrentNbHitKnife >= NbHitKnifeBeforeDie)
+	{
+		PlayerFailed();
+	}
+}
+
+void AIwacLevelScriptActor::PlayerTouchByLightning_Implementation()
+{
+	CurrentNbHitLightning++;
+
+	if (CurrentNbHitLightning >= NbHitLightningBeforeDie)
+	{
+		PlayerFailed();
+	}
+}
+
+void AIwacLevelScriptActor::PlayerTouchByIron_Implementation()
+{
+	CurrentTimeHitIron += GetWorld()->DeltaTimeSeconds;
+
+	if (CurrentTimeHitIron >= TimeHitIronBeforeDie)
+	{
+		PlayerFailed();
+	}
+}
+
+void AIwacLevelScriptActor::PlayerFailed_Implementation()
+{
+	UE_LOG(LogGPCode, Log, TEXT("Player failed!"));
+	bPlayerHasFailed = true;
+	_PreviousTorturePhase = ETorturePhase::TP_EmptyPhase;
+	MatineePlayerFailed->Play();
 }
 
 void AIwacLevelScriptActor::_TickKnifePhase(float DeltaSeconds)
@@ -176,22 +221,30 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 {
 	check(_SpawnedIronActor); //Check if IronActor has spawned
 
-	//Increase time spend in Iron Phase
-	TimeSpendIronPhase += DeltaSeconds;
-
-	//Increase rotation speed depending of time spend in Iron phase
-	_SpawnedIronActor->RotationSpeed = FMath::Lerp(LightRotationSpeedMin, LightRotationSpeedMax, TimeSpendIronPhase / LengthIronPhase);
-
-	//Raycast from Iron point light to player to check if player is behind the tree
-	FHitResult Hit(ForceInit);
-	FCollisionQueryParams Trace(TEXT("IronTrace"), false, GetOwner());
-	FVector IronPointLightPosition = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation();
-	GetWorld()->LineTraceSingle(Hit, IronPointLightPosition, _PlayerCharacter->GetActorLocation(), ECC_Visibility, Trace);
-
-	if (Hit.Actor == NULL || Hit.Actor != TreeActor)
+	//Check if waiting time before phase beginning elapsed
+	if (_RemainingTime > 0)
 	{
-		//UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
-		PlayerTouchByIron();
+		_RemainingTime -= DeltaSeconds;
+	}
+	else
+	{
+		//Increase time spend in Iron Phase
+		TimeSpendIronPhase += DeltaSeconds;
+
+		//Increase rotation speed depending of time spend in Iron phase
+		_SpawnedIronActor->RotationSpeed = FMath::Lerp(LightRotationSpeedMin, LightRotationSpeedMax, TimeSpendIronPhase / LengthIronPhase);
+
+		//Raycast from Iron point light to player to check if player is behind the tree
+		FHitResult Hit(ForceInit);
+		FCollisionQueryParams Trace(TEXT("IronTrace"), false, GetOwner());
+		FVector IronPointLightPosition = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation();
+		GetWorld()->LineTraceSingle(Hit, IronPointLightPosition, _PlayerCharacter->GetActorLocation(), ECC_Visibility, Trace);
+
+		if (Hit.Actor == NULL || Hit.Actor != TreeActor)
+		{
+			//UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
+			PlayerTouchByIron();
+		}
 	}
 }
 

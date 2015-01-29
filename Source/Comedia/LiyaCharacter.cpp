@@ -76,7 +76,7 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 
 	if (!(Accel.X == 0.f && Accel.Y == 0.f))
 	{
-		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Accel.Y, Accel.X) * 180.f / PI - 90.f;
+		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Accel.Y, Accel.X) * 180.f / PI - 90.0f;
 	}
 
 	Mesh->SetRelativeRotation(FRotator(
