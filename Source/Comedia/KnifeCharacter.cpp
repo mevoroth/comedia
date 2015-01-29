@@ -9,6 +9,10 @@
 AKnifeCharacter::AKnifeCharacter(const class FPostConstructInitializeProperties& PCIP)
 	: Super(PCIP)
 {
+	//Get blueprint class for trail instantiation
+	static ConstructorHelpers::FClassFinder<AActor> TrailClassFinder(TEXT("/Game/Blueprints/Bp_Fente_knfie_fx"));
+	_TrailClass = TrailClassFinder.Class;
+
 	//Enable tick function
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -48,14 +52,14 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 		//Check if distance player/knife more than ComputedRadiusSpawnKnifeArea and if player is behind knife
 		if ((GetWorld()->GetFirstPlayerController()->GetCharacter()->GetActorLocation() - GetActorLocation()).Size() > IwacLevelScript->ComputedRadiusSpawnKnifeArea && AngleForwardToPlayer > 90.0f)
 		{
-			DestroyKnife();
+			_DestroyKnife();
 		}
 	}
 
 	//Check if need to spawn a new decal
-	if ((GetActorLocation() - LastDecalPosition).Size() >= DecalLength)
+	if ((GetActorLocation() - _LastDecalPosition).Size() >= _TrailLength)
 	{
-		SpawnDecal();
+		_SpawnTrail();
 	}
 
 	//Update position to be on ground with trace
@@ -75,16 +79,24 @@ void AKnifeCharacter::ReceiveHit(class UPrimitiveComponent* MyComp, AActor* Othe
 	if (Cast<ALiyaCharacter>(Other))
 	{
 		UE_LOG(LogGPCode, Log, TEXT("Knife collide with player"));
-		DestroyKnife();
+
+		//Call PlayerTouchByKnife event in LevelBlueprint
+		AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		if (IwacLevelScript)
+		{
+			IwacLevelScript->PlayerTouchByKnife();
+		}
+
+		_DestroyKnife();
 	}
 }
 
 void AKnifeCharacter::InitOriginalPosition()
 {
-	LastDecalPosition = GetActorLocation();
+	_LastDecalPosition = GetActorLocation();
 }
 
-void AKnifeCharacter::DestroyKnife()
+void AKnifeCharacter::_DestroyKnife()
 {
 	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 	if (IwacLevelScript)
@@ -95,25 +107,41 @@ void AKnifeCharacter::DestroyKnife()
 	}
 }
 
-void AKnifeCharacter::SpawnDecal()
+void AKnifeCharacter::_SpawnTrail()
 {
-	//Spawn, set position and set scale
-	ADecalActor* NewDecal = GetWorld()->SpawnActor<ADecalActor>();
-	NewDecal->SetLifeSpan(DecalLifeSpan);
+	//Get ground height
+	FHitResult Hit(ForceInit);
+	FCollisionQueryParams Trace(TEXT("KnifeTrace"), false, GetOwner());
+	GetWorld()->LineTraceSingle(Hit, GetActorLocation() + FVector::UpVector * 1000.0f, GetActorLocation() + FVector::UpVector * -2000.0f, ECC_Visibility, Trace);
 
-	NewDecal->SetActorLocation((LastDecalPosition + GetActorLocation()) / 2.0f);
-	NewDecal->SetActorScale3D(FVector(512.0f, DecalWidth, DecalLength));
+	//Spawn, set position and set scale
+	AActor* NewTrail = GetWorld()->SpawnActor<AActor>(_TrailClass);
+
+	//Get BoxComponent to compute TrailLength
+	if (_TrailLength == 0)
+	{
+		UBoxComponent* BoundingBoxComponent = NewTrail->FindComponentByClass<UBoxComponent>();
+		if (BoundingBoxComponent)
+		{
+			_TrailLength = BoundingBoxComponent->GetScaledBoxExtent().Y * 2.0f * RatioTrailLength;
+		}
+		else
+		{
+			_TrailLength = NewTrail->GetComponentsBoundingBox(true).GetSize().Y;
+		}
+	}
+
+	FVector NewTrailPosition = GetActorLocation();
+	NewTrailPosition.Z = Hit.ImpactPoint.Z;
+	NewTrail->SetActorLocation(NewTrailPosition);
 
 	//Compute rotation
-	FVector DecalDirection = GetActorLocation() - NewDecal->GetActorLocation();
-	DecalDirection.Normalize();
-	float AngleDecal = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(DecalDirection, FVector::ForwardVector)));
-	float SignAngleDecal = FMath::Sign<float>(FVector::CrossProduct(FVector::ForwardVector, DecalDirection).Z);
-	FRotator RotationDecal = FRotator(0.0f, 0.0f, AngleDecal * SignAngleDecal);
-	NewDecal->AddActorLocalRotation(RotationDecal);
+	FVector NewTrailDirection = GetActorLocation() - _LastDecalPosition;
+	NewTrailDirection.Normalize();
+	float AngleNewTrail = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(NewTrailDirection, FVector::ForwardVector)));
+	float SignAngleNewTrail = FMath::Sign<float>(FVector::CrossProduct(FVector::ForwardVector, NewTrailDirection).Z);
+	FRotator RotationNewTrail = FRotator(0.0f, -90.0f + (AngleNewTrail * SignAngleNewTrail), 0.0f);
+	NewTrail->SetActorRelativeRotation(RotationNewTrail);
 
-	//Set decal material
-	NewDecal->GetDecal()->SetDecalMaterial(DecalMaterial);
-
-	LastDecalPosition = GetActorLocation();
+	_LastDecalPosition = GetActorLocation();
 }

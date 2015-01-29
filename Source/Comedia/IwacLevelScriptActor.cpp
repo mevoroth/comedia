@@ -7,21 +7,25 @@
 AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializeProperties& PCIP)
 	: Super(PCIP)
 {
+
 	//Get blueprint class for knife instantiation
 	static ConstructorHelpers::FClassFinder<AKnifeCharacter> KnifeCharacterClassFinder(TEXT("/Game/Blueprints/Knife"));
-	KnifeClass = KnifeCharacterClassFinder.Class;
+	_KnifeClass = KnifeCharacterClassFinder.Class;
 
 	//Get blueprint class for lightning instantiation
 	static ConstructorHelpers::FClassFinder<ALightningActor> LightningActorClassFinder(TEXT("/Game/Blueprints/Lightning"));
-	LightningClass = LightningActorClassFinder.Class;
+	_LightningClass = LightningActorClassFinder.Class;
+
+	//Get blueprint class for Iron instantiation
+	static ConstructorHelpers::FClassFinder<AIronActor> IronActorClassFinder(TEXT("/Game/Blueprints/BP_Iron"));
+	_IronClass = IronActorClassFinder.Class;
 
 	//Enable tick function
 	PrimaryActorTick.bCanEverTick = true;
 
-	PreviousTorturePhase = ETorturePhase::TP_EmptyPhase;
+	_PreviousTorturePhase = ETorturePhase::TP_EmptyPhase;
 
 	bHasKnifeSpawned = false;
-	NbSpawnedKnife = 0;
 	CurrentNbLightning = 0;
 }
 
@@ -29,11 +33,22 @@ void AIwacLevelScriptActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//Check if TreeActor set in Level blueprint
+	check(TreeActor);
+
+	//Check if Matinees set in Level Blueprint
+	check(MatineeKnifeToLightning);
+	check(MatineeLightningToIron);
+	check(MatineeIntro);
+	check(MatineeOutro);
+
 	//Get player character
-	PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
+	_PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetCharacter();
 
 	//Init remaining time with DelayFirstKnifeSpawn
-	RemainingTime = DelayFirstSpawn;
+	_RemainingTime = DelayFirstSpawn;
+
+	MatineeIntro->Play();
 }
 
 void AIwacLevelScriptActor::Tick(float DeltaSeconds)
@@ -41,7 +56,7 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	//Check if phase changed
-	if (TorturePhase != PreviousTorturePhase)
+	if (TorturePhase != _PreviousTorturePhase)
 	{
 		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ETorturePhase"), true);
 		if (EnumPtr)
@@ -57,6 +72,13 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 
 				case ETorturePhase::TP_LightningPhase:
 					TimeSpendLightningPhase = 0.0f;
+					MatineeKnifeToLightning->Play();
+					break;
+
+				case ETorturePhase::TP_IronPhase:
+					TimeSpendIronPhase = 0.0f;
+					_IronSpawning();
+					MatineeLightningToIron->Play();
 					break;
 
 				case ETorturePhase::TP_EmptyPhase:
@@ -64,51 +86,75 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 					break;
 			}
 		}
-		PreviousTorturePhase = TorturePhase;
+		_PreviousTorturePhase = TorturePhase;
+
+		//Destroy _SpawnedIronActor if existing and not in Iron Phase
+		if (_SpawnedIronActor && TorturePhase != ETorturePhase::TP_IronPhase)
+		{
+			GetWorld()->DestroyActor(_SpawnedIronActor);
+			_SpawnedIronActor = nullptr;
+		}
+
+		//Reinit delay first spawn
+		_RemainingTime = DelayFirstSpawn;
 	}
 
-	//Tick current torture phase
-	switch (TorturePhase)
+	//Don't tick phases when MatineeIntro or MatineeOutro playing
+	if (!MatineeIntro->bIsPlaying && !MatineeOutro->bIsPlaying)
 	{
+		//Tick current torture phase
+		switch (TorturePhase)
+		{
 		case ETorturePhase::TP_KnifePhase:
-			TickKnifePhase(DeltaSeconds);
+			_TickKnifePhase(DeltaSeconds);
 			break;
 
 		case ETorturePhase::TP_LightningPhase:
-			TickLightningPhase(DeltaSeconds);
+			if (!MatineeKnifeToLightning->bIsPlaying)
+			{
+				_TickLightningPhase(DeltaSeconds);
+			}
+			break;
+
+		case ETorturePhase::TP_IronPhase:
+			if (!MatineeLightningToIron->bIsPlaying)
+			{
+				_TickIronPhase(DeltaSeconds);
+			}
 			break;
 
 		case ETorturePhase::TP_EmptyPhase:
 		default:
 			break;
+		}
 	}
 }
 
-void AIwacLevelScriptActor::TickKnifePhase(float DeltaSeconds)
+void AIwacLevelScriptActor::_TickKnifePhase(float DeltaSeconds)
 {
 	//Draw spawn area around the player
-	ComputedRadiusSpawnKnifeArea = PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
-	DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
+	ComputedRadiusSpawnKnifeArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
+	DrawDebugSphere(GetWorld(), _PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
 
 	//Check if no knife spawned
 	if (!bHasKnifeSpawned)
 	{
 		//Decreased remaining time before next knife spawn
-		RemainingTime -= DeltaSeconds;
+		_RemainingTime -= DeltaSeconds;
 
 		//Knife spawn when no more remaining time
-		if (RemainingTime <= 0.0f)
+		if (_RemainingTime <= 0.0f)
 		{
-			KnifeSpawning(ComputedRadiusSpawnKnifeArea);
+			_KnifeSpawning(ComputedRadiusSpawnKnifeArea);
 		}
 	}
 }
 
-void AIwacLevelScriptActor::TickLightningPhase(float DeltaSeconds)
+void AIwacLevelScriptActor::_TickLightningPhase(float DeltaSeconds)
 {
 	 //Draw spawn area around the player
-	float ComputedRadiusSpawnLightningArea = PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnLightningArea;
-	DrawDebugSphere(GetWorld(), PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnLightningArea, 32, FColor::Blue);
+	float ComputedRadiusSpawnLightningArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnLightningArea;
+	DrawDebugSphere(GetWorld(), _PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnLightningArea, 32, FColor::Blue);
 
 	//Increase time spend in lightning phase
 	TimeSpendLightningPhase += DeltaSeconds;
@@ -117,16 +163,39 @@ void AIwacLevelScriptActor::TickLightningPhase(float DeltaSeconds)
 	if (CurrentNbLightning < MaxNbLightning)
 	{
 		//Decrease remaining time before next lightning spawn
-		RemainingTime -= DeltaSeconds;
+		_RemainingTime -= DeltaSeconds;
 
-		if (RemainingTime <= 0.0f)
+		if (_RemainingTime <= 0.0f)
 		{
-			LightningSpawning(ComputedRadiusSpawnLightningArea);
+			_LightningSpawning(ComputedRadiusSpawnLightningArea);
 		}
 	}
 }
 
-void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
+void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
+{
+	check(_SpawnedIronActor); //Check if IronActor has spawned
+
+	//Increase time spend in Iron Phase
+	TimeSpendIronPhase += DeltaSeconds;
+
+	//Increase rotation speed depending of time spend in Iron phase
+	_SpawnedIronActor->RotationSpeed = FMath::Lerp(LightRotationSpeedMin, LightRotationSpeedMax, TimeSpendIronPhase / LengthIronPhase);
+
+	//Raycast from Iron point light to player to check if player is behind the tree
+	FHitResult Hit(ForceInit);
+	FCollisionQueryParams Trace(TEXT("IronTrace"), false, GetOwner());
+	FVector IronPointLightPosition = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation();
+	GetWorld()->LineTraceSingle(Hit, IronPointLightPosition, _PlayerCharacter->GetActorLocation(), ECC_Visibility, Trace);
+
+	if (Hit.Actor == NULL || Hit.Actor != TreeActor)
+	{
+		//UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
+		PlayerTouchByIron();
+	}
+}
+
+void AIwacLevelScriptActor::_KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 {
 	//UE_LOG(LogGPCode, Log, TEXT("Spawn Knife"));
 	
@@ -134,11 +203,11 @@ void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 	bHasKnifeSpawned = true;
 
 	//Set remaining time with DelayBetweenKnifeSpawn for next knife spawn
-	RemainingTime = DelayBetweenKnifeSpawn;
+	_RemainingTime = DelayBetweenKnifeSpawn;
 
 	//Spawn knife
-	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(KnifeClass);
-	FVector SpawningKnifePosition = PlayerCharacter->GetActorLocation();
+	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(_KnifeClass);
+	FVector SpawningKnifePosition = _PlayerCharacter->GetActorLocation();
 	SpawnedKnifeCharacter->SetActorLocation(SpawningKnifePosition);
 	SpawnedKnifeCharacter->SpawnDefaultController();
 
@@ -154,19 +223,19 @@ void AIwacLevelScriptActor::KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 	SpawnedKnifeCharacter->InitOriginalPosition();
 }
 
-void AIwacLevelScriptActor::LightningSpawning(float ComputedRadiusSpawnLightningArea)
+void AIwacLevelScriptActor::_LightningSpawning(float ComputedRadiusSpawnLightningArea)
 {
 	//UE_LOG(LogGPCode, Log, TEXT("Spawn Lightning"));
 	CurrentNbLightning++;
 
 	//Set remaining time with MinCooldownLightning and MaxCooldownLightning for the next lightning spawn
-	RemainingTime = FMath::FRandRange(MinCooldownLightning, MaxCooldownLightning);
+	_RemainingTime = FMath::FRandRange(MinCooldownLightning, MaxCooldownLightning);
 
 	//Spawn lightning
-	ALightningActor* SpawnedLightningActor = GetWorld()->SpawnActor<ALightningActor>(LightningClass);
+	ALightningActor* SpawnedLightningActor = GetWorld()->SpawnActor<ALightningActor>(_LightningClass);
 	SpawnedLightningActor->SetLifeSpan(DelayDamageLightning);
-	float ComputedRadiusDamageLightningArea = PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusDamageLightningArea;
-	SpawnedLightningActor->SetActorLocation(PlayerCharacter->GetActorLocation());
+	float ComputedRadiusDamageLightningArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusDamageLightningArea;
+	SpawnedLightningActor->SetActorLocation(_PlayerCharacter->GetActorLocation());
 	SpawnedLightningActor->SetDecalsScale(ComputedRadiusDamageLightningArea, ComputedRadiusDamageLightningArea);
 
 	//Check if critical lightning
@@ -184,5 +253,33 @@ void AIwacLevelScriptActor::LightningSpawning(float ComputedRadiusSpawnLightning
 	else
 	{
 		//UE_LOG(LogGPCode, Log, TEXT("Critical!"));
+	}
+
+	//Init impact target position and prethunder emitter
+	SpawnedLightningActor->InitImpactTarget();
+}
+
+void AIwacLevelScriptActor::_IronSpawning()
+{
+	if (!_SpawnedIronActor)
+	{
+		//Spawn Iron actor and set location on tree, to rotate around it
+		_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
+		_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
+
+		//Rotate it to be at the opposite side of the player
+		//Compute angle
+		FVector VectTreeIron = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation() - TreeActor->GetActorLocation();
+		FVector VectTreePlayer = _PlayerCharacter->GetActorLocation() - TreeActor->GetActorLocation();
+		VectTreeIron.Z = VectTreePlayer.Z = 0.0f;
+		VectTreeIron.Normalize();
+		VectTreePlayer.Normalize();
+		float AngleIronPlayer = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(VectTreeIron, VectTreePlayer)));
+		float SignAngleIronPlayer = FMath::Sign<float>(FVector::CrossProduct(VectTreePlayer, VectTreeIron).Z);
+		//Rotate
+		_SpawnedIronActor->AddActorWorldRotation(FRotator(0.0f, 180.0f - AngleIronPlayer * SignAngleIronPlayer, 0.0f));
+
+		//Set initial rotation speed
+		_SpawnedIronActor->RotationSpeed = 0.0f;
 	}
 }
