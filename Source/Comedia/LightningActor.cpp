@@ -49,9 +49,6 @@ void ALightningActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	//Compute impact position of the lightning
-	UE_LOG(LogGPCode, Log, TEXT("Impact point: %s"), *_ImpactPosition.ToString());
-
 	//Rescale timer decal
 	float RatioRemainingTime = _GetRatioRemainingTime();
 	LightningTimerDecal->SetWorldScale3D(FVector(LightningFullDecal->GetComponentScale().X, LightningFullDecal->GetComponentScale().Y * RatioRemainingTime, LightningFullDecal->GetComponentScale().Z * RatioRemainingTime));

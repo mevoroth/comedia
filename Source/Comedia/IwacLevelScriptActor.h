@@ -169,6 +169,7 @@ private:
 	/** Class to instance when spawning Lightning */
 	TSubclassOf<ALightningActor> _LightningClass;
 
+
 	/** Class to instance when spawning Iron Actor */
 	TSubclassOf<AIronActor> _IronClass;
 
