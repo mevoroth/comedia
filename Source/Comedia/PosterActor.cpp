@@ -14,12 +14,35 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, Grabbed(false)
 	, ResetSpeed(1.f)
 	, _ResetAlpha(1.f)
+	, State(INIT)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
 	RootComponent = PosterMesh;
 
 	PrimaryActorTick.bCanEverTick = true;
+}
+
+FString APosterActor::GetState()
+
+{
+	FString mescouilles;
+	if ((State & ~(GRABBABLE | HEADISROOT)) == INIT)
+	{
+		mescouilles = TEXT("INIT");
+	}
+	else if ((State & ~(GRABBABLE | HEADISROOT)) == GRABBED)
+	{
+		mescouilles = TEXT("GRABBED");
+	}
+	else if ((State & ~(GRABBABLE | HEADISROOT)) == STICKED)
+	{
+		mescouilles = TEXT("STICKED");
+	}
+
+	mescouilles += (State & GRABBABLE) ? TEXT("GRABBABLE") : TEXT("NOT GRABBABLE");
+	mescouilles += (State & HEADISROOT) ? TEXT("HEADISROOT") : TEXT("TAILISROOT");
+	return mescouilles;
 }
 
 void APosterActor::BeginPlay()
@@ -43,6 +66,10 @@ void APosterActor::BeginPlay()
 		_BonesInit[i - 1] = PosterMesh->GetBoneTransform(i);
 		Parent = CurrBoneLoc;
 	}
+	bool HeadIsRoot = (State & HEADISROOT) != 0;
+	int32 First = (HeadIsRoot ? 0 : PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2);
+	int32 Last = (HeadIsRoot ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2 : 0);
+	//_PlaneForward = _BonesInit[Last - 1].GetLocation() - _BonesInit[First - 1].GetLocation().UnsafeNormal();
 
 	_DistanceFromTail = new float[PosterMesh->SkeletalMesh->RefSkeleton.GetNum()];
 	// Take last bone
@@ -58,6 +85,9 @@ void APosterActor::BeginPlay()
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1)),
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1))
 	);
+
+	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
+	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
 }
 
 void APosterActor::BeginDestroy()
@@ -90,13 +120,14 @@ void APosterActor::UpdateChain()
 {
 	check(PosterMesh);
 
+	bool HeadIsRoot = (State & HEADISROOT) != 0;
 	int32 Count = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
-	int32 First = (_HeadIsRoot ? 1 : Count - 1);
-	int32 Second = (_HeadIsRoot ? 2 : Count - 2);
-	int32 Last = (_HeadIsRoot ? Count - 1 : 1);
-	int32 End = (_HeadIsRoot ? Count : 0);
-	int32 It = (_HeadIsRoot ? 1 : -1);
-	float** Dist = (_HeadIsRoot ? &_DistanceFromHead : &_DistanceFromTail);
+	int32 First = (HeadIsRoot ? 1 : Count - 1);
+	int32 Second = (HeadIsRoot ? 2 : Count - 2);
+	int32 Last = (HeadIsRoot ? Count - 1 : 1);
+	int32 End = (HeadIsRoot ? Count : 0);
+	int32 It = (HeadIsRoot ? 1 : -1);
+	float** Dist = (HeadIsRoot ? &_DistanceFromHead : &_DistanceFromTail);
 	bool bBonesUpdated = false;
 
 	for (int32 BoneIndex = 0, BoneCount = Count - 1; BoneIndex < BoneCount; ++BoneIndex)
@@ -162,7 +193,9 @@ void APosterActor::UpdateChain()
 	{
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
+#ifdef WITH_EDITOR
 			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
+#endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
 
@@ -193,49 +226,175 @@ void APosterActor::SetEffector(const FTransform& Effector)
 
 void APosterActor::Grabbing(bool Grabbing)
 {
-	if (Grabbed != Grabbing && !Grabbing)
+	if ((State & GRABBABLE) && Grabbing)
 	{
-		for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
-			_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
+		case INIT:
+		case STICKED:
+			State = (PosterState)((State & HEADISROOT) | GRABBED);
+			break;
 		}
-
-		_ResetAlpha = 0.f;
 	}
-	Grabbed = GrabEnabled && Grabbing;
+	else if (!Grabbing)
+	{
+		switch (State & ~(GRABBABLE | HEADISROOT))
+		{
+		case GRABBED:
+			State = INIT;
+			for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+			{
+				_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
+			}
+
+			_ResetAlpha = 0.f;
+			break;
+		case ONSTICK:
+			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
+			break;
+		}
+	}
+	//switch (State)
+	//{
+	//case GRABBABLE:
+	//	if (Grabbing)
+	//	{
+	//		for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+	//		{
+	//			_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
+	//		}
+	//		_ResetAlpha = 0.f;
+
+	//		State = GRABBED;
+	//	}
+	//	break;
+	//}
+	//if (Grabbed != Grabbing && !Grabbing)
+	//{
+	//	for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+	//	{
+	//		_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
+	//	}
+
+	//	_ResetAlpha = 0.f;
+	//}
+	//Grabbed = GrabEnabled && Grabbing;
 }
 
 void APosterActor::InRange(bool HeadIsRoot)
 {
-	if (!Grabbed)
+	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
-		_HeadIsRoot = HeadIsRoot;
-		GrabEnabled = true;
+	case INIT:
+		if (HeadIsRoot)
+		{
+			State = (PosterState)(State | HEADISROOT);
+		}
+		else
+		{
+			State = (PosterState)(State & ~HEADISROOT);
+		}
+		State = (PosterState)(State | GRABBABLE);
+	case STICKED:
+		if (HeadIsRoot && (State & HEADISROOT)
+			|| !(HeadIsRoot || (State | ~HEADISROOT)))
+		{
+			State = (PosterState)(State | GRABBABLE);
+		}
+		break;
 	}
+
+	//if (!(Grabbed || Sticked))
+	//{
+	//	_HeadIsRoot = HeadIsRoot;
+	//	GrabEnabled = true;
+	//}
 }
 
 void APosterActor::OutRange()
 {
-	if (!Grabbed)
+	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
-		GrabEnabled = false;
+	case INIT:
+	case STICKED:
+		State = (PosterState)(State & ~GRABBABLE);
+		break;
 	}
+	//if (!(Grabbed || Sticked))
+	//{
+	//	GrabEnabled = false;
+	//}
+}
+
+
+void APosterActor::Stick(bool Sticked)
+{
+	switch (State & ~(GRABBABLE | HEADISROOT))
+	{
+	case GRABBED:
+		if (Sticked)
+		{
+			State = (PosterState)((State & HEADISROOT) | ONSTICK);
+		}
+		break;
+	case INIT:
+	case STICKED:
+		if (!Sticked)
+		{
+			State = (PosterState)((State & HEADISROOT) | GRABBED);
+		}
+	}
+	//this->Sticked = Sticked;
+}
+
+FVector APosterActor::GetGripHeadUpdated() const
+{
+	int32 First = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1;
+
+	//FVector Loc = PosterMesh->GetBoneTransform(First).GetLocation();
+	FVector Loc = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(First));
+	return Loc + PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * _HeadDist;
+}
+FVector APosterActor::GetGripTailUpdated() const
+{
+	int32 First = 1;
+
+	//FVector Loc = PosterMesh->GetBoneTransform(Last).GetLocation();
+	FVector Loc = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(First));
+	return Loc - PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * _TailDist;
 }
 
 void APosterActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (Grabbed)
+	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
-		_UpdateEffector();
-
-		UpdateChain();
-	}
-	else
-	{
+	case INIT:
 		_Reset(DeltaSeconds);
+		break;
+	case ONSTICK:
+	case GRABBED:
+		_UpdateEffector();
+		UpdateChain();
+		break;
 	}
+
+	//if (Sticked && !Grabbed)
+	//{
+	//	return;
+	//}
+
+	//if (Grabbed)
+	//{
+	//	_UpdateEffector();
+
+	//	UpdateChain();
+	//}
+	//else
+	//{
+	//	_Reset(DeltaSeconds);
+	//}
 }
 
 void APosterActor::_UpdateEffector()

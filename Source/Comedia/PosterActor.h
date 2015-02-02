@@ -13,6 +13,15 @@ class COMEDIA_API APosterActor : public AActor
 {
 	GENERATED_UCLASS_BODY()
 
+	enum PosterState
+	{
+		INIT = 0,
+		GRABBED = 1,
+		ONSTICK = 2,
+		STICKED = 3,
+		GRABBABLE = 0x1 << 30,
+		HEADISROOT = 0x1 << 31
+	};
 private_subobject:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
@@ -30,6 +39,17 @@ public:
 	void InRange(bool HeadIsRoot);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void OutRange();
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	FVector GetGripHeadUpdated() const;
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	FVector GetGripTailUpdated() const;
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	void Stick(bool Sticked);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual FVector GetGripHead() const;
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual FVector GetGripTail() const;
 
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
@@ -57,7 +77,11 @@ public:
 
 	bool Sticked;
 
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	FString GetState();
+
 private:
+	PosterState State;
 	/** Root to target distance */
 	float _MaxDistance;
 
@@ -78,6 +102,11 @@ private:
 	/** Reset Poster to origin */
 	void _Reset(float DeltaSeconds);
 	float _ResetAlpha;
+
+	FVector _PlaneForward;
+
+	float _HeadDist;
+	float _TailDist;
 
 	FTransform* _BonesBuff;
 	FTransform* _BonesInit;
