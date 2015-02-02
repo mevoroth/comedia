@@ -88,6 +88,9 @@ void APosterActor::BeginPlay()
 
 	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
 	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
+
+	FireRangeRadius = FMath::DegreesToRadians(FireRangeRadius);
+	FireRangeDistance *= FireRangeDistance; // Square
 }
 
 void APosterActor::BeginDestroy()
@@ -450,4 +453,23 @@ void APosterActor::_Reset(float DeltaSeconds)
 		);
 	}
 	_ResetAlpha = FMath::Clamp(_ResetAlpha + DeltaSeconds, 0.f, ResetSpeed);
+}
+
+//FVector APosterActor::GetPosterForward() const
+//{
+//	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+//	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+//	return FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal();
+//}
+
+bool APosterActor::IsInFireRange(const FVector& Position) const
+{
+	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+
+	FVector Center = (Head + Tail) / 2.f;
+	return FVector::DotProduct(
+		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
+		(Position - Center).UnsafeNormal()
+	) && FVector::DistSquared(Position, Center) < FireRangeDistance;
 }

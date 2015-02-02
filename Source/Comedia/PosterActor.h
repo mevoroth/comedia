@@ -45,6 +45,10 @@ public:
 	FVector GetGripTailUpdated() const;
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void Stick(bool Sticked);
+	//UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	//FVector GetPosterForward() const;
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	bool IsInFireRange(const FVector& Position) const;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripHead() const;
@@ -63,9 +67,17 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float MaxIterations;
 
-	/** Reset Du */
+	/** Reset Poster Animation */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float ResetSpeed;
+
+	/** Fire Range Distance */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float FireRangeDistance;
+
+	/** Fire Range Radius in degrees */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float FireRangeRadius;
 
 	/** If grab is used */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
