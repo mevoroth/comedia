@@ -1,0 +1,40 @@
+Event	ID	Name			Wwise Object Path	Notes
+	477318044	Thunder_fail			\Default Work Unit\Thunder_fail	
+	1287545852	Thunder_circle			\Default Work Unit\Thunder_circle	
+	2385628198	Footsteps			\Default Work Unit\Footsteps	
+	2811031212	Knife_Loop_Start			\Default Work Unit\Knife_Loop_Start	
+	3561017543	Thunder_hit			\Default Work Unit\Thunder_hit	
+	3632834637	Knife_Flyby			\Default Work Unit\Knife_Flyby	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3917897988	Distance_to_player			\Default Work Unit\Distance_to_player	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	24175894	footdi1	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi1_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi1		32196
+	69349838	S_SFX_DIE_TOR_Knife-Woosh2	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_Knife-Woosh2_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife woosh\Woosh\S_SFX_DIE_TOR_Knife-Woosh2		341849
+	73860518	footdi7	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi7_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi7		42691
+	88651339	S_SFX_DIE_TOR_Rattle-Loop	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_Rattle-Loop_2657E66E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\S_SFX_DIE_TOR_Rattle-Loop		2263261
+	152447386	Thunder hit 05	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Thunder hit 05_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Hits\Thunder hit 05		399749
+	252967211	S_SFX_DIE_TOR_Knife-Woosh3	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_Knife-Woosh3_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife woosh\Woosh\S_SFX_DIE_TOR_Knife-Woosh3		321968
+	298545835	Buildup 05	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Buildup 05_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\Buildup 05		254458
+	309361023	footdi2	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi2_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi2		42372
+	315144141	Thunder hit 01	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Thunder hit 01_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Hits\Thunder hit 01		273774
+	368811509	Buildup 01	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Buildup 01_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\Buildup 01		266897
+	377375254	Kiteh	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Kité_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Fail\Scream\Kiteh		57811
+	415154560	S_SFX_DIE_TOR_Knife-Woosh	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_Knife-Woosh _950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife woosh\Woosh\S_SFX_DIE_TOR_Knife-Woosh		315277
+	555344972	Buildup 03	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Buildup 03_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\Buildup 03		293388
+	593203450	Thunder hit 04	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Thunder hit 04_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Hits\Thunder hit 04		352345
+	643444766	footdi6	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi6_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi6		39302
+	646985262	footdi9	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi9_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi9		40561
+	652882334	footdi5	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi5_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi5		34028
+	696465191	Thunder hit 02	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Thunder hit 02_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Hits\Thunder hit 02		499492
+	794216867	footdi4	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi4_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi4		40638
+	817909908	Buildup 02	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Buildup 02_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\Buildup 02		273995
+	901236066	S_SFX_DIE_TOR_Tear-LP-Loop	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_Tear-LP-Loop_A4420F53.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\S_SFX_DIE_TOR_Tear-LP-Loop		2259559
+	953409729	Thunder hit 03	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Thunder hit 03_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Hits\Thunder hit 03		394875
+	960637719	footdi3	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi3_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi3		35124
+	984447787	Buildup 04	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Buildup 04_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\Buildup 04		264640
+	1001164761	S_SFX_DIE_TOR_Saw-Loop	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_Saw-Loop_AE6DB1F2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\S_SFX_DIE_TOR_Saw-Loop		13260621
+	1015573855	footdi10	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi10_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi10		29730
+	1068841297	footdi8	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\footdi8_950FF8F3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Dirt\footdi8		38816
+

@@ -1,0 +1,8 @@
+Event	ID	Name			Wwise Object Path	Notes
+	527347948	Music_Knife			\Default Work Unit\Music_Knife	
+	984952705	Music_intro			\Default Work Unit\Music_intro	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	27484448	Kniferev1	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Kniferev1_E453E291.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Knife\Knife\Kniferev1		3408053
+	564369602	Knife music intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Knife music intro_7740A9A5.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\Knife music intro		820823
+
