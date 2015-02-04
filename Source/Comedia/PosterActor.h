@@ -79,6 +79,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float FireRangeRadius;
 
+	/** Delay between bones when reset */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float DelayBetweenBones;
+
 	/** If grab is used */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
 	bool Grabbed;
@@ -88,9 +92,6 @@ public:
 	bool GrabEnabled;
 
 	bool Sticked;
-
-	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
-	FString GetState();
 
 private:
 	PosterState State;
