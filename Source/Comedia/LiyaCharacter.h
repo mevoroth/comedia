@@ -18,8 +18,8 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	///** How many footsteps to buffer for filtering footsteps height */
 	//const int FOOTSTEP_LATENCY = 3;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
-	float CharacterSpeed;
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	//float CharacterSpeed;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float CameraSpeed;
@@ -79,6 +79,8 @@ protected:
 	void AddCameraPitch(float Val);
 	/** Controls Mouse X axis */
 	void AddCameraRoll(float Val);
+
+	void _Controls(float DeltaSeconds);
 
 private:
 	FVector2D Accel;

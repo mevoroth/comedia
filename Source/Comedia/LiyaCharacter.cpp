@@ -77,11 +77,22 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	_Controls(DeltaSeconds);
+}
+
+void ALiyaCharacter::_Controls(float DeltaSeconds)
+{
 	FVector2D TmpSpeed;
-	if (Accel.SizeSquared() > 0.01f)
+	if (Accel.SizeSquared() > 0.1f)
 	{
-		Speed += Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
-		Speed = Speed.ClampAxes(-MaxSpeed, MaxSpeed);
+		float Size = Speed.Size();
+		Speed = Accel.SafeNormal() * (Size + Accel.Size() * AccelMultiplier * DeltaSeconds);
+		//Speed += Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
+		Size = Speed.SizeSquared();
+		if (Size > MaxSpeed*MaxSpeed)
+		{
+			Speed = Speed.SafeNormal() * MaxSpeed;
+		}
 
 		if (Speed.SizeSquared() < DeadZone)
 		{
@@ -89,13 +100,20 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 		}
 		else
 		{
-			TmpSpeed = Speed;
+			if (Speed.SizeSquared() > Accel.SizeSquared())
+			{
+				TmpSpeed = Speed.SafeNormal() * Accel.Size();
+			}
+			else
+			{
+				TmpSpeed = Speed;
+			}
 		}
+		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Speed.Y, Speed.X) * 180.f / PI - 90.0f;
 	}
 	else
 	{
-		UE_LOG(LogGPCode, Warning, TEXT("ET CEST PAS LE GG"));
-		Speed -= Speed.SafeNormal() * DeccelMultiplier;
+		Speed -= Speed.SafeNormal() * DeccelMultiplier * DeltaSeconds;
 		if (Speed.SizeSquared() < DeadZone)
 		{
 			Speed = FVector2D(0.f, 0.f);
@@ -103,17 +121,12 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 		TmpSpeed = Speed;
 	}
 
-	AddMovementInput(Camera->GetForwardVector(), TmpSpeed.X * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
-	AddMovementInput(Camera->GetRightVector(), TmpSpeed.Y * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
-
-	if (!(Accel.X == 0.f && Accel.Y == 0.f))
-	{
-		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Speed.Y, Speed.X) * 180.f / PI - 90.0f;
-	}
+	AddMovementInput(Camera->GetForwardVector(), TmpSpeed.X);
+	AddMovementInput(Camera->GetRightVector(), TmpSpeed.Y);
 
 	Mesh->SetRelativeRotation(FRotator(
 		0.f, Rotation, 0.f
-	));
+		));
 
 
 	Accel = FVector2D(0.f, 0.f);
