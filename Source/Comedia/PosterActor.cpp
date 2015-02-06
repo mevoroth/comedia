@@ -223,7 +223,7 @@ void APosterActor::Grabbing(bool Grabbing)
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
 		case GRABBED:
-			State = INIT;
+			State = (PosterState)((State & HEADISROOT) | INIT);
 			for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
 			{
 				_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
@@ -404,7 +404,7 @@ void APosterActor::_UpdateEffector()
 bool APosterActor::IsDetached() const
 {
 	float Dist = 0.f;
-	int c = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
+	int32 c = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
 	for (int32 i = 1; i < c; ++i)
 	{
 		FVector a = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(i));
@@ -419,9 +419,16 @@ bool APosterActor::IsDetached() const
 void APosterActor::_Reset(float DeltaSeconds)
 {
 	float ResetAlphaNormalized = _ResetAlpha / ResetSpeed;
-	for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+
+	bool bHeadIsRoot = (State & HEADISROOT) != 0;
+	int32 BoneIndex = (bHeadIsRoot ? 0 : PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2);
+	int32 Last = (bHeadIsRoot ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : -1);
+	int32 It = (bHeadIsRoot ? 1 : -1);
+	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+
+	for (; BoneIndex != Last; BoneIndex += It)
 	{
-		float CurrentAlpha = FMath::Clamp(ResetAlphaNormalized - DelayBetweenBones * BoneIndex, 0.f, 1.f);
+		float CurrentAlpha = FMath::Clamp(ResetAlphaNormalized - DelayBetweenBones * (bHeadIsRoot ? BoneIndex : Reverse - BoneIndex), 0.f, 1.f);
 		PosterMesh->SetBoneTransformByName(
 			PosterMesh->GetBoneName(BoneIndex + 1),
 			FTransform(
