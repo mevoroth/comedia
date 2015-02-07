@@ -251,29 +251,41 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 void AIwacLevelScriptActor::_KnifeSpawning(float ComputedRadiusSpawnKnifeArea)
 {
 	//UE_LOG(LogGPCode, Log, TEXT("Spawn Knife"));
-	
-	NbSpawnedKnife++;
-	bHasKnifeSpawned = true;
-
-	//Set remaining time with DelayBetweenKnifeSpawn for next knife spawn
-	_RemainingTime = DelayBetweenKnifeSpawn;
 
 	//Spawn knife
-	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(_KnifeClass);
-	FVector SpawningKnifePosition = _PlayerCharacter->GetActorLocation();
-	SpawnedKnifeCharacter->SetActorLocation(SpawningKnifePosition);
-	SpawnedKnifeCharacter->SpawnDefaultController();
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.bNoCollisionFail = true;
+	AKnifeCharacter* SpawnedKnifeCharacter = GetWorld()->SpawnActor<AKnifeCharacter>(_KnifeClass, SpawnParams);
+	if (SpawnedKnifeCharacter)
+	{
+		//Set spawned knifes variables
+		NbSpawnedKnife++;
+		bHasKnifeSpawned = true;
 
-	//Rotate to a random angle
-	SpawnedKnifeCharacter->SetActorRelativeRotation(FRotator(0.0f, FMath::FRand() * 360.0f, 0.0f));
+		//Set remaining time with DelayBetweenKnifeSpawn for next knife spawn
+		_RemainingTime = DelayBetweenKnifeSpawn;
 
-	//Move to border of the area
-	SpawnedKnifeCharacter->SetActorLocation(SpawnedKnifeCharacter->GetActorLocation() + SpawnedKnifeCharacter->GetActorForwardVector() * ComputedRadiusSpawnKnifeArea);
+		UE_LOG(LogGPCode, Log, TEXT("Spawn position: %s"), *SpawnedKnifeCharacter->GetActorLocation().ToString());
+		FVector SpawningKnifePosition = _PlayerCharacter->GetActorLocation();
+		SpawnedKnifeCharacter->SetActorLocation(SpawningKnifePosition);
+		SpawnedKnifeCharacter->SpawnDefaultController();
 
-	//Look at player character
-	SpawnedKnifeCharacter->AddActorLocalRotation(FRotator(0.0f, 180.0f, 0.0f));
+		//Rotate to a random angle
+		SpawnedKnifeCharacter->SetActorRelativeRotation(FRotator(0.0f, FMath::FRand() * 360.0f, 0.0f));
 
-	SpawnedKnifeCharacter->InitOriginalPosition();
+		//Move to border of the area
+		SpawnedKnifeCharacter->SetActorLocation(SpawnedKnifeCharacter->GetActorLocation() + SpawnedKnifeCharacter->GetActorForwardVector() * ComputedRadiusSpawnKnifeArea);
+
+		//Look at player character
+		SpawnedKnifeCharacter->AddActorLocalRotation(FRotator(0.0f, 180.0f, 0.0f));
+
+		SpawnedKnifeCharacter->InitOriginalPosition();
+	} 
+	else
+	{
+		UE_LOG(LogGPCode, Log, TEXT("KNIFE SPAWN FAILED"));
+	}
+	
 }
 
 void AIwacLevelScriptActor::_LightningSpawning(float ComputedRadiusSpawnLightningArea)
