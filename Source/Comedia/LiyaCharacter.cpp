@@ -10,9 +10,13 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, bInvertXAxis(true)
 	, bInvertYAxis(true)
 	, MaxSpeed(1.f)
-	, DeccelMultiplier(0.2f)
-	, AccelMultiplier(1.f)
+	, MaxSpeedWhenGrab(0.2f)
+	, DeccelMultiplier(2.25f)
+	, AccelMultiplier(1.75f)
 	, DeadZone(0.05f)
+	, _GrabSpeedAlpha(1.f)
+	, _GrabSpeedAlphaIt(-1.f)
+	, GrabSpeedAlphaTimer(1.f)
 {
 }
 
@@ -77,6 +81,8 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	_LerpGrab(DeltaSeconds);
+
 	_Controls(DeltaSeconds);
 }
 
@@ -109,7 +115,32 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 				TmpSpeed = Speed;
 			}
 		}
-		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Speed.Y, Speed.X) * 180.f / PI - 90.0f;
+		FQuat CameraOriented(FVector::UpVector, FMath::DegreesToRadians(Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X))));
+		FQuat PosterOriented(FVector::UpVector, FMath::Atan2(_GrabDirection.Y, _GrabDirection.X));
+		float LerpedRotation = FQuat::Slerp(CameraOriented, PosterOriented, _GrabSpeedAlpha / GrabSpeedAlphaTimer).Rotator().Yaw - 90.f;
+		LerpedRotation = FMath::Fmod(LerpedRotation + 360.f, 360.f);
+		//UE_LOG(LogGPCode, Warning, TEXT("LERPED : %f"), LerpedRotation);
+		//float LerpedRotation = FMath::Lerp(
+		//	Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X)),
+		//	FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X)),
+		//	_GrabSpeedAlpha / GrabSpeedAlphaTimer
+		//) - 90.f;
+		float FinalRotation = (_GrabSpeedAlphaIt < 0.f ? Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X)) : FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X))) - 90.f;
+		FinalRotation = FMath::Fmod(FinalRotation + 360.f, 360.f);
+		//UE_LOG(LogGPCode, Warning, TEXT("FINAL : %f"), FinalRotation);
+		Rotation = (FMath::Abs(LerpedRotation - FinalRotation) < FMath::Abs(FMath::Fmod(Rotation + 360.f, 360.f) - FinalRotation) ? LerpedRotation : Rotation);
+		//Rotation = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X)) - 90.0f;
+		//Rotation = FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X)) - 90.f;
+
+		//UE_LOG(LogGPCode, Warning, TEXT("%s"), *_GrabDirection.ToString());
+		//UE_LOG(LogGPCode, Warning, TEXT("%s"), *FVector(GetActorForwardVector().X, GetActorForwardVector().Y, 0.f).ToString());
+
+		//Rotation = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(
+		//	_GrabDirection,
+		//	FVector(GetActorForwardVector().X, GetActorForwardVector().Y, 0.f)
+		//)));
+
+		//UE_LOG(LogGPCode, Warning, TEXT("%f"), Rotation);
 	}
 	else
 	{
@@ -121,13 +152,39 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 		TmpSpeed = Speed;
 	}
 
+	TmpSpeed *= _CurrentSpeedMultiplier;
+
 	AddMovementInput(Camera->GetForwardVector(), TmpSpeed.X);
 	AddMovementInput(Camera->GetRightVector(), TmpSpeed.Y);
 
 	Mesh->SetRelativeRotation(FRotator(
 		0.f, Rotation, 0.f
-		));
+	));
 
 
 	Accel = FVector2D(0.f, 0.f);
+}
+
+void ALiyaCharacter::NotifyGrab()
+{
+	_GrabSpeedAlphaIt = 1.f;
+}
+
+void ALiyaCharacter::NotifyReleasePoster()
+{
+	_GrabSpeedAlphaIt = -1.f;
+}
+
+void ALiyaCharacter::_LerpGrab(float DeltaSeconds)
+{
+	_GrabSpeedAlpha = FMath::Clamp(_GrabSpeedAlpha + DeltaSeconds * _GrabSpeedAlphaIt, 0.f, GrabSpeedAlphaTimer);
+
+	_CurrentSpeedMultiplier = FMath::Lerp(MaxSpeed, MaxSpeedWhenGrab, _GrabSpeedAlpha / GrabSpeedAlphaTimer);
+}
+
+void ALiyaCharacter::UpdateGrabPoint(const FVector& GrabPoint)
+{
+	_GrabDirection = GrabPoint - GetActorLocation();
+	_GrabDirection.Z = 0.f;
+	_GrabDirection = _GrabDirection.SafeNormal();
 }
