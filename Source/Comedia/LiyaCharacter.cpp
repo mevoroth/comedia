@@ -7,6 +7,12 @@
 ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	: Super(FOI)
 	, Camera(0)
+	, bInvertXAxis(true)
+	, bInvertYAxis(true)
+	, MaxSpeed(1.f)
+	, DeccelMultiplier(0.2f)
+	, AccelMultiplier(1.f)
+	, DeadZone(0.05f)
 {
 }
 
@@ -42,7 +48,7 @@ void ALiyaCharacter::AddCameraRoll(float Val)
 	check(Camera); // Camera not set in BP
 
 	Camera->AddRelativeRotation(FRotator(
-		0.f, Val * GetWorld()->GetDeltaSeconds() * CameraSpeed, 0.f
+		0.f, Val * GetWorld()->GetDeltaSeconds() * CameraSpeed * (bInvertXAxis ? -1.f : 1.f), 0.f
 	));
 }
 
@@ -51,7 +57,7 @@ void ALiyaCharacter::AddCameraPitch(float Val)
 	check(Camera); // Camera not set in BP
 
 	float Pitch = Camera->GetComponentRotation().Pitch;
-	Val *= GetWorld()->GetDeltaSeconds() * CameraSpeed;
+	Val *= GetWorld()->GetDeltaSeconds() * CameraSpeed * (bInvertYAxis ? -1.f : 1.f);
 
 	if (Pitch + Val < MinCamPitch)
 	{
@@ -71,17 +77,57 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	AddMovementInput(Camera->GetForwardVector(), Accel.X * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
-	AddMovementInput(Camera->GetRightVector(), Accel.Y * GetWorld()->GetDeltaSeconds() * CharacterSpeed);
+	_Controls(DeltaSeconds);
+}
 
-	if (!(Accel.X == 0.f && Accel.Y == 0.f))
+void ALiyaCharacter::_Controls(float DeltaSeconds)
+{
+	FVector2D TmpSpeed;
+	if (Accel.SizeSquared() > 0.1f)
 	{
-		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Accel.Y, Accel.X) * 180.f / PI - 90.0f;
+		float Size = Speed.Size();
+		Speed = Accel.SafeNormal() * (Size + Accel.Size() * AccelMultiplier * DeltaSeconds);
+		//Speed += Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
+		Size = Speed.SizeSquared();
+		if (Size > MaxSpeed*MaxSpeed)
+		{
+			Speed = Speed.SafeNormal() * MaxSpeed;
+		}
+
+		if (Speed.SizeSquared() < DeadZone)
+		{
+			TmpSpeed = FVector2D(0.f, 0.f);
+		}
+		else
+		{
+			if (Speed.SizeSquared() > Accel.SizeSquared())
+			{
+				TmpSpeed = Speed.SafeNormal() * Accel.Size();
+			}
+			else
+			{
+				TmpSpeed = Speed;
+			}
+		}
+		Rotation = Camera->GetComponentRotation().Yaw + FMath::Atan2(Speed.Y, Speed.X) * 180.f / PI - 90.0f;
 	}
+	else
+	{
+		Speed -= Speed.SafeNormal() * DeccelMultiplier * DeltaSeconds;
+		if (Speed.SizeSquared() < DeadZone)
+		{
+			Speed = FVector2D(0.f, 0.f);
+		}
+		TmpSpeed = Speed;
+	}
+
+	AddMovementInput(Camera->GetForwardVector(), TmpSpeed.X);
+	AddMovementInput(Camera->GetRightVector(), TmpSpeed.Y);
 
 	Mesh->SetRelativeRotation(FRotator(
 		0.f, Rotation, 0.f
-	));
+		));
+
 
 	Accel = FVector2D(0.f, 0.f);
 }

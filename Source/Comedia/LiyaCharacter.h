@@ -4,8 +4,6 @@
 
 #include "LiyaCamera.h"
 
-#include "LowPassFilterComponent.h"
-
 #include "GameFramework/Character.h"
 #include "LiyaCharacter.generated.h"
 
@@ -20,8 +18,8 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	///** How many footsteps to buffer for filtering footsteps height */
 	//const int FOOTSTEP_LATENCY = 3;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
-	float CharacterSpeed;
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	//float CharacterSpeed;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float CameraSpeed;
@@ -32,10 +30,28 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float MaxCamPitch;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	bool bInvertXAxis;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	bool bInvertYAxis;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float MaxSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float DeadZone;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float DeccelMultiplier;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float AccelMultiplier;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	USceneComponent* Camera;
 
-	inline float GetCameraSpeed() const
+	FORCEINLINE float GetCameraSpeed() const
 	{
 		return CameraSpeed;
 	}
@@ -64,7 +80,10 @@ protected:
 	/** Controls Mouse X axis */
 	void AddCameraRoll(float Val);
 
+	void _Controls(float DeltaSeconds);
+
 private:
 	FVector2D Accel;
+	FVector2D Speed;
 	float Rotation;
 };

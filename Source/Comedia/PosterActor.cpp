@@ -13,36 +13,14 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _HeadIsRoot(false)
 	, Grabbed(false)
 	, ResetSpeed(1.f)
-	, _ResetAlpha(1.f)
 	, State(INIT)
+	, DelayBetweenBones(0.15f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
 	RootComponent = PosterMesh;
 
 	PrimaryActorTick.bCanEverTick = true;
-}
-
-FString APosterActor::GetState()
-
-{
-	FString mescouilles;
-	if ((State & ~(GRABBABLE | HEADISROOT)) == INIT)
-	{
-		mescouilles = TEXT("INIT");
-	}
-	else if ((State & ~(GRABBABLE | HEADISROOT)) == GRABBED)
-	{
-		mescouilles = TEXT("GRABBED");
-	}
-	else if ((State & ~(GRABBABLE | HEADISROOT)) == STICKED)
-	{
-		mescouilles = TEXT("STICKED");
-	}
-
-	mescouilles += (State & GRABBABLE) ? TEXT("GRABBABLE") : TEXT("NOT GRABBABLE");
-	mescouilles += (State & HEADISROOT) ? TEXT("HEADISROOT") : TEXT("TAILISROOT");
-	return mescouilles;
 }
 
 void APosterActor::BeginPlay()
@@ -53,6 +31,7 @@ void APosterActor::BeginPlay()
 		return;
 	}
 
+	_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones;
 	_BonesBuff = new FTransform[PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1];
 	_BonesInit = new FTransform[PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1];
 
@@ -88,6 +67,9 @@ void APosterActor::BeginPlay()
 
 	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
 	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
+
+	FireRangeRadius = FMath::DegreesToRadians(FireRangeRadius);
+	FireRangeDistance *= FireRangeDistance; // Square
 }
 
 void APosterActor::BeginDestroy()
@@ -241,7 +223,7 @@ void APosterActor::Grabbing(bool Grabbing)
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
 		case GRABBED:
-			State = INIT;
+			State = (PosterState)((State & HEADISROOT) | INIT);
 			for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
 			{
 				_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
@@ -422,7 +404,7 @@ void APosterActor::_UpdateEffector()
 bool APosterActor::IsDetached() const
 {
 	float Dist = 0.f;
-	int c = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
+	int32 c = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
 	for (int32 i = 1; i < c; ++i)
 	{
 		FVector a = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(i));
@@ -437,17 +419,44 @@ bool APosterActor::IsDetached() const
 void APosterActor::_Reset(float DeltaSeconds)
 {
 	float ResetAlphaNormalized = _ResetAlpha / ResetSpeed;
-	for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
+
+	bool bHeadIsRoot = (State & HEADISROOT) != 0;
+	int32 BoneIndex = (bHeadIsRoot ? 0 : PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2);
+	int32 Last = (bHeadIsRoot ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : -1);
+	int32 It = (bHeadIsRoot ? 1 : -1);
+	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+
+	for (; BoneIndex != Last; BoneIndex += It)
 	{
+		float CurrentAlpha = FMath::Clamp(ResetAlphaNormalized - DelayBetweenBones * (bHeadIsRoot ? BoneIndex : Reverse - BoneIndex), 0.f, 1.f);
 		PosterMesh->SetBoneTransformByName(
 			PosterMesh->GetBoneName(BoneIndex + 1),
 			FTransform(
-				FQuat::Slerp(_BonesBuff[BoneIndex].GetRotation(), _BonesInit[BoneIndex].GetRotation(), ResetAlphaNormalized),
-				FMath::Lerp(_BonesBuff[BoneIndex].GetLocation(), _BonesInit[BoneIndex].GetLocation(), ResetAlphaNormalized),
-				FMath::Lerp(_BonesBuff[BoneIndex].GetScale3D(), _BonesInit[BoneIndex].GetScale3D(), ResetAlphaNormalized)
+				FQuat::Slerp(_BonesBuff[BoneIndex].GetRotation(), _BonesInit[BoneIndex].GetRotation(), CurrentAlpha),
+				FMath::Lerp(_BonesBuff[BoneIndex].GetLocation(), _BonesInit[BoneIndex].GetLocation(), CurrentAlpha),
+				FMath::Lerp(_BonesBuff[BoneIndex].GetScale3D(), _BonesInit[BoneIndex].GetScale3D(), CurrentAlpha)
 			),
 			EBoneSpaces::WorldSpace
 		);
 	}
-	_ResetAlpha = FMath::Clamp(_ResetAlpha + DeltaSeconds, 0.f, ResetSpeed);
+	_ResetAlpha += DeltaSeconds;
+}
+
+//FVector APosterActor::GetPosterForward() const
+//{
+//	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+//	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+//	return FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal();
+//}
+
+bool APosterActor::IsInFireRange(const FVector& Position) const
+{
+	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+
+	FVector Center = (Head + Tail) / 2.f;
+	return FVector::DotProduct(
+		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
+		(Position - Center).UnsafeNormal()
+	) && FVector::DistSquared(Position, Center) < FireRangeDistance;
 }
