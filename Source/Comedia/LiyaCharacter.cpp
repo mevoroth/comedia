@@ -17,6 +17,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, _GrabSpeedAlpha(1.f)
 	, _GrabSpeedAlphaIt(-1.f)
 	, GrabSpeedAlphaTimer(1.f)
+	, MaxAngularSpeed(200.f)
 {
 }
 
@@ -115,32 +116,36 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 				TmpSpeed = Speed;
 			}
 		}
-		FQuat CameraOriented(FVector::UpVector, FMath::DegreesToRadians(Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X))));
-		FQuat PosterOriented(FVector::UpVector, FMath::Atan2(_GrabDirection.Y, _GrabDirection.X));
+
+		float RotationFromCamera = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X));
+		float RotationFromPoster = FMath::Atan2(_GrabDirection.Y, _GrabDirection.X);
+
+		FQuat CameraOriented(FVector::UpVector, FMath::DegreesToRadians(RotationFromCamera));
+		FQuat PosterOriented(FVector::UpVector, RotationFromPoster);
+		
 		float LerpedRotation = FQuat::Slerp(CameraOriented, PosterOriented, _GrabSpeedAlpha / GrabSpeedAlphaTimer).Rotator().Yaw - 90.f;
 		LerpedRotation = FMath::Fmod(LerpedRotation + 360.f, 360.f);
-		//UE_LOG(LogGPCode, Warning, TEXT("LERPED : %f"), LerpedRotation);
-		//float LerpedRotation = FMath::Lerp(
-		//	Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X)),
-		//	FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X)),
-		//	_GrabSpeedAlpha / GrabSpeedAlphaTimer
-		//) - 90.f;
-		float FinalRotation = (_GrabSpeedAlphaIt < 0.f ? Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X)) : FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X))) - 90.f;
+		
+		float FinalRotation = (_GrabSpeedAlphaIt < 0.f ? RotationFromCamera : FMath::RadiansToDegrees(RotationFromPoster)) - 90.f;
 		FinalRotation = FMath::Fmod(FinalRotation + 360.f, 360.f);
-		//UE_LOG(LogGPCode, Warning, TEXT("FINAL : %f"), FinalRotation);
-		Rotation = (FMath::Abs(LerpedRotation - FinalRotation) < FMath::Abs(FMath::Fmod(Rotation + 360.f, 360.f) - FinalRotation) ? LerpedRotation : Rotation);
-		//Rotation = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X)) - 90.0f;
-		//Rotation = FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X)) - 90.f;
 
-		//UE_LOG(LogGPCode, Warning, TEXT("%s"), *_GrabDirection.ToString());
-		//UE_LOG(LogGPCode, Warning, TEXT("%s"), *FVector(GetActorForwardVector().X, GetActorForwardVector().Y, 0.f).ToString());
-
-		//Rotation = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(
-		//	_GrabDirection,
-		//	FVector(GetActorForwardVector().X, GetActorForwardVector().Y, 0.f)
-		//)));
-
-		//UE_LOG(LogGPCode, Warning, TEXT("%f"), Rotation);
+		if (FMath::Abs(LerpedRotation - FinalRotation) < FMath::Abs(Rotation - FinalRotation))
+		{
+			float AngularDelta = Rotation - LerpedRotation;
+			AngularDelta = FMath::Fmod(AngularDelta + 360.f, 360.f);
+			if (AngularDelta > 180.f)
+			{
+				AngularDelta -= 360.f;
+			}
+			if (FMath::Abs(AngularDelta) / DeltaSeconds > MaxAngularSpeed)
+			{
+				Rotation -= FMath::Sign(AngularDelta) * MaxAngularSpeed * DeltaSeconds;
+			}
+			else
+			{
+				Rotation = LerpedRotation;
+			}
+		}
 	}
 	else
 	{

@@ -37,6 +37,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	bool bInvertYAxis;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float MaxAngularSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float MaxSpeed;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
