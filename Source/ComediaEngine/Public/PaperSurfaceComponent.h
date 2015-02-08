@@ -43,8 +43,6 @@ class UPaperSurfaceComponent : public UMeshComponent
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Comedia Paper Settings", FriendlyName = "Ripped Paper Texture")
 	UTexture2D* RippedPaperTexture;
 
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
-
 	TResourceArray<FVector4> ComputedColors;
 private:
 	/** Output data */
