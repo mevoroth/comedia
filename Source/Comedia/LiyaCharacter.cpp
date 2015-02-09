@@ -22,6 +22,13 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 {
 }
 
+void ALiyaCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
+	_GrabArmLength *= 2;
+}
+
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	// set up gameplay key bindings
@@ -176,12 +183,18 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 	AddMovementInput(Camera->GetForwardVector(), Speed.X);
 	AddMovementInput(Camera->GetRightVector(), Speed.Y);
 
-	FVector NewPos = ConsumeMovementInputVector();
-	if (FVector::DistSquared(NewPos + GetActorLocation(), _GrabPivot) < _GrabMaxDistance)
+	FVector NewPos = ConsumeMovementInputVector() + GetActorLocation();
+	FVector GrabPivot = _GrabPivot;
+	GrabPivot.Z = 0.f;
+	NewPos.Z = 0.f;
+
+	float CurrentDist = FVector::Dist(NewPos, GrabPivot) - _GrabArmLength;
+	if (!GetGrabbing() || CurrentDist < FMath::Sqrt(_GrabMaxDistance) || CurrentDist < _GrabPreviousDistance)
 	{
 		AddMovementInput(Camera->GetForwardVector(), Speed.X);
 		AddMovementInput(Camera->GetRightVector(), Speed.Y);
 	}
+	_GrabPreviousDistance = CurrentDist;
 }
 
 void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)

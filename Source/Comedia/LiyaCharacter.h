@@ -88,6 +88,7 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	bool GetGrabbing() const;
 #pragma endregion AnimBlueprint
 
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
 
@@ -114,10 +115,12 @@ private:
 
 	FVector _GrabPivot;
 	float _GrabMaxDistance;
+	float _GrabPreviousDistance;
 	FVector _GrabDirection;
 	float _CurrentSpeedMultiplier;
 	float _GrabSpeedAlpha;
 	float _GrabSpeedAlphaIt;
+	float _GrabArmLength;
 
 	float _RunningSpeedAnimBP;
 
