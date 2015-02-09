@@ -67,17 +67,26 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 #pragma region Grab Events
 	/** Event for when grab poster */
-	void NotifyGrab();
+	void NotifyGrab(float PosterMaxDistance);
 	/** Update grab point */
 	void UpdateGrabPoint(const FVector& GrabPoint);
 	/** Event for when release poster */
 	void NotifyReleasePoster();
+	/** Grab Pivot (for distance max) */
+	void UpdateGrabPivot(const FVector& GrabPivot);
 #pragma endregion Grab Events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
 	virtual void LeftFootStep(const FVector& Pos);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
 	virtual void RightFootStep(const FVector& Pos);
+
+#pragma region AnimBlueprint
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]AnimBlueprint")
+	float GetRunningSpeedAnimBP() const;
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]AnimBlueprint")
+	bool GetGrabbing() const;
+#pragma endregion AnimBlueprint
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -103,12 +112,18 @@ private:
 	FVector2D Speed;
 	float Rotation;
 
+	FVector _GrabPivot;
+	float _GrabMaxDistance;
 	FVector _GrabDirection;
 	float _CurrentSpeedMultiplier;
 	float _GrabSpeedAlpha;
 	float _GrabSpeedAlphaIt;
 
+	float _RunningSpeedAnimBP;
+
 	void _Controls(float DeltaSeconds);
 	void _LerpGrab(float DeltaSeconds);
+
+	void _ControlsMove(const FVector2D& Speed);
 
 };
