@@ -37,7 +37,13 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	bool bInvertYAxis;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float MaxAngularSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float MaxSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float MaxSpeedWhenGrab;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float DeadZone;
@@ -48,6 +54,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float AccelMultiplier;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float GrabSpeedAlphaTimer;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	USceneComponent* Camera;
 
@@ -55,6 +64,15 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	{
 		return CameraSpeed;
 	}
+
+#pragma region Grab Events
+	/** Event for when grab poster */
+	void NotifyGrab();
+	/** Update grab point */
+	void UpdateGrabPoint(const FVector& GrabPoint);
+	/** Event for when release poster */
+	void NotifyReleasePoster();
+#pragma endregion Grab Events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
 	virtual void LeftFootStep(const FVector& Pos);
@@ -80,10 +98,17 @@ protected:
 	/** Controls Mouse X axis */
 	void AddCameraRoll(float Val);
 
-	void _Controls(float DeltaSeconds);
-
 private:
 	FVector2D Accel;
 	FVector2D Speed;
 	float Rotation;
+
+	FVector _GrabDirection;
+	float _CurrentSpeedMultiplier;
+	float _GrabSpeedAlpha;
+	float _GrabSpeedAlphaIt;
+
+	void _Controls(float DeltaSeconds);
+	void _LerpGrab(float DeltaSeconds);
+
 };

@@ -2,6 +2,7 @@
 
 #include "Comedia.h"
 #include "PosterActor.h"
+#include "LiyaCharacter.h"
 
 APosterActor::APosterActor(const FObjectInitializer& FOI)
 	: Super(FOI)
@@ -208,6 +209,7 @@ void APosterActor::SetEffector(const FTransform& Effector)
 
 void APosterActor::Grabbing(bool Grabbing)
 {
+	ALiyaCharacter* Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 	if ((State & GRABBABLE) && Grabbing)
 	{
 		switch (State & ~(GRABBABLE | HEADISROOT))
@@ -215,6 +217,12 @@ void APosterActor::Grabbing(bool Grabbing)
 		case INIT:
 		case STICKED:
 			State = (PosterState)((State & HEADISROOT) | GRABBED);
+			if (!Character)
+			{
+				UE_LOG(LogGPCode, Error, TEXT("No Character"));
+				return;
+			}
+			Character->NotifyGrab();
 			break;
 		}
 	}
@@ -230,6 +238,13 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			_ResetAlpha = 0.f;
+
+			if (!Character)
+			{
+				UE_LOG(LogGPCode, Error, TEXT("No Character"));
+				return;
+			}
+			Character->NotifyReleasePoster();
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
@@ -359,6 +374,13 @@ void APosterActor::Tick(float DeltaSeconds)
 	case GRABBED:
 		_UpdateEffector();
 		UpdateChain();
+		ALiyaCharacter* Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
+		if (!Character)
+		{
+			UE_LOG(LogGPCode, Error, TEXT("No Character"));
+			return;
+		}
+		Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
 		break;
 	}
 
