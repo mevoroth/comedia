@@ -1,15 +1,8 @@
 Event	ID	Name			Wwise Object Path	Notes
 	527347948	Music_Knife			\Default Work Unit\Music_Knife	
 	984952705	Music_intro			\Default Work Unit\Music_intro	
-	2616261669	Music_Sun			\Default Work Unit\Music_Sun	
-	3567178845	Music_Thunder			\Default Work Unit\Music_Thunder	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	27484448	Kniferev1	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Kniferev1_E81B0A92.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Knife\Knife\Kniferev1		3408445
-	376015080	S_VX_CUT_TOR_KNIFE	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_VX_CUT_TOR_KNIFE_A7B60E92.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\S_VX_CUT_TOR_KNIFE		1696115
-	461330647	S_MUS_TOR_THUNDER	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_THUNDER_11182432.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Thunder\Thunder\S_MUS_TOR_THUNDER		4308515
-	564369602	Knife music intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Knife music intro_7F482BCE.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\Knife music intro		820971
-	671002750	S_MUS_TOR_SUN	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_SUNv2&OUTRO_84C9299C.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\S_MUS_TOR_SUN		8998084
-	750962119	S_VX_CUT_TOR_SUN	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_VX_CUT_TOR_SUN_45F08874.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\S_VX_CUT_TOR_SUN		1075463
-	966561974	S_VX_CUT_TOR_THUNDER	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_VX_CUT_TOR_THUNDER_B5849895.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Thunder\Thunder\S_VX_CUT_TOR_THUNDER		1458310
+	27484448	Kniferev1	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Kniferev1_E453E291.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Knife\Knife\Kniferev1		3408053
+	564369602	Knife music intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Knife music intro_7740A9A5.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\Knife music intro		820823
 
