@@ -22,6 +22,9 @@ class COMEDIA_API AKnifeCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifeParams")
 	float RatioTrailLength = 1.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] KnifeParams")
+	float VerticalTrailOffset = 1.0f;
+
 	virtual void Tick(float DeltaSeconds) override;
 
 	virtual void ReceiveHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;

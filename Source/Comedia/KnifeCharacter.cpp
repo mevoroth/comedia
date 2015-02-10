@@ -145,7 +145,7 @@ void AKnifeCharacter::_SpawnTrail()
 	}
 
 	FVector NewTrailPosition = GetActorLocation();
-	NewTrailPosition.Z = Hit.ImpactPoint.Z;
+	NewTrailPosition.Z = Hit.ImpactPoint.Z + VerticalTrailOffset;
 	NewTrail->SetActorLocation(NewTrailPosition);
 
 	//Compute rotation
