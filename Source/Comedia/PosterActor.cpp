@@ -21,6 +21,12 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	PosterMesh->Activate(true);
 	RootComponent = PosterMesh;
 
+	LeftGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Left Grabbed Cam Position"));
+	LeftGrabbedCamPosition->AttachTo(RootComponent);
+
+	RightGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Right Grabbed Cam Position"));
+	RightGrabbedCamPosition->AttachTo(RootComponent);
+
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -222,6 +228,18 @@ void APosterActor::Grabbing(bool Grabbing)
 				UE_LOG(LogGPCode, Error, TEXT("No Character"));
 				return;
 			}
+
+			//Set character override camera position when poster grabbed
+			Character->ElapsedTravellingScriptedCamera = 0.0f;
+			if (State & HEADISROOT)
+			{
+				Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition;
+			}
+			else
+			{
+				Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition;
+			}
+
 			Character->NotifyGrab();
 			break;
 		}
@@ -245,12 +263,17 @@ void APosterActor::Grabbing(bool Grabbing)
 				return;
 			}
 			Character->NotifyReleasePoster();
+			//Remove camera override
+			Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
+			Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
+			Character->OverrideScriptedCameraPosition = nullptr;
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
 			break;
 		}
 	}
+
 	//switch (State)
 	//{
 	//case GRABBABLE:
