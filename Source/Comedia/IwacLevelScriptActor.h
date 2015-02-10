@@ -160,6 +160,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia] Events")
 	void PlayerFailed();
 
+	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
+	void ReinitCurrentPhase();
+
 private:
 	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;
 

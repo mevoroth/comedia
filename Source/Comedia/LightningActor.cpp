@@ -38,6 +38,11 @@ void ALightningActor::InitImpactTarget()
 {
 	FHitResult Hit(ForceInit);
 	FCollisionQueryParams Trace(TEXT("LightningTrace"), false, GetOwner());
+	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (IwacLevelScript)
+	{
+		Trace.AddIgnoredActor(IwacLevelScript->TreeActor);
+	}
 	GetWorld()->LineTraceSingle(Hit, GetActorLocation() + FVector::UpVector * 1000.0f, GetActorLocation() + FVector::UpVector * -2000.0f, ECC_Visibility, Trace);
 	_ImpactPosition = Hit.ImpactPoint;
 
