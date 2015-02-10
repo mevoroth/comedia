@@ -237,6 +237,7 @@ void APosterActor::Grabbing(bool Grabbing)
 
 			//Set character override camera position when poster grabbed
 			Character->ElapsedTravellingScriptedCamera = 0.0f;
+			Character->RatioCameraFollow = 0.5f;
 			if (State & HEADISROOT)
 			{
 				Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition;
