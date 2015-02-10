@@ -210,7 +210,13 @@ void APosterActor::UpdateChain()
 
 void APosterActor::SetEffector(const FTransform& Effector)
 {
+	int32 First = (State & HEADISROOT) ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1;
+	float Dist = (State & HEADISROOT) ? _HeadDist : _TailDist;
+
 	_Effector = Effector;
+	_Effector.AddToTranslation(
+		PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
+	);
 }
 
 void APosterActor::Grabbing(bool Grabbing)
@@ -240,7 +246,7 @@ void APosterActor::Grabbing(bool Grabbing)
 				Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition;
 			}
 
-			Character->NotifyGrab();
+			Character->NotifyGrab(_MaxDistance);
 			break;
 		}
 	}
@@ -403,7 +409,9 @@ void APosterActor::Tick(float DeltaSeconds)
 			UE_LOG(LogGPCode, Error, TEXT("No Character"));
 			return;
 		}
-		Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
+		//Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
+		Character->UpdateGrabPoint(State & HEADISROOT ? GetGripHeadUpdated() : GetGripTailUpdated());
+		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
 		break;
 	}
 

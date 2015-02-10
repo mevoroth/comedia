@@ -18,7 +18,15 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, _GrabSpeedAlphaIt(-1.f)
 	, GrabSpeedAlphaTimer(1.f)
 	, MaxAngularSpeed(200.f)
+	, _RunningSpeedAnimBP(0.f)
 {
+}
+
+void ALiyaCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
+	_GrabArmLength *= 2;
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -197,9 +205,9 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 	}
 
 	TmpSpeed *= _CurrentSpeedMultiplier;
+	_RunningSpeedAnimBP = TmpSpeed.Size();
 
-	AddMovementInput(Camera->GetForwardVector(), TmpSpeed.X);
-	AddMovementInput(Camera->GetRightVector(), TmpSpeed.Y);
+	_ControlsMove(TmpSpeed);
 
 	Mesh->SetRelativeRotation(FRotator(
 		0.f, Rotation, 0.f
@@ -209,9 +217,29 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 	Accel = FVector2D(0.f, 0.f);
 }
 
-void ALiyaCharacter::NotifyGrab()
+void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
+{
+	AddMovementInput(Camera->GetForwardVector(), Speed.X);
+	AddMovementInput(Camera->GetRightVector(), Speed.Y);
+
+	FVector NewPos = ConsumeMovementInputVector() + GetActorLocation();
+	FVector GrabPivot = _GrabPivot;
+	GrabPivot.Z = 0.f;
+	NewPos.Z = 0.f;
+
+	float CurrentDist = FVector::Dist(NewPos, GrabPivot) - _GrabArmLength;
+	if (!GetGrabbing() || CurrentDist < FMath::Sqrt(_GrabMaxDistance) || CurrentDist < _GrabPreviousDistance)
+	{
+		AddMovementInput(Camera->GetForwardVector(), Speed.X);
+		AddMovementInput(Camera->GetRightVector(), Speed.Y);
+	}
+	_GrabPreviousDistance = CurrentDist;
+}
+
+void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)
 {
 	_GrabSpeedAlphaIt = 1.f;
+	_GrabMaxDistance = PosterMaxDistance * PosterMaxDistance;
 }
 
 void ALiyaCharacter::NotifyReleasePoster()
@@ -231,4 +259,19 @@ void ALiyaCharacter::UpdateGrabPoint(const FVector& GrabPoint)
 	_GrabDirection = GrabPoint - GetActorLocation();
 	_GrabDirection.Z = 0.f;
 	_GrabDirection = _GrabDirection.SafeNormal();
+}
+
+FORCEINLINE float ALiyaCharacter::GetRunningSpeedAnimBP() const
+{
+	return _RunningSpeedAnimBP;
+}
+
+FORCEINLINE bool ALiyaCharacter::GetGrabbing() const
+{
+	return _GrabSpeedAlphaIt > 0.f;
+}
+
+FORCEINLINE void ALiyaCharacter::UpdateGrabPivot(const FVector& GrabPivot)
+{
+	_GrabPivot = GrabPivot;
 }
