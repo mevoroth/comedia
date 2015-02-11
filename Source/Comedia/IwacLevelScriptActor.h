@@ -160,6 +160,22 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia] Events")
 	void PlayerFailed();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void PlayMatineeIntro();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void PlayMatineeLightningToIron();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void PlayMatineeKnifeToLightning();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void PlayMatineeOutro();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void PlayMatineePlayerFailed();
+
+
 	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
 	void ReinitCurrentPhase();
 
