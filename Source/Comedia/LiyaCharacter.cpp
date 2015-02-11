@@ -261,17 +261,17 @@ void ALiyaCharacter::UpdateGrabPoint(const FVector& GrabPoint)
 	_GrabDirection = _GrabDirection.SafeNormal();
 }
 
-FORCEINLINE float ALiyaCharacter::GetRunningSpeedAnimBP() const
+float ALiyaCharacter::GetRunningSpeedAnimBP() const
 {
 	return _RunningSpeedAnimBP;
 }
 
-FORCEINLINE bool ALiyaCharacter::GetGrabbing() const
+bool ALiyaCharacter::GetGrabbing() const
 {
 	return _GrabSpeedAlphaIt > 0.f;
 }
 
-FORCEINLINE void ALiyaCharacter::UpdateGrabPivot(const FVector& GrabPivot)
+void ALiyaCharacter::UpdateGrabPivot(const FVector& GrabPivot)
 {
 	_GrabPivot = GrabPivot;
 }
