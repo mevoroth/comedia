@@ -219,8 +219,14 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 
 void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 {
-	AddMovementInput(Camera->GetForwardVector(), Speed.X);
-	AddMovementInput(Camera->GetRightVector(), Speed.Y);
+	FVector Fw = Camera->GetForwardVector();
+	FVector Right = Camera->GetRightVector();
+	Fw.Z = 0.f;
+	Right.Z = 0.f;
+	Fw.Normalize();
+	Right.Normalize();
+	AddMovementInput(Fw, Speed.X);
+	AddMovementInput(Right, Speed.Y);
 
 	FVector NewPos = ConsumeMovementInputVector() + GetActorLocation();
 	FVector GrabPivot = _GrabPivot;
@@ -230,8 +236,8 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 	float CurrentDist = FVector::Dist(NewPos, GrabPivot) - _GrabArmLength;
 	if (!GetGrabbing() || CurrentDist < FMath::Sqrt(_GrabMaxDistance) || CurrentDist < _GrabPreviousDistance)
 	{
-		AddMovementInput(Camera->GetForwardVector(), Speed.X);
-		AddMovementInput(Camera->GetRightVector(), Speed.Y);
+		AddMovementInput(Fw, Speed.X);
+		AddMovementInput(Right, Speed.Y);
 	}
 	_GrabPreviousDistance = CurrentDist;
 }
