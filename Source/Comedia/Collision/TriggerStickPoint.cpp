@@ -40,6 +40,7 @@ void ATriggerStickPoint::OnBeginOverlap(class AActor* OtherActor, class UPrimiti
 	if (PosterActor)
 	{
 		PosterActor->Stick(true);
+		PosterActor->UpdateStickPoint(GetActorLocation());
 	}
 }
 

@@ -50,6 +50,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	bool IsInFireRange(const FVector& Position) const;
 
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	void UpdateStickPoint(const FVector& StickPointPos);
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripHead() const;
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
@@ -103,6 +106,9 @@ private:
 	PosterState State;
 	/** Root to target distance */
 	float _MaxDistance;
+
+	/** If stick point, variable indicates absolute position */
+	FVector _StickPointPos;
 
 	/** Effector (Hands) */
 	FTransform _Effector;
