@@ -52,7 +52,7 @@ void AIwacLevelScriptActor::BeginPlay()
 		//Init remaining time with DelayFirstKnifeSpawn
 		_RemainingTime = DelayFirstSpawn;
 
-		MatineeIntro->Play();
+		PlayMatineeIntro();
 	}
 }
 
@@ -88,14 +88,14 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 				case ETorturePhase::TP_LightningPhase:
 					CurrentNbHitLightning = 0;
 					TimeSpendLightningPhase = 0.0f;
-					MatineeKnifeToLightning->Play();
+					PlayMatineeKnifeToLightning();
 					break;
 
 				case ETorturePhase::TP_IronPhase:
 					CurrentTimeHitIron = 0.0f;
 					TimeSpendIronPhase = 0.0f;
 					_IronSpawning();
-					MatineeLightningToIron->Play();
+					PlayMatineeLightningToIron();
 					break;
 
 				case ETorturePhase::TP_EmptyPhase:
@@ -177,7 +177,7 @@ void AIwacLevelScriptActor::PlayerFailed_Implementation()
 {
 	UE_LOG(LogGPCode, Log, TEXT("Player failed!"));
 	bPlayerHasFailed = true;
-	MatineePlayerFailed->Play();
+	PlayMatineePlayerFailed();
 }
 
 void AIwacLevelScriptActor::ReinitCurrentPhase()
@@ -258,6 +258,11 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 		{
 			//UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
 			PlayerTouchByIron();
+			bTouchedIronLastTick = true;
+		}
+		else
+		{
+			bTouchedIronLastTick = false;
 		}
 	}
 }
