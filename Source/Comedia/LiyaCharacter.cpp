@@ -111,7 +111,7 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 		else
 		{
 			Camera->SetWorldTransform(OverrideScriptedCameraPosition->ComponentToWorld);
-			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) / 2.0f);
+			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
 		}
 	}
 	else
