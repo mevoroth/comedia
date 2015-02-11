@@ -16,6 +16,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, ResetSpeed(1.f)
 	, State(INIT)
 	, DelayBetweenBones(0.15f)
+	, DelayBeforeReset(1.f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
@@ -38,7 +39,7 @@ void APosterActor::BeginPlay()
 		return;
 	}
 
-	_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones;
+	_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
 	_BonesBuff = new FTransform[PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1];
 	_BonesInit = new FTransform[PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1];
 
@@ -494,7 +495,9 @@ void APosterActor::_Reset(float DeltaSeconds)
 	int32 Last = (bHeadIsRoot ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : -1);
 	int32 It = (bHeadIsRoot ? 1 : -1);
 	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
-
+	
+	ResetAlphaNormalized -= DelayBeforeReset;
+	
 	for (; BoneIndex != Last; BoneIndex += It)
 	{
 		float CurrentAlpha = FMath::Clamp(ResetAlphaNormalized - DelayBetweenBones * (bHeadIsRoot ? BoneIndex : Reverse - BoneIndex), 0.f, 1.f);

@@ -100,6 +100,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
 	bool GrabEnabled;
 
+	/** Delay before reset poster */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float DelayBeforeReset;
+
 	bool Sticked;
 
 private:
