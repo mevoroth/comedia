@@ -2,6 +2,7 @@
 
 #include "Comedia.h"
 #include "ComediaGameMode.h"
+#include "Scalability.h"
 
 
 AComediaGameMode::AComediaGameMode(const class FPostConstructInitializeProperties& PCIP)
@@ -14,4 +15,16 @@ AComediaGameMode::AComediaGameMode(const class FPostConstructInitializePropertie
 
 }
 
+void AComediaGameMode::BeginPlay()
+{
+	if (GEngine)
+	{
+		UGameUserSettings* Settings = GEngine->GetGameUserSettings();
+		Settings->SetScreenResolution(FIntPoint(1920, 1020));
+		Settings->SetFullscreenMode(EWindowMode::Fullscreen);
+		Settings->SetVSyncEnabled(true);
+		Settings->ScalabilityQuality = Scalability::FQualityLevels();
+		Settings->ApplySettings();
+	}
+}
 
