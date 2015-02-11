@@ -279,6 +279,7 @@ void APosterActor::Grabbing(bool Grabbing)
 				Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
 				Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
 				Character->OverrideScriptedCameraPosition = nullptr;
+
 			}
 			break;
 		case ONSTICK:
