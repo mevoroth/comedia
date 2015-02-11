@@ -393,7 +393,7 @@ FVector APosterActor::GetGripTailUpdated() const
 void APosterActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
+	ALiyaCharacter* Character = 0;
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case INIT:
@@ -403,7 +403,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	case GRABBED:
 		_UpdateEffector();
 		UpdateChain();
-		ALiyaCharacter* Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
+		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 		if (!Character)
 		{
 			UE_LOG(LogGPCode, Error, TEXT("No Character"));
@@ -412,6 +412,14 @@ void APosterActor::Tick(float DeltaSeconds)
 		//Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
 		Character->UpdateGrabPoint(State & HEADISROOT ? GetGripHeadUpdated() : GetGripTailUpdated());
 		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
+		break;
+	case STICKED:
+		SetEffector(FTransform(
+			FRotator::ZeroRotator,
+			_StickPointPos,
+			FVector(1.f, 1.f, 1.f)
+		));
+		UpdateChain();
 		break;
 	}
 
@@ -512,4 +520,9 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
 		(Position - Center).UnsafeNormal()
 	) && FVector::DistSquared(Position, Center) < FireRangeDistance;
+}
+
+void APosterActor::UpdateStickPoint(const FVector& StickPointPos)
+{
+	_StickPointPos = StickPointPos;
 }
