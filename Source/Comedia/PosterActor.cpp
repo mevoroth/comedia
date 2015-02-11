@@ -236,15 +236,18 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			//Set character override camera position when poster grabbed
-			Character->ElapsedTravellingScriptedCamera = 0.0f;
-			Character->RatioCameraFollow = 0.5f;
-			if (State & HEADISROOT)
+			if (!Character->OverrideScriptedCameraPosition)
 			{
-				Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition;
-			}
-			else
-			{
-				Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition;
+				Character->ElapsedTravellingScriptedCamera = 0.0f;
+				Character->RatioCameraFollow = 0.5f;
+				if (State & HEADISROOT)
+				{
+					Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition;
+				}
+				else
+				{
+					Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition;
+				}
 			}
 
 			Character->NotifyGrab(_MaxDistance);
@@ -271,9 +274,12 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 			Character->NotifyReleasePoster();
 			//Remove camera override
-			Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
-			Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
-			Character->OverrideScriptedCameraPosition = nullptr;
+			if (Character->OverrideScriptedCameraPosition == LeftGrabbedCamPosition || Character->OverrideScriptedCameraPosition == RightGrabbedCamPosition)
+			{
+				Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
+				Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
+				Character->OverrideScriptedCameraPosition = nullptr;
+			}
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
