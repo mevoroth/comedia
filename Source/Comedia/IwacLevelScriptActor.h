@@ -143,6 +143,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	float TimeSpendIronPhase;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
+	bool bTouchedIronLastTick;
 #pragma endregion IronPhase
 
 	virtual void BeginPlay() override;

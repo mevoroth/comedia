@@ -258,6 +258,11 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 		{
 			//UE_LOG(LogGPCode, Log, TEXT("Actor hit by red light at %s"), *_PlayerCharacter->GetActorLocation().ToString());
 			PlayerTouchByIron();
+			bTouchedIronLastTick = true;
+		}
+		else
+		{
+			bTouchedIronLastTick = false;
 		}
 	}
 }
