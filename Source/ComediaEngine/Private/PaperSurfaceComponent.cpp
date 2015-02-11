@@ -210,12 +210,3 @@ void UPaperSurfaceComponent::UpdateOutputAndRandom()
 			RHIUnlockVertexBuffer(Buffer);
 		});
 }
-
-void UPaperSurfaceComponent::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
-{
-	Super::PostEditChangeProperty(PropertyChangedEvent);
-	if (!(Tex0 && Tex1 && Tex2 && Tex3 && RippedPaperTexture))
-	{
-		return;
-	}
-}
