@@ -3,7 +3,7 @@
 	<RootPaths>
 		<ProjectRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\</ProjectRoot>
 		<SourceFilesRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\louis-marie.alet\Documents\Unreal Projects\IWAC\comedia\Content\WwiseAudio\Windows\</SoundBanksRoot>
+		<SoundBanksRoot>C:\Users\louis-marie.alet\Documents\GitHub\comedia\Content\WwiseAudio\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
 		<ExternalSourcesOutputRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
@@ -15,204 +15,205 @@
 			<Path>ENV.bnk</Path>
 			<IncludedEvents>
 				<Event Id="2256197126" Name="Knife_envstart2"/>
+				<Event Id="3626617759" Name="Sun_Envstart"/>
 				<Event Id="3857201847" Name="Thunder_envstart"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="15471767" Language="SFX">
 					<ShortName>Thunder Env events-045.wav</ShortName>
-					<Path>SFX\Thunder Env events-045_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-045_9209B708.wem</Path>
 				</File>
 				<File Id="17596316" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Tear-HP-Loop.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Tear-HP-Loop_48D775D7.wem</Path>
+					<Path>SFX\S_SFX_DIE_TOR_Tear-HP-Loop_13CC49F8.wem</Path>
 				</File>
 				<File Id="29919511" Language="SFX">
 					<ShortName>Thunder Env events-040.wav</ShortName>
-					<Path>SFX\Thunder Env events-040_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-040_9209B708.wem</Path>
 				</File>
 				<File Id="105457372" Language="SFX">
 					<ShortName>Thunder Env events-029.wav</ShortName>
-					<Path>SFX\Thunder Env events-029_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-029_9209B708.wem</Path>
 				</File>
 				<File Id="122403591" Language="SFX">
 					<ShortName>Thunder Env events-020.wav</ShortName>
-					<Path>SFX\Thunder Env events-020_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-020_9209B708.wem</Path>
 				</File>
 				<File Id="150702821" Language="SFX">
 					<ShortName>Thunder Env events-037.wav</ShortName>
-					<Path>SFX\Thunder Env events-037_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-037_9209B708.wem</Path>
 				</File>
 				<File Id="160398610" Language="SFX">
 					<ShortName>Thunder Env events-031.wav</ShortName>
-					<Path>SFX\Thunder Env events-031_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-031_9209B708.wem</Path>
 				</File>
 				<File Id="176602613" Language="SFX">
 					<ShortName>Thunder Env events-013.wav</ShortName>
-					<Path>SFX\Thunder Env events-013_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-013_9209B708.wem</Path>
 				</File>
 				<File Id="186768456" Language="SFX">
 					<ShortName>Thunder Env events-030.wav</ShortName>
-					<Path>SFX\Thunder Env events-030_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-030_9209B708.wem</Path>
 				</File>
 				<File Id="202874423" Language="SFX">
 					<ShortName>Thunder Env events-018.wav</ShortName>
-					<Path>SFX\Thunder Env events-018_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-018_9209B708.wem</Path>
 				</File>
 				<File Id="213259494" Language="SFX">
 					<ShortName>Thunder Env events-023.wav</ShortName>
-					<Path>SFX\Thunder Env events-023_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-023_9209B708.wem</Path>
 				</File>
 				<File Id="267062997" Language="SFX">
 					<ShortName>Thunder Env events-025.wav</ShortName>
-					<Path>SFX\Thunder Env events-025_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-025_9209B708.wem</Path>
 				</File>
 				<File Id="298538016" Language="SFX">
 					<ShortName>Thunder Env events-001.wav</ShortName>
-					<Path>SFX\Thunder Env events-001_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-001_9209B708.wem</Path>
 				</File>
 				<File Id="310709877" Language="SFX">
 					<ShortName>Thunder Env events-026.wav</ShortName>
-					<Path>SFX\Thunder Env events-026_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-026_9209B708.wem</Path>
 				</File>
 				<File Id="351790980" Language="SFX">
 					<ShortName>Thunder Env events-008.wav</ShortName>
-					<Path>SFX\Thunder Env events-008_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-008_9209B708.wem</Path>
 				</File>
 				<File Id="373496786" Language="SFX">
 					<ShortName>Thunder Env events-019.wav</ShortName>
-					<Path>SFX\Thunder Env events-019_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-019_9209B708.wem</Path>
 				</File>
 				<File Id="434753035" Language="SFX">
 					<ShortName>Thunder Env events-021.wav</ShortName>
-					<Path>SFX\Thunder Env events-021_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-021_9209B708.wem</Path>
 				</File>
 				<File Id="439475780" Language="SFX">
 					<ShortName>Thunder Env events-043.wav</ShortName>
-					<Path>SFX\Thunder Env events-043_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-043_9209B708.wem</Path>
 				</File>
 				<File Id="458489299" Language="SFX">
 					<ShortName>Thunder Env events-005.wav</ShortName>
-					<Path>SFX\Thunder Env events-005_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-005_9209B708.wem</Path>
 				</File>
 				<File Id="479206470" Language="SFX">
 					<ShortName>Thunder Env events-015.wav</ShortName>
-					<Path>SFX\Thunder Env events-015_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-015_9209B708.wem</Path>
 				</File>
 				<File Id="523076004" Language="SFX">
 					<ShortName>Thunder Env events-042.wav</ShortName>
-					<Path>SFX\Thunder Env events-042_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-042_9209B708.wem</Path>
 				</File>
 				<File Id="578017239" Language="SFX">
 					<ShortName>Thunder Env events-009.wav</ShortName>
-					<Path>SFX\Thunder Env events-009_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-009_9209B708.wem</Path>
 				</File>
 				<File Id="595138675" Language="SFX">
 					<ShortName>Thunder Env events-041.wav</ShortName>
-					<Path>SFX\Thunder Env events-041_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-041_9209B708.wem</Path>
 				</File>
 				<File Id="618358006" Language="SFX">
 					<ShortName>Thunder Env events-010.wav</ShortName>
-					<Path>SFX\Thunder Env events-010_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-010_9209B708.wem</Path>
 				</File>
 				<File Id="636822297" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Sand-Loop.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Sand-Loop_B108B270.wem</Path>
+					<Path>SFX\S_SFX_DIE_TOR_Sand-Loop_5EDBB49B.wem</Path>
 				</File>
 				<File Id="651835577" Language="SFX">
 					<ShortName>Thunder Env events-017.wav</ShortName>
-					<Path>SFX\Thunder Env events-017_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-017_9209B708.wem</Path>
 				</File>
 				<File Id="682037422" Language="SFX">
 					<ShortName>Thunder Env events-032.wav</ShortName>
-					<Path>SFX\Thunder Env events-032_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-032_9209B708.wem</Path>
 				</File>
 				<File Id="691007076" Language="SFX">
 					<ShortName>Thunder Env events-027.wav</ShortName>
-					<Path>SFX\Thunder Env events-027_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-027_9209B708.wem</Path>
 				</File>
 				<File Id="692317898" Language="SFX">
 					<ShortName>Thunder Env events-024.wav</ShortName>
-					<Path>SFX\Thunder Env events-024_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-024_9209B708.wem</Path>
 				</File>
 				<File Id="708880227" Language="SFX">
 					<ShortName>Thunder Env events-022.wav</ShortName>
-					<Path>SFX\Thunder Env events-022_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-022_9209B708.wem</Path>
 				</File>
 				<File Id="711635103" Language="SFX">
 					<ShortName>roomtone.wav</ShortName>
-					<Path>SFX\roomtone_6602789D.wem</Path>
+					<Path>SFX\roomtone_782157C6.wem</Path>
 				</File>
 				<File Id="724668617" Language="SFX">
 					<ShortName>Thunder Env events-004.wav</ShortName>
-					<Path>SFX\Thunder Env events-004_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-004_9209B708.wem</Path>
 				</File>
 				<File Id="726495745" Language="SFX">
 					<ShortName>Thunder Env events-038.wav</ShortName>
-					<Path>SFX\Thunder Env events-038_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-038_9209B708.wem</Path>
 				</File>
 				<File Id="732414363" Language="SFX">
 					<ShortName>Thunder Env events-028.wav</ShortName>
-					<Path>SFX\Thunder Env events-028_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-028_9209B708.wem</Path>
 				</File>
 				<File Id="737170651" Language="SFX">
 					<ShortName>Thunder Env events-035.wav</ShortName>
-					<Path>SFX\Thunder Env events-035_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-035_9209B708.wem</Path>
 				</File>
 				<File Id="759952912" Language="SFX">
 					<ShortName>Thunder Env events-011.wav</ShortName>
-					<Path>SFX\Thunder Env events-011_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-011_9209B708.wem</Path>
 				</File>
 				<File Id="761898648" Language="SFX">
 					<ShortName>Thunder Env events-034.wav</ShortName>
-					<Path>SFX\Thunder Env events-034_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-034_9209B708.wem</Path>
 				</File>
 				<File Id="870016500" Language="SFX">
 					<ShortName>Thunder Env events-002.wav</ShortName>
-					<Path>SFX\Thunder Env events-002_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-002_9209B708.wem</Path>
 				</File>
 				<File Id="902529822" Language="SFX">
 					<ShortName>Thunder Env events-039.wav</ShortName>
-					<Path>SFX\Thunder Env events-039_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-039_9209B708.wem</Path>
 				</File>
 				<File Id="930703658" Language="SFX">
 					<ShortName>Thunder Env events-033.wav</ShortName>
-					<Path>SFX\Thunder Env events-033_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-033_9209B708.wem</Path>
 				</File>
 				<File Id="985211630" Language="SFX">
 					<ShortName>Thunder Env events-014.wav</ShortName>
-					<Path>SFX\Thunder Env events-014_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-014_9209B708.wem</Path>
 				</File>
 				<File Id="1007520723" Language="SFX">
 					<ShortName>Thunder Env events-006.wav</ShortName>
-					<Path>SFX\Thunder Env events-006_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-006_9209B708.wem</Path>
 				</File>
 				<File Id="1010459332" Language="SFX">
 					<ShortName>Thunder Env events-003.wav</ShortName>
-					<Path>SFX\Thunder Env events-003_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-003_9209B708.wem</Path>
 				</File>
 				<File Id="1017913663" Language="SFX">
 					<ShortName>Thunder Env events-016.wav</ShortName>
-					<Path>SFX\Thunder Env events-016_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-016_9209B708.wem</Path>
 				</File>
 				<File Id="1031163020" Language="SFX">
 					<ShortName>Thunder Env events-036.wav</ShortName>
-					<Path>SFX\Thunder Env events-036_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-036_9209B708.wem</Path>
 				</File>
 				<File Id="1036101269" Language="SFX">
 					<ShortName>Thunder Env events-012.wav</ShortName>
-					<Path>SFX\Thunder Env events-012_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-012_9209B708.wem</Path>
 				</File>
 				<File Id="1036843415" Language="SFX">
 					<ShortName>Thunder Env events-007.wav</ShortName>
-					<Path>SFX\Thunder Env events-007_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-007_9209B708.wem</Path>
 				</File>
 				<File Id="1044730241" Language="SFX">
 					<ShortName>Thunder Env events-044.wav</ShortName>
-					<Path>SFX\Thunder Env events-044_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-044_9209B708.wem</Path>
 				</File>
 				<File Id="1055056251" Language="SFX">
 					<ShortName>Thunder Env events-046.wav</ShortName>
-					<Path>SFX\Thunder Env events-046_950FF8F3.wem</Path>
+					<Path>SFX\Thunder Env events-046_9209B708.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -223,13 +224,6 @@
 		<SoundBank Id="1355168291" Language="SFX">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
-			<ExcludedMemoryFiles>
-				<File Id="30489455" Language="SFX">
-					<ShortName>AudioEase\Altiverb - Outdoor and More\Outdoor\Forest\AE_ForestAuterlitz_WideOpen.wav</ShortName>
-					<Path>Plugins\Wwise Convolution Reverb\AudioEase\Altiverb - Outdoor and More\Outdoor\Forest\AE_ForestAuterlitz_WideOpen_4BDB3B7B.wem</Path>
-					<PrefetchSize>0</PrefetchSize>
-				</File>
-			</ExcludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="2041901253" Language="SFX">
 			<ShortName>MUSICTORTUREBANK</ShortName>
@@ -237,15 +231,37 @@
 			<IncludedEvents>
 				<Event Id="984952705" Name="Music_intro"/>
 				<Event Id="527347948" Name="Music_Knife"/>
+				<Event Id="2616261669" Name="Music_Sun"/>
+				<Event Id="3567178845" Name="Music_Thunder"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="27484448" Language="SFX">
 					<ShortName>Kniferev1.wav</ShortName>
-					<Path>SFX\Kniferev1_E453E291.wem</Path>
+					<Path>SFX\Kniferev1_E81B0A92.wem</Path>
 				</File>
-				<File Id="564369602" Language="SFX">
-					<ShortName>Knife music intro.wav</ShortName>
-					<Path>SFX\Knife music intro_7740A9A5.wem</Path>
+				<File Id="59236879" Language="SFX">
+					<ShortName>S_MUS_DIE_TOR_INTRO.wav</ShortName>
+					<Path>SFX\S_MUS_DIE_TOR_INTRO_5DAE68DD.wem</Path>
+				</File>
+				<File Id="376015080" Language="SFX">
+					<ShortName>S_VX_CUT_TOR_KNIFE.wav</ShortName>
+					<Path>SFX\S_VX_CUT_TOR_KNIFE_862872AA.wem</Path>
+				</File>
+				<File Id="461330647" Language="SFX">
+					<ShortName>S_MUS_TOR_THUNDER.wav</ShortName>
+					<Path>SFX\S_MUS_TOR_THUNDER_11182432.wem</Path>
+				</File>
+				<File Id="671002750" Language="SFX">
+					<ShortName>S_MUS_TOR_SUNv2&amp;OUTRO.wav</ShortName>
+					<Path>SFX\S_MUS_TOR_SUNv2&amp;OUTRO_84C9299C.wem</Path>
+				</File>
+				<File Id="750962119" Language="SFX">
+					<ShortName>S_VX_CUT_TOR_SUN.wav</ShortName>
+					<Path>SFX\S_VX_CUT_TOR_SUN_45F08874.wem</Path>
+				</File>
+				<File Id="966561974" Language="SFX">
+					<ShortName>S_VX_CUT_TOR_THUNDER.wav</ShortName>
+					<Path>SFX\S_VX_CUT_TOR_THUNDER_B5849895.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -254,8 +270,11 @@
 			<Path>TORTUREBANK.bnk</Path>
 			<IncludedEvents>
 				<Event Id="2385628198" Name="Footsteps"/>
+				<Event Id="2671209179" Name="Knife_Fail"/>
 				<Event Id="3632834637" Name="Knife_Flyby"/>
 				<Event Id="2811031212" Name="Knife_Loop_Start"/>
+				<Event Id="2394515795" Name="Stop_Knife"/>
+				<Event Id="8782740" Name="Sun_fail"/>
 				<Event Id="1287545852" Name="Thunder_circle"/>
 				<Event Id="477318044" Name="Thunder_fail"/>
 				<Event Id="3561017543" Name="Thunder_hit"/>
@@ -263,111 +282,219 @@
 			<IncludedMemoryFiles>
 				<File Id="24175894" Language="SFX">
 					<ShortName>footdi1.wav</ShortName>
-					<Path>SFX\footdi1_950FF8F3.wem</Path>
+					<Path>SFX\footdi1_9209B708.wem</Path>
+				</File>
+				<File Id="28522372" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE03.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE03_9209B708.wem</Path>
+				</File>
+				<File Id="40808771" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_17.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_17_9209B708.wem</Path>
 				</File>
 				<File Id="69349838" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh2.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh2_950FF8F3.wem</Path>
+					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh2_9209B708.wem</Path>
 				</File>
 				<File Id="73860518" Language="SFX">
 					<ShortName>footdi7.wav</ShortName>
-					<Path>SFX\footdi7_950FF8F3.wem</Path>
+					<Path>SFX\footdi7_9209B708.wem</Path>
 				</File>
-				<File Id="88651339" Language="SFX">
-					<ShortName>S_SFX_DIE_TOR_Rattle-Loop.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Rattle-Loop_2657E66E.wem</Path>
+				<File Id="126730567" Language="SFX">
+					<ShortName>Sparks thunder fail-001.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-001_9209B708.wem</Path>
 				</File>
 				<File Id="152447386" Language="SFX">
 					<ShortName>Thunder hit 05.wav</ShortName>
-					<Path>SFX\Thunder hit 05_950FF8F3.wem</Path>
+					<Path>SFX\Thunder hit 05_9209B708.wem</Path>
+				</File>
+				<File Id="189264941" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_10.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_10_9209B708.wem</Path>
+				</File>
+				<File Id="193317668" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE02.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE02_9209B708.wem</Path>
+				</File>
+				<File Id="244484198" Language="SFX">
+					<ShortName>S_SFX_TOR_SUNBURNLOOP-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SUNBURNLOOP-001_29503F80.wem</Path>
 				</File>
 				<File Id="252967211" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh3.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh3_950FF8F3.wem</Path>
-				</File>
-				<File Id="298545835" Language="SFX">
-					<ShortName>Buildup 05.wav</ShortName>
-					<Path>SFX\Buildup 05_950FF8F3.wem</Path>
+					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh3_9209B708.wem</Path>
 				</File>
 				<File Id="309361023" Language="SFX">
 					<ShortName>footdi2.wav</ShortName>
-					<Path>SFX\footdi2_950FF8F3.wem</Path>
+					<Path>SFX\footdi2_9209B708.wem</Path>
 				</File>
 				<File Id="315144141" Language="SFX">
 					<ShortName>Thunder hit 01.wav</ShortName>
-					<Path>SFX\Thunder hit 01_950FF8F3.wem</Path>
+					<Path>SFX\Thunder hit 01_9209B708.wem</Path>
 				</File>
-				<File Id="368811509" Language="SFX">
-					<ShortName>Buildup 01.wav</ShortName>
-					<Path>SFX\Buildup 01_950FF8F3.wem</Path>
+				<File Id="325928729" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE04.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE04_9209B708.wem</Path>
 				</File>
-				<File Id="377375254" Language="SFX">
-					<ShortName>Kité.wav</ShortName>
-					<Path>SFX\Kité_950FF8F3.wem</Path>
+				<File Id="344529239" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Rattle-Loop.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Rattle-Loop_160176C9.wem</Path>
 				</File>
 				<File Id="415154560" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh .wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh _950FF8F3.wem</Path>
+					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh _9209B708.wem</Path>
 				</File>
-				<File Id="555344972" Language="SFX">
-					<ShortName>Buildup 03.wav</ShortName>
-					<Path>SFX\Buildup 03_950FF8F3.wem</Path>
+				<File Id="419870567" Language="SFX">
+					<ShortName>Sparks thunder fail-004.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-004_9209B708.wem</Path>
+				</File>
+				<File Id="429319999" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_15.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_15_9209B708.wem</Path>
+				</File>
+				<File Id="436706535" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_11.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_11_9209B708.wem</Path>
+				</File>
+				<File Id="521253662" Language="SFX">
+					<ShortName>Sparks thunder fail-003.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-003_9209B708.wem</Path>
+				</File>
+				<File Id="553415406" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_04.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_04_9209B708.wem</Path>
+				</File>
+				<File Id="563499839" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_12.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_12_9209B708.wem</Path>
+				</File>
+				<File Id="565636235" Language="SFX">
+					<ShortName>S_SFX_TOR_SUNBURNLOOP.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SUNBURNLOOP_29503F80.wem</Path>
+				</File>
+				<File Id="576890836" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-002.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-002_9209B708.wem</Path>
 				</File>
 				<File Id="593203450" Language="SFX">
 					<ShortName>Thunder hit 04.wav</ShortName>
-					<Path>SFX\Thunder hit 04_950FF8F3.wem</Path>
+					<Path>SFX\Thunder hit 04_9209B708.wem</Path>
+				</File>
+				<File Id="615082441" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_02.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_02_9209B708.wem</Path>
 				</File>
 				<File Id="643444766" Language="SFX">
 					<ShortName>footdi6.wav</ShortName>
-					<Path>SFX\footdi6_950FF8F3.wem</Path>
+					<Path>SFX\footdi6_9209B708.wem</Path>
 				</File>
 				<File Id="646985262" Language="SFX">
 					<ShortName>footdi9.wav</ShortName>
-					<Path>SFX\footdi9_950FF8F3.wem</Path>
+					<Path>SFX\footdi9_9209B708.wem</Path>
 				</File>
 				<File Id="652882334" Language="SFX">
 					<ShortName>footdi5.wav</ShortName>
-					<Path>SFX\footdi5_950FF8F3.wem</Path>
+					<Path>SFX\footdi5_9209B708.wem</Path>
+				</File>
+				<File Id="660652716" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_14.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_14_9209B708.wem</Path>
+				</File>
+				<File Id="677632142" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-004.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-004_9209B708.wem</Path>
+				</File>
+				<File Id="685931883" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_01.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_01_9209B708.wem</Path>
 				</File>
 				<File Id="696465191" Language="SFX">
 					<ShortName>Thunder hit 02.wav</ShortName>
-					<Path>SFX\Thunder hit 02_950FF8F3.wem</Path>
+					<Path>SFX\Thunder hit 02_9209B708.wem</Path>
+				</File>
+				<File Id="711483065" Language="SFX">
+					<ShortName>Sparks thunder fail-002.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-002_9209B708.wem</Path>
+				</File>
+				<File Id="732268279" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Saw-Loop.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Saw-Loop_FA7A34E9.wem</Path>
+				</File>
+				<File Id="745638615" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_09.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_09_9209B708.wem</Path>
+				</File>
+				<File Id="762689651" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-005.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-005_9209B708.wem</Path>
+				</File>
+				<File Id="789636226" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_08.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_08_9209B708.wem</Path>
 				</File>
 				<File Id="794216867" Language="SFX">
 					<ShortName>footdi4.wav</ShortName>
-					<Path>SFX\footdi4_950FF8F3.wem</Path>
+					<Path>SFX\footdi4_9209B708.wem</Path>
 				</File>
-				<File Id="817909908" Language="SFX">
-					<ShortName>Buildup 02.wav</ShortName>
-					<Path>SFX\Buildup 02_950FF8F3.wem</Path>
+				<File Id="802683991" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_16.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_16_9209B708.wem</Path>
+				</File>
+				<File Id="822877906" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_05.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_05_9209B708.wem</Path>
+				</File>
+				<File Id="851048328" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_07.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_07_9209B708.wem</Path>
+				</File>
+				<File Id="855125173" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_06.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_06_9209B708.wem</Path>
+				</File>
+				<File Id="875690567" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE05.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE05_9209B708.wem</Path>
+				</File>
+				<File Id="877417282" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-001_9209B708.wem</Path>
 				</File>
 				<File Id="901236066" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Tear-LP-Loop.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Tear-LP-Loop_A4420F53.wem</Path>
+					<Path>SFX\S_SFX_DIE_TOR_Tear-LP-Loop_48F95C60.wem</Path>
+				</File>
+				<File Id="912415545" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_13.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_13_9209B708.wem</Path>
+				</File>
+				<File Id="933485849" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE01.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE01_9209B708.wem</Path>
 				</File>
 				<File Id="953409729" Language="SFX">
 					<ShortName>Thunder hit 03.wav</ShortName>
-					<Path>SFX\Thunder hit 03_950FF8F3.wem</Path>
+					<Path>SFX\Thunder hit 03_9209B708.wem</Path>
 				</File>
 				<File Id="960637719" Language="SFX">
 					<ShortName>footdi3.wav</ShortName>
-					<Path>SFX\footdi3_950FF8F3.wem</Path>
+					<Path>SFX\footdi3_9209B708.wem</Path>
 				</File>
-				<File Id="984447787" Language="SFX">
-					<ShortName>Buildup 04.wav</ShortName>
-					<Path>SFX\Buildup 04_950FF8F3.wem</Path>
-				</File>
-				<File Id="1001164761" Language="SFX">
-					<ShortName>S_SFX_DIE_TOR_Saw-Loop.wav</ShortName>
-					<Path>SFX\S_SFX_DIE_TOR_Saw-Loop_AE6DB1F2.wem</Path>
+				<File Id="1007043541" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_03.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_03_9209B708.wem</Path>
 				</File>
 				<File Id="1015573855" Language="SFX">
 					<ShortName>footdi10.wav</ShortName>
-					<Path>SFX\footdi10_950FF8F3.wem</Path>
+					<Path>SFX\footdi10_9209B708.wem</Path>
+				</File>
+				<File Id="1021719798" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-003.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-003_9209B708.wem</Path>
 				</File>
 				<File Id="1068841297" Language="SFX">
 					<ShortName>footdi8.wav</ShortName>
-					<Path>SFX\footdi8_950FF8F3.wem</Path>
+					<Path>SFX\footdi8_9209B708.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
