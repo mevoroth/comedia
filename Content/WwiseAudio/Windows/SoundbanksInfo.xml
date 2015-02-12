@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" SchemaVersion="10" SoundbankVersion="112">
 	<RootPaths>
-		<ProjectRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\louis-marie.alet\Documents\GitHub\comedia\Content\WwiseAudio\Windows\</SoundBanksRoot>
+		<ProjectRoot>C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\daniel.quach\Documents\Comedia\Content\WwiseAudio\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
