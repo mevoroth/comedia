@@ -225,6 +225,9 @@
 			<ShortName>POCBANK</ShortName>
 			<Path>POCBANK.bnk</Path>
 			<IncludedEvents>
+				<Event Id="906520831" Name="Grab"/>
+				<Event Id="780428406" Name="Handling"/>
+				<Event Id="2405648188" Name="Release"/>
 				<Event Id="3749639609" Name="Start_AMB_POC"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
@@ -232,9 +235,105 @@
 					<ShortName>S_MUS_POC.wav</ShortName>
 					<Path>SFX\S_MUS_POC_9209B708.wem</Path>
 				</File>
+				<File Id="37334847" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-013.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-013_9209B708.wem</Path>
+				</File>
+				<File Id="78091238" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-002_9209B708.wem</Path>
+				</File>
 				<File Id="104471255" Language="SFX">
 					<ShortName>S_AMB_POC_WIND.wav</ShortName>
 					<Path>SFX\S_AMB_POC_WIND_8EF17A91.wem</Path>
+				</File>
+				<File Id="138719345" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-002_9209B708.wem</Path>
+				</File>
+				<File Id="187579217" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-004_9209B708.wem</Path>
+				</File>
+				<File Id="195501043" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-009.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-009_9209B708.wem</Path>
+				</File>
+				<File Id="214325416" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-010.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-010_9209B708.wem</Path>
+				</File>
+				<File Id="273957997" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-003_9209B708.wem</Path>
+				</File>
+				<File Id="363071318" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-001_9209B708.wem</Path>
+				</File>
+				<File Id="378533836" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-003_9209B708.wem</Path>
+				</File>
+				<File Id="415785054" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-004_9209B708.wem</Path>
+				</File>
+				<File Id="449561365" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-016.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-016_9209B708.wem</Path>
+				</File>
+				<File Id="558682521" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-006_9209B708.wem</Path>
+				</File>
+				<File Id="602830164" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-001_9209B708.wem</Path>
+				</File>
+				<File Id="614686763" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-002_9209B708.wem</Path>
+				</File>
+				<File Id="826014673" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-011.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-011_9209B708.wem</Path>
+				</File>
+				<File Id="828864535" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-008.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-008_9209B708.wem</Path>
+				</File>
+				<File Id="898758585" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-014.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-014_9209B708.wem</Path>
+				</File>
+				<File Id="918430595" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-005_9209B708.wem</Path>
+				</File>
+				<File Id="942327293" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-015.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-015_9209B708.wem</Path>
+				</File>
+				<File Id="969923550" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-003_9209B708.wem</Path>
+				</File>
+				<File Id="1013916400" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-007.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-007_9209B708.wem</Path>
+				</File>
+				<File Id="1042815631" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-012.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-012_9209B708.wem</Path>
+				</File>
+				<File Id="1046163077" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-001_9209B708.wem</Path>
+				</File>
+				<File Id="1068772292" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-004_9209B708.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -390,6 +489,10 @@
 					<ShortName>S_SFX_POC_FOOTS-006.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTS-006_9209B708.wem</Path>
 				</File>
+				<File Id="232904417" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-004_9209B708.wem</Path>
+				</File>
 				<File Id="244484198" Language="SFX">
 					<ShortName>S_SFX_TOR_SUNBURNLOOP-001.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SUNBURNLOOP-001_29503F80.wem</Path>
@@ -486,6 +589,10 @@
 					<ShortName>S_SFX_TOR_TEARLP-001.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-001_E606D6A7.wem</Path>
 				</File>
+				<File Id="514741865" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-001_9209B708.wem</Path>
+				</File>
 				<File Id="521253662" Language="SFX">
 					<ShortName>Sparks thunder fail-003.wav</ShortName>
 					<Path>SFX\Sparks thunder fail-003_9209B708.wem</Path>
@@ -505,6 +612,10 @@
 				<File Id="563499839" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_12.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_12_9209B708.wem</Path>
+				</File>
+				<File Id="565147389" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-003_9209B708.wem</Path>
 				</File>
 				<File Id="565636235" Language="SFX">
 					<ShortName>S_SFX_TOR_SUNBURNLOOP.wav</ShortName>
@@ -638,6 +749,10 @@
 					<ShortName>S_SFX_TOR_SAW09.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SAW09_3A01E825.wem</Path>
 				</File>
+				<File Id="896024870" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-005_9209B708.wem</Path>
+				</File>
 				<File Id="910208607" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-015.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTS-015_9209B708.wem</Path>
@@ -646,6 +761,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_13.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_13_9209B708.wem</Path>
 				</File>
+				<File Id="917288936" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-006_9209B708.wem</Path>
+				</File>
 				<File Id="924498498" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-012.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTS-012_9209B708.wem</Path>
@@ -653,6 +772,10 @@
 				<File Id="933485849" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITKNIFE01.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE01_9209B708.wem</Path>
+				</File>
+				<File Id="943402261" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-002_9209B708.wem</Path>
 				</File>
 				<File Id="945625114" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-014.wav</ShortName>
