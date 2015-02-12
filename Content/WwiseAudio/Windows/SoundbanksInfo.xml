@@ -221,6 +221,23 @@
 			<ShortName>Torture</ShortName>
 			<Path>Torture.bnk</Path>
 		</SoundBank>
+		<SoundBank Id="1350668815" Language="SFX">
+			<ShortName>POCBANK</ShortName>
+			<Path>POCBANK.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3749639609" Name="Start_AMB_POC"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="31323866" Language="SFX">
+					<ShortName>S_MUS_POC.wav</ShortName>
+					<Path>SFX\S_MUS_POC_9209B708.wem</Path>
+				</File>
+				<File Id="104471255" Language="SFX">
+					<ShortName>S_AMB_POC_WIND.wav</ShortName>
+					<Path>SFX\S_AMB_POC_WIND_8EF17A91.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="1355168291" Language="SFX">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
@@ -274,6 +291,7 @@
 				<Event Id="3632834637" Name="Knife_Flyby"/>
 				<Event Id="2811031212" Name="Knife_Loop_Start"/>
 				<Event Id="2394515795" Name="Stop_Knife"/>
+				<Event Id="660322461" Name="Stop_Sun_fail"/>
 				<Event Id="8782740" Name="Sun_fail"/>
 				<Event Id="1287545852" Name="Thunder_circle"/>
 				<Event Id="477318044" Name="Thunder_fail"/>
@@ -303,6 +321,10 @@
 				<File Id="52979081" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE02.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_RATTLE02_E606D6A7.wem</Path>
+				</File>
+				<File Id="62804544" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-008.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-008_9209B708.wem</Path>
 				</File>
 				<File Id="69349838" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh2.wav</ShortName>
@@ -364,9 +386,17 @@
 					<ShortName>S_SFX_TOR_SAW11.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SAW11_A4D98697.wem</Path>
 				</File>
+				<File Id="226802094" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-006_9209B708.wem</Path>
+				</File>
 				<File Id="244484198" Language="SFX">
 					<ShortName>S_SFX_TOR_SUNBURNLOOP-001.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SUNBURNLOOP-001_29503F80.wem</Path>
+				</File>
+				<File Id="248145761" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-011.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-011_9209B708.wem</Path>
 				</File>
 				<File Id="252967211" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh3.wav</ShortName>
@@ -388,9 +418,17 @@
 					<ShortName>Thunder hit 01.wav</ShortName>
 					<Path>SFX\Thunder hit 01_391988D9.wem</Path>
 				</File>
+				<File Id="318644905" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-002_9209B708.wem</Path>
+				</File>
 				<File Id="325928729" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITKNIFE04.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE04_9209B708.wem</Path>
+				</File>
+				<File Id="333297469" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-003_9209B708.wem</Path>
 				</File>
 				<File Id="345016871" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE10.wav</ShortName>
@@ -408,6 +446,10 @@
 					<ShortName>S_SFX_TOR_TEARLP-009.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-009_0763CB7B.wem</Path>
 				</File>
+				<File Id="369668336" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-013.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-013_9209B708.wem</Path>
+				</File>
 				<File Id="415154560" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh .wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh _9209B708.wem</Path>
@@ -415,6 +457,10 @@
 				<File Id="419870567" Language="SFX">
 					<ShortName>Sparks thunder fail-004.wav</ShortName>
 					<Path>SFX\Sparks thunder fail-004_9209B708.wem</Path>
+				</File>
+				<File Id="422667053" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-010.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-010_9209B708.wem</Path>
 				</File>
 				<File Id="423569960" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE06.wav</ShortName>
@@ -447,6 +493,14 @@
 				<File Id="553415406" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_04.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_04_9209B708.wem</Path>
+				</File>
+				<File Id="559410239" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-004_9209B708.wem</Path>
+				</File>
+				<File Id="560233774" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-005_9209B708.wem</Path>
 				</File>
 				<File Id="563499839" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_12.wav</ShortName>
@@ -532,6 +586,10 @@
 					<ShortName>S_SFX_TOR_THundBuildup-005.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_THundBuildup-005_E566A47F.wem</Path>
 				</File>
+				<File Id="780040415" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-007.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-007_9209B708.wem</Path>
+				</File>
 				<File Id="789636226" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_08.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_08_9209B708.wem</Path>
@@ -543,6 +601,10 @@
 				<File Id="802683991" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_16.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_16_9209B708.wem</Path>
+				</File>
+				<File Id="811123411" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-001_9209B708.wem</Path>
 				</File>
 				<File Id="822877906" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_05.wav</ShortName>
@@ -576,13 +638,25 @@
 					<ShortName>S_SFX_TOR_SAW09.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SAW09_3A01E825.wem</Path>
 				</File>
+				<File Id="910208607" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-015.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-015_9209B708.wem</Path>
+				</File>
 				<File Id="912415545" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_13.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_13_9209B708.wem</Path>
 				</File>
+				<File Id="924498498" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-012.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-012_9209B708.wem</Path>
+				</File>
 				<File Id="933485849" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITKNIFE01.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE01_9209B708.wem</Path>
+				</File>
+				<File Id="945625114" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-014.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-014_9209B708.wem</Path>
 				</File>
 				<File Id="953409729" Language="SFX">
 					<ShortName>Thunder hit 03.wav</ShortName>
@@ -595,6 +669,10 @@
 				<File Id="960637719" Language="SFX">
 					<ShortName>footdi3.wav</ShortName>
 					<Path>SFX\footdi3_9209B708.wem</Path>
+				</File>
+				<File Id="978504971" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-009.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-009_9209B708.wem</Path>
 				</File>
 				<File Id="1007043541" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_03.wav</ShortName>

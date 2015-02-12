@@ -45,8 +45,8 @@ public:
 	FVector GetGripTailUpdated() const;
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void Stick(bool Sticked);
-	//UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
-	//FVector GetPosterForward() const;
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	FVector GetPosterForward() const;
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	bool IsInFireRange(const FVector& Position) const;
 

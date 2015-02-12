@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3749639609	Start_AMB_POC			\Default Work Unit\POC\Start_AMB_POC	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	31323866	S_MUS_POC	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_POC_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Affiches\MUS\S_MUS_POC		7640726
+	104471255	WInd	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_AMB_POC_WIND_8EF17A91.wem		\Actor-Mixer Hierarchy\Default Work Unit\Affiches\Ambiances\WInd		9112188
+
