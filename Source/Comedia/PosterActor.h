@@ -54,6 +54,9 @@ public:
 	void UpdateStickPoint(const FVector& StickPointPos);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual void OnGrab(const FVector& Position);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripHead() const;
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripTail() const;

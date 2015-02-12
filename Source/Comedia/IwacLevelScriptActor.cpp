@@ -189,7 +189,7 @@ void AIwacLevelScriptActor::_TickKnifePhase(float DeltaSeconds)
 {
 	//Draw spawn area around the player
 	ComputedRadiusSpawnKnifeArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnKnifeArea;
-#ifdef WITH_EDITOR
+#if defined WITH_EDITOR
 	DrawDebugSphere(GetWorld(), _PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnKnifeArea, 32, FColor::Red);
 #endif
 
@@ -211,7 +211,7 @@ void AIwacLevelScriptActor::_TickLightningPhase(float DeltaSeconds)
 {
 	 //Draw spawn area around the player
 	float ComputedRadiusSpawnLightningArea = _PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * RadiusSpawnLightningArea;
-#ifdef WITH_EDITOR
+#if defined WITH_EDITOR
 	DrawDebugSphere(GetWorld(), _PlayerCharacter->GetActorLocation(), ComputedRadiusSpawnLightningArea, 32, FColor::Blue);
 #endif
 
