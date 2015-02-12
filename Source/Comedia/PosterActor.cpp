@@ -252,7 +252,7 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			OnGrab(Character->GetActorLocation());
-			//ToggleFootStep();
+			ToggleFootStep();
 			Character->NotifyGrab(_MaxDistance);
 			break;
 		}
@@ -289,6 +289,8 @@ void APosterActor::Grabbing(bool Grabbing)
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
+			OnRelease(Character->GetActorLocation());
+			Character->NotifyReleasePoster();
 			break;
 		}
 	}
