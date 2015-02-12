@@ -514,12 +514,12 @@ void APosterActor::_Reset(float DeltaSeconds)
 	_ResetAlpha += DeltaSeconds;
 }
 
-//FVector APosterActor::GetPosterForward() const
-//{
-//	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
-//	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
-//	return FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal();
-//}
+FVector APosterActor::GetPosterForward() const
+{
+	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+	return FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal();
+}
 
 bool APosterActor::IsInFireRange(const FVector& Position) const
 {
