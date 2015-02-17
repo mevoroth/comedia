@@ -183,8 +183,8 @@ void APosterActor::UpdateChain()
 	{
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
-#ifdef WITH_EDITOR
-			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
+#if defined WITH_EDITOR
+			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
 #endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
@@ -251,6 +251,8 @@ void APosterActor::Grabbing(bool Grabbing)
 				}
 			}
 
+			OnGrab(Character->GetActorLocation());
+			ToggleFootStep();
 			Character->NotifyGrab(_MaxDistance);
 			break;
 		}
@@ -273,6 +275,8 @@ void APosterActor::Grabbing(bool Grabbing)
 				UE_LOG(LogGPCode, Error, TEXT("No Character"));
 				return;
 			}
+
+			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
 			//Remove camera override
 			if (Character->OverrideScriptedCameraPosition == LeftGrabbedCamPosition || Character->OverrideScriptedCameraPosition == RightGrabbedCamPosition)
@@ -285,6 +289,8 @@ void APosterActor::Grabbing(bool Grabbing)
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
+			OnRelease(Character->GetActorLocation());
+			Character->NotifyReleasePoster();
 			break;
 		}
 	}
