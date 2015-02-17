@@ -27,6 +27,7 @@ void ALiyaCharacter::BeginPlay()
 	Super::BeginPlay();
 	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
 	_GrabArmLength *= 2;
+	_InitHeight = GetMesh()->GetComponentLocation().Z;
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -140,7 +141,7 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 	if (Accel.SizeSquared() > 0.1f)
 	{
 		float Size = Speed.Size();
-		Speed = Accel.SafeNormal() * (Size + Accel.Size() * AccelMultiplier * DeltaSeconds);
+		Speed = Accel.SafeNormal() * (Size + Accel.SizeSquared() * AccelMultiplier * DeltaSeconds);
 		//Speed += Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
 		Size = Speed.SizeSquared();
 		if (Size > MaxSpeed*MaxSpeed)
@@ -280,4 +281,14 @@ bool ALiyaCharacter::GetGrabbing() const
 void ALiyaCharacter::UpdateGrabPivot(const FVector& GrabPivot)
 {
 	_GrabPivot = GrabPivot;
+}
+
+void ALiyaCharacter::SetHeightDisplacement(float Height)
+{
+	GetMesh()->SetWorldLocation(FVector(
+		GetMesh()->GetComponentLocation().X,
+		GetMesh()->GetComponentLocation().Y,
+		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
+	));
+	UE_LOG(LogGPCode, Warning, TEXT("%f"), );
 }

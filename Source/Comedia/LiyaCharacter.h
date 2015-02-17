@@ -102,6 +102,8 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	float GetRunningSpeedAnimBP() const;
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]AnimBlueprint")
 	bool GetGrabbing() const;
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]AnimBlueprint")
+	void SetHeightDisplacement(float Height);
 #pragma endregion AnimBlueprint
 
 	virtual void BeginPlay() override;
@@ -139,6 +141,7 @@ private:
 	float _GrabArmLength;
 
 	float _RunningSpeedAnimBP;
+	float _InitHeight;
 
 	void _Controls(float DeltaSeconds);
 	void _LerpGrab(float DeltaSeconds);
