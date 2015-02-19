@@ -237,17 +237,19 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			//Set character override camera position when poster grabbed
-			if (!Character->OverrideScriptedCameraPosition)
+			if (Character->OverrideScriptedCameraPosition.GetLocation() == FVector::ZeroVector)
 			{
+				Character->GrabbingPlayerLocation = Character->GetActorLocation();
+				Character->LengthTravellingScriptedCamera = LengthTravellingScriptedCamera;
 				Character->ElapsedTravellingScriptedCamera = 0.0f;
 				Character->RatioCameraFollow = 0.5f;
 				if (State & HEADISROOT)
 				{
-					Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition;
+					Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition->ComponentToWorld;
 				}
 				else
 				{
-					Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition;
+					Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition->ComponentToWorld;
 				}
 			}
 
@@ -279,11 +281,11 @@ void APosterActor::Grabbing(bool Grabbing)
 			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
 			//Remove camera override
-			if (Character->OverrideScriptedCameraPosition == LeftGrabbedCamPosition || Character->OverrideScriptedCameraPosition == RightGrabbedCamPosition)
+			if (Character->OverrideScriptedCameraPosition.GetLocation() == LeftGrabbedCamPosition->ComponentToWorld.GetLocation() || Character->OverrideScriptedCameraPosition.GetLocation() == RightGrabbedCamPosition->ComponentToWorld.GetLocation())
 			{
 				Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
 				Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
-				Character->OverrideScriptedCameraPosition = nullptr;
+				Character->OverrideScriptedCameraPosition = FTransform();
 
 			}
 			break;
