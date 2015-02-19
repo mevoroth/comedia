@@ -216,7 +216,7 @@ void APosterActor::SetEffector(const FTransform& Effector)
 
 	_Effector = Effector;
 	_Effector.AddToTranslation(
-		PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
+		(State & HEADISROOT ? -1 : 1) * PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
 	);
 }
 
