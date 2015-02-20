@@ -37,6 +37,8 @@ public:
 	UFUNCTION()
 	void OnEndOverlap(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	virtual void BeginPlay() override;
+
 private:
 	void _CancelCameraOverride(ALiyaCharacter* Character);
 };
