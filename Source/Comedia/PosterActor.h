@@ -120,6 +120,8 @@ private:
 
 	/** If stick point, variable indicates absolute position */
 	FVector _StickPointPos;
+	FTransform _GrabbedCurrentPosition;
+	float _StickedAlpha;
 
 	/** Effector (Hands) */
 	FTransform _Effector;

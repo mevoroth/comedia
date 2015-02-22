@@ -17,6 +17,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, State(INIT)
 	, DelayBetweenBones(0.15f)
 	, DelayBeforeReset(1.f)
+	, _StickedAlpha(0.f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
@@ -291,6 +292,8 @@ void APosterActor::Grabbing(bool Grabbing)
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
 			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
+			_GrabbedCurrentPosition = _Effector;
+			_StickedAlpha = 0.f;
 			break;
 		}
 	}
@@ -429,11 +432,17 @@ void APosterActor::Tick(float DeltaSeconds)
 		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
 		break;
 	case STICKED:
+		//SetEffector(FTransform(
+		//	FRotator::ZeroRotator,
+		//	_StickPointPos,
+		//	FVector(1.f, 1.f, 1.f)
+		//));
 		SetEffector(FTransform(
-			FRotator::ZeroRotator,
-			_StickPointPos,
+			FQuat::Slerp(_GrabbedCurrentPosition.GetRotation(), FQuat::Identity, _StickedAlpha),
+			FMath::Lerp(_GrabbedCurrentPosition.GetLocation(), _StickPointPos, _StickedAlpha),
 			FVector(1.f, 1.f, 1.f)
 		));
+		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
 		UpdateChain();
 		break;
 	}
