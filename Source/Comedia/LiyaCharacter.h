@@ -57,6 +57,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float GrabSpeedAlphaTimer;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float JumpHeight;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	USceneComponent* Camera;
 

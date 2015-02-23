@@ -19,6 +19,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, GrabSpeedAlphaTimer(1.f)
 	, MaxAngularSpeed(200.f)
 	, _RunningSpeedAnimBP(0.f)
+	, JumpHeight(17.5f)
 {
 }
 
@@ -288,7 +289,6 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 	GetMesh()->SetWorldLocation(FVector(
 		GetMesh()->GetComponentLocation().X,
 		GetMesh()->GetComponentLocation().Y,
-		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
+		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * JumpHeight
 	));
-	UE_LOG(LogGPCode, Warning, TEXT("%f"), );
 }
