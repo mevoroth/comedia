@@ -294,5 +294,4 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 		GetMesh()->GetComponentLocation().Y,
 		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
 	));
-	UE_LOG(LogGPCode, Warning, TEXT("%f"), );
 }

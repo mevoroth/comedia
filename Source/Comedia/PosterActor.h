@@ -75,6 +75,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster")
 	USceneComponent* RightGrabbedCamPosition;
 
+	/** For Prince Navigation */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	TArray<float> KeyPoints;
+
 	/** Precision */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float Precision;
