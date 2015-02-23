@@ -111,6 +111,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float DelayBeforeReset;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float LengthTravellingScriptedCamera = 2.0f;
+
 	bool Sticked;
 
 private:
@@ -120,6 +123,8 @@ private:
 
 	/** If stick point, variable indicates absolute position */
 	FVector _StickPointPos;
+	FTransform _GrabbedCurrentPosition;
+	float _StickedAlpha;
 
 	/** Effector (Hands) */
 	FTransform _Effector;

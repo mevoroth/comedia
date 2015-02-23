@@ -17,6 +17,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, State(INIT)
 	, DelayBetweenBones(0.15f)
 	, DelayBeforeReset(1.f)
+	, _StickedAlpha(0.f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
@@ -216,7 +217,7 @@ void APosterActor::SetEffector(const FTransform& Effector)
 
 	_Effector = Effector;
 	_Effector.AddToTranslation(
-		PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
+		(State & HEADISROOT ? -1 : 1) * PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
 	);
 }
 
@@ -237,17 +238,19 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			//Set character override camera position when poster grabbed
-			if (!Character->OverrideScriptedCameraPosition)
+			if (Character->OverrideScriptedCameraPosition.GetLocation() == FVector::ZeroVector)
 			{
+				Character->GrabbingPlayerLocation = Character->GetActorLocation();
+				Character->LengthTravellingScriptedCamera = LengthTravellingScriptedCamera;
 				Character->ElapsedTravellingScriptedCamera = 0.0f;
 				Character->RatioCameraFollow = 0.5f;
 				if (State & HEADISROOT)
 				{
-					Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition;
+					Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition->ComponentToWorld;
 				}
 				else
 				{
-					Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition;
+					Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition->ComponentToWorld;
 				}
 			}
 
@@ -279,11 +282,11 @@ void APosterActor::Grabbing(bool Grabbing)
 			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
 			//Remove camera override
-			if (Character->OverrideScriptedCameraPosition == LeftGrabbedCamPosition || Character->OverrideScriptedCameraPosition == RightGrabbedCamPosition)
+			if (Character->OverrideScriptedCameraPosition.GetLocation() == LeftGrabbedCamPosition->ComponentToWorld.GetLocation() || Character->OverrideScriptedCameraPosition.GetLocation() == RightGrabbedCamPosition->ComponentToWorld.GetLocation())
 			{
 				Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
 				Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
-				Character->OverrideScriptedCameraPosition = nullptr;
+				Character->OverrideScriptedCameraPosition = FTransform();
 
 			}
 			break;
@@ -291,6 +294,8 @@ void APosterActor::Grabbing(bool Grabbing)
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
 			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
+			_GrabbedCurrentPosition = _Effector;
+			_StickedAlpha = 0.f;
 			break;
 		}
 	}
@@ -429,11 +434,17 @@ void APosterActor::Tick(float DeltaSeconds)
 		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
 		break;
 	case STICKED:
+		//SetEffector(FTransform(
+		//	FRotator::ZeroRotator,
+		//	_StickPointPos,
+		//	FVector(1.f, 1.f, 1.f)
+		//));
 		SetEffector(FTransform(
-			FRotator::ZeroRotator,
-			_StickPointPos,
+			FQuat::Slerp(_GrabbedCurrentPosition.GetRotation(), FQuat::Identity, _StickedAlpha),
+			FMath::Lerp(_GrabbedCurrentPosition.GetLocation(), _StickPointPos, _StickedAlpha),
 			FVector(1.f, 1.f, 1.f)
 		));
+		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
 		UpdateChain();
 		break;
 	}

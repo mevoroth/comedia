@@ -27,6 +27,7 @@ void ALiyaCharacter::BeginPlay()
 	Super::BeginPlay();
 	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
 	_GrabArmLength *= 2;
+	_InitHeight = GetMesh()->GetComponentLocation().Z;
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -94,8 +95,13 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 
 	_Controls(DeltaSeconds);
 
+	_OverridingCamera(DeltaSeconds);
+}
+
+void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
+{
 	//Check if cam position overrided
-	if (OverrideScriptedCameraPosition) //Travelling cam
+	if (OverrideScriptedCameraPosition.GetLocation() != FVector::ZeroVector) //Travelling cam
 	{
 
 		if (ElapsedTravellingScriptedCamera < LengthTravellingScriptedCamera)
@@ -103,14 +109,14 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 			//Interpolate cam position and rotation
 			ElapsedTravellingScriptedCamera += DeltaSeconds;
 			float AlphaTravelling = ElapsedTravellingScriptedCamera / LengthTravellingScriptedCamera;
-			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), OverrideScriptedCameraPosition->ComponentToWorld.GetLocation(), AlphaTravelling);
-			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), OverrideScriptedCameraPosition->GetComponentQuat(), AlphaTravelling);
+			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), OverrideScriptedCameraPosition.GetLocation(), AlphaTravelling);
+			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), OverrideScriptedCameraPosition.GetRotation(), AlphaTravelling);
 			Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
-			GrabbingPlayerLocation = GetActorLocation();
+			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
 		}
 		else
 		{
-			Camera->SetWorldTransform(OverrideScriptedCameraPosition->ComponentToWorld);
+			Camera->SetWorldTransform(OverrideScriptedCameraPosition);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
 		}
 	}
@@ -123,13 +129,12 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 			float AlphaTravelling = (LengthTravellingBackScriptedCamera - ElapsedTravellingScriptedCamera) / LengthTravellingBackScriptedCamera;
 			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), LastCamPosition.GetLocation(), AlphaTravelling);
 			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), LastCamPosition.GetRotation(), AlphaTravelling);
-
 			Camera->SetRelativeTransform(FTransform(CurrentCamQuat, CurrentCamLocation));
 		}
 		else
 		{
-			LastCamPosition = Camera->GetRelativeTransform();
 			StartTravellingPosition = Camera->ComponentToWorld;
+			LastCamPosition = Camera->GetRelativeTransform();
 		}
 	}
 }
@@ -140,7 +145,7 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 	if (Accel.SizeSquared() > 0.1f)
 	{
 		float Size = Speed.Size();
-		Speed = Accel.SafeNormal() * (Size + Accel.Size() * AccelMultiplier * DeltaSeconds);
+		Speed = Accel.SafeNormal() * (Size + Accel.SizeSquared() * AccelMultiplier * DeltaSeconds);
 		//Speed += Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
 		Size = Speed.SizeSquared();
 		if (Size > MaxSpeed*MaxSpeed)
@@ -280,4 +285,14 @@ bool ALiyaCharacter::GetGrabbing() const
 void ALiyaCharacter::UpdateGrabPivot(const FVector& GrabPivot)
 {
 	_GrabPivot = GrabPivot;
+}
+
+void ALiyaCharacter::SetHeightDisplacement(float Height)
+{
+	GetMesh()->SetWorldLocation(FVector(
+		GetMesh()->GetComponentLocation().X,
+		GetMesh()->GetComponentLocation().Y,
+		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
+	));
+	UE_LOG(LogGPCode, Warning, TEXT("%f"), );
 }
