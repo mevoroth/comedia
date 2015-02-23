@@ -63,18 +63,13 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	USceneComponent* Camera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	float LengthTravellingScriptedCamera = 2.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	float LengthTravellingBackScriptedCamera = 0.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	float ElapsedTravellingScriptedCamera = 0.0f;
 
 	float RatioCameraFollow = 1.0f;
 
-	USceneComponent* OverrideScriptedCameraPosition;
+	FTransform OverrideScriptedCameraPosition;
 	FTransform LastCamPosition;
 	FTransform StartTravellingPosition;
 	FVector GrabbingPlayerLocation;
@@ -148,6 +143,7 @@ private:
 
 	void _Controls(float DeltaSeconds);
 	void _LerpGrab(float DeltaSeconds);
+	void _OverridingCamera(float DeltaSeconds);
 
 	void _ControlsMove(const FVector2D& Speed);
 
