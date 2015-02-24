@@ -17,6 +17,11 @@ class COMEDIA_API AMainLevelScriptActor : public ALevelScriptActor
 public:
 	PathGraph CurrentLevelPathGraph;
 
+	FORCEINLINE PathGraph GetPathGraph()
+	{
+		return CurrentLevelPathGraph;
+	}
+
 	AMainLevelScriptActor(const FObjectInitializer& FOI);
 	virtual void BeginPlay() override;
 	
