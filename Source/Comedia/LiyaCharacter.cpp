@@ -250,7 +250,7 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)
 {
 	_GrabSpeedAlphaIt = 1.f;
-	_GrabMaxDistance = PosterMaxDistance * PosterMaxDistance;
+	_GrabMaxDistance = PosterMaxDistance;
 }
 
 void ALiyaCharacter::NotifyReleasePoster()

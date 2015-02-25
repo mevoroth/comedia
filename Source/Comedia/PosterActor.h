@@ -53,12 +53,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void UpdateStickPoint(const FVector& StickPointPos);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
-	virtual bool OnGrab(const FVector& Position);
+#pragma region Poster Events
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Poster")
+	void OnGrab(const FVector& Position);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual bool OnRelease(const FVector& Position);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual bool OnStick(const FVector& Position);
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Poster")
+	void OnResetFinished();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual bool ToggleFootStep();
+#pragma endregion Poster Events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripHead() const;
@@ -85,7 +91,7 @@ public:
 
 	/** Max Iterations */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
-	float MaxIterations;
+	int32 MaxIterations;
 
 	/** Reset Poster Animation */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
@@ -118,6 +124,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float LengthTravellingScriptedCamera = 2.0f;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	ABlockingVolume* AssociatedBlockingVolume;
+
 	bool Sticked;
 
 private:
@@ -138,9 +147,6 @@ private:
 	/** Distance between each bone starting from head */
 	float* _DistanceFromTail;
 
-	UPROPERTY()
-	bool _HeadIsRoot;
-
 	/** Set Liya's Hands Socket to effector */
 	void _UpdateEffector();
 
@@ -153,6 +159,15 @@ private:
 	float _HeadDist;
 	float _TailDist;
 
+	float _LastAnimatedObjectPosition;
+	float _LastOrientation;
+
 	FTransform* _BonesBuff;
 	FTransform* _BonesInit;
+
+	UMaterialInstance* _MeshMaterialInst;
+
+#pragma region Poster Events
+	bool _ResetCalled;
+#pragma endregion Poster Events
 };
