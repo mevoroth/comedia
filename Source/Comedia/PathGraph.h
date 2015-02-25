@@ -21,7 +21,13 @@ public:
 	void  UpdatePosterNodes(APosterActor* Poster);
 	float GetCharacterPosition(APosterActor* Poster);
 	bool  MoveCharacterTo(PathNode* TargetNode);
+	void  DrawNodes();
+	void  DrawPath(PathNode* NodeOfPath);
+	FVector GetNodeLocation(PathNode* PosterNode);
+	PathNode* GetRandomNode();
 
 private:
+	UWorld* World;
+
 	PathNode* _GetLastNode(APosterActor* Poster);
 };

@@ -65,6 +65,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripTail() const;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual void InitGripReferences();
+
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -119,6 +122,12 @@ public:
 	float LengthTravellingScriptedCamera = 2.0f;
 
 	bool Sticked;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	USphereComponent* GripHeadComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	USphereComponent* GripTailComponent;
 
 private:
 	PosterState State;

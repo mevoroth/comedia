@@ -5,7 +5,6 @@
 
 PathNode::PathNode()
 {
-	UE_LOG(LogGPCode, Log, TEXT("PathGraph Constructor"));
 }
 
 PathNode::~PathNode()
