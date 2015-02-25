@@ -13,4 +13,13 @@ void AMainLevelScriptActor::BeginPlay()
 {
 	CurrentLevelPathGraph = PathGraph();
 	CurrentLevelPathGraph.InitNodes(GetWorld());
+
+	CurrentLevelPathGraph.DrawNodes();
+
+	RandomNode = CurrentLevelPathGraph.GetRandomNode();
+}
+
+void AMainLevelScriptActor::Tick(float DeltaSeconds)
+{
+	CurrentLevelPathGraph.DrawPath(RandomNode);
 }

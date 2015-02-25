@@ -271,6 +271,8 @@ void APosterActor::Grabbing(bool Grabbing)
 	}
 	else if (!Grabbing)
 	{
+
+		AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
 		case GRABBED:
@@ -299,6 +301,11 @@ void APosterActor::Grabbing(bool Grabbing)
 				Character->OverrideScriptedCameraPosition = FTransform();
 
 			}
+			//Update graph nodes
+			if (LevelScriptActor)
+			{
+				LevelScriptActor->CurrentLevelPathGraph.UpdatePosterNodes(this);
+			}
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
@@ -307,6 +314,11 @@ void APosterActor::Grabbing(bool Grabbing)
 			Character->NotifyReleasePoster();
 			_GrabbedCurrentPosition = _Effector;
 			_StickedAlpha = 0.f;
+			//Update graph nodes
+			if (LevelScriptActor)
+			{
+				LevelScriptActor->CurrentLevelPathGraph.UpdatePosterNodes(this);
+			}
 			break;
 		}
 	}
