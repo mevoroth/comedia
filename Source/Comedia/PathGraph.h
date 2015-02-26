@@ -28,7 +28,7 @@ public:
 	FVector GetNodeLocation(const PathNode* PosterNode) const;
 	PathNode* GetRandomNode();
 	void Tick(float DeltaSeconds);
-	const PathNode* GetNode(const FVector& Position) const;
+	const PathNode* GetNearestNode(const FVector& Position) const;
 
 private:
 	UWorld* World;

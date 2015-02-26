@@ -21,7 +21,7 @@ public:
 	~PathCharacter();
 
 	void UpdateCharacter(float DeltaSeconds);
-	void SetLastNode(PathNode* LastCrossedNode);
+	void SetCharacterNode(PathNode* LastCrossedNode);
 
 private:
 	void _CrossNextNode();

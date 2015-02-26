@@ -198,7 +198,32 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 
 float PathGraph::GetCharacterPosition(APosterActor* Poster)
 {
-	return 0.5f;
+	float CharacterPosition;
+	PathNode* LastPosterNode = _GetLastNode(Poster);
+
+	//Check if character is in selected poster
+	if (PathMainCharacter.LastCrossedNode->PosterOwner == Poster)
+	{
+		CharacterPosition = PathMainCharacter.LocalPosition;
+	}
+	//If on right poster
+	else if (LastPosterNode->RightNode != nullptr && LastPosterNode->RightNode->PosterOwner == PathMainCharacter.LastCrossedNode->PosterOwner)
+	{
+		if (LastPosterNode->RightNode->LeftNode == LastPosterNode)
+		{
+			CharacterPosition = 1.0f + PathMainCharacter.LocalPosition;
+		}
+		else
+		{
+			CharacterPosition = 1.0f + (1.0f - PathMainCharacter.LocalPosition);
+		}
+	}
+	else
+	{
+		CharacterPosition = 0.0f;
+	}
+
+	return CharacterPosition;
 }
 
 bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
@@ -386,6 +411,7 @@ const PathNode* PathGraph::GetNearestNode(const FVector& Position) const
 	//check(Ret);
 
 	//return Ret;
+	return nullptr;
 }
 
 void PathGraph::Tick(float DeltaSeconds)
