@@ -21,6 +21,7 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	//UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	//float CharacterSpeed;
 
+#pragma region GD Settings
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float CameraSpeed;
 
@@ -56,6 +57,10 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float GrabSpeedAlphaTimer;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float CallCooldown;
+#pragma endregion GD Settings
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	USceneComponent* Camera;
@@ -104,8 +109,8 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
-
 protected:
+#pragma region Controls
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
@@ -121,10 +126,14 @@ protected:
 	/** Controls Mouse X axis */
 	void AddCameraRoll(float Val);
 
+	/** Call character */
+	void CallCharacter();
+#pragma endregion Controls
+
 private:
-	FVector2D Accel;
-	FVector2D Speed;
-	float Rotation;
+	FVector2D _Accel;
+	FVector2D _Speed;
+	float _Rotation;
 
 	FVector _GrabPivot;
 	float _GrabMaxDistance;
@@ -135,13 +144,16 @@ private:
 	float _GrabSpeedAlphaIt;
 	float _GrabArmLength;
 
+	float _CallCooldown;
+
 	float _RunningSpeedAnimBP;
 	float _InitHeight;
+
+	UMaterialInstanceDynamic* _PosterMaterialInst;
 
 	void _Controls(float DeltaSeconds);
 	void _LerpGrab(float DeltaSeconds);
 	void _OverridingCamera(float DeltaSeconds);
 
 	void _ControlsMove(const FVector2D& Speed);
-
 };

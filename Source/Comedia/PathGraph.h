@@ -22,12 +22,13 @@ public:
 	void  InitNodes(UWorld* World);
 	void  UpdatePosterNodes(APosterActor* Poster);
 	float GetCharacterPosition(APosterActor* Poster);
-	bool  MoveCharacterTo(PathNode* TargetNode);
+	bool  MoveCharacterTo(const PathNode* TargetNode);
 	void  DrawNodes();
 	void  DrawPath(PathNode* NodeOfPath);
-	FVector GetNodeLocation(PathNode* PosterNode);
+	FVector GetNodeLocation(const PathNode* PosterNode) const;
 	PathNode* GetRandomNode();
 	void Tick(float DeltaSeconds);
+	const PathNode* GetNode(const FVector& Position) const;
 
 private:
 	UWorld* World;
