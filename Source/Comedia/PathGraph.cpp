@@ -3,6 +3,8 @@
 #include "Comedia.h"
 #include "PathGraph.h"
 
+#include <limits>
+
 PathGraph::PathGraph()
 {
 	UE_LOG(LogGPCode, Log, TEXT("PathGraph Constructor"));
@@ -184,7 +186,7 @@ float PathGraph::GetCharacterPosition(APosterActor* Poster)
 	return 0.5f;
 }
 
-bool PathGraph::MoveCharacterTo(PathNode* TargetNode)
+bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 {
 	return false;
 }
@@ -267,7 +269,7 @@ void PathGraph::DrawPath(PathNode* NodeOfPath)
 	}
 }
 
-FVector PathGraph::GetNodeLocation(PathNode* PosterNode)
+FVector PathGraph::GetNodeLocation(const PathNode* PosterNode) const
 {
 	FVector HeadPosition = PosterNode->PosterOwner->GripHeadComponent->ComponentToWorld.GetLocation();
 	FVector TailPosition = PosterNode->PosterOwner->GripTailComponent->ComponentToWorld.GetLocation();
@@ -281,6 +283,26 @@ PathNode* PathGraph::GetRandomNode()
 	MapHeadNodes.GenerateValueArray(ArrayNodes);
 
 	return ArrayNodes[FMath::RandRange(0, ArrayNodes.Num() - 1)];
+}
+
+const PathNode* PathGraph::GetNearestNode(const FVector& Position) const
+{
+	float Dist = std::numeric_limits<float>::infinity();
+	float Tmp = std::numeric_limits<float>::infinity();
+	PathNode* Ret = 0;
+	for (TMap<APosterActor*, PathNode*>::TConstIterator It = MapHeadNodes.CreateConstIterator(); It; ++It)
+	{
+		Tmp = FVector::DistSquared(Position, GetNodeLocation(It->Value));
+		if (Tmp < Dist)
+		{
+			Ret = It->Value;
+			Dist = Tmp;
+		}
+	}
+
+	check(Ret);
+
+	return Ret;
 }
 
 PathNode* PathGraph::_GetLastNode(APosterActor* Poster)

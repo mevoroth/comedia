@@ -3,6 +3,7 @@
 #include "Comedia.h"
 #include "LiyaCharacter.h"
 #include "DamonFalconActor.h"
+#include "MainLevelScriptActor.h"
 
 ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	: Super(FOI)
@@ -19,6 +20,8 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, GrabSpeedAlphaTimer(1.f)
 	, MaxAngularSpeed(200.f)
 	, _RunningSpeedAnimBP(0.f)
+	, CallCooldown(1.f)
+	, _CallCooldown(0.f)
 {
 }
 
@@ -35,10 +38,12 @@ void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	// set up gameplay key bindings
 	check(InputComponent);
 	
-	InputComponent->BindAxis("MoveForward", this, &ALiyaCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &ALiyaCharacter::MoveRight);
-	InputComponent->BindAxis("Turn", this, &ALiyaCharacter::AddCameraRoll);
-	InputComponent->BindAxis("LookUp", this, &ALiyaCharacter::AddCameraPitch);
+	InputComponent->BindAxis(FName(TEXT("MoveForward")), this, &ALiyaCharacter::MoveForward);
+	InputComponent->BindAxis(FName(TEXT("MoveRight")), this, &ALiyaCharacter::MoveRight);
+	InputComponent->BindAxis(FName(TEXT("Turn")), this, &ALiyaCharacter::AddCameraRoll);
+	InputComponent->BindAxis(FName(TEXT("LookUp")), this, &ALiyaCharacter::AddCameraPitch);
+
+	InputComponent->BindAction(FName(TEXT("Call")), EInputEvent::IE_Pressed, this, &ALiyaCharacter::CallCharacter);
 }
 
 void ALiyaCharacter::MoveForward(float Val)
@@ -96,6 +101,8 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	_Controls(DeltaSeconds);
 
 	_OverridingCamera(DeltaSeconds);
+
+	_CallCooldown -= DeltaSeconds;
 }
 
 void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
@@ -294,4 +301,20 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 		GetMesh()->GetComponentLocation().Y,
 		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
 	));
+}
+
+void ALiyaCharacter::CallCharacter()
+{
+	if (_CallCooldown < 0.f)
+	{
+		AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		if (LevelScript)
+		{
+			const PathNode* Node = LevelScript->GetPathGraph().GetNearestNode(GetActorLocation());
+			if (LevelScript->GetPathGraph().MoveCharacterTo(Node))
+			{
+				_CallCooldown = CallCooldown;
+			}
+		}
+	}
 }

@@ -57,6 +57,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float GrabSpeedAlphaTimer;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float CallCooldown;
 #pragma endregion GD Settings
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
@@ -106,8 +109,8 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
-
 protected:
+#pragma region Controls
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
@@ -123,6 +126,10 @@ protected:
 	/** Controls Mouse X axis */
 	void AddCameraRoll(float Val);
 
+	/** Call character */
+	void CallCharacter();
+#pragma endregion Controls
+
 private:
 	FVector2D _Accel;
 	FVector2D _Speed;
@@ -136,6 +143,8 @@ private:
 	float _GrabSpeedAlpha;
 	float _GrabSpeedAlphaIt;
 	float _GrabArmLength;
+
+	float _CallCooldown;
 
 	float _RunningSpeedAnimBP;
 	float _InitHeight;
