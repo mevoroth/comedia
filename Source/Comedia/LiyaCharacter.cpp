@@ -309,9 +309,9 @@ void ALiyaCharacter::CallCharacter()
 	{
 		AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 
-		if (LevelScript)
+		if (!LevelScript)
 		{
-			UE_LOG(LogGPCode, Error, TEXT("MainLevelScriptActor "));
+			UE_LOG(LogGPCode, Error, TEXT("MainLevelScriptActor unfound"));
 			return;
 		}
 
