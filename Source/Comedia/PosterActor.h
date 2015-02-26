@@ -26,6 +26,9 @@ private_subobject:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Call", meta = (ExposeFunctionCategories = "Shape,Collision,Rendering,Transform", AllowPrivateAccess = true, MakeEditWidget))
+	UBoxComponent* CallTrigger;
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	bool IsDetached() const;

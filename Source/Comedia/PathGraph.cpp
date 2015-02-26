@@ -287,22 +287,22 @@ PathNode* PathGraph::GetRandomNode()
 
 const PathNode* PathGraph::GetNearestNode(const FVector& Position) const
 {
-	float Dist = std::numeric_limits<float>::infinity();
-	float Tmp = std::numeric_limits<float>::infinity();
-	PathNode* Ret = 0;
-	for (TMap<APosterActor*, PathNode*>::TConstIterator It = MapHeadNodes.CreateConstIterator(); It; ++It)
-	{
-		Tmp = FVector::DistSquared(Position, GetNodeLocation(It->Value));
-		if (Tmp < Dist)
-		{
-			Ret = It->Value;
-			Dist = Tmp;
-		}
-	}
+	//float Dist = std::numeric_limits<float>::infinity();
+	//float Tmp = std::numeric_limits<float>::infinity();
+	//PathNode* Ret = 0;
+	//for (TMap<APosterActor*, PathNode*>::TConstIterator It = MapHeadNodes.CreateConstIterator(); It; ++It)
+	//{
+	//	Tmp = FVector::DistSquared(Position, GetNodeLocation(It->Value));
+	//	if (Tmp < Dist)
+	//	{
+	//		Ret = It->Value;
+	//		Dist = Tmp;
+	//	}
+	//}
 
-	check(Ret);
+	//check(Ret);
 
-	return Ret;
+	//return Ret;
 }
 
 PathNode* PathGraph::_GetLastNode(APosterActor* Poster)

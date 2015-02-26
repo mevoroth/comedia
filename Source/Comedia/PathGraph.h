@@ -25,7 +25,7 @@ public:
 	void  DrawPath(PathNode* NodeOfPath);
 	FVector GetNodeLocation(const PathNode* PosterNode) const;
 	PathNode* GetRandomNode();
-	const PathNode* GetNearestNode(const FVector& Position) const;
+	const PathNode* GetNode(const FVector& Position) const;
 
 private:
 	UWorld* World;

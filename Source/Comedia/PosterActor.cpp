@@ -38,6 +38,12 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	RightGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Right Grabbed Cam Position"));
 	RightGrabbedCamPosition->AttachTo(RootComponent);
 
+	CallTrigger = FOI.CreateDefaultSubobject<UBoxComponent>(this, TEXT("CallTrigger"));
+	CallTrigger->SetRelativeLocation(FVector(0.f, 550.f, 0.f));
+	CallTrigger->SetBoxExtent(FVector(200.f, 200.f, 200.f));
+	CallTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	CallTrigger->SetCollisionProfileName(FName(TEXT("Trigger")));
+
 	PrimaryActorTick.bCanEverTick = true;
 }
 

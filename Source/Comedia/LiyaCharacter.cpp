@@ -305,16 +305,42 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 
 void ALiyaCharacter::CallCharacter()
 {
-	if (_CallCooldown < 0.f)
+	if (_CallCooldown <= 0.f)
 	{
 		AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+
 		if (LevelScript)
 		{
-			const PathNode* Node = LevelScript->GetPathGraph().GetNearestNode(GetActorLocation());
-			if (LevelScript->GetPathGraph().MoveCharacterTo(Node))
-			{
-				_CallCooldown = CallCooldown;
-			}
+			UE_LOG(LogGPCode, Error, TEXT("MainLevelScriptActor "));
+			return;
 		}
+
+		TArray<AActor*> Posters;
+		GetOverlappingActors(Posters, APosterActor::StaticClass());
+
+		if (Posters.Num() > 1)
+		{
+			UE_LOG(LogGPCode, Error, TEXT("Poster triggers overlapping"));
+			return;
+		}
+
+		if (Posters.Num() == 1)
+		{
+			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
+			//if (LevelScript->GetPathGraph().MoveCharacterTo(Poster))
+			//{
+			//	_CallCooldown = CallCooldown;
+			//}
+		}
+
+		//AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		//if (LevelScript)
+		//{
+		//	const PathNode* Node = LevelScript->GetPathGraph().GetNearestNode(GetActorLocation());
+		//	if (LevelScript->GetPathGraph().MoveCharacterTo(Node))
+		//	{
+		//		_CallCooldown = CallCooldown;
+		//	}
+		//}
 	}
 }
