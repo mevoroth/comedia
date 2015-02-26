@@ -98,7 +98,7 @@ void APuzzleZoneActor::OnEndOverlap(class AActor* OtherActor, class UPrimitiveCo
 				for (int i = 0; i < OverlappingActors.Num() && !bOtherPuzzleZoneSet; i++)
 				{
 					APuzzleZoneActor* CurrentPuzzleZone = Cast<APuzzleZoneActor>(OverlappingActors[i]);
-					if (OverlappingActors[i] != this && !CurrentPuzzleZone->bCantOverride && CurrentPuzzleZone->CameraPosition)
+					if (CurrentPuzzleZone && OverlappingActors[i] != this && !CurrentPuzzleZone->bCantOverride && CurrentPuzzleZone->CameraPosition)
 					{
 						CurrentPuzzleZone->OnBeginOverlap(Character, nullptr, 0, false, FHitResult());
 						bOtherPuzzleZoneSet = true;
