@@ -21,7 +21,7 @@ void AMainLevelScriptActor::BeginPlay()
 
 void AMainLevelScriptActor::Tick(float DeltaSeconds)
 {
-	CurrentLevelPathGraph.DrawNodes();
-	CurrentLevelPathGraph.DrawPath(RandomNode);
+	//CurrentLevelPathGraph.DrawNodes();
+	//CurrentLevelPathGraph.DrawPath(RandomNode);
 	CurrentLevelPathGraph.Tick(DeltaSeconds);
 }

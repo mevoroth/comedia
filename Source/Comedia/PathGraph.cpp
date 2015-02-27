@@ -228,7 +228,7 @@ float PathGraph::GetCharacterPosition(APosterActor* Poster)
 		CharacterPosition = 0.0f;
 	}
 
-	return CharacterPosition;
+	return 1.0f - CharacterPosition;
 }
 
 bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
@@ -237,12 +237,12 @@ bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 	PathNode* CurrentNode;
 	PathNode* NextNode;
 
-	DrawDebugSphere(World, GetNodeLocation(TargetNode), 64, 12, FColor::Red, false, 5.0f);
-	DrawDebugSphere(World, GetNodeLocation(PathMainCharacter.LastCrossedNode), 64, 12, FColor::Green, false, 5.0f);
+	//DrawDebugSphere(World, GetNodeLocation(TargetNode), 64, 12, FColor::Red, false, 5.0f);
+	//DrawDebugSphere(World, GetNodeLocation(PathMainCharacter.LastCrossedNode), 64, 12, FColor::Green, false, 5.0f);
 
 	//Reinit PathCharacter variables
 	PathMainCharacter.IndexCurrentTargetNode = 0;
-	PathMainCharacter.LocalPosition = TargetNode->NodePosition;
+	PathMainCharacter.LocalPosition = PathMainCharacter.LastCrossedNode->NodePosition;
 
 	//Seek for target node on right
 	PathMainCharacter.PathNodes.Empty();
@@ -304,10 +304,10 @@ bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 		PathMainCharacter.PathNodes.Add(PathMainCharacter.LastCrossedNode);
 	}
 
-	UE_LOG(LogGPCode, Log, TEXT("Path Found: %d"), (bPathFound) ? 1 : 0);
+	//UE_LOG(LogGPCode, Log, TEXT("Path Found: %d"), (bPathFound) ? 1 : 0);
 
-	UE_LOG(LogGPCode, Log, TEXT("Target node position: %s"), *GetNodeLocation(TargetNode).ToString());
-	DrawDebugSphere(World, GetNodeLocation(TargetNode), 35.0f, 32, FColor::Magenta, false, 5.0f);
+	//UE_LOG(LogGPCode, Log, TEXT("Target node position: %s"), *GetNodeLocation(TargetNode).ToString());
+	//DrawDebugSphere(World, GetNodeLocation(TargetNode), 35.0f, 32, FColor::Magenta, false, 5.0f);
 
 	return bPathFound;
 }

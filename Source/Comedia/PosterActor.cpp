@@ -409,22 +409,23 @@ void APosterActor::Tick(float DeltaSeconds)
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case INIT:
-	{
-		AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-		if (LevelSCriptActor)
+		_Reset(DeltaSeconds);
 		{
-			float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
-			UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
-			MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-			if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
+			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+			if (LevelSCriptActor)
 			{
-				_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
-				MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
-				_LastAnimatedObjectPosition = Ratio;
+				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
+				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
+				{
+					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
+					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
+					_LastAnimatedObjectPosition = Ratio;
+				}
 			}
 		}
-		_Reset(DeltaSeconds);
-	} break;
+		break;
 	case ONSTICK:
 	case GRABBED:
 		_UpdateEffector();
@@ -446,6 +447,21 @@ void APosterActor::Tick(float DeltaSeconds)
 		));
 		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
 		UpdateChain();
+		{
+			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+			if (LevelSCriptActor)
+			{
+				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
+				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
+				{
+					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
+					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
+					_LastAnimatedObjectPosition = Ratio;
+				}
+			}
+		}
 		break;
 	}
 }

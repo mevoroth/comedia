@@ -16,8 +16,9 @@ PathCharacter::~PathCharacter()
 
 void PathCharacter::UpdateCharacter(float DeltaSeconds)
 {
-	if (PathNodes.Num() > 0 && IndexCurrentTargetNode < PathNodes.Num() - 1)
+	if (PathNodes.Num() > 0 && IndexCurrentTargetNode < PathNodes.Num())
 	{
+		float PosterSize = (LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation() - LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation()).Size();
 		//Check if two nodes on different posters, if so, tp character to other poster
 		if (LastCrossedNode->PosterOwner != PathNodes[IndexCurrentTargetNode]->PosterOwner)
 		{
@@ -27,7 +28,7 @@ void PathCharacter::UpdateCharacter(float DeltaSeconds)
 		{
 			if (LastCrossedNode->NodePosition < PathNodes[IndexCurrentTargetNode]->NodePosition)
 			{
-				LocalPosition += MovingSpeed * DeltaSeconds;
+				LocalPosition += MovingSpeed * DeltaSeconds / PosterSize;
 				if (LocalPosition > PathNodes[IndexCurrentTargetNode]->NodePosition)
 				{
 					_CrossNextNode();
@@ -35,7 +36,7 @@ void PathCharacter::UpdateCharacter(float DeltaSeconds)
 			}
 			else
 			{
-				LocalPosition -= MovingSpeed * DeltaSeconds;
+				LocalPosition -= MovingSpeed * DeltaSeconds / PosterSize;
 				if (LocalPosition < PathNodes[IndexCurrentTargetNode]->NodePosition)
 				{
 					_CrossNextNode();
@@ -44,11 +45,11 @@ void PathCharacter::UpdateCharacter(float DeltaSeconds)
 		}
 	}
 
-	if (LastCrossedNode != nullptr && LastCrossedNode->PosterOwner != nullptr)
-	{
-		FVector CharacWorldPosition = FMath::Lerp<FVector>(LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation(), LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation(), LocalPosition);
-		DrawDebugSphere(World, CharacWorldPosition, 32.0f, 32, FColor::Blue);
-	}
+	//if (LastCrossedNode != nullptr && LastCrossedNode->PosterOwner != nullptr)
+	//{
+	//	FVector CharacWorldPosition = FMath::Lerp<FVector>(LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation(), LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation(), LocalPosition);
+	//	DrawDebugSphere(World, CharacWorldPosition, 32.0f, 32, FColor::Blue);
+	//}
 }
 
 void PathCharacter::SetCharacterNode(PathNode* LastCrossedNode)
