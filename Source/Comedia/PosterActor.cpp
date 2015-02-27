@@ -73,7 +73,6 @@ void APosterActor::BeginPlay()
 	bool HeadIsRoot = (State & HEADISROOT) != 0;
 	int32 First = (HeadIsRoot ? 0 : PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2);
 	int32 Last = (HeadIsRoot ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2 : 0);
-	//_PlaneForward = _BonesInit[Last - 1].GetLocation() - _BonesInit[First - 1].GetLocation().UnsafeNormal();
 
 	_DistanceFromTail = new float[PosterMesh->SkeletalMesh->RefSkeleton.GetNum()];
 	// Take last bone
@@ -329,32 +328,6 @@ void APosterActor::Grabbing(bool Grabbing)
 			break;
 		}
 	}
-
-	//switch (State)
-	//{
-	//case GRABBABLE:
-	//	if (Grabbing)
-	//	{
-	//		for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
-	//		{
-	//			_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
-	//		}
-	//		_ResetAlpha = 0.f;
-
-	//		State = GRABBED;
-	//	}
-	//	break;
-	//}
-	//if (Grabbed != Grabbing && !Grabbing)
-	//{
-	//	for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
-	//	{
-	//		_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
-	//	}
-
-	//	_ResetAlpha = 0.f;
-	//}
-	//Grabbed = GrabEnabled && Grabbing;
 }
 
 void APosterActor::InRange(bool HeadIsRoot)
@@ -379,12 +352,6 @@ void APosterActor::InRange(bool HeadIsRoot)
 		}
 		break;
 	}
-
-	//if (!(Grabbed || Sticked))
-	//{
-	//	_HeadIsRoot = HeadIsRoot;
-	//	GrabEnabled = true;
-	//}
 }
 
 void APosterActor::OutRange()
@@ -396,10 +363,6 @@ void APosterActor::OutRange()
 		State = (PosterState)(State & ~GRABBABLE);
 		break;
 	}
-	//if (!(Grabbed || Sticked))
-	//{
-	//	GrabEnabled = false;
-	//}
 }
 
 
@@ -420,14 +383,12 @@ void APosterActor::Stick(bool Sticked)
 			State = (PosterState)((State & HEADISROOT) | GRABBED);
 		}
 	}
-	//this->Sticked = Sticked;
 }
 
 FVector APosterActor::GetGripHeadUpdated() const
 {
 	int32 First = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1;
 
-	//FVector Loc = PosterMesh->GetBoneTransform(First).GetLocation();
 	FVector Loc = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(First));
 	return Loc + PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * _HeadDist;
 }
@@ -435,7 +396,6 @@ FVector APosterActor::GetGripTailUpdated() const
 {
 	int32 First = 1;
 
-	//FVector Loc = PosterMesh->GetBoneTransform(Last).GetLocation();
 	FVector Loc = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(First));
 	return Loc - PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * _TailDist;
 }
@@ -475,16 +435,10 @@ void APosterActor::Tick(float DeltaSeconds)
 			UE_LOG(LogGPCode, Error, TEXT("No Character"));
 			return;
 		}
-		//Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
 		Character->UpdateGrabPoint(State & HEADISROOT ? GetGripHeadUpdated() : GetGripTailUpdated());
 		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
 		break;
 	case STICKED:
-		//SetEffector(FTransform(
-		//	FRotator::ZeroRotator,
-		//	_StickPointPos,
-		//	FVector(1.f, 1.f, 1.f)
-		//));
 		SetEffector(FTransform(
 			FQuat::Slerp(_GrabbedCurrentPosition.GetRotation(), FQuat::Identity, _StickedAlpha),
 			FMath::Lerp(_GrabbedCurrentPosition.GetLocation(), _StickPointPos, _StickedAlpha),
@@ -494,22 +448,6 @@ void APosterActor::Tick(float DeltaSeconds)
 		UpdateChain();
 		break;
 	}
-
-	//if (Sticked && !Grabbed)
-	//{
-	//	return;
-	//}
-
-	//if (Grabbed)
-	//{
-	//	_UpdateEffector();
-
-	//	UpdateChain();
-	//}
-	//else
-	//{
-	//	_Reset(DeltaSeconds);
-	//}
 }
 
 void APosterActor::_UpdateEffector()
