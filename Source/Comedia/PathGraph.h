@@ -29,7 +29,7 @@ public:
 	FVector GetNodeLocation(const PathNode* PosterNode) const;
 	PathNode* GetRandomNode();
 	void Tick(float DeltaSeconds);
-	const PathNode* GetNode(const APosterActor* Poster) const;
+	const PathNode* GetNode(const FVector& Location, const APosterActor* Poster) const;
 
 private:
 	UWorld* World;

@@ -406,10 +406,23 @@ PathNode* PathGraph::GetRandomNode()
 	return ArrayNodes[FMath::RandRange(0, ArrayNodes.Num() - 1)];
 }
 
-const PathNode* PathGraph::GetNode(const APosterActor* Poster) const
+const PathNode* PathGraph::GetNode(const FVector& Location, const APosterActor* Poster) const
 {
-	return *MapHeadNodes.Find(Poster);
-	//return nullptr;
+	const PathNode* Current = *MapHeadNodes.Find(Poster);
+	float Dist = FVector::DistSquared(Location, GetNodeLocation(Current));
+	float TmpDist = 0.f;
+	while (Current->RightNode
+		&& Current->RightNode->PosterOwner == Poster)
+	{
+		TmpDist = FVector::DistSquared(Location, GetNodeLocation(Current->RightNode));
+		if (TmpDist >= Dist)
+		{
+			break;
+		}
+		Dist = TmpDist;
+		Current = Current->RightNode;
+	}
+	return Current;
 }
 
 void PathGraph::Tick(float DeltaSeconds)
