@@ -326,9 +326,11 @@ void ALiyaCharacter::CallCharacter()
 
 		if (Posters.Num() == 1)
 		{
+			UE_LOG(LogGPCode, Log, TEXT("Before move char to"));
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
-			if (LevelScript->GetPathGraph().MoveCharacterTo(LevelScript->GetPathGraph().GetNode(Poster)))
+			if (LevelScript->CurrentLevelPathGraph.MoveCharacterTo(LevelScript->CurrentLevelPathGraph.GetNode(Poster)))
 			{
+				UE_LOG(LogGPCode, Log, TEXT("move char to"));
 				_CallCooldown = CallCooldown;
 			}
 		}

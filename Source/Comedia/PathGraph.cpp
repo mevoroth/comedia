@@ -22,6 +22,7 @@ void PathGraph::InitNodes(UWorld* World)
 
 	//Reset MapHeadNotes
 	MapHeadNodes.Reset();
+	ArrayNodes.Reset();
 
 	//Get all posters
 	TArray<AActor*> ArrayPosterActors;
@@ -35,6 +36,7 @@ void PathGraph::InitNodes(UWorld* World)
 
 		//Create head node
 		PathNode* HeadNode = new PathNode();
+		ArrayNodes.Add(HeadNode);
 		HeadNode->NodePosition = 0.0f;
 		HeadNode->PosterOwner = CurrentPosterActor;
 		HeadNode->LeftNode = nullptr;
@@ -45,6 +47,7 @@ void PathGraph::InitNodes(UWorld* World)
 		{
 			//Create new node with its data
 			PathNode* KeypointNode = new PathNode();
+			ArrayNodes.Add(KeypointNode);
 			KeypointNode->NodePosition = CurrentPosterActor->KeyPoints[j];
 			KeypointNode->PosterOwner = CurrentPosterActor;
 			
@@ -58,6 +61,7 @@ void PathGraph::InitNodes(UWorld* World)
 
 		//Create tail node
 		PathNode* TailNode = new PathNode();
+		ArrayNodes.Add(TailNode);
 		TailNode->NodePosition = 1.0f;
 		TailNode->PosterOwner = CurrentPosterActor;
 		TailNode->RightNode = nullptr;
@@ -296,6 +300,11 @@ bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 		PathMainCharacter.PathNodes.Add(PathMainCharacter.LastCrossedNode);
 	}
 
+	UE_LOG(LogGPCode, Log, TEXT("Path Found: %d"), (bPathFound) ? 1 : 0);
+
+	UE_LOG(LogGPCode, Log, TEXT("Target node position: %s"), *GetNodeLocation(TargetNode).ToString());
+	DrawDebugSphere(World, GetNodeLocation(TargetNode), 35.0f, 32, FColor::Magenta, false, 5.0f);
+
 	return bPathFound;
 }
 
@@ -379,8 +388,8 @@ void PathGraph::DrawPath(PathNode* NodeOfPath)
 
 FVector PathGraph::GetNodeLocation(const PathNode* PosterNode) const
 {
-	FVector HeadPosition = PosterNode->PosterOwner->GripHeadComponent->ComponentToWorld.GetLocation();
-	FVector TailPosition = PosterNode->PosterOwner->GripTailComponent->ComponentToWorld.GetLocation();
+	FVector HeadPosition = PosterNode->PosterOwner->GripHeadComponent->GetComponentLocation();
+	FVector TailPosition = PosterNode->PosterOwner->GripTailComponent->GetComponentLocation();
 
 	return FMath::Lerp<FVector>(HeadPosition, TailPosition, PosterNode->NodePosition);
 }
@@ -395,8 +404,8 @@ PathNode* PathGraph::GetRandomNode()
 
 const PathNode* PathGraph::GetNode(const APosterActor* Poster) const
 {
-	return (const PathNode*)MapHeadNodes.Find(Poster);
-	return nullptr;
+	return *MapHeadNodes.Find(Poster);
+	//return nullptr;
 }
 
 void PathGraph::Tick(float DeltaSeconds)

@@ -13,6 +13,7 @@ class COMEDIA_API PathGraph
 {
 public:
 
+	TArray<PathNode*> ArrayNodes;
 	TMap<APosterActor*, PathNode*> MapHeadNodes;
 	PathCharacter PathMainCharacter;
 
