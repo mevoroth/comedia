@@ -43,6 +43,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	CallTrigger->SetBoxExtent(FVector(200.f, 200.f, 200.f));
 	CallTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	CallTrigger->SetCollisionProfileName(FName(TEXT("Trigger")));
+	CallTrigger->AttachTo(RootComponent);
 
 	PrimaryActorTick.bCanEverTick = true;
 }
