@@ -43,6 +43,12 @@ void PathCharacter::UpdateCharacter(float DeltaSeconds)
 			}
 		}
 	}
+
+	if (LastCrossedNode != nullptr && LastCrossedNode->PosterOwner != nullptr)
+	{
+		FVector CharacWorldPosition = FMath::Lerp<FVector>(LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation(), LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation(), LocalPosition);
+		DrawDebugSphere(World, CharacWorldPosition, 32.0f, 32, FColor::Blue);
+	}
 }
 
 void PathCharacter::SetCharacterNode(PathNode* LastCrossedNode)

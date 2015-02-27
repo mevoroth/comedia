@@ -17,6 +17,8 @@ public:
 	float LocalPosition;
 	float MovingSpeed = 1.0f;
 
+	UWorld* World;
+
 	PathCharacter();
 	~PathCharacter();
 

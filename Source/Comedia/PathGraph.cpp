@@ -18,6 +18,7 @@ PathGraph::~PathGraph()
 
 void PathGraph::InitNodes(UWorld* World)
 {
+	PathMainCharacter.World = World;
 	this->World = World;
 
 	//Reset MapHeadNotes
@@ -235,6 +236,9 @@ bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 	bool bPathFound = false;
 	PathNode* CurrentNode;
 	PathNode* NextNode;
+
+	DrawDebugSphere(World, GetNodeLocation(TargetNode), 64, 12, FColor::Red, false, 5.0f);
+	DrawDebugSphere(World, GetNodeLocation(PathMainCharacter.LastCrossedNode), 64, 12, FColor::Green, false, 5.0f);
 
 	//Reinit PathCharacter variables
 	PathMainCharacter.IndexCurrentTargetNode = 0;
