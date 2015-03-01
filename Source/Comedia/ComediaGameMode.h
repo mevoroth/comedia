@@ -13,6 +13,5 @@ class COMEDIA_API AComediaGameMode : public AGameMode
 {
 	GENERATED_UCLASS_BODY()
 
-	
-	
+	virtual void BeginPlay() override;
 };

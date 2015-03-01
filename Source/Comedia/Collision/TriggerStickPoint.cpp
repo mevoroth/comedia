@@ -19,11 +19,11 @@ ATriggerStickPoint::ATriggerStickPoint(const FObjectInitializer& FOI)
 	SphereCollisionComponent->SetCollisionProfileName(CollisionProfileName);
 	//SphereCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	//SphereCollisionComponent->SetCollisionResponseToAllChannels(ECR_Overlap);
-
-	if (GetSpriteComponent())
-	{
-		GetSpriteComponent()->AttachParent = SphereCollisionComponent;
-	}
+	GetSpriteComponent()->bHiddenInGame = true;
+	//if (GetSpriteComponent())
+	//{
+	//	GetSpriteComponent()->AttachParent = SphereCollisionComponent;
+	//}
 	SphereCollisionComponent->OnComponentBeginOverlap.__Internal_AddDynamic(this, &ATriggerStickPoint::OnBeginOverlap, TEXT("ATriggerStickPoint::OnBeginOverlap"));
 	SphereCollisionComponent->OnComponentEndOverlap.__Internal_AddDynamic(this, &ATriggerStickPoint::OnEndOverlap, TEXT("ATriggerStickPoint::OnEndOverlap"));
 }
@@ -40,6 +40,7 @@ void ATriggerStickPoint::OnBeginOverlap(class AActor* OtherActor, class UPrimiti
 	if (PosterActor)
 	{
 		PosterActor->Stick(true);
+		PosterActor->UpdateStickPoint(GetActorLocation());
 	}
 }
 

@@ -1,8 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Comedia.h"
+
+#include <limits>
+
 #include "PosterActor.h"
 #include "LiyaCharacter.h"
+#include "MainLevelScriptActor.h"
 
 APosterActor::APosterActor(const FObjectInitializer& FOI)
 	: Super(FOI)
@@ -11,15 +15,34 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, MaxIterations(10)
 	, _DistanceFromHead(0)
 	, _DistanceFromTail(0)
-	, _HeadIsRoot(false)
 	, Grabbed(false)
 	, ResetSpeed(1.f)
 	, State(INIT)
 	, DelayBetweenBones(0.15f)
+	, DelayBeforeReset(1.f)
+	, _StickedAlpha(0.f)
+	, _ResetCalled(false)
+	, _LastAnimatedObjectPosition(-std::numeric_limits<float>::infinity())
+	, _LastOrientation(1.f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
 	RootComponent = PosterMesh;
+
+	ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
+	_MeshMaterialInst = MeshMaterial.Object;
+
+	LeftGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Left Grabbed Cam Position"));
+	LeftGrabbedCamPosition->AttachTo(RootComponent);
+
+	RightGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Right Grabbed Cam Position"));
+	RightGrabbedCamPosition->AttachTo(RootComponent);
+
+	CallTrigger = FOI.CreateDefaultSubobject<UBoxComponent>(this, TEXT("CallTrigger"));
+	CallTrigger->SetRelativeLocation(FVector(0.f, 550.f, 0.f));
+	CallTrigger->SetBoxExtent(FVector(200.f, 200.f, 200.f));
+	CallTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	CallTrigger->SetCollisionProfileName(FName(TEXT("Trigger")));
 
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -32,7 +55,7 @@ void APosterActor::BeginPlay()
 		return;
 	}
 
-	_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones;
+	_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
 	_BonesBuff = new FTransform[PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1];
 	_BonesInit = new FTransform[PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1];
 
@@ -61,7 +84,7 @@ void APosterActor::BeginPlay()
 		Parent = CurrBoneLoc;
 	}
 
-	_MaxDistance = FVector::Dist(
+	_MaxDistance = FVector::DistSquared(
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1)),
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1))
 	);
@@ -119,7 +142,7 @@ void APosterActor::UpdateChain()
 	}
 	
 	// Effector further than poster range
-	if (FVector::Dist(_Effector.GetLocation(), _BonesBuff[First - 1].GetLocation()) > _MaxDistance)
+	if (FVector::DistSquared(_Effector.GetLocation(), _BonesBuff[First - 1].GetLocation()) > _MaxDistance)
 	{
 		FVector Dir = (_Effector.GetLocation() - _BonesBuff[First - 1].GetLocation()).UnsafeNormal();
 		for (int32 BoneIndex = Second; BoneIndex != End; BoneIndex += It)
@@ -176,8 +199,8 @@ void APosterActor::UpdateChain()
 	{
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
-#ifdef WITH_EDITOR
-			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
+#if defined WITH_EDITOR
+			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
 #endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
@@ -204,7 +227,13 @@ void APosterActor::UpdateChain()
 
 void APosterActor::SetEffector(const FTransform& Effector)
 {
+	int32 First = (State & HEADISROOT) ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1;
+	float Dist = (State & HEADISROOT) ? _HeadDist : _TailDist;
+
 	_Effector = Effector;
+	_Effector.AddToTranslation(
+		(State & HEADISROOT ? -1 : 1) * PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
+	);
 }
 
 void APosterActor::Grabbing(bool Grabbing)
@@ -222,12 +251,34 @@ void APosterActor::Grabbing(bool Grabbing)
 				UE_LOG(LogGPCode, Error, TEXT("No Character"));
 				return;
 			}
-			Character->NotifyGrab();
+
+			//Set character override camera position when poster grabbed
+			if (Character->OverrideScriptedCameraPosition.GetLocation() == FVector::ZeroVector)
+			{
+				Character->GrabbingPlayerLocation = Character->GetActorLocation();
+				Character->LengthTravellingScriptedCamera = LengthTravellingScriptedCamera;
+				Character->ElapsedTravellingScriptedCamera = 0.0f;
+				Character->RatioCameraFollow = 0.5f;
+				if (State & HEADISROOT)
+				{
+					Character->OverrideScriptedCameraPosition = LeftGrabbedCamPosition->ComponentToWorld;
+				}
+				else
+				{
+					Character->OverrideScriptedCameraPosition = RightGrabbedCamPosition->ComponentToWorld;
+				}
+			}
+
+			OnGrab(Character->GetActorLocation());
+			ToggleFootStep();
+			Character->NotifyGrab(_MaxDistance);
 			break;
 		}
 	}
 	else if (!Grabbing)
 	{
+
+		AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
 		case GRABBED:
@@ -238,19 +289,46 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			_ResetAlpha = 0.f;
+			_ResetCalled = false;
 
 			if (!Character)
 			{
 				UE_LOG(LogGPCode, Error, TEXT("No Character"));
 				return;
 			}
+
+			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
+			//Remove camera override
+			if (Character->OverrideScriptedCameraPosition.GetLocation() == LeftGrabbedCamPosition->ComponentToWorld.GetLocation() || Character->OverrideScriptedCameraPosition.GetLocation() == RightGrabbedCamPosition->ComponentToWorld.GetLocation())
+			{
+				Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
+				Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
+				Character->OverrideScriptedCameraPosition = FTransform();
+
+			}
+			//Update graph nodes
+			if (LevelScriptActor)
+			{
+				LevelScriptActor->CurrentLevelPathGraph.UpdatePosterNodes(this);
+			}
 			break;
 		case ONSTICK:
 			State = (PosterState)((State & (GRABBABLE | HEADISROOT)) | STICKED);
+			OnRelease(Character->GetActorLocation());
+			OnStick(Character->GetActorLocation());
+			Character->NotifyReleasePoster();
+			_GrabbedCurrentPosition = _Effector;
+			_StickedAlpha = 0.f;
+			//Update graph nodes
+			if (LevelScriptActor)
+			{
+				LevelScriptActor->CurrentLevelPathGraph.UpdatePosterNodes(this);
+			}
 			break;
 		}
 	}
+
 	//switch (State)
 	//{
 	//case GRABBABLE:
@@ -363,24 +441,56 @@ FVector APosterActor::GetGripTailUpdated() const
 
 void APosterActor::Tick(float DeltaSeconds)
 {
-	Super::Tick(DeltaSeconds);
+	check(GetWorld());
 
+	Super::Tick(DeltaSeconds);
+	ALiyaCharacter* Character = 0;
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case INIT:
+	{
+		AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		if (LevelSCriptActor)
+		{
+			float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+			UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
+			MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+			if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
+			{
+				_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
+				MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
+				_LastAnimatedObjectPosition = Ratio;
+			}
+		}
 		_Reset(DeltaSeconds);
-		break;
+	} break;
 	case ONSTICK:
 	case GRABBED:
 		_UpdateEffector();
 		UpdateChain();
-		ALiyaCharacter* Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
+		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 		if (!Character)
 		{
 			UE_LOG(LogGPCode, Error, TEXT("No Character"));
 			return;
 		}
-		Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
+		//Character->UpdateGrabPoint(PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(State & HEADISROOT ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1)));
+		Character->UpdateGrabPoint(State & HEADISROOT ? GetGripHeadUpdated() : GetGripTailUpdated());
+		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
+		break;
+	case STICKED:
+		//SetEffector(FTransform(
+		//	FRotator::ZeroRotator,
+		//	_StickPointPos,
+		//	FVector(1.f, 1.f, 1.f)
+		//));
+		SetEffector(FTransform(
+			FQuat::Slerp(_GrabbedCurrentPosition.GetRotation(), FQuat::Identity, _StickedAlpha),
+			FMath::Lerp(_GrabbedCurrentPosition.GetLocation(), _StickPointPos, _StickedAlpha),
+			FVector(1.f, 1.f, 1.f)
+		));
+		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
+		UpdateChain();
 		break;
 	}
 
@@ -448,6 +558,13 @@ void APosterActor::_Reset(float DeltaSeconds)
 	int32 It = (bHeadIsRoot ? 1 : -1);
 	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
 
+	ResetAlphaNormalized -= DelayBeforeReset;
+
+	if (ResetAlphaNormalized - DelayBetweenBones * Reverse > 1.f)
+	{
+		OnResetFinished();
+	}
+
 	for (; BoneIndex != Last; BoneIndex += It)
 	{
 		float CurrentAlpha = FMath::Clamp(ResetAlphaNormalized - DelayBetweenBones * (bHeadIsRoot ? BoneIndex : Reverse - BoneIndex), 0.f, 1.f);
@@ -464,12 +581,12 @@ void APosterActor::_Reset(float DeltaSeconds)
 	_ResetAlpha += DeltaSeconds;
 }
 
-//FVector APosterActor::GetPosterForward() const
-//{
-//	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
-//	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
-//	return FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal();
-//}
+FVector APosterActor::GetPosterForward() const
+{
+	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+	return FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal();
+}
 
 bool APosterActor::IsInFireRange(const FVector& Position) const
 {
@@ -481,4 +598,29 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
 		(Position - Center).UnsafeNormal()
 	) && FVector::DistSquared(Position, Center) < FireRangeDistance;
+}
+
+void APosterActor::UpdateStickPoint(const FVector& StickPointPos)
+{
+	_StickPointPos = StickPointPos;
+}
+
+void APosterActor::OnResetFinished_Implementation()
+{
+	if (!_ResetCalled)
+	{
+		if (AssociatedBlockingVolume)
+		{
+			AssociatedBlockingVolume->SetActorEnableCollision(true);
+		}
+		_ResetCalled = true;
+	}
+}
+
+void APosterActor::OnGrab_Implementation(const FVector& Position)
+{
+	if (AssociatedBlockingVolume)
+	{
+		AssociatedBlockingVolume->SetActorEnableCollision(false);
+	}
 }

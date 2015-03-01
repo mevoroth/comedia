@@ -1,0 +1,15 @@
+Event	ID	Name			Wwise Object Path	Notes
+	527347948	Music_Knife			\Default Work Unit\Music_Knife	
+	984952705	Music_intro			\Default Work Unit\Music_intro	
+	2616261669	Music_Sun			\Default Work Unit\Music_Sun	
+	3567178845	Music_Thunder			\Default Work Unit\Music_Thunder	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	27484448	Kniferev1	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\Kniferev1_E81B0A92.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Knife\Knife\Kniferev1		3408445
+	59236879	Knife music intro	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_DIE_TOR_INTRO_5DAE68DD.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\Knife music intro		989473
+	376015080	S_VX_CUT_TOR_KNIFE	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_VX_CUT_TOR_KNIFE_862872AA.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\S_VX_CUT_TOR_KNIFE		1792211
+	461330647	S_MUS_TOR_THUNDER	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_THUNDER_11182432.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Thunder\Thunder\S_MUS_TOR_THUNDER		4308515
+	671002750	S_MUS_TOR_SUN	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_SUNv2&OUTRO_84C9299C.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\S_MUS_TOR_SUN		8998084
+	750962119	S_VX_CUT_TOR_SUN	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_VX_CUT_TOR_SUN_45F08874.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\S_VX_CUT_TOR_SUN		1075463
+	966561974	S_VX_CUT_TOR_THUNDER	C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_VX_CUT_TOR_THUNDER_B5849895.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Thunder\Thunder\S_VX_CUT_TOR_THUNDER		1458310
+

@@ -12,6 +12,15 @@ UCLASS()
 class COMEDIA_API APropagandaHandActor : public AActor
 {
 	GENERATED_BODY()
-	
-	
+
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] PropagandaHandParams")
+	UArrowComponent* ForwardArrowComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] PropagandaHandParams")
+	USphereComponent* SphereTriggerZoneComponent;
+
+	APropagandaHandActor(const FObjectInitializer& ObjectInitializer);
+
+
 };

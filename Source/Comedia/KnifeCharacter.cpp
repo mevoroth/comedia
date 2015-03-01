@@ -27,18 +27,23 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 	float AngleForwardToPlayer = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(KnifeToPlayerDirVector, GetActorForwardVector())));
 	float DirectionAngleForwardPlayer = FMath::Sign<float>(FVector::CrossProduct(GetActorForwardVector(), KnifeToPlayerDirVector).Z);
 	
-	//Apply rotation stuff
-	float MaxRotationAngle = MaxRotationSpeed * DeltaSeconds;
-	FRotator RotationToPlayer;
-	if (AngleForwardToPlayer < MaxRotationAngle)
+	//Check if player not behind the knife
+	if (AngleForwardToPlayer < 90.0f)
 	{
-		RotationToPlayer = FRotator(0.0f, AngleForwardToPlayer * DirectionAngleForwardPlayer, 0.0f);
+		//Apply rotation stuff
+		float MaxRotationAngle = MaxRotationSpeed * DeltaSeconds;
+		FRotator RotationToPlayer;
+		if (AngleForwardToPlayer < MaxRotationAngle)
+		{
+			RotationToPlayer = FRotator(0.0f, AngleForwardToPlayer * DirectionAngleForwardPlayer, 0.0f);
+		}
+		else
+		{
+			RotationToPlayer = FRotator(0.0f, MaxRotationAngle * DirectionAngleForwardPlayer, 0.0f);
+		}
+		AddActorLocalRotation(RotationToPlayer);
 	}
-	else
-	{
-		RotationToPlayer = FRotator(0.0f, MaxRotationAngle * DirectionAngleForwardPlayer, 0.0f);
-	}
-	AddActorLocalRotation(RotationToPlayer);
+	
 
 	//Set character move
 	CharacterMovement->SetMovementMode(EMovementMode::MOVE_Flying);
@@ -65,6 +70,7 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 	//Update position to be on ground with trace
 	FHitResult Hit(ForceInit);
 	FCollisionQueryParams Trace(TEXT("KnifeTrace"), false, GetOwner());
+	Trace.AddIgnoredActor(IwacLevelScript->TreeActor);
 	GetWorld()->LineTraceSingle(Hit, GetActorLocation(), GetActorLocation() + FVector::UpVector * -1000.0f, ECC_Visibility, Trace);
 	FVector CurrentKnifePosition = GetActorLocation();
 	CurrentKnifePosition.Z = Hit.Location.Z + CapsuleComponent->GetScaledCapsuleHalfHeight();
@@ -112,10 +118,17 @@ void AKnifeCharacter::_SpawnTrail()
 	//Get ground height
 	FHitResult Hit(ForceInit);
 	FCollisionQueryParams Trace(TEXT("KnifeTrace"), false, GetOwner());
+	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (IwacLevelScript)
+	{
+		Trace.AddIgnoredActor(IwacLevelScript->TreeActor);
+	}
 	GetWorld()->LineTraceSingle(Hit, GetActorLocation() + FVector::UpVector * 1000.0f, GetActorLocation() + FVector::UpVector * -2000.0f, ECC_Visibility, Trace);
 
 	//Spawn, set position and set scale
-	AActor* NewTrail = GetWorld()->SpawnActor<AActor>(_TrailClass);
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.bNoCollisionFail = true;
+	AActor* NewTrail = GetWorld()->SpawnActor<AActor>(_TrailClass, SpawnParams);
 
 	//Get BoxComponent to compute TrailLength
 	if (_TrailLength == 0)
@@ -132,7 +145,7 @@ void AKnifeCharacter::_SpawnTrail()
 	}
 
 	FVector NewTrailPosition = GetActorLocation();
-	NewTrailPosition.Z = Hit.ImpactPoint.Z;
+	NewTrailPosition.Z = Hit.ImpactPoint.Z + VerticalTrailOffset;
 	NewTrail->SetActorLocation(NewTrailPosition);
 
 	//Compute rotation
