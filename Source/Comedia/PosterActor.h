@@ -8,6 +8,18 @@
 /**
  * 
  */
+UENUM(BlueprintType)
+namespace ENodeType
+{
+	enum Type
+	{
+		NT_BasicNode   UMETA(DisplayName = "BasicNode"),
+		NT_HiddingNode UMETA(DisplayName = "HiddingNode"),
+		NT_DoorNode    UMETA(DisplayName = "DoorNode"),
+		NT_SideNode    UMETA(DisplayName = "SideNode")
+	};
+}
+
 UCLASS()
 class COMEDIA_API APosterActor : public AActor
 {
@@ -80,6 +92,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster")
 	USceneComponent* LeftGrabbedCamPosition;
@@ -90,6 +103,9 @@ public:
 	/** For Prince Navigation */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
 	TArray<float> KeyPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	TArray<TEnumAsByte<ENodeType::Type>> KeyNodeTypes;
 
 	/** Precision */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")

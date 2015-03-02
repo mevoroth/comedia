@@ -41,6 +41,7 @@ void PathGraph::InitNodes(UWorld* World)
 		HeadNode->NodePosition = 0.0f;
 		HeadNode->PosterOwner = CurrentPosterActor;
 		HeadNode->LeftNode = nullptr;
+		HeadNode->NodeType = ENodeType::NT_SideNode;
 
 		//Create key points nodes
 		PathNode* LastKeyNode = HeadNode;
@@ -51,6 +52,10 @@ void PathGraph::InitNodes(UWorld* World)
 			ArrayNodes.Add(KeypointNode);
 			KeypointNode->NodePosition = CurrentPosterActor->KeyPoints[j];
 			KeypointNode->PosterOwner = CurrentPosterActor;
+			if (CurrentPosterActor->KeyNodeTypes[j])
+			{
+				KeypointNode->NodeType = CurrentPosterActor->KeyNodeTypes[j];
+			}
 			
 			//Link two nodes
 			KeypointNode->LeftNode = LastKeyNode;
@@ -67,6 +72,7 @@ void PathGraph::InitNodes(UWorld* World)
 		TailNode->PosterOwner = CurrentPosterActor;
 		TailNode->RightNode = nullptr;
 		TailNode->LeftNode = LastKeyNode;
+		TailNode->NodeType = ENodeType::NT_SideNode;
 		LastKeyNode->RightNode = TailNode;
 
 		//Add head node to MapHeadNotes
@@ -233,83 +239,7 @@ float PathGraph::GetCharacterPosition(APosterActor* Poster)
 
 bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 {
-	bool bPathFound = false;
-	PathNode* CurrentNode;
-	PathNode* NextNode;
-
-	//DrawDebugSphere(World, GetNodeLocation(TargetNode), 64, 12, FColor::Red, false, 5.0f);
-	//DrawDebugSphere(World, GetNodeLocation(PathMainCharacter.LastCrossedNode), 64, 12, FColor::Green, false, 5.0f);
-
-	//Reinit PathCharacter variables
-	PathMainCharacter.IndexCurrentTargetNode = 0;
-	PathMainCharacter.LocalPosition = PathMainCharacter.LastCrossedNode->NodePosition;
-
-	//Seek for target node on right
-	PathMainCharacter.PathNodes.Empty();
-	CurrentNode = PathMainCharacter.LastCrossedNode;
-	NextNode = CurrentNode->RightNode;
-	PathMainCharacter.PathNodes.Add(CurrentNode);
-	while (NextNode != nullptr && !bPathFound)
-	{
-		//Add next node
-		PathMainCharacter.PathNodes.Add(NextNode);
-		bPathFound = (NextNode == TargetNode);
-
-		//Go to next node
-		if (NextNode->LeftNode == CurrentNode)
-		{
-			CurrentNode = NextNode;
-			NextNode = CurrentNode->RightNode;
-		}
-		else
-		{
-			CurrentNode = NextNode;
-			NextNode = CurrentNode->LeftNode;
-		}
-	}
-
-	//Check target not found on right
-	if (!bPathFound)
-	{
-		//Seek for target node on left
-		PathMainCharacter.PathNodes.Empty();
-		CurrentNode = PathMainCharacter.LastCrossedNode;
-		NextNode = CurrentNode->LeftNode;
-		PathMainCharacter.PathNodes.Add(CurrentNode);
-
-		while (NextNode != nullptr && !bPathFound)
-		{
-			//Add next node
-			PathMainCharacter.PathNodes.Add(NextNode);
-			bPathFound = (NextNode == TargetNode);
-
-			//Go to next node
-			if (NextNode->RightNode == CurrentNode)
-			{
-				CurrentNode = NextNode;
-				NextNode = CurrentNode->LeftNode;
-			}
-			else
-			{
-				CurrentNode = NextNode;
-				NextNode = CurrentNode->RightNode;
-			}
-		}
-	}
-
-	//Check target not found on left
-	if (!bPathFound)
-	{
-		PathMainCharacter.PathNodes.Empty();
-		PathMainCharacter.PathNodes.Add(PathMainCharacter.LastCrossedNode);
-	}
-
-	//UE_LOG(LogGPCode, Log, TEXT("Path Found: %d"), (bPathFound) ? 1 : 0);
-
-	//UE_LOG(LogGPCode, Log, TEXT("Target node position: %s"), *GetNodeLocation(TargetNode).ToString());
-	//DrawDebugSphere(World, GetNodeLocation(TargetNode), 35.0f, 32, FColor::Magenta, false, 5.0f);
-
-	return bPathFound;
+	return PathMainCharacter.MoveTo(TargetNode);
 }
 
 void PathGraph::DrawNodes()
@@ -409,20 +339,26 @@ PathNode* PathGraph::GetRandomNode()
 const PathNode* PathGraph::GetNode(const FVector& Location, const APosterActor* Poster) const
 {
 	const PathNode* Current = *MapHeadNodes.Find(Poster);
+	const PathNode* ClosestNode = nullptr;
 	float Dist = FVector::DistSquared(Location, GetNodeLocation(Current));
 	float TmpDist = 0.f;
 	while (Current->RightNode
 		&& Current->RightNode->PosterOwner == Poster)
 	{
+		if (Current->NodeType != ENodeType::NT_SideNode)
+		{
+			ClosestNode = Current;
+		}
+
 		TmpDist = FVector::DistSquared(Location, GetNodeLocation(Current->RightNode));
-		if (TmpDist >= Dist)
+		if (TmpDist >= Dist && ClosestNode != nullptr)
 		{
 			break;
 		}
 		Dist = TmpDist;
 		Current = Current->RightNode;
 	}
-	return Current;
+	return ClosestNode;
 }
 
 void PathGraph::Tick(float DeltaSeconds)

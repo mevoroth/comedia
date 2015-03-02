@@ -48,6 +48,16 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+void APosterActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	UE_LOG(LogGPCode, Log, TEXT("PostEditChangeProperty"));
+	//Check if there is as much element in KeyPoints than in KeyNodeTypes
+	if (KeyPoints.Num() != KeyNodeTypes.Num())
+	{
+		KeyNodeTypes.SetNumZeroed(KeyPoints.Num());
+	}
+}
+
 void APosterActor::BeginPlay()
 {
 	Super::BeginPlay();
