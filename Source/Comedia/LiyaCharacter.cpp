@@ -3,6 +3,7 @@
 #include "Comedia.h"
 #include "LiyaCharacter.h"
 #include "DamonFalconActor.h"
+#include "MainLevelScriptActor.h"
 
 ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	: Super(FOI)
@@ -19,6 +20,8 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, GrabSpeedAlphaTimer(1.f)
 	, MaxAngularSpeed(200.f)
 	, _RunningSpeedAnimBP(0.f)
+	, CallCooldown(1.f)
+	, _CallCooldown(0.f)
 {
 }
 
@@ -35,17 +38,19 @@ void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	// set up gameplay key bindings
 	check(InputComponent);
 	
-	InputComponent->BindAxis("MoveForward", this, &ALiyaCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &ALiyaCharacter::MoveRight);
-	InputComponent->BindAxis("Turn", this, &ALiyaCharacter::AddCameraRoll);
-	InputComponent->BindAxis("LookUp", this, &ALiyaCharacter::AddCameraPitch);
+	InputComponent->BindAxis(FName(TEXT("MoveForward")), this, &ALiyaCharacter::MoveForward);
+	InputComponent->BindAxis(FName(TEXT("MoveRight")), this, &ALiyaCharacter::MoveRight);
+	InputComponent->BindAxis(FName(TEXT("Turn")), this, &ALiyaCharacter::AddCameraRoll);
+	InputComponent->BindAxis(FName(TEXT("LookUp")), this, &ALiyaCharacter::AddCameraPitch);
+
+	InputComponent->BindAction(FName(TEXT("Call")), EInputEvent::IE_Pressed, this, &ALiyaCharacter::CallCharacter);
 }
 
 void ALiyaCharacter::MoveForward(float Val)
 {
 	if (Val != 0.0f)
 	{
-		Accel.X = Val;
+		_Accel.X = Val;
 	}
 }
 
@@ -53,7 +58,7 @@ void ALiyaCharacter::MoveRight(float Val)
 {
 	if (Val != 0.0f)
 	{
-		Accel.Y = Val;
+		_Accel.Y = Val;
 	}
 }
 
@@ -96,6 +101,8 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	_Controls(DeltaSeconds);
 
 	_OverridingCamera(DeltaSeconds);
+
+	_CallCooldown -= DeltaSeconds;
 }
 
 void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
@@ -142,34 +149,34 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 void ALiyaCharacter::_Controls(float DeltaSeconds)
 {
 	FVector2D TmpSpeed;
-	if (Accel.SizeSquared() > 0.1f)
+	if (_Accel.SizeSquared() > 0.1f)
 	{
-		float Size = Speed.Size();
-		Speed = Accel.SafeNormal() * (Size + Accel.SizeSquared() * AccelMultiplier * DeltaSeconds);
-		//Speed += Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
-		Size = Speed.SizeSquared();
+		float Size = _Speed.Size();
+		_Speed = _Accel.SafeNormal() * (Size + _Accel.SizeSquared() * AccelMultiplier * DeltaSeconds);
+		//_Speed += _Accel.SafeNormal() * DeltaSeconds * AccelMultiplier;
+		Size = _Speed.SizeSquared();
 		if (Size > MaxSpeed*MaxSpeed)
 		{
-			Speed = Speed.SafeNormal() * MaxSpeed;
+			_Speed = _Speed.SafeNormal() * MaxSpeed;
 		}
 
-		if (Speed.SizeSquared() < DeadZone)
+		if (_Speed.SizeSquared() < DeadZone)
 		{
 			TmpSpeed = FVector2D(0.f, 0.f);
 		}
 		else
 		{
-			if (Speed.SizeSquared() > Accel.SizeSquared())
+			if (_Speed.SizeSquared() > _Accel.SizeSquared())
 			{
-				TmpSpeed = Speed.SafeNormal() * Accel.Size();
+				TmpSpeed = _Speed.SafeNormal() * _Accel.Size();
 			}
 			else
 			{
-				TmpSpeed = Speed;
+				TmpSpeed = _Speed;
 			}
 		}
 
-		float RotationFromCamera = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(Speed.Y, Speed.X));
+		float RotationFromCamera = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(_Speed.Y, _Speed.X));
 		float RotationFromPoster = FMath::Atan2(_GrabDirection.Y, _GrabDirection.X);
 
 		FQuat CameraOriented(FVector::UpVector, FMath::DegreesToRadians(RotationFromCamera));
@@ -181,9 +188,9 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 		float FinalRotation = (_GrabSpeedAlphaIt < 0.f ? RotationFromCamera : FMath::RadiansToDegrees(RotationFromPoster)) - 90.f;
 		FinalRotation = FMath::Fmod(FinalRotation + 360.f, 360.f);
 
-		if (FMath::Abs(LerpedRotation - FinalRotation) < FMath::Abs(Rotation - FinalRotation))
+		if (FMath::Abs(LerpedRotation - FinalRotation) < FMath::Abs(_Rotation - FinalRotation))
 		{
-			float AngularDelta = Rotation - LerpedRotation;
+			float AngularDelta = _Rotation - LerpedRotation;
 			AngularDelta = FMath::Fmod(AngularDelta + 360.f, 360.f);
 			if (AngularDelta > 180.f)
 			{
@@ -191,22 +198,22 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 			}
 			if (FMath::Abs(AngularDelta) / DeltaSeconds > MaxAngularSpeed)
 			{
-				Rotation -= FMath::Sign(AngularDelta) * MaxAngularSpeed * DeltaSeconds;
+				_Rotation -= FMath::Sign(AngularDelta) * MaxAngularSpeed * DeltaSeconds;
 			}
 			else
 			{
-				Rotation = LerpedRotation;
+				_Rotation = LerpedRotation;
 			}
 		}
 	}
 	else
 	{
-		Speed -= Speed.SafeNormal() * DeccelMultiplier * DeltaSeconds;
-		if (Speed.SizeSquared() < DeadZone)
+		_Speed -= _Speed.SafeNormal() * DeccelMultiplier * DeltaSeconds;
+		if (_Speed.SizeSquared() < DeadZone)
 		{
-			Speed = FVector2D(0.f, 0.f);
+			_Speed = FVector2D(0.f, 0.f);
 		}
-		TmpSpeed = Speed;
+		TmpSpeed = _Speed;
 	}
 
 	TmpSpeed *= _CurrentSpeedMultiplier;
@@ -215,11 +222,11 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 	_ControlsMove(TmpSpeed);
 
 	Mesh->SetRelativeRotation(FRotator(
-		0.f, Rotation, 0.f
+		0.f, _Rotation, 0.f
 	));
 
 
-	Accel = FVector2D(0.f, 0.f);
+	_Accel = FVector2D(0.f, 0.f);
 }
 
 void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
@@ -250,7 +257,7 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)
 {
 	_GrabSpeedAlphaIt = 1.f;
-	_GrabMaxDistance = PosterMaxDistance * PosterMaxDistance;
+	_GrabMaxDistance = PosterMaxDistance;
 }
 
 void ALiyaCharacter::NotifyReleasePoster()
@@ -294,5 +301,46 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 		GetMesh()->GetComponentLocation().Y,
 		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
 	));
-	UE_LOG(LogGPCode, Warning, TEXT("%f"), );
+}
+
+void ALiyaCharacter::CallCharacter()
+{
+	if (_CallCooldown <= 0.f)
+	{
+		AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+
+		if (!LevelScript)
+		{
+			UE_LOG(LogGPCode, Error, TEXT("MainLevelScriptActor unfound"));
+			return;
+		}
+
+		TArray<AActor*> Posters;
+		GetOverlappingActors(Posters, APosterActor::StaticClass());
+
+		if (Posters.Num() > 1)
+		{
+			UE_LOG(LogGPCode, Error, TEXT("Poster triggers overlapping"));
+			return;
+		}
+
+		if (Posters.Num() == 1)
+		{
+			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
+			if (LevelScript->CurrentLevelPathGraph.MoveCharacterTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
+			{
+				_CallCooldown = CallCooldown;
+			}
+		}
+
+		//AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		//if (LevelScript)
+		//{
+		//	const PathNode* Node = LevelScript->GetPathGraph().GetNearestNode(GetActorLocation());
+		//	if (LevelScript->GetPathGraph().MoveCharacterTo(Node))
+		//	{
+		//		_CallCooldown = CallCooldown;
+		//	}
+		//}
+	}
 }
