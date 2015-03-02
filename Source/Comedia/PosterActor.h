@@ -77,6 +77,11 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual void InitGripReferences();
 
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual void SetSoldier(USceneComponent* SoldierComponent);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual void SetSoldierTimelineComponent(UCurveFloat* TimelineComponent);
+
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -133,6 +138,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	ABlockingVolume* AssociatedBlockingVolume;
 
+	/** For Soldier cone toggle */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	TArray<float> ConeToggle;
+
 	bool Sticked;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
@@ -140,7 +149,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	USphereComponent* GripTailComponent;
-
 private:
 	PosterState State;
 	/** Root to target distance */
@@ -178,6 +186,13 @@ private:
 	FTransform* _BonesInit;
 
 	UMaterialInstance* _MeshMaterialInst;
+
+	USceneComponent* _SoldierComponent;
+	UCurveFloat* _TimelineComponent;
+
+	bool _SoldierEnabled;
+	void _Soldier(float DeltaSeconds);
+	float _SoldierElapsedTime;
 
 #pragma region Poster Events
 	bool _ResetCalled;

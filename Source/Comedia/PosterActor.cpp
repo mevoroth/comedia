@@ -24,6 +24,8 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _ResetCalled(false)
 	, _LastAnimatedObjectPosition(-std::numeric_limits<float>::infinity())
 	, _LastOrientation(1.f)
+	, _SoldierEnabled(true)
+	, _SoldierElapsedTime(0.f)
 {
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
@@ -94,6 +96,16 @@ void APosterActor::BeginPlay()
 
 	FireRangeRadius = FMath::DegreesToRadians(FireRangeRadius);
 	FireRangeDistance *= FireRangeDistance; // Square
+}
+
+void APosterActor::SetSoldier(USceneComponent* SoldierComponent)
+{
+	_SoldierComponent = SoldierComponent;
+}
+
+void APosterActor::SetSoldierTimelineComponent(UCurveFloat* TimelineComponent)
+{
+	_TimelineComponent = TimelineComponent;
 }
 
 void APosterActor::BeginDestroy()
@@ -427,6 +439,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	} break;
 	case ONSTICK:
 	case GRABBED:
+		_SoldierEnabled = false;
 		_UpdateEffector();
 		UpdateChain();
 		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
@@ -446,7 +459,45 @@ void APosterActor::Tick(float DeltaSeconds)
 		));
 		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
 		UpdateChain();
+		_SoldierEnabled = true;
 		break;
+	}
+
+	_Soldier(DeltaSeconds);
+}
+
+void APosterActor::_Soldier(float DeltaSeconds)
+{
+	if (_SoldierEnabled)
+	{
+		float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+		float Min, Max;
+		_TimelineComponent->GetTimeRange(Min, Max);
+		float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
+		float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
+		
+		SampledSoldier *= Nodes;
+		SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
+		FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
+		A.Z = _SoldierComponent->GetComponentLocation().Z;
+		FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1));
+		B.Z = A.Z;
+
+		_SoldierComponent->SetWorldLocation(
+			FMath::Lerp<FVector>(
+				A, B,
+				SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+			)
+		);
+		int32 ToggleCount = 0;
+		for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
+		{
+			++ToggleCount;
+		}
+
+		_SoldierComponent->GetChildComponent(0)->SetVisibility(ToggleCount % 2 == 0 ? false : true, true);
+
+		_SoldierElapsedTime += DeltaSeconds;
 	}
 }
 
@@ -554,6 +605,7 @@ void APosterActor::OnResetFinished_Implementation()
 		}
 		_ResetCalled = true;
 	}
+	_SoldierEnabled = true;
 }
 
 void APosterActor::OnGrab_Implementation(const FVector& Position)
