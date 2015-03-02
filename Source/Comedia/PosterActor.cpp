@@ -511,7 +511,14 @@ void APosterActor::_Soldier(float DeltaSeconds)
 			++ToggleCount;
 		}
 
-		_SoldierComponent->GetChildComponent(0)->SetVisibility(ToggleCount % 2 == 0 ? false : true, true);
+		for (int32 i = 0, c = _SoldierComponent->GetNumChildrenComponents(); i < c; ++i)
+		{
+			if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
+			{
+				_SoldierComponent->GetChildComponent(i)->SetVisibility(ToggleCount % 2 == 0 ? false : true, true);
+				break;
+			}
+		}
 
 		_SoldierElapsedTime += DeltaSeconds;
 	}

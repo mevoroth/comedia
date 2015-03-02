@@ -33,11 +33,28 @@ SpriteSize = SpritePos + float2(
 if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 	&& TexCoord.y > SpritePos.y && TexCoord.y <= SpriteSize.y)
 {
-	float2 UV = float2(
-		lerp((TexCoord.x - SpritePos.x) / (FrameCol * (SpriteSize.x - SpritePos.x)), 1 / FrameCol - (TexCoord.x - SpritePos.x) / (FrameCol * (SpriteSize.x - SpritePos.x)), Orientation) + (Frame % FrameCol) / FrameCol,
-		(TexCoord.y - SpritePos.y) / (FrameRow * (SpriteSize.y - SpritePos.y)) + (Frame % FrameCol) / FrameRow
-	);
+	float2 UV;
+
+	if (Orientation > 0)
+	{
+		UV = float2(
+			(TexCoord.x - SpritePos.x) / (SpriteSize.x - SpritePos.x),
+			(TexCoord.y - SpritePos.y) / (SpriteSize.y - SpritePos.y)
+		);
+	}
+	else
+	{
+		UV = float2(
+			1 - (TexCoord.x - SpritePos.x) / (SpriteSize.x - SpritePos.x),
+			(TexCoord.y - SpritePos.y) / (SpriteSize.y - SpritePos.y)
+		);
+	}
 	float4 SpriteCol = Sprite.Sample(SpriteSampler, UV);
+	if (SpriteCol.r == 0 && SpriteCol.g == 0 && SpriteCol.b == 0)
+	{
+		SpriteCol.a = 0;
+	}
+	
 	float4 BackgroundCol = Background.Sample(BackgroundSampler, TexCoord.xy);
 
 	return float4(
