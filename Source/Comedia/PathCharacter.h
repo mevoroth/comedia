@@ -15,7 +15,9 @@ public:
 	PathNode* LastCrossedNode;
 	int32 IndexCurrentTargetNode;
 	float LocalPosition;
-	float MovingSpeed = 1.0f;
+	float MovingSpeed = 300.0f;
+
+	UWorld* World;
 
 	PathCharacter();
 	~PathCharacter();
