@@ -175,6 +175,8 @@ private:
 	/** Root to target distance */
 	float _MaxDistance;
 
+	float _MaxDistanceBetweenGrip;
+
 	/** If stick point, variable indicates absolute position */
 	FVector _StickPointPos;
 	FTransform _GrabbedCurrentPosition;
