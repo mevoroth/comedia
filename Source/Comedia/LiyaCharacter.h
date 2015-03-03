@@ -154,6 +154,7 @@ private:
 	void _Controls(float DeltaSeconds);
 	void _LerpGrab(float DeltaSeconds);
 	void _OverridingCamera(float DeltaSeconds);
+	void _OverridingAudioListener();
 
 	void _ControlsMove(const FVector2D& Speed);
 };

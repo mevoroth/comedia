@@ -19,4 +19,5 @@ public:
 
 	PathNode();
 	~PathNode();
+	FVector GetNodeLocation() const;
 };

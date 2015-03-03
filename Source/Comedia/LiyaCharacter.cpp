@@ -3,6 +3,7 @@
 #include "Comedia.h"
 #include "LiyaCharacter.h"
 #include "DamonFalconActor.h"
+#include "IwacPlayerController.h"
 #include "MainLevelScriptActor.h"
 
 ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
@@ -102,7 +103,21 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 
 	_OverridingCamera(DeltaSeconds);
 
+	_OverridingAudioListener();
+
 	_CallCooldown -= DeltaSeconds;
+}
+
+void ALiyaCharacter::_OverridingAudioListener()
+{
+	AIwacPlayerController* PlayerController = Cast<AIwacPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	FVector CameraLocation = Camera->GetChildComponent(0)->GetComponentLocation();
+
+	if (PlayerController)
+	{
+		FVector AudioListenerPosition = (CameraLocation + GetActorLocation()) / 2.0f;
+		PlayerController->SetAudioListenerLocation(AudioListenerPosition);
+	}
 }
 
 void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
@@ -327,7 +342,7 @@ void ALiyaCharacter::CallCharacter()
 		if (Posters.Num() == 1)
 		{
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
-			if (LevelScript->CurrentLevelPathGraph.MoveCharacterTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
+			if (LevelScript->PathMainCharacter.MoveTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
 			{
 				_CallCooldown = CallCooldown;
 			}
