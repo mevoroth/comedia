@@ -221,7 +221,7 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 
 	_ControlsMove(TmpSpeed);
 
-	Mesh->SetRelativeRotation(FRotator(
+	GetMesh()->SetRelativeRotation(FRotator(
 		0.f, _Rotation, 0.f
 	));
 

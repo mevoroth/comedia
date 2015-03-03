@@ -35,6 +35,9 @@ class COMEDIA_API APosterActor : public AActor
 		HEADISROOT = 0x1 << 31
 	};
 private_subobject:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Transform", AllowPrivateAccess = "true"))
+	USceneComponent*  PosterRoot;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
 
@@ -157,6 +160,8 @@ public:
 	/** For Soldier cone toggle */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	TArray<float> ConeToggle;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	bool SoldierPatrolEnabled;
 
 	bool Sticked;
 
