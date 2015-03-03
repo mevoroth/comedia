@@ -221,7 +221,7 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 
 	_ControlsMove(TmpSpeed);
 
-	Mesh->SetRelativeRotation(FRotator(
+	GetMesh()->SetRelativeRotation(FRotator(
 		0.f, _Rotation, 0.f
 	));
 
@@ -309,9 +309,9 @@ void ALiyaCharacter::CallCharacter()
 	{
 		AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 
-		if (LevelScript)
+		if (!LevelScript)
 		{
-			UE_LOG(LogGPCode, Error, TEXT("MainLevelScriptActor "));
+			UE_LOG(LogGPCode, Error, TEXT("MainLevelScriptActor unfound"));
 			return;
 		}
 
@@ -327,10 +327,10 @@ void ALiyaCharacter::CallCharacter()
 		if (Posters.Num() == 1)
 		{
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
-			//if (LevelScript->GetPathGraph().MoveCharacterTo(Poster))
-			//{
-			//	_CallCooldown = CallCooldown;
-			//}
+			if (LevelScript->CurrentLevelPathGraph.MoveCharacterTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
+			{
+				_CallCooldown = CallCooldown;
+			}
 		}
 
 		//AMainLevelScriptActor* LevelScript = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());

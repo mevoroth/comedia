@@ -3,6 +3,7 @@
 #pragma once
 
 #include "PosterActor.h"
+#include "PathCharacter.h"
 #include "PathNode.h"
 
 /**
@@ -12,7 +13,9 @@ class COMEDIA_API PathGraph
 {
 public:
 
+	TArray<PathNode*> ArrayNodes;
 	TMap<APosterActor*, PathNode*> MapHeadNodes;
+	PathCharacter PathMainCharacter;
 
 	PathGraph();
 	~PathGraph();
@@ -25,7 +28,8 @@ public:
 	void  DrawPath(PathNode* NodeOfPath);
 	FVector GetNodeLocation(const PathNode* PosterNode) const;
 	PathNode* GetRandomNode();
-	const PathNode* GetNode(const FVector& Position) const;
+	void Tick(float DeltaSeconds);
+	const PathNode* GetNode(const FVector& Location, const APosterActor* Poster) const;
 
 private:
 	UWorld* World;

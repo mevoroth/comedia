@@ -15,6 +15,7 @@ public:
 	PathNode* RightNode;
 	APosterActor* PosterOwner;
 	float NodePosition;
+	TEnumAsByte<ENodeType::Type> NodeType;
 
 	PathNode();
 	~PathNode();

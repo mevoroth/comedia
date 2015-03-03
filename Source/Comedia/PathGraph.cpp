@@ -13,14 +13,17 @@ PathGraph::PathGraph()
 PathGraph::~PathGraph()
 {
 	MapHeadNodes = TMap<APosterActor*, PathNode*>();
+	PathMainCharacter = PathCharacter();
 }
 
 void PathGraph::InitNodes(UWorld* World)
 {
+	PathMainCharacter.World = World;
 	this->World = World;
 
 	//Reset MapHeadNotes
 	MapHeadNodes.Reset();
+	ArrayNodes.Reset();
 
 	//Get all posters
 	TArray<AActor*> ArrayPosterActors;
@@ -34,9 +37,11 @@ void PathGraph::InitNodes(UWorld* World)
 
 		//Create head node
 		PathNode* HeadNode = new PathNode();
+		ArrayNodes.Add(HeadNode);
 		HeadNode->NodePosition = 0.0f;
 		HeadNode->PosterOwner = CurrentPosterActor;
 		HeadNode->LeftNode = nullptr;
+		HeadNode->NodeType = ENodeType::NT_SideNode;
 
 		//Create key points nodes
 		PathNode* LastKeyNode = HeadNode;
@@ -44,8 +49,13 @@ void PathGraph::InitNodes(UWorld* World)
 		{
 			//Create new node with its data
 			PathNode* KeypointNode = new PathNode();
+			ArrayNodes.Add(KeypointNode);
 			KeypointNode->NodePosition = CurrentPosterActor->KeyPoints[j];
 			KeypointNode->PosterOwner = CurrentPosterActor;
+			if (CurrentPosterActor->KeyNodeTypes[j])
+			{
+				KeypointNode->NodeType = CurrentPosterActor->KeyNodeTypes[j];
+			}
 			
 			//Link two nodes
 			KeypointNode->LeftNode = LastKeyNode;
@@ -57,10 +67,12 @@ void PathGraph::InitNodes(UWorld* World)
 
 		//Create tail node
 		PathNode* TailNode = new PathNode();
+		ArrayNodes.Add(TailNode);
 		TailNode->NodePosition = 1.0f;
 		TailNode->PosterOwner = CurrentPosterActor;
 		TailNode->RightNode = nullptr;
 		TailNode->LeftNode = LastKeyNode;
+		TailNode->NodeType = ENodeType::NT_SideNode;
 		LastKeyNode->RightNode = TailNode;
 
 		//Add head node to MapHeadNotes
@@ -83,7 +95,14 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 		//Break left link with other poster
 		if ((*PtrHeadPosterNode)->LeftNode != nullptr)
 		{
-			(*PtrHeadPosterNode)->LeftNode->RightNode = nullptr;
+			if ((*PtrHeadPosterNode)->LeftNode->RightNode == (*PtrHeadPosterNode))
+			{
+				(*PtrHeadPosterNode)->LeftNode->RightNode = nullptr;
+			}
+			else
+			{
+				(*PtrHeadPosterNode)->LeftNode->LeftNode = nullptr;
+			}
 			(*PtrHeadPosterNode)->LeftNode = nullptr;
 		}
 
@@ -91,7 +110,14 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 		PathNode* LastNodePoster = _GetLastNode(Poster);
 		if (LastNodePoster != nullptr && LastNodePoster->RightNode != nullptr)
 		{
-			LastNodePoster->RightNode->LeftNode = nullptr;
+			if (LastNodePoster->RightNode->LeftNode == LastNodePoster)
+			{
+				LastNodePoster->RightNode->LeftNode = nullptr;
+			}
+			else
+			{
+				LastNodePoster->RightNode->RightNode = nullptr;
+			}
 			LastNodePoster->RightNode = nullptr;
 		}
 
@@ -183,12 +209,37 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 
 float PathGraph::GetCharacterPosition(APosterActor* Poster)
 {
-	return 0.5f;
+	float CharacterPosition;
+	PathNode* LastPosterNode = _GetLastNode(Poster);
+
+	//Check if character is in selected poster
+	if (PathMainCharacter.LastCrossedNode->PosterOwner == Poster)
+	{
+		CharacterPosition = PathMainCharacter.LocalPosition;
+	}
+	//If on right poster
+	else if (LastPosterNode->RightNode != nullptr && LastPosterNode->RightNode->PosterOwner == PathMainCharacter.LastCrossedNode->PosterOwner)
+	{
+		if (LastPosterNode->RightNode->LeftNode == LastPosterNode)
+		{
+			CharacterPosition = 1.0f + PathMainCharacter.LocalPosition;
+		}
+		else
+		{
+			CharacterPosition = 1.0f + (1.0f - PathMainCharacter.LocalPosition);
+		}
+	}
+	else
+	{
+		CharacterPosition = 0.0f;
+	}
+
+	return 1.0f - CharacterPosition;
 }
 
 bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
 {
-	return false;
+	return PathMainCharacter.MoveTo(TargetNode);
 }
 
 void PathGraph::DrawNodes()
@@ -209,13 +260,13 @@ void PathGraph::DrawNodes()
 			PathNode* CurrentNode = *PtrHeadPosterNode;
 			FVector HeadPosition = (Posters[i])->GripHeadComponent->ComponentToWorld.GetLocation();
 			FVector TailPosition = (Posters[i])->GripTailComponent->ComponentToWorld.GetLocation();
-			DrawDebugSphere(World, HeadPosition, 25.0f, 32, RandomColor, false, 10.0f);
+			DrawDebugSphere(World, HeadPosition, 25.0f, 32, RandomColor);
 
 			while (CurrentNode != TailPosterNode)
 			{
 				CurrentNode = CurrentNode->RightNode;
 				FVector NodePosition = FMath::Lerp<FVector>(HeadPosition, TailPosition, CurrentNode->NodePosition);
-				DrawDebugSphere(World, NodePosition, 25.0f, 32, RandomColor, false, 10.0f);
+				DrawDebugSphere(World, NodePosition, 25.0f, 32, RandomColor);
 			}
 		}
 	}
@@ -271,8 +322,8 @@ void PathGraph::DrawPath(PathNode* NodeOfPath)
 
 FVector PathGraph::GetNodeLocation(const PathNode* PosterNode) const
 {
-	FVector HeadPosition = PosterNode->PosterOwner->GripHeadComponent->ComponentToWorld.GetLocation();
-	FVector TailPosition = PosterNode->PosterOwner->GripTailComponent->ComponentToWorld.GetLocation();
+	FVector HeadPosition = PosterNode->PosterOwner->GripHeadComponent->GetComponentLocation();
+	FVector TailPosition = PosterNode->PosterOwner->GripTailComponent->GetComponentLocation();
 
 	return FMath::Lerp<FVector>(HeadPosition, TailPosition, PosterNode->NodePosition);
 }
@@ -285,24 +336,34 @@ PathNode* PathGraph::GetRandomNode()
 	return ArrayNodes[FMath::RandRange(0, ArrayNodes.Num() - 1)];
 }
 
-const PathNode* PathGraph::GetNearestNode(const FVector& Position) const
+const PathNode* PathGraph::GetNode(const FVector& Location, const APosterActor* Poster) const
 {
-	//float Dist = std::numeric_limits<float>::infinity();
-	//float Tmp = std::numeric_limits<float>::infinity();
-	//PathNode* Ret = 0;
-	//for (TMap<APosterActor*, PathNode*>::TConstIterator It = MapHeadNodes.CreateConstIterator(); It; ++It)
-	//{
-	//	Tmp = FVector::DistSquared(Position, GetNodeLocation(It->Value));
-	//	if (Tmp < Dist)
-	//	{
-	//		Ret = It->Value;
-	//		Dist = Tmp;
-	//	}
-	//}
+	const PathNode* Current = *MapHeadNodes.Find(Poster);
+	const PathNode* ClosestNode = nullptr;
+	float Dist = FVector::DistSquared(Location, GetNodeLocation(Current));
+	float TmpDist = 0.f;
+	while (Current->RightNode
+		&& Current->RightNode->PosterOwner == Poster)
+	{
+		if (Current->NodeType != ENodeType::NT_SideNode)
+		{
+			ClosestNode = Current;
+		}
 
-	//check(Ret);
+		TmpDist = FVector::DistSquared(Location, GetNodeLocation(Current->RightNode));
+		if (TmpDist >= Dist && ClosestNode != nullptr)
+		{
+			break;
+		}
+		Dist = TmpDist;
+		Current = Current->RightNode;
+	}
+	return ClosestNode;
+}
 
-	//return Ret;
+void PathGraph::Tick(float DeltaSeconds)
+{
+	PathMainCharacter.UpdateCharacter(DeltaSeconds);
 }
 
 PathNode* PathGraph::_GetLastNode(APosterActor* Poster)

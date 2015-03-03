@@ -8,6 +8,18 @@
 /**
  * 
  */
+UENUM(BlueprintType)
+namespace ENodeType
+{
+	enum Type
+	{
+		NT_BasicNode   UMETA(DisplayName = "BasicNode"),
+		NT_HiddingNode UMETA(DisplayName = "HiddingNode"),
+		NT_DoorNode    UMETA(DisplayName = "DoorNode"),
+		NT_SideNode    UMETA(DisplayName = "SideNode")
+	};
+}
+
 UCLASS()
 class COMEDIA_API APosterActor : public AActor
 {
@@ -23,6 +35,9 @@ class COMEDIA_API APosterActor : public AActor
 		HEADISROOT = 0x1 << 31
 	};
 private_subobject:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Transform", AllowPrivateAccess = "true"))
+	USceneComponent*  PosterRoot;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
 
@@ -77,9 +92,15 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual void InitGripReferences();
 
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual void SetSoldier(USceneComponent* SoldierComponent);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual void SetSoldierTimelineComponent(UCurveFloat* TimelineComponent);
+
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster")
 	USceneComponent* LeftGrabbedCamPosition;
@@ -90,6 +111,9 @@ public:
 	/** For Prince Navigation */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
 	TArray<float> KeyPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	TArray<TEnumAsByte<ENodeType::Type>> KeyNodeTypes;
 
 	/** Precision */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
@@ -133,6 +157,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	ABlockingVolume* AssociatedBlockingVolume;
 
+	/** For Soldier cone toggle */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	TArray<float> ConeToggle;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	bool SoldierPatrolEnabled;
+
 	bool Sticked;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
@@ -140,7 +170,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	USphereComponent* GripTailComponent;
-
 private:
 	PosterState State;
 	/** Root to target distance */
@@ -178,6 +207,13 @@ private:
 	FTransform* _BonesInit;
 
 	UMaterialInstance* _MeshMaterialInst;
+
+	USceneComponent* _SoldierComponent;
+	UCurveFloat* _TimelineComponent;
+
+	bool _SoldierEnabled;
+	void _Soldier(float DeltaSeconds);
+	float _SoldierElapsedTime;
 
 #pragma region Poster Events
 	bool _ResetCalled;
