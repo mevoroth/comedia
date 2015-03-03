@@ -4,6 +4,7 @@
 
 #include "Engine/LevelScriptActor.h"
 #include "PathGraph.h"
+#include "PathCharacter.h"
 #include "MainLevelScriptActor.generated.h"
 
 /**
@@ -16,6 +17,7 @@ class COMEDIA_API AMainLevelScriptActor : public ALevelScriptActor
 
 public:
 	PathGraph CurrentLevelPathGraph;
+	PathCharacter PathMainCharacter;
 	PathNode* RandomNode;
 
 	FORCEINLINE PathGraph GetPathGraph()

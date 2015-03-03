@@ -106,11 +106,14 @@ public:
 	USceneComponent* RightGrabbedCamPosition;
 
 	/** For Prince Navigation */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
 	TArray<float> KeyPoints;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
 	TArray<TEnumAsByte<ENodeType::Type>> KeyNodeTypes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
+	APosterActor* DoorLinkedPoster;
 
 	/** Precision */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")

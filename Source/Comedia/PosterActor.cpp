@@ -436,7 +436,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 			if (LevelSCriptActor)
 			{
-				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				float Ratio = LevelSCriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -475,7 +475,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 			if (LevelSCriptActor)
 			{
-				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				float Ratio = LevelSCriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
