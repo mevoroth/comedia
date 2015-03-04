@@ -32,6 +32,7 @@ void ALiyaCharacter::BeginPlay()
 	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
 	_GrabArmLength *= 2;
 	_InitHeight = GetMesh()->GetComponentLocation().Z;
+	_OriginalPivotCamPosition = Camera->RelativeLocation;
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -140,6 +141,14 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 		{
 			Camera->SetWorldTransform(OverrideScriptedCameraPosition);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
+		}
+
+		//Ray cast to check collision
+		FHitResult Hit(ForceInit);
+		FCollisionQueryParams Trace(TEXT("CamTrace"), false, GetOwner());
+		if (GetWorld()->LineTraceSingle(Hit, (GetActorLocation() + _OriginalPivotCamPosition), Camera->GetComponentLocation(), ECC_Visibility, Trace))
+		{
+			Camera->SetWorldLocation(Hit.ImpactPoint);
 		}
 	}
 	else

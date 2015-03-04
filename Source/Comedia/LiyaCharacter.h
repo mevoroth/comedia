@@ -149,6 +149,8 @@ private:
 	float _RunningSpeedAnimBP;
 	float _InitHeight;
 
+	FVector _OriginalPivotCamPosition;
+
 	UMaterialInstanceDynamic* _PosterMaterialInst;
 
 	void _Controls(float DeltaSeconds);
