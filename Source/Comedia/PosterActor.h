@@ -143,7 +143,7 @@ public:
 
 	/** Fire Range Radius in degrees */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
-	float FireRangeRadius;
+	float FireRangeAngle;
 
 	/** Delay between bones when reset */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")

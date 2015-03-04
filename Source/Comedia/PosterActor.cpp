@@ -542,7 +542,6 @@ bool APosterActor::SoldierKills()
 	if (IsInFireRange(Player->GetActorLocation()))
 	{
 		OnKill();
-		DrawDebugSphere(GetWorld(), Player->GetActorLocation(), 200.f, 32, FColor::Green);
 		return true;
 	}
 
