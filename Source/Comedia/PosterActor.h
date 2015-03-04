@@ -8,6 +8,18 @@
 /**
  * 
  */
+UENUM(BlueprintType)
+namespace ENodeType
+{
+	enum Type
+	{
+		NT_BasicNode   UMETA(DisplayName = "BasicNode"),
+		NT_HiddingNode UMETA(DisplayName = "HiddingNode"),
+		NT_DoorNode    UMETA(DisplayName = "DoorNode"),
+		NT_SideNode    UMETA(DisplayName = "SideNode")
+	};
+}
+
 UCLASS()
 class COMEDIA_API APosterActor : public AActor
 {
@@ -23,8 +35,14 @@ class COMEDIA_API APosterActor : public AActor
 		HEADISROOT = 0x1 << 31
 	};
 private_subobject:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Transform", AllowPrivateAccess = "true"))
+	USceneComponent*  PosterRoot;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Call", meta = (ExposeFunctionCategories = "Shape,Collision,Rendering,Transform", AllowPrivateAccess = true, MakeEditWidget))
+	UBoxComponent* CallTrigger;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
@@ -53,21 +71,36 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void UpdateStickPoint(const FVector& StickPointPos);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
-	virtual bool OnGrab(const FVector& Position);
+#pragma region Poster Events
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Poster")
+	void OnGrab(const FVector& Position);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual bool OnRelease(const FVector& Position);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual bool OnStick(const FVector& Position);
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Poster")
+	void OnResetFinished();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual bool ToggleFootStep();
+#pragma endregion Poster Events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripHead() const;
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual FVector GetGripTail() const;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	virtual void InitGripReferences();
+
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual void SetSoldier(USceneComponent* SoldierComponent);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual void SetSoldierTimelineComponent(UCurveFloat* TimelineComponent);
+
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster")
 	USceneComponent* LeftGrabbedCamPosition;
@@ -75,13 +108,20 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster")
 	USceneComponent* RightGrabbedCamPosition;
 
+	/** For Prince Navigation */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	TArray<float> KeyPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Poster")
+	TArray<TEnumAsByte<ENodeType::Type>> KeyNodeTypes;
+
 	/** Precision */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float Precision;
 
 	/** Max Iterations */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
-	float MaxIterations;
+	int32 MaxIterations;
 
 	/** Reset Poster Animation */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
@@ -114,12 +154,28 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float LengthTravellingScriptedCamera = 2.0f;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	ABlockingVolume* AssociatedBlockingVolume;
+
+	/** For Soldier cone toggle */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	TArray<float> ConeToggle;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	bool SoldierPatrolEnabled;
+
 	bool Sticked;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	USphereComponent* GripHeadComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	USphereComponent* GripTailComponent;
 private:
 	PosterState State;
 	/** Root to target distance */
 	float _MaxDistance;
+
+	float _MaxDistanceBetweenGrip;
 
 	/** If stick point, variable indicates absolute position */
 	FVector _StickPointPos;
@@ -134,9 +190,6 @@ private:
 	/** Distance between each bone starting from head */
 	float* _DistanceFromTail;
 
-	UPROPERTY()
-	bool _HeadIsRoot;
-
 	/** Set Liya's Hands Socket to effector */
 	void _UpdateEffector();
 
@@ -149,6 +202,22 @@ private:
 	float _HeadDist;
 	float _TailDist;
 
+	float _LastAnimatedObjectPosition;
+	float _LastOrientation;
+
 	FTransform* _BonesBuff;
 	FTransform* _BonesInit;
+
+	UMaterialInstance* _MeshMaterialInst;
+
+	USceneComponent* _SoldierComponent;
+	UCurveFloat* _TimelineComponent;
+
+	bool _SoldierEnabled;
+	void _Soldier(float DeltaSeconds);
+	float _SoldierElapsedTime;
+
+#pragma region Poster Events
+	bool _ResetCalled;
+#pragma endregion Poster Events
 };

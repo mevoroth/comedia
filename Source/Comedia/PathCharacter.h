@@ -1,0 +1,32 @@
+// All rights reserved
+
+#pragma once
+
+#include "PathNode.h"
+
+/**
+ * 
+ */
+class COMEDIA_API PathCharacter
+{
+public:
+
+	TArray<PathNode*> PathNodes;
+	PathNode* LastCrossedNode;
+	int32 IndexCurrentTargetNode;
+	float LocalPosition;
+	float MovingSpeed = 300.0f;
+
+	UWorld* World;
+
+	PathCharacter();
+	~PathCharacter();
+
+	bool MoveTo(const PathNode* TargetNode);
+	void UpdateCharacter(float DeltaSeconds);
+	void SetCharacterNode(PathNode* LastCrossedNode);
+
+private:
+	void _CrossNextNode();
+	void _LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingNodeType, bool bStarting);
+};
