@@ -25,11 +25,15 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _LastAnimatedObjectPosition(-std::numeric_limits<float>::infinity())
 	, _LastOrientation(1.f)
 	, _SoldierEnabled(true)
+	, SoldierPatrolEnabled(false)
 	, _SoldierElapsedTime(0.f)
 {
+	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
+	RootComponent = PosterRoot;
+
 	PosterMesh = FOI.CreateDefaultSubobject<UPoseableMeshComponent>(this, TEXT("Poster"));
 	PosterMesh->Activate(true);
-	RootComponent = PosterMesh;
+	PosterMesh->AttachTo(PosterRoot);
 
 	ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
 	_MeshMaterialInst = MeshMaterial.Object;
@@ -436,7 +440,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 			if (LevelSCriptActor)
 			{
-				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				float Ratio = LevelSCriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -475,7 +479,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 			if (LevelSCriptActor)
 			{
-				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				float Ratio = LevelSCriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -489,7 +493,13 @@ void APosterActor::Tick(float DeltaSeconds)
 		break;
 	}
 
-	_Soldier(DeltaSeconds);
+	_SoldierComponent->SetComponentTickEnabled(SoldierPatrolEnabled);
+	_SoldierComponent->SetVisibility(SoldierPatrolEnabled, true);
+
+	if (SoldierPatrolEnabled)
+	{
+		_Soldier(DeltaSeconds);
+	}
 }
 
 void APosterActor::_Soldier(float DeltaSeconds)

@@ -16,12 +16,15 @@ void AMainLevelScriptActor::BeginPlay()
 
 	RandomNode = CurrentLevelPathGraph.GetRandomNode();
 
-	CurrentLevelPathGraph.PathMainCharacter.SetCharacterNode(CurrentLevelPathGraph.GetRandomNode());
+	PathMainCharacter.World = GetWorld();
+	PathMainCharacter.CurrentPathGraph = &CurrentLevelPathGraph;
+
+	PathMainCharacter.SetCharacterNode(CurrentLevelPathGraph.GetRandomNode());
 }
 
 void AMainLevelScriptActor::Tick(float DeltaSeconds)
 {
 	//CurrentLevelPathGraph.DrawNodes();
 	//CurrentLevelPathGraph.DrawPath(RandomNode);
-	CurrentLevelPathGraph.Tick(DeltaSeconds);
+	PathMainCharacter.UpdateCharacter(DeltaSeconds);
 }

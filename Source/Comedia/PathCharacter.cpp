@@ -151,6 +151,36 @@ void PathCharacter::SetCharacterNode(PathNode* LastCrossedNode)
 	IndexCurrentTargetNode = 0;
 }
 
+float PathCharacter::GetCharacterPosition(APosterActor* RelativePoster)
+{
+	float CharacterPosition;
+	PathNode* LastPosterNode = CurrentPathGraph->GetLastNode(RelativePoster);
+
+	//Check if character is in selected poster
+	if (LastCrossedNode->PosterOwner == RelativePoster)
+	{
+		CharacterPosition = LocalPosition;
+	}
+	//If on right poster
+	else if (LastPosterNode->RightNode != nullptr && LastPosterNode->RightNode->PosterOwner == LastCrossedNode->PosterOwner)
+	{
+		if (LastPosterNode->RightNode->LeftNode == LastPosterNode)
+		{
+			CharacterPosition = 1.0f + LocalPosition;
+		}
+		else
+		{
+			CharacterPosition = 1.0f + (1.0f - LocalPosition);
+		}
+	}
+	else
+	{
+		CharacterPosition = 0.0f;
+	}
+
+	return 1.0f - CharacterPosition;
+}
+
 void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingNodeType, bool bStarting)
 {
 	if (CorrespondingNodeType == ENodeType::NT_HiddingNode)
@@ -172,9 +202,32 @@ void PathCharacter::_CrossNextNode()
 	LastCrossedNode = PathNodes[IndexCurrentTargetNode];
 	IndexCurrentTargetNode++;
 
-	//Check if character reach a hiding node
-	if (PathNodes.Num() > 1 && IndexCurrentTargetNode == PathNodes.Num() && LastCrossedNode->NodeType == ENodeType::NT_HiddingNode)
+	if (PathNodes.Num() > 1 && IndexCurrentTargetNode == PathNodes.Num())
 	{
-		_LaunchAnimation(ENodeType::NT_HiddingNode, true);
+		//Check if character reach a hiding node
+		if (LastCrossedNode->NodeType == ENodeType::NT_HiddingNode)
+		{
+			_LaunchAnimation(ENodeType::NT_HiddingNode, true);
+		}
+		//Check if character reach a door node
+		else if (LastCrossedNode->NodeType == ENodeType::NT_DoorNode)
+		{
+			if (LastCrossedNode->PosterOwner->DoorLinkedPoster != nullptr)
+			{
+				PathNode* LinkedNode = CurrentPathGraph->GetDoorNode(LastCrossedNode->PosterOwner->DoorLinkedPoster);
+				if (LinkedNode != nullptr)
+				{
+					SetCharacterNode(LinkedNode);
+					if (LinkedNode->RightNode != nullptr && LinkedNode->RightNode->NodeType != ENodeType::NT_SideNode)
+					{
+						MoveTo(LinkedNode->RightNode);
+					}
+					else if (LinkedNode->LeftNode != nullptr && LinkedNode->LeftNode->NodeType != ENodeType::NT_SideNode)
+					{
+						MoveTo(LinkedNode->LeftNode);
+					}
+				}
+			}
+		}
 	}
 }

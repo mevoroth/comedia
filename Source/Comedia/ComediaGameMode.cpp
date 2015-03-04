@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Comedia.h"
+#include "IwacPlayerController.h"
 #include "ComediaGameMode.h"
 #include "Scalability.h"
 
@@ -14,6 +15,9 @@ AComediaGameMode::AComediaGameMode(const class FPostConstructInitializePropertie
 
 	static ConstructorHelpers::FClassFinder<AHUD> HUDClassFinder(TEXT("/Game/Blueprints/BP_HUD"));
 	HUDClass = HUDClassFinder.Class;
+
+	PlayerControllerClass = AIwacPlayerController::StaticClass();
+
 }
 
 void AComediaGameMode::BeginPlay()

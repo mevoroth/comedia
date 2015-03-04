@@ -13,12 +13,10 @@ PathGraph::PathGraph()
 PathGraph::~PathGraph()
 {
 	MapHeadNodes = TMap<APosterActor*, PathNode*>();
-	PathMainCharacter = PathCharacter();
 }
 
 void PathGraph::InitNodes(UWorld* World)
 {
-	PathMainCharacter.World = World;
 	this->World = World;
 
 	//Reset MapHeadNotes
@@ -107,7 +105,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 		}
 
 		//Break right link with other poster
-		PathNode* LastNodePoster = _GetLastNode(Poster);
+		PathNode* LastNodePoster = GetLastNode(Poster);
 		if (LastNodePoster != nullptr && LastNodePoster->RightNode != nullptr)
 		{
 			if (LastNodePoster->RightNode->LeftNode == LastNodePoster)
@@ -149,7 +147,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 					else if (OtherPoster->GripTailComponent == GripComponent)
 					{
 						//Attach to other tail
-						PathNode* TailOtherPosterNode = _GetLastNode(OtherPoster);
+						PathNode* TailOtherPosterNode = GetLastNode(OtherPoster);
 						if (TailOtherPosterNode != nullptr)
 						{
 							TailOtherPosterNode->RightNode = (*PtrHeadPosterNode);
@@ -162,7 +160,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 		}
 
 		//Update Tail
-		PathNode* TailPosterNode = _GetLastNode(Poster);
+		PathNode* TailPosterNode = GetLastNode(Poster);
 		if (TailPosterNode != nullptr)
 		{
 			bool bLinkOtherPosterTail = false;
@@ -192,7 +190,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 						else if (OtherPoster->GripTailComponent == GripComponent)
 						{
 							//Attach to other tail
-							PathNode* TailOtherPosterNode = _GetLastNode(OtherPoster);
+							PathNode* TailOtherPosterNode = GetLastNode(OtherPoster);
 							if (TailOtherPosterNode != nullptr)
 							{
 								TailOtherPosterNode->RightNode = TailPosterNode;
@@ -207,41 +205,6 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 	}
 }
 
-float PathGraph::GetCharacterPosition(APosterActor* Poster)
-{
-	float CharacterPosition;
-	PathNode* LastPosterNode = _GetLastNode(Poster);
-
-	//Check if character is in selected poster
-	if (PathMainCharacter.LastCrossedNode->PosterOwner == Poster)
-	{
-		CharacterPosition = PathMainCharacter.LocalPosition;
-	}
-	//If on right poster
-	else if (LastPosterNode->RightNode != nullptr && LastPosterNode->RightNode->PosterOwner == PathMainCharacter.LastCrossedNode->PosterOwner)
-	{
-		if (LastPosterNode->RightNode->LeftNode == LastPosterNode)
-		{
-			CharacterPosition = 1.0f + PathMainCharacter.LocalPosition;
-		}
-		else
-		{
-			CharacterPosition = 1.0f + (1.0f - PathMainCharacter.LocalPosition);
-		}
-	}
-	else
-	{
-		CharacterPosition = 0.0f;
-	}
-
-	return 1.0f - CharacterPosition;
-}
-
-bool PathGraph::MoveCharacterTo(const PathNode* TargetNode)
-{
-	return PathMainCharacter.MoveTo(TargetNode);
-}
-
 void PathGraph::DrawNodes()
 {
 	FColor RandomColor;
@@ -253,7 +216,7 @@ void PathGraph::DrawNodes()
 		//Draw Nodes
 		RandomColor = FColor::MakeRandomColor();
 		PathNode** PtrHeadPosterNode = MapHeadNodes.Find(Posters[i]);
-		PathNode* TailPosterNode = _GetLastNode(Posters[i]);
+		PathNode* TailPosterNode = GetLastNode(Posters[i]);
 
 		if (PtrHeadPosterNode != nullptr && *PtrHeadPosterNode != nullptr && TailPosterNode != nullptr)
 		{
@@ -322,10 +285,7 @@ void PathGraph::DrawPath(PathNode* NodeOfPath)
 
 FVector PathGraph::GetNodeLocation(const PathNode* PosterNode) const
 {
-	FVector HeadPosition = PosterNode->PosterOwner->GripHeadComponent->GetComponentLocation();
-	FVector TailPosition = PosterNode->PosterOwner->GripTailComponent->GetComponentLocation();
-
-	return FMath::Lerp<FVector>(HeadPosition, TailPosition, PosterNode->NodePosition);
+	return PosterNode->GetNodeLocation();
 }
 
 PathNode* PathGraph::GetRandomNode()
@@ -361,12 +321,29 @@ const PathNode* PathGraph::GetNode(const FVector& Location, const APosterActor* 
 	return ClosestNode;
 }
 
-void PathGraph::Tick(float DeltaSeconds)
+PathNode* PathGraph::GetDoorNode(const APosterActor* Poster) const
 {
-	PathMainCharacter.UpdateCharacter(DeltaSeconds);
+	PathNode* Current = *MapHeadNodes.Find(Poster);
+	PathNode* DoorNode = nullptr;
+
+	while (Current->RightNode != nullptr && Current->RightNode->PosterOwner == Poster && DoorNode == nullptr)
+	{
+		if (Current->NodeType == ENodeType::NT_DoorNode)
+		{
+			DoorNode = Current;
+		}
+
+		Current = Current->RightNode;
+	}
+
+	return DoorNode;
 }
 
-PathNode* PathGraph::_GetLastNode(APosterActor* Poster)
+void PathGraph::Tick(float DeltaSeconds)
+{
+}
+
+PathNode* PathGraph::GetLastNode(APosterActor* Poster)
 {
 	PathNode* LastPosterNode = nullptr;
 
