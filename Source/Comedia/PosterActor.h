@@ -41,6 +41,9 @@ private_subobject:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	UPoseableMeshComponent* PosterMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* FeedbackMesh;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Call", meta = (ExposeFunctionCategories = "Shape,Collision,Rendering,Transform", AllowPrivateAccess = true, MakeEditWidget))
 	UBoxComponent* CallTrigger;
 
@@ -65,8 +68,6 @@ public:
 	void Stick(bool Sticked);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	FVector GetPosterForward() const;
-	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
-	bool IsInFireRange(const FVector& Position) const;
 
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void UpdateStickPoint(const FVector& StickPointPos);
@@ -92,10 +93,19 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual void InitGripReferences();
 
+#pragma region Soldier
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
 	virtual void SetSoldier(USceneComponent* SoldierComponent);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
 	virtual void SetSoldierTimelineComponent(UCurveFloat* TimelineComponent);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
+	virtual bool APosterActor::SoldierKills();
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
+	virtual void OnKill();
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	bool IsInFireRange(const FVector& Position) const;
+	bool PrinceIsInFireRange();
+#pragma endregion Soldier
 
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
@@ -214,6 +224,9 @@ private:
 	bool _SoldierEnabled;
 	void _Soldier(float DeltaSeconds);
 	float _SoldierElapsedTime;
+	float _SoldierCurrentPos;
+	float _SoldierPreviousPos;
+	float _GetSoldierDirection() const;
 
 #pragma region Poster Events
 	bool _ResetCalled;

@@ -107,7 +107,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 		}
 
 		//Break right link with other poster
-		PathNode* LastNodePoster = _GetLastNode(Poster);
+		PathNode* LastNodePoster = GetLastNode(Poster);
 		if (LastNodePoster != nullptr && LastNodePoster->RightNode != nullptr)
 		{
 			if (LastNodePoster->RightNode->LeftNode == LastNodePoster)
@@ -149,7 +149,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 					else if (OtherPoster->GripTailComponent == GripComponent)
 					{
 						//Attach to other tail
-						PathNode* TailOtherPosterNode = _GetLastNode(OtherPoster);
+						PathNode* TailOtherPosterNode = GetLastNode(OtherPoster);
 						if (TailOtherPosterNode != nullptr)
 						{
 							TailOtherPosterNode->RightNode = (*PtrHeadPosterNode);
@@ -162,7 +162,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 		}
 
 		//Update Tail
-		PathNode* TailPosterNode = _GetLastNode(Poster);
+		PathNode* TailPosterNode = GetLastNode(Poster);
 		if (TailPosterNode != nullptr)
 		{
 			bool bLinkOtherPosterTail = false;
@@ -192,7 +192,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 						else if (OtherPoster->GripTailComponent == GripComponent)
 						{
 							//Attach to other tail
-							PathNode* TailOtherPosterNode = _GetLastNode(OtherPoster);
+							PathNode* TailOtherPosterNode = GetLastNode(OtherPoster);
 							if (TailOtherPosterNode != nullptr)
 							{
 								TailOtherPosterNode->RightNode = TailPosterNode;
@@ -210,7 +210,7 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 float PathGraph::GetCharacterPosition(APosterActor* Poster)
 {
 	float CharacterPosition;
-	PathNode* LastPosterNode = _GetLastNode(Poster);
+	PathNode* LastPosterNode = GetLastNode(Poster);
 
 	//Check if character is in selected poster
 	if (PathMainCharacter.LastCrossedNode->PosterOwner == Poster)
@@ -253,7 +253,7 @@ void PathGraph::DrawNodes()
 		//Draw Nodes
 		RandomColor = FColor::MakeRandomColor();
 		PathNode** PtrHeadPosterNode = MapHeadNodes.Find(Posters[i]);
-		PathNode* TailPosterNode = _GetLastNode(Posters[i]);
+		PathNode* TailPosterNode = GetLastNode(Posters[i]);
 
 		if (PtrHeadPosterNode != nullptr && *PtrHeadPosterNode != nullptr && TailPosterNode != nullptr)
 		{
@@ -366,7 +366,7 @@ void PathGraph::Tick(float DeltaSeconds)
 	PathMainCharacter.UpdateCharacter(DeltaSeconds);
 }
 
-PathNode* PathGraph::_GetLastNode(APosterActor* Poster)
+PathNode* PathGraph::GetLastNode(APosterActor* Poster)
 {
 	PathNode* LastPosterNode = nullptr;
 

@@ -27,6 +27,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _SoldierEnabled(true)
 	, SoldierPatrolEnabled(false)
 	, _SoldierElapsedTime(0.f)
+	, _SoldierPreviousPos(0.f)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -35,14 +36,20 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	PosterMesh->Activate(true);
 	PosterMesh->AttachTo(PosterRoot);
 
+	FeedbackMesh = FOI.CreateDefaultSubobject<USkeletalMeshComponent>(this, TEXT("FeedbackMesh"));
+	FeedbackMesh->Activate(true);
+	FeedbackMesh->AttachTo(PosterMesh);
+	FeedbackMesh->SetRelativeLocation(FVector::ZeroVector);
+	FeedbackMesh->SetVisibility(false);
+
 	ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
 	_MeshMaterialInst = MeshMaterial.Object;
 
 	LeftGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Left Grabbed Cam Position"));
-	LeftGrabbedCamPosition->AttachTo(RootComponent);
+	LeftGrabbedCamPosition->AttachTo(PosterMesh);
 
 	RightGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Right Grabbed Cam Position"));
-	RightGrabbedCamPosition->AttachTo(RootComponent);
+	RightGrabbedCamPosition->AttachTo(PosterMesh);
 
 	CallTrigger = FOI.CreateDefaultSubobject<UBoxComponent>(this, TEXT("CallTrigger"));
 	CallTrigger->SetRelativeLocation(FVector(0.f, 550.f, 0.f));
@@ -502,6 +509,70 @@ void APosterActor::Tick(float DeltaSeconds)
 	}
 }
 
+float APosterActor::_GetSoldierDirection() const
+{
+	float Diff = _SoldierCurrentPos - _SoldierPreviousPos;
+	if (FMath::IsNearlyZero(Diff))
+	{
+		return 0.f;
+	}
+	return FMath::Sign(Diff);
+}
+
+bool APosterActor::SoldierKills()
+{
+	ACharacter* Player = 0;
+	if (GetWorld()
+		&& GetWorld()->GetFirstPlayerController())
+	{
+		Player = GetWorld()->GetFirstPlayerController()->GetCharacter();
+	}
+
+	// Liya killed
+	if (IsInFireRange(Player->GetActorLocation()))
+	{
+		OnKill();
+	}
+
+	// Prince killed
+	if (PrinceIsInFireRange())
+	{
+		OnKill();
+	}
+}
+
+bool APosterActor::PrinceIsInFireRange()
+{
+	//AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	//if (LevelSCriptActor)
+	//{
+	//	PathNode* Node = LevelSCriptActor->CurrentLevelPathGraph.GetLastNode(this);
+	//	APosterActor* RightPoster = 0;
+	//	if (Node->RightNode)
+	//	{
+	//		RightPoster = Node->RightNode->PosterOwner;
+	//	}
+
+
+
+	//	if (Node->RightNode && Node->RightNode->PosterOwner)
+	//	{
+	//		float PrincePosition = LevelSCriptActor->CurrentLevelPathGraph.GetCharacterPosition(
+	//			Node->RightNode->PosterOwner
+	//		);
+	//		
+	//		
+	//	}
+
+		//if (PrincePosition < 0.f && PrincePosition > 1.f)
+		//{
+		//	return false;
+		//}
+
+		//if (Node)
+	}
+}
+
 void APosterActor::_Soldier(float DeltaSeconds)
 {
 	if (_SoldierEnabled)
@@ -511,6 +582,9 @@ void APosterActor::_Soldier(float DeltaSeconds)
 		_TimelineComponent->GetTimeRange(Min, Max);
 		float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
 		float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
+
+		_SoldierPreviousPos = _SoldierCurrentPos;
+		_SoldierCurrentPos = SampledSoldier;
 		
 		SampledSoldier *= Nodes;
 		SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);

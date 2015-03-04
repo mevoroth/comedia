@@ -31,8 +31,8 @@ public:
 	void Tick(float DeltaSeconds);
 	const PathNode* GetNode(const FVector& Location, const APosterActor* Poster) const;
 
+	PathNode* GetLastNode(APosterActor* Poster);
+
 private:
 	UWorld* World;
-
-	PathNode* _GetLastNode(APosterActor* Poster);
 };
