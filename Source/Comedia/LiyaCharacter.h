@@ -59,6 +59,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	float GrabSpeedAlphaTimer;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float JumpHeight;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float CallCooldown;
 #pragma endregion GD Settings
 

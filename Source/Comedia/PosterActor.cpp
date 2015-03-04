@@ -28,6 +28,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, SoldierPatrolEnabled(false)
 	, _SoldierElapsedTime(0.f)
 	, _SoldierPreviousPos(0.f)
+	, _MaxDistanceBetweenGrip(0.f)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -115,6 +116,8 @@ void APosterActor::BeginPlay()
 	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
 	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
 
+	_MaxDistanceBetweenGrip = FVector::DistSquared(GetGripHead(), GetGripTail());
+
 	FireRangeRadius = FMath::DegreesToRadians(FireRangeRadius);
 	FireRangeDistance *= FireRangeDistance; // Square
 }
@@ -191,7 +194,9 @@ void APosterActor::UpdateChain()
 		float Slop = FVector::Dist(_Effector.GetLocation(), _BonesBuff[Last - 1].GetLocation());
 		if (Slop > Precision)
 		{
-			_BonesBuff[Last - 1].SetLocation(_Effector.GetLocation());
+			FVector Effector = _Effector.GetLocation();
+			Effector.Z = _BonesBuff[Last - 1].GetLocation().Z;
+			_BonesBuff[Last - 1].SetLocation(Effector);
 
 			int32 IterationsCount = 0;
 			while (Slop > Precision && (IterationsCount++ < MaxIterations))
@@ -233,7 +238,7 @@ void APosterActor::UpdateChain()
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
 #if defined WITH_EDITOR
-			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
+			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
 #endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
@@ -304,7 +309,7 @@ void APosterActor::Grabbing(bool Grabbing)
 
 			OnGrab(Character->GetActorLocation());
 			ToggleFootStep();
-			Character->NotifyGrab(_MaxDistance);
+			Character->NotifyGrab(_MaxDistanceBetweenGrip);
 			break;
 		}
 	}

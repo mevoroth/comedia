@@ -20,6 +20,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, GrabSpeedAlphaTimer(1.f)
 	, MaxAngularSpeed(200.f)
 	, _RunningSpeedAnimBP(0.f)
+	, JumpHeight(17.5f)
 	, CallCooldown(1.f)
 	, _CallCooldown(0.f)
 {
@@ -299,7 +300,7 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 	GetMesh()->SetWorldLocation(FVector(
 		GetMesh()->GetComponentLocation().X,
 		GetMesh()->GetComponentLocation().Y,
-		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
+		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * JumpHeight
 	));
 }
 
