@@ -29,6 +29,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _SoldierElapsedTime(0.f)
 	, _SoldierPreviousPos(0.f)
 	, _MaxDistanceBetweenGrip(0.f)
+	, FireRangeAngle(90.f)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -118,7 +119,7 @@ void APosterActor::BeginPlay()
 
 	_MaxDistanceBetweenGrip = FVector::DistSquared(GetGripHead(), GetGripTail());
 
-	FireRangeRadius = FMath::DegreesToRadians(FireRangeRadius);
+	FireRangeAngle = FMath::DegreesToRadians(FireRangeAngle);
 	FireRangeDistance *= FireRangeDistance; // Square
 }
 
@@ -449,10 +450,10 @@ void APosterActor::Tick(float DeltaSeconds)
 	case INIT:
 		_Reset(DeltaSeconds);
 		{
-			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-			if (LevelSCriptActor)
+			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+			if (LevelScriptActor)
 			{
-				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				float Ratio = LevelScriptActor->GetPathGraph().GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -488,10 +489,10 @@ void APosterActor::Tick(float DeltaSeconds)
 		UpdateChain();
 		_SoldierEnabled = true;
 		{
-			AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-			if (LevelSCriptActor)
+			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+			if (LevelScriptActor)
 			{
-				float Ratio = LevelSCriptActor->GetPathGraph().GetCharacterPosition(this);
+				float Ratio = LevelScriptActor->GetPathGraph().GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -511,6 +512,10 @@ void APosterActor::Tick(float DeltaSeconds)
 	if (SoldierPatrolEnabled)
 	{
 		_Soldier(DeltaSeconds);
+		if (SoldierKills())
+		{
+			UE_LOG(LogGPCode, Warning, TEXT("IL EST MOURRU"));
+		}
 	}
 }
 
@@ -537,45 +542,66 @@ bool APosterActor::SoldierKills()
 	if (IsInFireRange(Player->GetActorLocation()))
 	{
 		OnKill();
+		DrawDebugSphere(GetWorld(), Player->GetActorLocation(), 200.f, 32, FColor::Green);
+		return true;
 	}
 
 	// Prince killed
 	if (PrinceIsInFireRange())
 	{
 		OnKill();
+		return true;
 	}
+	return false;
 }
 
 bool APosterActor::PrinceIsInFireRange()
 {
-	//AMainLevelScriptActor* LevelSCriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-	//if (LevelSCriptActor)
-	//{
-	//	PathNode* Node = LevelSCriptActor->CurrentLevelPathGraph.GetLastNode(this);
-	//	APosterActor* RightPoster = 0;
-	//	if (Node->RightNode)
-	//	{
-	//		RightPoster = Node->RightNode->PosterOwner;
-	//	}
+	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (LevelScriptActor)
+	{
+		PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
+		APosterActor* LeftPoster = 0;
+		APosterActor* RightPoster = 0;
+		if (Node->RightNode)
+		{
+			RightPoster = Node->RightNode->PosterOwner;
+		}
 
+		while (Node->LeftNode && Node->LeftNode->PosterOwner == this)
+		{
+			Node = Node->LeftNode;
+		}
+		if (Node->LeftNode && Node->LeftNode->PosterOwner != this)
+		{
+			LeftPoster = Node->LeftNode->PosterOwner;
+		}
 
+		if (LeftPoster)
+		{
+			float PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(LeftPoster);
+			float SoldierDir = _GetSoldierDirection();
+			if (PrincePosition >= 0.f && PrincePosition <= 1.f
+				&& _LastOrientation * SoldierDir <  0 && SoldierDir < 0)
+			{
+				return true;
+			}
+		}
 
-	//	if (Node->RightNode && Node->RightNode->PosterOwner)
-	//	{
-	//		float PrincePosition = LevelSCriptActor->CurrentLevelPathGraph.GetCharacterPosition(
-	//			Node->RightNode->PosterOwner
-	//		);
-	//		
-	//		
-	//	}
+		if (RightPoster)
+		{
+			float PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(RightPoster);
+			float SoldierDir = _GetSoldierDirection();
+			if (PrincePosition >= 0.f && PrincePosition <= 1.f
+				&& _LastOrientation * SoldierDir < 0 && SoldierDir > 0)
+			{
+				return true;
+			}
+		}
 
-		//if (PrincePosition < 0.f && PrincePosition > 1.f)
-		//{
-		//	return false;
-		//}
-
-		//if (Node)
+		return false;
 	}
+	return false;
 }
 
 void APosterActor::_Soldier(float DeltaSeconds)
@@ -704,12 +730,13 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 {
 	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
 	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+	FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
+	SoldierPos.Z = Position.Z;
 
-	FVector Center = (Head + Tail) / 2.f;
 	return FVector::DotProduct(
 		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
-		(Position - Center).UnsafeNormal()
-	) && FVector::DistSquared(Position, Center) < FireRangeDistance;
+		(Position - SoldierPos).UnsafeNormal()
+	) > FMath::Cos(FireRangeAngle / 2.f) && FVector::DistSquared(Position, SoldierPos) < FireRangeDistance;
 }
 
 void APosterActor::UpdateStickPoint(const FVector& StickPointPos)
@@ -736,4 +763,10 @@ void APosterActor::OnGrab_Implementation(const FVector& Position)
 	{
 		AssociatedBlockingVolume->SetActorEnableCollision(false);
 	}
+}
+
+
+void APosterActor::OnKill_Implementation()
+{
+
 }

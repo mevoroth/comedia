@@ -99,9 +99,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
 	virtual void SetSoldierTimelineComponent(UCurveFloat* TimelineComponent);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
-	virtual bool APosterActor::SoldierKills();
+	virtual bool SoldierKills();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
-	virtual void OnKill();
+	void OnKill();
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	bool IsInFireRange(const FVector& Position) const;
 	bool PrinceIsInFireRange();
@@ -138,11 +138,11 @@ public:
 	float ResetSpeed;
 
 	/** Fire Range Distance */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	float FireRangeDistance;
 
 	/** Fire Range Radius in degrees */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	float FireRangeRadius;
 
 	/** Delay between bones when reset */
