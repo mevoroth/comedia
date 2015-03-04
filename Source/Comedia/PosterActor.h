@@ -16,7 +16,8 @@ namespace ENodeType
 		NT_BasicNode   UMETA(DisplayName = "BasicNode"),
 		NT_HiddingNode UMETA(DisplayName = "HiddingNode"),
 		NT_DoorNode    UMETA(DisplayName = "DoorNode"),
-		NT_SideNode    UMETA(DisplayName = "SideNode")
+		NT_SideNode    UMETA(DisplayName = "SideNode"),
+		NT_StartNode   UMETA(DisplayName = "StartNode")
 	};
 }
 

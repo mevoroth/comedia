@@ -7,12 +7,11 @@
 
 PathGraph::PathGraph()
 {
-	UE_LOG(LogGPCode, Log, TEXT("PathGraph Constructor"));
+	StartNode = nullptr;
 }
 
 PathGraph::~PathGraph()
 {
-	MapHeadNodes = TMap<APosterActor*, PathNode*>();
 }
 
 void PathGraph::InitNodes(UWorld* World)
@@ -53,6 +52,19 @@ void PathGraph::InitNodes(UWorld* World)
 			if (CurrentPosterActor->KeyNodeTypes[j])
 			{
 				KeypointNode->NodeType = CurrentPosterActor->KeyNodeTypes[j];
+
+				//Store the start node
+				if (CurrentPosterActor->KeyNodeTypes[j] == ENodeType::NT_StartNode)
+				{
+					if (StartNode == nullptr)
+					{
+						StartNode = KeypointNode;
+					}
+					else
+					{
+						UE_LOG(LogGPCode, Warning, TEXT("Warning! More than on start node!"));
+					}
+				}
 			}
 			
 			//Link two nodes
