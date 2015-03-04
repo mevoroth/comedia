@@ -155,6 +155,7 @@ float PathCharacter::GetCharacterPosition(APosterActor* RelativePoster)
 {
 	float CharacterPosition;
 	PathNode* LastPosterNode = CurrentPathGraph->GetLastNode(RelativePoster);
+	PathNode* HeadPosterNode = *CurrentPathGraph->MapHeadNodes.Find(RelativePoster);
 
 	//Check if character is in selected poster
 	if (LastCrossedNode->PosterOwner == RelativePoster)
@@ -173,12 +174,24 @@ float PathCharacter::GetCharacterPosition(APosterActor* RelativePoster)
 			CharacterPosition = 1.0f + (1.0f - LocalPosition);
 		}
 	}
+	//If on left poster
+	else if (HeadPosterNode->LeftNode != nullptr && HeadPosterNode->LeftNode->PosterOwner == LastCrossedNode->PosterOwner)
+	{
+		if (HeadPosterNode->LeftNode->RightNode == HeadPosterNode)
+		{
+			CharacterPosition = - 1.0f + LocalPosition;
+		}
+		else
+		{
+			CharacterPosition = -LocalPosition;
+		}
+	}
 	else
 	{
-		CharacterPosition = 0.0f;
+		CharacterPosition = -1.0f;
 	}
 
-	return 1.0f - CharacterPosition;
+	return CharacterPosition;
 }
 
 void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingNodeType, bool bStarting)
