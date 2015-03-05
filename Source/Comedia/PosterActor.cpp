@@ -109,6 +109,12 @@ void APosterActor::BeginPlay()
 
 	FireRangeRadius = FMath::DegreesToRadians(FireRangeRadius);
 	FireRangeDistance *= FireRangeDistance; // Square
+
+	//Check if Poster is door linked to another poster and set it ungrabbable if needed
+	if (DoorLinkedPoster != nullptr)
+	{
+		bIsGrabbable = false;
+	}
 }
 
 void APosterActor::SetSoldier(USceneComponent* SoldierComponent)
