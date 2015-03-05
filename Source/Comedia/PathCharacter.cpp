@@ -155,6 +155,7 @@ float PathCharacter::GetCharacterPosition(APosterActor* RelativePoster)
 {
 	float CharacterPosition;
 	PathNode* LastPosterNode = CurrentPathGraph->GetLastNode(RelativePoster);
+	PathNode* HeadPosterNode = *CurrentPathGraph->MapHeadNodes.Find(RelativePoster);
 
 	//Check if character is in selected poster
 	if (LastCrossedNode->PosterOwner == RelativePoster)
@@ -173,12 +174,24 @@ float PathCharacter::GetCharacterPosition(APosterActor* RelativePoster)
 			CharacterPosition = 1.0f + (1.0f - LocalPosition);
 		}
 	}
+	//If on left poster
+	else if (HeadPosterNode->LeftNode != nullptr && HeadPosterNode->LeftNode->PosterOwner == LastCrossedNode->PosterOwner)
+	{
+		if (HeadPosterNode->LeftNode->RightNode == HeadPosterNode)
+		{
+			CharacterPosition = - 1.0f + LocalPosition;
+		}
+		else
+		{
+			CharacterPosition = -LocalPosition;
+		}
+	}
 	else
 	{
-		CharacterPosition = 0.0f;
+		CharacterPosition = -1.0f;
 	}
 
-	return 1.0f - CharacterPosition;
+	return CharacterPosition;
 }
 
 void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingNodeType, bool bStarting)
@@ -188,10 +201,12 @@ void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingN
 		if (bStarting)
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Start Hidding Animation"));
+			bIsHidden = true;
 		}
 		else
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Start exit hidding animation"));
+			bIsHidden = false;
 		}
 	}
 }
@@ -217,6 +232,9 @@ void PathCharacter::_CrossNextNode()
 				PathNode* LinkedNode = CurrentPathGraph->GetDoorNode(LastCrossedNode->PosterOwner->DoorLinkedPoster);
 				if (LinkedNode != nullptr)
 				{
+					//Set poster grabbable when character go through a poster
+					LastCrossedNode->PosterOwner->bIsGrabbable = true;
+
 					SetCharacterNode(LinkedNode);
 					if (LinkedNode->RightNode != nullptr && LinkedNode->RightNode->NodeType != ENodeType::NT_SideNode)
 					{

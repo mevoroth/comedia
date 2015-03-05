@@ -59,6 +59,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	float GrabSpeedAlphaTimer;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float JumpHeight;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float CallCooldown;
 #pragma endregion GD Settings
 
@@ -148,6 +151,8 @@ private:
 
 	float _RunningSpeedAnimBP;
 	float _InitHeight;
+
+	FVector _OriginalPivotCamPosition;
 
 	UMaterialInstanceDynamic* _PosterMaterialInst;
 

@@ -11,10 +11,9 @@
 class COMEDIA_API PathGraph
 {
 public:
-	static PathGraph* Instance;
-
 	TArray<PathNode*> ArrayNodes;
 	TMap<APosterActor*, PathNode*> MapHeadNodes;
+	PathNode* StartNode;
 
 	PathGraph();
 	~PathGraph();

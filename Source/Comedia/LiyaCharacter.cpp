@@ -21,6 +21,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, GrabSpeedAlphaTimer(1.f)
 	, MaxAngularSpeed(200.f)
 	, _RunningSpeedAnimBP(0.f)
+	, JumpHeight(17.5f)
 	, CallCooldown(1.f)
 	, _CallCooldown(0.f)
 {
@@ -32,6 +33,7 @@ void ALiyaCharacter::BeginPlay()
 	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
 	_GrabArmLength *= 2;
 	_InitHeight = GetMesh()->GetComponentLocation().Z;
+	_OriginalPivotCamPosition = Camera->RelativeLocation;
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -140,6 +142,14 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 		{
 			Camera->SetWorldTransform(OverrideScriptedCameraPosition);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
+		}
+
+		//Ray cast to check collision
+		FHitResult Hit(ForceInit);
+		FCollisionQueryParams Trace(TEXT("CamTrace"), false, GetOwner());
+		if (GetWorld()->LineTraceSingle(Hit, (GetActorLocation() + _OriginalPivotCamPosition), Camera->GetComponentLocation(), ECC_Visibility, Trace))
+		{
+			Camera->SetWorldLocation(Hit.ImpactPoint);
 		}
 	}
 	else
@@ -314,7 +324,7 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 	GetMesh()->SetWorldLocation(FVector(
 		GetMesh()->GetComponentLocation().X,
 		GetMesh()->GetComponentLocation().Y,
-		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * 15.f
+		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * JumpHeight
 	));
 }
 

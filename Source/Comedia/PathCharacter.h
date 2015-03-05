@@ -16,6 +16,7 @@ public:
 	int32 IndexCurrentTargetNode;
 	float LocalPosition;
 	float MovingSpeed = 300.0f;
+	bool bIsHidden = false;
 
 	PathGraph* CurrentPathGraph;
 	UWorld* World;

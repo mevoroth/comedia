@@ -18,8 +18,15 @@ void AMainLevelScriptActor::BeginPlay()
 
 	PathMainCharacter.World = GetWorld();
 	PathMainCharacter.CurrentPathGraph = &CurrentLevelPathGraph;
-
-	PathMainCharacter.SetCharacterNode(CurrentLevelPathGraph.GetRandomNode());
+	if (CurrentLevelPathGraph.StartNode)
+	{
+		PathMainCharacter.SetCharacterNode(CurrentLevelPathGraph.StartNode);
+	}
+	else
+	{
+		UE_LOG(LogGPCode, Warning, TEXT("No start node set!"));
+		PathMainCharacter.SetCharacterNode(RandomNode);
+	}
 }
 
 void AMainLevelScriptActor::Tick(float DeltaSeconds)
