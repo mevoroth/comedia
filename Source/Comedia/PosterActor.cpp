@@ -452,7 +452,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 			if (LevelScriptActor)
 			{
-				float Ratio = LevelSCriptActor->PathMainCharacter.GetCharacterPosition(this);
+				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -491,7 +491,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 			if (LevelScriptActor)
 			{
-				float Ratio = LevelSCriptActor->PathMainCharacter.GetCharacterPosition(this);
+				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
@@ -573,7 +573,7 @@ bool APosterActor::PrinceIsInFireRange()
 	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 	if (LevelScriptActor)
 	{
-		float PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(this);
+		float PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 		// Prince is in same poster
 		if (PrincePosition >= 0.f && PrincePosition <= 1.f)
 		{
@@ -604,7 +604,7 @@ bool APosterActor::PrinceIsInFireRange()
 
 		if (LeftPoster)
 		{
-			PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(LeftPoster);
+			PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(LeftPoster);
 			float SoldierDir = _GetSoldierDirection();
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
 				&& _LastOrientation * SoldierDir <  0 && SoldierDir < 0)
@@ -615,7 +615,7 @@ bool APosterActor::PrinceIsInFireRange()
 
 		if (RightPoster)
 		{
-			PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(RightPoster);
+			PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(RightPoster);
 			float SoldierDir = _GetSoldierDirection();
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
 				&& _LastOrientation * SoldierDir < 0 && SoldierDir > 0)
