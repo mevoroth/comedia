@@ -558,6 +558,9 @@ bool APosterActor::PrinceIsInFireRange()
 {
 	// Cone is disabled
 	int32 ToggleCount = 0;
+	float Min, Max;
+	_TimelineComponent->GetTimeRange(Min, Max);
+	float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
 	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
 	{
 		++ToggleCount;
