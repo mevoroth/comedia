@@ -16,6 +16,8 @@ PathCharacter::~PathCharacter()
 
 void PathCharacter::UpdateCharacter(float DeltaSeconds)
 {
+	UE_LOG(LogGPCode, Log, TEXT("IsHidden: %d"), bIsHidden ? 1 : 0);
+
 	if (PathNodes.Num() > 0 && IndexCurrentTargetNode < PathNodes.Num())
 	{
 		float PosterSize = (LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation() - LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation()).Size();
@@ -201,10 +203,12 @@ void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingN
 		if (bStarting)
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Start Hidding Animation"));
+			bIsHidden = true;
 		}
 		else
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Start exit hidding animation"));
+			bIsHidden = false;
 		}
 	}
 }
