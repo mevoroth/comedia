@@ -523,6 +523,11 @@ void APosterActor::Tick(float DeltaSeconds)
 		}
 		_Soldier(DeltaSeconds);
 	}
+
+	//Update callzone position
+	FTransform TransformMiddlePosterBone = PosterMesh->GetBoneTransformByName(PosterMesh->GetBoneName(((PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) / 2) + 1), EBoneSpaces::WorldSpace);
+	CallTrigger->SetWorldLocation(TransformMiddlePosterBone.GetLocation());
+
 }
 
 float APosterActor::_GetSoldierDirection() const
