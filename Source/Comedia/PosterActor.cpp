@@ -527,6 +527,13 @@ void APosterActor::Tick(float DeltaSeconds)
 	FTransform TransformMiddlePosterBone = PosterMesh->GetBoneTransformByName(PosterMesh->GetBoneName(((PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) / 2) + 1), EBoneSpaces::WorldSpace);
 	CallTrigger->SetWorldLocation(TransformMiddlePosterBone.GetLocation());
 
+	//Update pathgraph on every tick
+	AMainLevelScriptActor* MainLevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (MainLevelScriptActor)
+	{
+		MainLevelScriptActor->CurrentLevelPathGraph.UpdatePosterNodes(this);
+	}
+
 }
 
 float APosterActor::_GetSoldierDirection() const
