@@ -516,11 +516,12 @@ void APosterActor::Tick(float DeltaSeconds)
 
 	if (SoldierPatrolEnabled)
 	{
-		_Soldier(DeltaSeconds);
 		if (SoldierKills())
 		{
 			UE_LOG(LogGPCode, Warning, TEXT("IL EST MOURRU"));
+			return;
 		}
+		_Soldier(DeltaSeconds);
 	}
 }
 
@@ -561,35 +562,51 @@ bool APosterActor::SoldierKills()
 
 bool APosterActor::PrinceIsInFireRange()
 {
-	// Cone is disabled
-	int32 ToggleCount = 0;
-	float Min, Max;
-	_TimelineComponent->GetTimeRange(Min, Max);
-	float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
-	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
-	{
-		++ToggleCount;
-	}
-
-	if (ToggleCount % 2 == 0)
-	{
-		return false;
-	}
-
 	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+
 	if (LevelScriptActor)
 	{
-		float PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
+		float PrincePosition = -1.f;
+
+		// Cone is disabled
+		int32 ToggleCount = 0;
+		float Min, Max;
+		_TimelineComponent->GetTimeRange(Min, Max);
+		float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
+		for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
+		{
+			++ToggleCount;
+		}
+
+		if (ToggleCount % 2 == 1)
+		{
+			for (TObjectIterator<APosterActor> It; It; ++It)
+			{
+				APosterActor* Poster = *It;
+				PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(Poster);
+				if (PrincePosition > 0.f && PrincePosition < 1.f)
+				{
+					FVector PrincePosterHead = Poster->PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+					FVector PrincePosterTail = Poster->PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+					FVector PrincePos = FMath::Lerp<FVector>(PrincePosterHead, PrincePosterTail, PrincePosition);
+					//UE_LOG(LogGPCode, Warning, TEXT("PRINCE MY BALLZ"));
+					//UE_LOG(LogGPCode, Warning, TEXT("%s"), *Poster->GetName());
+					//DrawDebugSphere(GetWorld(), PrincePos, 200.f, 64, FColor::Red);
+					if (IsInFireRange(PrincePos))
+					{
+						return true;
+					}
+					break;
+				}
+			}
+		}
+
+		PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 		// Prince is in same poster
 		if (PrincePosition >= 0.f && PrincePosition <= 1.f)
 		{
 			return true;
 		}
-
-		FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
-		FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
-		FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
-		// TODO PRINCE IN CONE RANGE
 
 		PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
 		APosterActor* LeftPoster = 0;
@@ -613,7 +630,7 @@ bool APosterActor::PrinceIsInFireRange()
 			PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(LeftPoster);
 			float SoldierDir = _GetSoldierDirection();
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
-				&& _LastOrientation * SoldierDir <  0 && SoldierDir < 0)
+				&& _LastOrientation * SoldierDir >  0 && SoldierDir > 0)
 			{
 				return true;
 			}
@@ -624,7 +641,7 @@ bool APosterActor::PrinceIsInFireRange()
 			PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(RightPoster);
 			float SoldierDir = _GetSoldierDirection();
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
-				&& _LastOrientation * SoldierDir < 0 && SoldierDir > 0)
+				&& _LastOrientation * SoldierDir > 0 && SoldierDir < 0)
 			{
 				return true;
 			}
@@ -763,7 +780,13 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
 	FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
 	SoldierPos.Z = Position.Z;
+	//UE_LOG(LogGPCode, Warning, TEXT("ANGLE : %s"), *(Position - SoldierPos).UnsafeNormal().ToString());
+	//UE_LOG(LogGPCode, Warning, TEXT("BALLZ : %s"), *FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal().ToString());
+	//UE_LOG(LogGPCode, Warning, TEXT("SOLDIER : %s"), *SoldierPos.ToString());
+	//UE_LOG(LogGPCode, Warning, TEXT("SOLDIER : %s"), *GetName());
+	//UE_LOG(LogGPCode, Warning, TEXT("PRINCE MES COUILLES : %s"), *Position.ToString());
 
+	//DrawDebugSphere(GetWorld(), SoldierPos, 500.f, 64, FColor::Red);
 	return FVector::DotProduct(
 		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
 		(Position - SoldierPos).UnsafeNormal()
