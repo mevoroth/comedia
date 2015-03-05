@@ -29,6 +29,8 @@ public:
 	PathNode* GetDoorNode(const APosterActor* Poster) const;
 	PathNode* GetLastNode(APosterActor* Poster);
 
+	PathNode* GetLastNode(APosterActor* Poster);
+
 private:
 	UWorld* World;
 };
