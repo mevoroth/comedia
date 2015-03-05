@@ -15,7 +15,6 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, MaxIterations(10)
 	, _DistanceFromHead(0)
 	, _DistanceFromTail(0)
-	, Grabbed(false)
 	, ResetSpeed(1.f)
 	, State(INIT)
 	, DelayBetweenBones(0.15f)
@@ -265,7 +264,7 @@ void APosterActor::SetEffector(const FTransform& Effector)
 void APosterActor::Grabbing(bool Grabbing)
 {
 	ALiyaCharacter* Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
-	if ((State & GRABBABLE) && Grabbing)
+	if ((State & GRABBABLE) && Grabbing && bIsGrabbable)
 	{
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{

@@ -119,6 +119,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
 	APosterActor* DoorLinkedPoster;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	bool bIsGrabbable;
+
 	/** Precision */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float Precision;
@@ -142,14 +145,6 @@ public:
 	/** Delay between bones when reset */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float DelayBetweenBones;
-
-	/** If grab is used */
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
-	bool Grabbed;
-
-	/** If grab is enabled */
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia]Poster")
-	bool GrabEnabled;
 
 	/** Delay before reset poster */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
