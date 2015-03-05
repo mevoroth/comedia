@@ -556,9 +556,33 @@ bool APosterActor::SoldierKills()
 
 bool APosterActor::PrinceIsInFireRange()
 {
+	// Cone is disabled
+	int32 ToggleCount = 0;
+	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
+	{
+		++ToggleCount;
+	}
+
+	if (ToggleCount % 2 == 0)
+	{
+		return false;
+	}
+
 	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 	if (LevelScriptActor)
 	{
+		float PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(this);
+		// Prince is in same poster
+		if (PrincePosition >= 0.f && PrincePosition <= 1.f)
+		{
+			return true;
+		}
+
+		FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
+		FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
+		FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
+		// TODO PRINCE IN CONE RANGE
+
 		PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
 		APosterActor* LeftPoster = 0;
 		APosterActor* RightPoster = 0;
@@ -578,7 +602,7 @@ bool APosterActor::PrinceIsInFireRange()
 
 		if (LeftPoster)
 		{
-			float PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(LeftPoster);
+			PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(LeftPoster);
 			float SoldierDir = _GetSoldierDirection();
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
 				&& _LastOrientation * SoldierDir <  0 && SoldierDir < 0)
@@ -589,7 +613,7 @@ bool APosterActor::PrinceIsInFireRange()
 
 		if (RightPoster)
 		{
-			float PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(RightPoster);
+			PrincePosition = LevelScriptActor->CurrentLevelPathGraph.GetCharacterPosition(RightPoster);
 			float SoldierDir = _GetSoldierDirection();
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
 				&& _LastOrientation * SoldierDir < 0 && SoldierDir > 0)
