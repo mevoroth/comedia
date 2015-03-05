@@ -16,8 +16,6 @@ PathCharacter::~PathCharacter()
 
 void PathCharacter::UpdateCharacter(float DeltaSeconds)
 {
-	UE_LOG(LogGPCode, Log, TEXT("IsHidden: %d"), bIsHidden ? 1 : 0);
-
 	if (PathNodes.Num() > 0 && IndexCurrentTargetNode < PathNodes.Num())
 	{
 		float PosterSize = (LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation() - LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation()).Size();
