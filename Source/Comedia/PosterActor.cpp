@@ -775,7 +775,7 @@ void APosterActor::_UpdateEffector()
 	}
 }
 
-bool APosterActor::IsDetached() const
+float APosterActor::DetachRatio() const
 {
 	float Dist = 0.f;
 	int32 c = PosterMesh->SkeletalMesh->RefSkeleton.GetNum();
@@ -787,7 +787,7 @@ bool APosterActor::IsDetached() const
 		b.Z = 0;
 		Dist += FVector::Dist(a, b);
 	}
-	return Dist / c > 100.f;
+	return FMath::Clamp(Dist / (c * 100.f), 0.f, 1.f);
 }
 
 void APosterActor::_Reset(float DeltaSeconds)
