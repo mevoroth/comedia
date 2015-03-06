@@ -27,6 +27,7 @@ public:
 	void Tick(float DeltaSeconds);
 	const PathNode* GetNode(const FVector& Location, const APosterActor* Poster) const;
 	PathNode* GetDoorNode(const APosterActor* Poster) const;
+	PathNode* GetRespawnNode(const APosterActor*) const;
 	PathNode* GetLastNode(APosterActor* Poster);
 
 private:
