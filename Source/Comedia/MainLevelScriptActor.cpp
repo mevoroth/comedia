@@ -11,6 +11,9 @@ AMainLevelScriptActor::AMainLevelScriptActor(const FObjectInitializer& FOI)
 
 void AMainLevelScriptActor::BeginPlay()
 {
+	//Check respawn matinee set
+	check(RespawnMatinee);
+
 	CurrentLevelPathGraph = PathGraph();
 	CurrentLevelPathGraph.InitNodes(GetWorld());
 

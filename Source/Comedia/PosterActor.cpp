@@ -598,14 +598,14 @@ bool APosterActor::SoldierKills()
 	// Liya killed
 	if (IsInFireRange(Player->GetActorLocation()))
 	{
-		OnKill();
+		OnKillLiyah();
 		return true;
 	}
 
 	// Prince killed
 	if (PrinceIsInFireRange())
 	{
-		OnKill();
+		OnKillPrince();
 		return true;
 	}
 	return false;
@@ -631,9 +631,11 @@ bool APosterActor::PrinceIsInFireRange()
 
 		if (ToggleCount % 2 == 1)
 		{
-			for (TObjectIterator<APosterActor> It; It; ++It)
+			TArray<APosterActor*> PosterKeys;
+			LevelScriptActor->CurrentLevelPathGraph.MapHeadNodes.GetKeys(PosterKeys);
+			for (int i = 0; i < PosterKeys.Num(); i++)
 			{
-				APosterActor* Poster = *It;
+				APosterActor* Poster = PosterKeys[i];
 				PrincePosition = LevelScriptActor->PathMainCharacter.GetCharacterPosition(Poster);
 				if (PrincePosition > 0.f && PrincePosition < 1.f)
 				{
@@ -871,9 +873,22 @@ void APosterActor::OnGrab_Implementation(const FVector& Position)
 }
 
 
-void APosterActor::OnKill_Implementation()
+void APosterActor::OnKillLiyah_Implementation()
 {
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (Character && Character->CurrentRespawnZone)
+	{
+		Character->CurrentRespawnZone->StartRespawn();
+	}
+}
 
+void APosterActor::OnKillPrince_Implementation()
+{
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (Character && Character->CurrentRespawnZone)
+	{
+		Character->CurrentRespawnZone->StartRespawn();
+	}
 }
 
 void APosterActor::_CancelOverridingCamPosition()

@@ -5,6 +5,7 @@
 #include "Engine/LevelScriptActor.h"
 #include "PathGraph.h"
 #include "PathCharacter.h"
+#include "Matinee/MatineeActor.h"
 #include "MainLevelScriptActor.generated.h"
 
 /**
@@ -19,6 +20,9 @@ public:
 	PathGraph CurrentLevelPathGraph;
 	PathCharacter PathMainCharacter;
 	PathNode* RandomNode;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]LevelBP")
+	AMatineeActor* RespawnMatinee;
 
 	FORCEINLINE PathGraph GetPathGraph()
 	{

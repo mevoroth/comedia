@@ -10,6 +10,25 @@ ARespawnZoneActor::ARespawnZoneActor(const FObjectInitializer& FOI)
 {
 }
 
+void ARespawnZoneActor::BeginPlay()
+{
+	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	RespawnMatinee = LevelScriptActor->RespawnMatinee;
+}
+
+void ARespawnZoneActor::StartRespawn()
+{
+	if (RespawnMatinee)
+	{
+		RespawnMatinee->Play();
+	}
+	else
+	{
+		UE_LOG(LogGPCode, Error, TEXT("NO RESPAWN MATINEE FOUND"));
+		Respawn();
+	}
+}
+
 void ARespawnZoneActor::Respawn()
 {
 	//Replace player respawn position

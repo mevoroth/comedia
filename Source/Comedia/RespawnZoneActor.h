@@ -4,6 +4,7 @@
 
 #include "PosterActor.h"
 #include "GameFramework/Actor.h"
+#include "Matinee/MatineeActor.h"
 #include "RespawnZoneActor.generated.h"
 
 /**
@@ -17,6 +18,9 @@ class COMEDIA_API ARespawnZoneActor : public AActor
 public:
 	ARespawnZoneActor(const FObjectInitializer& FOI);
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]RespawnZone")
+	AMatineeActor* RespawnMatinee;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]RespawnZone")
 	FVector PlayerRespawnLocation;
 
@@ -25,6 +29,11 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]RespawnZone")
 	TArray<APosterActor*> PostersToReinit;
+
+	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]RespawnZone")
+	void StartRespawn();
 
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]RespawnZone")
 	void Respawn();
