@@ -179,6 +179,12 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	USphereComponent* GripTailComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	UStaticMeshComponent* DoorComponent;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Door")
+	bool DoorEnabled;
 private:
 	PosterState State;
 	/** Root to target distance */
