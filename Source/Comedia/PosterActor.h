@@ -88,6 +88,8 @@ public:
 	void OnResetFinished();
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual bool ToggleFootStep();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
+	bool OnWayFound();
 #pragma endregion Poster Events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
