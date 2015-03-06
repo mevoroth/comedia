@@ -104,7 +104,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
 	virtual bool SoldierKills();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
-	void OnKill();
+	void OnKillLiyah();
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
+	void OnKillPrince();
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	bool IsInFireRange(const FVector& Position) const;
 	bool PrinceIsInFireRange();
