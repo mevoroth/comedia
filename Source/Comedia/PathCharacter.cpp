@@ -2,6 +2,7 @@
 
 #include "Comedia.h"
 #include "PathCharacter.h"
+#include "LiyaCharacter.h"
 
 PathCharacter::PathCharacter()
 {
@@ -216,6 +217,17 @@ void PathCharacter::_CrossNextNode()
 	LocalPosition = PathNodes[IndexCurrentTargetNode]->NodePosition;
 	LastCrossedNode = PathNodes[IndexCurrentTargetNode];
 	IndexCurrentTargetNode++;
+
+	if (LastCrossedNode->NodeType == ENodeType::NT_CheckpointNode)
+	{
+		ALiyaCharacter* Liya = Cast<ALiyaCharacter>(World->GetFirstPlayerController()->GetCharacter());
+		if (Liya)
+		{
+			UE_LOG(LogGPCode, Warning, TEXT("PRINCE IS IN RESPAWN NODE"));
+			Liya->CurrentRespawnZone = LastCrossedNode->PosterOwner->RespawnZone;
+			LastCrossedNode->NodeType = ENodeType::NT_BasicNode;
+		}
+	}
 
 	if (PathNodes.Num() > 1 && IndexCurrentTargetNode == PathNodes.Num())
 	{
