@@ -549,9 +549,12 @@ void APosterActor::Tick(float DeltaSeconds)
 		);
 	}
 
-	_SoldierComponent->SetComponentTickEnabled(SoldierPatrolEnabled);
-	_SoldierComponent->SetVisibility(SoldierPatrolEnabled, true);
-	_SoldierComponent->SetHiddenInGame(!SoldierPatrolEnabled, true);
+	if (_SoldierComponent)
+	{
+		_SoldierComponent->SetComponentTickEnabled(SoldierPatrolEnabled);
+		_SoldierComponent->SetVisibility(SoldierPatrolEnabled, true);
+		_SoldierComponent->SetHiddenInGame(!SoldierPatrolEnabled, true);
+	}
 
 	if (SoldierPatrolEnabled)
 	{
