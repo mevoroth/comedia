@@ -277,9 +277,7 @@ void APosterActor::UpdateChain()
 
 void APosterActor::ResetPoster()
 {
-	State = INIT;
-	_ResetAlpha = 42000000.0f;
-	UE_LOG(LogGPCode, Log, TEXT("Poster reinit"));
+	State = RESET_FIRST_FRAME;
 }
 
 void APosterActor::SetEffector(const FTransform& Effector)
@@ -517,6 +515,14 @@ void APosterActor::Tick(float DeltaSeconds)
 				}
 			}
 		}
+		break;
+	case RESET_FIRST_FRAME:
+		_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
+		_Reset(0.f);
+		State = RESET_SECOND_FRAME;
+		break;
+	case RESET_SECOND_FRAME:
+		State = INIT;
 		break;
 	}
 

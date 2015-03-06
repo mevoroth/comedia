@@ -33,6 +33,8 @@ class COMEDIA_API APosterActor : public AActor
 		GRABBED = 1,
 		ONSTICK = 2,
 		STICKED = 3,
+		RESET_FIRST_FRAME = 4,
+		RESET_SECOND_FRAME = 5,
 		GRABBABLE = 0x1 << 30,
 		HEADISROOT = 0x1 << 31
 	};
