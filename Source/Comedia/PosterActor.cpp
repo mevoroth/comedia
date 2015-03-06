@@ -29,6 +29,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _SoldierPreviousPos(0.f)
 	, _MaxDistanceBetweenGrip(0.f)
 	, FireRangeAngle(90.f)
+	, DoorEnabled(false)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -45,6 +46,10 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 
 	ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
 	_MeshMaterialInst = MeshMaterial.Object;
+
+	DoorComponent = FOI.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("DoorComponent"));
+	DoorComponent->TranslucencySortPriority = 100;
+	DoorComponent->AttachTo(RootComponent);
 
 	LeftGrabbedCamPosition = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("Left Grabbed Cam Position"));
 	LeftGrabbedCamPosition->AttachTo(PosterMesh);
@@ -265,6 +270,7 @@ void APosterActor::UpdateChain()
 			check(DeltaRotation.IsNormalized());
 
 			_BonesBuff[BoneIndex - 1].SetRotation(DeltaRotation * _BonesBuff[BoneIndex - 1].GetRotation());
+			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex), _BonesBuff[BoneIndex - 1], EBoneSpaces::WorldSpace);
 		}
 	}
 }
@@ -514,8 +520,32 @@ void APosterActor::Tick(float DeltaSeconds)
 		break;
 	}
 
+	if (DoorComponent)
+	{
+		DoorComponent->SetComponentTickEnabled(DoorEnabled);
+		DoorComponent->SetVisibility(DoorEnabled, true);
+		DoorComponent->SetHiddenInGame(!DoorEnabled, true);
+	}
+
+	if (DoorEnabled && DoorComponent)
+	{
+		FTransform MiddleBone = PosterMesh->GetBoneTransform((PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2) / 2 + 1);
+
+		FVector Loc = MiddleBone.GetLocation();
+		Loc.Z -= 100.f;
+
+		DoorComponent->SetWorldTransform(
+			FTransform(
+				MiddleBone.Rotator() + FRotator(0.f, -90.f, -90.f),
+				Loc,
+				FVector(1.f, 1.f, 1.f)
+			)
+		);
+	}
+
 	_SoldierComponent->SetComponentTickEnabled(SoldierPatrolEnabled);
 	_SoldierComponent->SetVisibility(SoldierPatrolEnabled, true);
+	_SoldierComponent->SetHiddenInGame(!SoldierPatrolEnabled, true);
 
 	if (SoldierPatrolEnabled)
 	{
