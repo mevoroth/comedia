@@ -872,6 +872,7 @@ void APosterActor::OnGrab_Implementation(const FVector& Position)
 	if (AssociatedBlockingVolume)
 	{
 		AssociatedBlockingVolume->SetActorEnableCollision(false);
+		OnWayFound();
 	}
 }
 
