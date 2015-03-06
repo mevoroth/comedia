@@ -3,6 +3,7 @@
 #pragma once
 
 #include "LiyaCamera.h"
+#include "RespawnZoneActor.h"
 
 #include "GameFramework/Character.h"
 #include "LiyaCharacter.generated.h"
@@ -67,6 +68,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	USceneComponent* Camera;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
+	ARespawnZoneActor* CurrentRespawnZone;
 
 	float LengthTravellingScriptedCamera = 2.0f;
 	float LengthTravellingBackScriptedCamera = 0.0f;

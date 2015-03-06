@@ -269,6 +269,13 @@ void APosterActor::UpdateChain()
 	}
 }
 
+void APosterActor::ResetPoster()
+{
+	State = INIT;
+	_ResetAlpha = 42000000.0f;
+	UE_LOG(LogGPCode, Log, TEXT("Poster reinit"));
+}
+
 void APosterActor::SetEffector(const FTransform& Effector)
 {
 	int32 First = (State & HEADISROOT) ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : 1;
@@ -344,13 +351,7 @@ void APosterActor::Grabbing(bool Grabbing)
 			OnRelease(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
 			//Remove camera override
-			if (Character->OverrideScriptedCameraPosition.GetLocation() == LeftGrabbedCamPosition->ComponentToWorld.GetLocation() || Character->OverrideScriptedCameraPosition.GetLocation() == RightGrabbedCamPosition->ComponentToWorld.GetLocation())
-			{
-				Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
-				Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
-				Character->OverrideScriptedCameraPosition = FTransform();
-
-			}
+			_CancelOverridingCamPosition();
 			//Update graph nodes
 			if (LevelScriptActor)
 			{
@@ -362,6 +363,8 @@ void APosterActor::Grabbing(bool Grabbing)
 			OnRelease(Character->GetActorLocation());
 			OnStick(Character->GetActorLocation());
 			Character->NotifyReleasePoster();
+			//Remove camera override
+			_CancelOverridingCamPosition();
 			_GrabbedCurrentPosition = _Effector;
 			_StickedAlpha = 0.f;
 			//Update graph nodes
@@ -812,4 +815,17 @@ void APosterActor::OnGrab_Implementation(const FVector& Position)
 void APosterActor::OnKill_Implementation()
 {
 
+}
+
+void APosterActor::_CancelOverridingCamPosition()
+{
+	//Remove camera override
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (Character && Character->OverrideScriptedCameraPosition.GetLocation() == LeftGrabbedCamPosition->ComponentToWorld.GetLocation() || Character->OverrideScriptedCameraPosition.GetLocation() == RightGrabbedCamPosition->ComponentToWorld.GetLocation())
+	{
+		Character->StartTravellingPosition = Character->Camera->GetRelativeTransform();
+		Character->LengthTravellingBackScriptedCamera = Character->ElapsedTravellingScriptedCamera;
+		Character->OverrideScriptedCameraPosition = FTransform();
+
+	}
 }

@@ -17,7 +17,8 @@ namespace ENodeType
 		NT_HiddingNode UMETA(DisplayName = "HiddingNode"),
 		NT_DoorNode    UMETA(DisplayName = "DoorNode"),
 		NT_SideNode    UMETA(DisplayName = "SideNode"),
-		NT_StartNode   UMETA(DisplayName = "StartNode")
+		NT_StartNode   UMETA(DisplayName = "StartNode"),
+		NT_RespawnNode UMETA(DisplayName = "RespawnNode")
 	};
 }
 
@@ -53,6 +54,7 @@ public:
 	bool IsDetached() const;
 
 	void UpdateChain();
+	void ResetPoster();
 
 	void SetEffector(const FTransform& Effector);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
@@ -228,6 +230,8 @@ private:
 	float _SoldierCurrentPos;
 	float _SoldierPreviousPos;
 	float _GetSoldierDirection() const;
+
+	void _CancelOverridingCamPosition();
 
 #pragma region Poster Events
 	bool _ResetCalled;

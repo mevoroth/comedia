@@ -182,7 +182,8 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 			{
 				//Check if overlapping compo is a sphere compo
 				USphereComponent* GripComponent = Cast<USphereComponent>(OverlappingComponentsTail[i]);
-				if (GripComponent)
+				APosterActor* PosterOwner = (GripComponent) ? Cast<APosterActor>(GripComponent->GetOwner()) : nullptr;
+				if (GripComponent && PosterOwner)
 				{
 					//Check if other poster is different than current poster
 					APosterActor* OtherPoster = Cast<APosterActor>(GripComponent->GetOwner());
@@ -349,6 +350,24 @@ PathNode* PathGraph::GetDoorNode(const APosterActor* Poster) const
 	}
 
 	return DoorNode;
+}
+
+PathNode* PathGraph::GetRespawnNode(const APosterActor* Poster) const
+{
+	PathNode* Current = *MapHeadNodes.Find(Poster);
+	PathNode* RespawnNode = nullptr;
+
+	while (Current->RightNode != nullptr && Current->RightNode->PosterOwner == Poster && RespawnNode == nullptr)
+	{
+		if (Current->NodeType == ENodeType::NT_RespawnNode || Current->NodeType == ENodeType::NT_StartNode)
+		{
+			RespawnNode = Current;
+		}
+
+		Current = Current->RightNode;
+	}
+
+	return RespawnNode;
 }
 
 void PathGraph::Tick(float DeltaSeconds)
