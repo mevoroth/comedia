@@ -354,6 +354,7 @@ void ALiyaCharacter::CallCharacter()
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
 			if (LevelScript->PathMainCharacter.MoveTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
 			{
+				OncallCharacter();
 				_CallCooldown = CallCooldown;
 			}
 		}
@@ -369,3 +370,8 @@ void ALiyaCharacter::CallCharacter()
 		//}
 	}
 }
+
+//void ALiyaCharacter::Oncall_Implementation()
+//{
+//
+//}

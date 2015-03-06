@@ -53,7 +53,7 @@ private_subobject:
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
-	bool IsDetached() const;
+	float DetachRatio() const;
 
 	void UpdateChain();
 	void ResetPoster();

@@ -137,6 +137,9 @@ protected:
 	void CallCharacter();
 #pragma endregion Controls
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
+	bool OncallCharacter();
+
 private:
 	FVector2D _Accel;
 	FVector2D _Speed;
