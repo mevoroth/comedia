@@ -2,11 +2,10 @@
 
 #pragma once
 
-#include "PosterActor.h"
 #include "GameFramework/Actor.h"
 #include "Matinee/MatineeActor.h"
 #include "RespawnZoneActor.generated.h"
-
+class APosterActor;
 /**
  * 
  */

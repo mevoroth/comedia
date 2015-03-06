@@ -620,6 +620,11 @@ bool APosterActor::PrinceIsInFireRange()
 
 	if (LevelScriptActor)
 	{
+		if (LevelScriptActor->PathMainCharacter.bIsHidden)
+		{
+			return false;
+		}
+
 		float PrincePosition = -1.f;
 
 		// Cone is disabled
@@ -879,6 +884,7 @@ void APosterActor::OnGrab_Implementation(const FVector& Position)
 
 void APosterActor::OnKillLiyah_Implementation()
 {
+	UE_LOG(LogGPCode, Warning, TEXT("LIYA EST MOURRU"));
 	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	if (Character && Character->CurrentRespawnZone)
 	{
@@ -888,6 +894,7 @@ void APosterActor::OnKillLiyah_Implementation()
 
 void APosterActor::OnKillPrince_Implementation()
 {
+	UE_LOG(LogGPCode, Warning, TEXT("PRINCE EST MOURRU"));
 	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	if (Character && Character->CurrentRespawnZone)
 	{

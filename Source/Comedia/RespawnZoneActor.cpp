@@ -4,6 +4,7 @@
 #include "RespawnZoneActor.h"
 #include "PathNode.h"
 #include "MainLevelScriptActor.h"
+#include "PosterActor.h"
 
 ARespawnZoneActor::ARespawnZoneActor(const FObjectInitializer& FOI)
 	: Super(FOI)

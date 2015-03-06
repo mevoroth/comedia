@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "RespawnZoneActor.h"
 #include "GameFramework/Actor.h"
 #include "PosterActor.generated.h"
 
@@ -18,7 +19,8 @@ namespace ENodeType
 		NT_DoorNode    UMETA(DisplayName = "DoorNode"),
 		NT_SideNode    UMETA(DisplayName = "SideNode"),
 		NT_StartNode   UMETA(DisplayName = "StartNode"),
-		NT_RespawnNode UMETA(DisplayName = "RespawnNode")
+		NT_RespawnNode UMETA(DisplayName = "RespawnNode"),
+		NT_CheckpointNode UMETA(DisplayName = "CheckpointNode")
 	};
 }
 
@@ -136,6 +138,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
 	APosterActor* DoorLinkedPoster;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
+	ARespawnZoneActor* RespawnZone;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	bool bIsGrabbable;
