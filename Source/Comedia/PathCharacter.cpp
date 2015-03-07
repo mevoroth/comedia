@@ -209,6 +209,12 @@ void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingN
 			UE_LOG(LogGPCode, Log, TEXT("Start exit hidding animation"));
 			bIsHidden = false;
 		}
+
+		ALiyaCharacter* Liya = Cast<ALiyaCharacter>(World->GetFirstPlayerController()->GetCharacter());
+		if (Liya)
+		{
+			Liya->UpdateHidding(bIsHidden);
+		}
 	}
 }
 
@@ -244,8 +250,6 @@ void PathCharacter::_CrossNextNode()
 				PathNode* LinkedNode = CurrentPathGraph->GetDoorNode(LastCrossedNode->PosterOwner->DoorLinkedPoster);
 				if (LinkedNode != nullptr)
 				{
-					LastCrossedNode->PosterOwner->PathCharacterGoThroughDoor(LastCrossedNode->GetNodeLocation());
-
 					//Set poster grabbable when character go through a poster
 					LastCrossedNode->PosterOwner->bIsGrabbable = true;
 
