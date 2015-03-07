@@ -723,6 +723,24 @@ void APosterActor::_Soldier(float DeltaSeconds)
 		float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
 		float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
 
+		//Update soldier state
+		if (SoldierState == ESoldierState::ST_Idle || SoldierState == ESoldierState::ST_Walking)
+		{
+			if (_SoldierPreviousPos == _SoldierCurrentPos)
+			{
+				SoldierState = ESoldierState::ST_Idle;
+			}
+			else
+			{
+				SoldierState = ESoldierState::ST_Walking;
+
+				if (_SoldierCurrentPos > _SoldierPreviousPos && bSoldierFlipped || _SoldierCurrentPos < _SoldierPreviousPos && !bSoldierFlipped)
+				{
+					bSoldierFlipped = !bSoldierFlipped;
+				}
+			}
+		}
+
 		_SoldierPreviousPos = _SoldierCurrentPos;
 		_SoldierCurrentPos = SampledSoldier;
 		
@@ -890,6 +908,8 @@ void APosterActor::OnKillLiyah_Implementation()
 	{
 		Character->CurrentRespawnZone->StartRespawn();
 	}
+
+	SoldierState = ESoldierState::ST_ShootingFace;
 }
 
 void APosterActor::OnKillPrince_Implementation()
@@ -900,6 +920,8 @@ void APosterActor::OnKillPrince_Implementation()
 	{
 		Character->CurrentRespawnZone->StartRespawn();
 	}
+
+	SoldierState = ESoldierState::ST_ShootingSide;
 }
 
 void APosterActor::_CancelOverridingCamPosition()
