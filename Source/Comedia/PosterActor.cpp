@@ -527,7 +527,7 @@ void APosterActor::Tick(float DeltaSeconds)
 				}
 				else
 				{
-					if (Character)
+					if (Character && Ratio != -1.f)
 						Character->UpdateRunAnim(false);
 				}
 			}
