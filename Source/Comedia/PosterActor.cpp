@@ -881,7 +881,7 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 		++ToggleCount;
 	}
 
-	if (ToggleCount % 2 == 1)
+	if (ToggleCount % 2 == 0)
 	{
 		return false;
 	}
