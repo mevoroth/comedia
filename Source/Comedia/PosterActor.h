@@ -198,6 +198,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Door")
 	bool DoorEnabled;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]PosterPath")
+	void PathCharacterGoThroughDoor(FVector DoorPosition);
 private:
 	PosterState State;
 	/** Root to target distance */
