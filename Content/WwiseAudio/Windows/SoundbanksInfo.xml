@@ -1,15 +1,438 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" SchemaVersion="10" SoundbankVersion="112">
 	<RootPaths>
-		<ProjectRoot>C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\daniel.quach\Documents\Comedia\Content\WwiseAudio\Windows\</SoundBanksRoot>
+		<ProjectRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\louis-marie.alet\Documents\GitHub\comedia\Content\WwiseAudio\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\daniel.quach\Documents\MGRWWISE\TEST PAPIER DECHIRE\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<SoundBanks>
+		<SoundBank Id="239188210" Language="SFX">
+			<ShortName>VSBANK</ShortName>
+			<Path>VSBANK.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3802016694" Name="Crosscinemat"/>
+				<Event Id="1384703060" Name="CrossMusic"/>
+				<Event Id="2291874042" Name="FadeinBellls"/>
+				<Event Id="3137572166" Name="FadeinGroundBass"/>
+				<Event Id="3678643990" Name="FadeinKeysnare"/>
+				<Event Id="3840998157" Name="FadeinMetal4"/>
+				<Event Id="3930107678" Name="FadeinMisc"/>
+				<Event Id="2650841211" Name="FadeinOrchestra"/>
+				<Event Id="725735106" Name="FadeinPerc"/>
+				<Event Id="531344210" Name="FadeinVibrametal3"/>
+				<Event Id="2580551146" Name="StartVS"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="1953402" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="2950969" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="5402268" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="6985705" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="7173264" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="11147287" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-008.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-008_5A140B9B.wem</Path>
+				</File>
+				<File Id="17458941" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="20845975" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="28076947" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x SingleShots huge-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="40209752" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="49430634" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x Bursts natural-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="66066790" Language="SFX">
+					<ShortName>OuagadougouStreet_SFXB.129.wav</ShortName>
+					<Path>SFX\OuagadougouStreet_SFXB.129_9209B708.wem</Path>
+				</File>
+				<File Id="83720713" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="84155188" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-006.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="99630150" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="104600075" Language="SFX">
+					<ShortName>ForestBirdsChirp_SFXB.70.wav</ShortName>
+					<Path>SFX\ForestBirdsChirp_SFXB.70_67D2D182.wem</Path>
+				</File>
+				<File Id="105406187" Language="SFX">
+					<ShortName>WarassetsBoulder Explosion-001.wav</ShortName>
+					<Path>SFX\WarassetsBoulder Explosion-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="111096390" Language="SFX">
+					<ShortName>Intro_Misc.wav</ShortName>
+					<Path>SFX\Intro_Misc_73A26916.wem</Path>
+				</File>
+				<File Id="111830127" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-002.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="115084327" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="121142198" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-003.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="141104663" Language="SFX">
+					<ShortName>WarassetsBoulder Explosion-002.wav</ShortName>
+					<Path>SFX\WarassetsBoulder Explosion-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="153624781" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="170622134" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="184471533" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="195223667" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-001.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="206801395" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-008.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-008_5A140B9B.wem</Path>
+				</File>
+				<File Id="207038404" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="225628905" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x SingleShots huge-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="227292541" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-006.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="236108985" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="242772020" Language="SFX">
+					<ShortName>Explo_Medium_15_Deep.wav</ShortName>
+					<Path>SFX\Explo_Medium_15_Deep_5A140B9B.wem</Path>
+				</File>
+				<File Id="247470190" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="259003074" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="276029912" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-004.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="302425522" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x Bursts natural-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="312058861" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="314323075" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x SingleShots huge-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="317073340" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-007.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-007_5A140B9B.wem</Path>
+				</File>
+				<File Id="336745573" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-005.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="337740990" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="340517003" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-003.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="350044637" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="350610275" Language="SFX">
+					<ShortName>Explosions - Explosion Large 2x Low Rumble 02.wav</ShortName>
+					<Path>SFX\Explosions - Explosion Large 2x Low Rumble 02_5A140B9B.wem</Path>
+				</File>
+				<File Id="352995879" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-007.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-007_5A140B9B.wem</Path>
+				</File>
+				<File Id="355838398" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="357732375" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="359393471" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-009.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-009_5A140B9B.wem</Path>
+				</File>
+				<File Id="376941250" Language="SFX">
+					<ShortName>Intro_Windbells.wav</ShortName>
+					<Path>SFX\Intro_Windbells_73A26916.wem</Path>
+				</File>
+				<File Id="381862445" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="394939005" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="401318392" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="405192892" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="411774607" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="413226637" Language="SFX">
+					<ShortName>Intro_Vibra.wav</ShortName>
+					<Path>SFX\Intro_Vibra_73A26916.wem</Path>
+				</File>
+				<File Id="413427431" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-006.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="445796786" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x Bursts natural-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="449163153" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-005.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="482980505" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="523776118" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="533805615" Language="SFX">
+					<ShortName>Explosion Cannon Fire 02.wav</ShortName>
+					<Path>SFX\Explosion Cannon Fire 02_5A140B9B.wem</Path>
+				</File>
+				<File Id="542536767" Language="SFX">
+					<ShortName>Intro_Chords.wav</ShortName>
+					<Path>SFX\Intro_Chords_73A26916.wem</Path>
+				</File>
+				<File Id="555842963" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="564640529" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-003.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="566421368" Language="SFX">
+					<ShortName>Explosions - Explosion Single Large 07.wav</ShortName>
+					<Path>SFX\Explosions - Explosion Single Large 07_5A140B9B.wem</Path>
+				</File>
+				<File Id="568165928" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-001.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="579602903" Language="SFX">
+					<ShortName>Corrupt_orchestra.wav</ShortName>
+					<Path>SFX\Corrupt_orchestra_4AF0AF3A.wem</Path>
+				</File>
+				<File Id="625090475" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="629672077" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="652154375" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-006.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="653604826" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-004.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="662110302" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="685649671" Language="SFX">
+					<ShortName>Intro_GroundBass.wav</ShortName>
+					<Path>SFX\Intro_GroundBass_73A26916.wem</Path>
+				</File>
+				<File Id="696444877" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-002.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="703592306" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-006.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="712780750" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="713359772" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="733082762" Language="SFX">
+					<ShortName>WarassetsBoulder Explosion-003.wav</ShortName>
+					<Path>SFX\WarassetsBoulder Explosion-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="743078939" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="753405024" Language="SFX">
+					<ShortName>Corrupt_Bells.wav</ShortName>
+					<Path>SFX\Corrupt_Bells_4AF0AF3A.wem</Path>
+				</File>
+				<File Id="757813133" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="757898946" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x SingleShots huge-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="762439768" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="782678198" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="792848095" Language="SFX">
+					<ShortName>ForestMorningBirds_SFXB.75.wav</ShortName>
+					<Path>SFX\ForestMorningBirds_SFXB.75_AB18AC3D.wem</Path>
+				</File>
+				<File Id="814228929" Language="SFX">
+					<ShortName>Corrupt_Drum_bass.wav</ShortName>
+					<Path>SFX\Corrupt_Drum_bass_4AF0AF3A.wem</Path>
+				</File>
+				<File Id="818002858" Language="SFX">
+					<ShortName>Corrupt_keysnare.wav</ShortName>
+					<Path>SFX\Corrupt_keysnare_4AF0AF3A.wem</Path>
+				</File>
+				<File Id="829410330" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="846466455" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="864210333" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="867006433" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="872046843" Language="SFX">
+					<ShortName>Corrupt_Perc.wav</ShortName>
+					<Path>SFX\Corrupt_Perc_4AF0AF3A.wem</Path>
+				</File>
+				<File Id="876896833" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="915030595" Language="SFX">
+					<ShortName>WarassetsAK47 V1 4x Bursts natural-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="921998893" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="946588468" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="950844973" Language="SFX">
+					<ShortName>Teaser test 3.wav</ShortName>
+					<Path>SFX\Teaser test 3_AD751C0B.wem</Path>
+				</File>
+				<File Id="998259513" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-006.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="1027068266" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="1048698904" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="1071230320" Language="SFX">
+					<ShortName>Corrupt_Vibraphone.wav</ShortName>
+					<Path>SFX\Corrupt_Vibraphone_4AF0AF3A.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="529726550" Language="SFX">
 			<ShortName>ENV</ShortName>
 			<Path>ENV.bnk</Path>
@@ -231,10 +654,6 @@
 				<Event Id="3749639609" Name="Start_AMB_POC"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="31323866" Language="SFX">
-					<ShortName>S_MUS_POC.wav</ShortName>
-					<Path>SFX\S_MUS_POC_9209B708.wem</Path>
-				</File>
 				<File Id="37334847" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERSEQ-013.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERSEQ-013_9209B708.wem</Path>
@@ -242,10 +661,6 @@
 				<File Id="78091238" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERGRAB-002.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERGRAB-002_9209B708.wem</Path>
-				</File>
-				<File Id="104471255" Language="SFX">
-					<ShortName>S_AMB_POC_WIND.wav</ShortName>
-					<Path>SFX\S_AMB_POC_WIND_8EF17A91.wem</Path>
 				</File>
 				<File Id="138719345" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERSEQ-002.wav</ShortName>

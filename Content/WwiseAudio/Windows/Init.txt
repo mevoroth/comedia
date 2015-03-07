@@ -12,7 +12,7 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	4236861272	Dialogs			\Default Work Unit\Master Audio Bus\HDR BUS\Dialogs	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
-	19910373	REverb_city			\Default Work Unit\Master Audio Bus\Monrovia\REverb_city	
+	19910373	Reverb_city			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_city	
 	3610144935	ReverbAmb			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances\ReverbAmb	
 
 Effect plug-ins	ID	Name	Type				Notes
