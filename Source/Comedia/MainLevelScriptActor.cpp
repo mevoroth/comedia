@@ -11,6 +11,8 @@ AMainLevelScriptActor::AMainLevelScriptActor(const FObjectInitializer& FOI)
 
 void AMainLevelScriptActor::BeginPlay()
 {
+	Super::BeginPlay();
+
 	//Check respawn matinee set
 	check(RespawnMatinee);
 
@@ -34,6 +36,7 @@ void AMainLevelScriptActor::BeginPlay()
 
 void AMainLevelScriptActor::Tick(float DeltaSeconds)
 {
+	Super::Tick(DeltaSeconds);
 	//CurrentLevelPathGraph.DrawNodes();
 	//CurrentLevelPathGraph.DrawPath(RandomNode);
 	PathMainCharacter.UpdateCharacter(DeltaSeconds);

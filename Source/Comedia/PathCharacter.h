@@ -15,6 +15,7 @@ public:
 	PathNode* LastCrossedNode;
 	int32 IndexCurrentTargetNode;
 	float LocalPosition;
+	float PreviousLocalPosition;
 	float MovingSpeed = 300.0f;
 	bool bIsHidden = false;
 

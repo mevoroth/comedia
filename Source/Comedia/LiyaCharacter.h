@@ -111,6 +111,12 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	bool GetGrabbing() const;
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]AnimBlueprint")
 	void SetHeightDisplacement(float Height);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Prince")
+	bool UpdateRunAnim(bool Run);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Prince")
+	bool UpdateHidding(bool Hidding);
 #pragma endregion AnimBlueprint
 
 	virtual void BeginPlay() override;

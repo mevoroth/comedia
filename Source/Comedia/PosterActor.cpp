@@ -468,11 +468,20 @@ void APosterActor::Tick(float DeltaSeconds)
 				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+				Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
+				UE_LOG(LogGPCode, Warning, TEXT("%f :: %f"), Ratio, _LastAnimatedObjectPosition);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
 				{
 					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
 					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
 					_LastAnimatedObjectPosition = Ratio;
+					if (Character)
+						Character->UpdateRunAnim(true);
+				}
+				else
+				{
+					if (Character && Ratio != -1.f)
+						Character->UpdateRunAnim(false);
 				}
 			}
 		}
@@ -507,11 +516,19 @@ void APosterActor::Tick(float DeltaSeconds)
 				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+				Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
 				{
 					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
 					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
 					_LastAnimatedObjectPosition = Ratio;
+					if (Character)
+						Character->UpdateRunAnim(true);
+				}
+				else
+				{
+					if (Character)
+						Character->UpdateRunAnim(false);
 				}
 			}
 		}
@@ -837,6 +854,20 @@ FVector APosterActor::GetPosterForward() const
 
 bool APosterActor::IsInFireRange(const FVector& Position) const
 {
+	int32 ToggleCount = 0;
+	float Min, Max;
+	_TimelineComponent->GetTimeRange(Min, Max);
+	float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
+	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
+	{
+		++ToggleCount;
+	}
+
+	if (ToggleCount % 2 == 1)
+	{
+		return false;
+	}
+
 	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
 	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
 	FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);

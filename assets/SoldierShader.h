@@ -50,9 +50,14 @@ if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 		);
 	}
 	float4 SpriteCol = Sprite.Sample(SpriteSampler, UV);
-	if (SpriteCol.r == 0 && SpriteCol.g == 0 && SpriteCol.b == 0)
+	if (SpriteCol.g > 0.75 && SpriteCol.r < 0.1 && SpriteCol.b < 0.1)
 	{
+		SpriteCol.g = 0;
 		SpriteCol.a = 0;
+	}
+	else
+	{
+		SpriteCol.a = 1;
 	}
 	
 	float4 BackgroundCol = Background.Sample(BackgroundSampler, TexCoord.xy);
