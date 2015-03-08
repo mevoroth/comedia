@@ -130,6 +130,11 @@ public:
 	bool PrinceIsInFireRange();
 #pragma endregion Soldier
 
+#pragma region Feedbacks
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Feedbacks")
+	virtual void SetFeedbackObject(USceneComponent* FeedbackObject);
+#pragma endregion Feedbacks
+
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -219,6 +224,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	UMaterialInstance* MeshMaterialInst;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Feedbacks")
+	bool bShowFeedback;
 private:
 	PosterState State;
 	/** Root to target distance */
@@ -268,6 +276,8 @@ private:
 	float _GetSoldierDirection() const;
 
 	void _CancelOverridingCamPosition();
+
+	USceneComponent* _FeedbackObject;
 
 #pragma region Poster Events
 	bool _ResetCalled;

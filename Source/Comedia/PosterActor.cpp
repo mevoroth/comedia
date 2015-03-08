@@ -30,6 +30,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _MaxDistanceBetweenGrip(0.f)
 	, FireRangeAngle(90.f)
 	, DoorEnabled(false)
+	, bShowFeedback(false)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -131,6 +132,11 @@ void APosterActor::BeginPlay()
 	{
 		bIsGrabbable = false;
 	}
+}
+
+void APosterActor::SetFeedbackObject(USceneComponent* FeedbackObject)
+{
+	_FeedbackObject = FeedbackObject;
 }
 
 void APosterActor::SetSoldier(USceneComponent* SoldierComponent)
@@ -249,7 +255,7 @@ void APosterActor::UpdateChain()
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
 #if defined WITH_EDITOR
-			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
+			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
 #endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
@@ -300,7 +306,13 @@ void APosterActor::Grabbing(bool Grabbing)
 		{
 		case INIT:
 		case STICKED:
+			if (!_ResetCalled)
+			{
+				return;
+			}
+
 			State = (PosterState)((State & HEADISROOT) | GRABBED);
+			
 			if (!Character)
 			{
 				UE_LOG(LogGPCode, Error, TEXT("No Character"));
@@ -395,6 +407,8 @@ void APosterActor::InRange(bool HeadIsRoot)
 			State = (PosterState)(State & ~HEADISROOT);
 		}
 		State = (PosterState)(State | GRABBABLE);
+		bShowFeedback = true;
+		break;
 	case STICKED:
 		if (HeadIsRoot && (State & HEADISROOT)
 			|| !(HeadIsRoot || (State | ~HEADISROOT)))
@@ -543,6 +557,20 @@ void APosterActor::Tick(float DeltaSeconds)
 		break;
 	}
 
+	// Update feedbacks
+	bShowFeedback = (State & GRABBABLE) != 0 && _ResetCalled;
+	PosterMesh->SetRenderCustomDepth(bShowFeedback);
+	if (FeedbackMesh)
+	{
+		FeedbackMesh->SetVisibility(bShowFeedback, true);
+	}
+	if (_FeedbackObject)
+	{
+		_FeedbackObject->SetVisibility(bShowFeedback, true);
+		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
+		_FeedbackObject->SetRelativeRotation(FRotator(0.f, Character->Camera->GetComponentRotation().Yaw, 0.f));
+	}
+
 	if (DoorComponent)
 	{
 		DoorComponent->SetComponentTickEnabled(DoorEnabled);
@@ -573,16 +601,6 @@ void APosterActor::Tick(float DeltaSeconds)
 		_SoldierComponent->SetHiddenInGame(!SoldierPatrolEnabled, true);
 	}
 
-	if (SoldierPatrolEnabled)
-	{
-		if (SoldierKills())
-		{
-			UE_LOG(LogGPCode, Warning, TEXT("IL EST MOURRU"));
-			return;
-		}
-		_Soldier(DeltaSeconds);
-	}
-
 	//Update callzone position
 	FTransform TransformMiddlePosterBone = PosterMesh->GetBoneTransformByName(PosterMesh->GetBoneName(((PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) / 2) + 1), EBoneSpaces::WorldSpace);
 	CallTrigger->SetWorldLocation(TransformMiddlePosterBone.GetLocation());
@@ -594,6 +612,15 @@ void APosterActor::Tick(float DeltaSeconds)
 		MainLevelScriptActor->CurrentLevelPathGraph.UpdatePosterNodes(this);
 	}
 
+	if (SoldierPatrolEnabled)
+	{
+		if (SoldierKills())
+		{
+			UE_LOG(LogGPCode, Warning, TEXT("IL EST MOURRU"));
+			return;
+		}
+		_Soldier(DeltaSeconds);
+	}
 }
 
 float APosterActor::_GetSoldierDirection() const
