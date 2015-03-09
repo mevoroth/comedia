@@ -13,6 +13,8 @@ Frame
 FrameCol
 FrameRow
 Orientation
+Foreground
+ForegroundAlpha
 
 // SpritePos : Ratio of Background Texture
 float RatioPoster = BackgroundTexSize.y / BackgroundTexSize.x;
@@ -64,13 +66,25 @@ if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 	}
 	
 	float4 BackgroundCol = Background.Sample(BackgroundSampler, TexCoord.xy);
-	
-	return float4(
+	float4 ForegroundCol = Foreground.Sample(ForegroundSampler, TexCoord.xy);
+	float4 FinalCol = float4(
 		SpriteCol.rgb * SpriteCol.a + BackgroundCol.rgb * (1 - SpriteCol.a),
 		SpriteCol.a * SpriteCol.a + BackgroundCol.a * (1 - SpriteCol.a)
+	);
+	ForegroundCol.a *= ForegroundAlpha;
+
+	return float4(
+		ForegroundCol.rgb * ForegroundCol.a + FinalCol.rgb * (1 - ForegroundCol.a),
+		ForegroundCol.a * ForegroundCol.a + FinalCol.a * (1 - ForegroundCol.a)
 	);
 }
 else
 {
-	return Background.Sample(BackgroundSampler, TexCoord.xy);
+	float4 BackgroundCol = Background.Sample(BackgroundSampler, TexCoord.xy);
+	float4 ForegroundCol = Foreground.Sample(ForegroundSampler, TexCoord.xy);
+	ForegroundCol.a *= ForegroundAlpha;
+	return float4(
+		ForegroundCol.rgb * ForegroundCol.a + BackgroundCol.rgb * (1 - ForegroundCol.a),
+		ForegroundCol.a * ForegroundCol.a + BackgroundCol.a * (1 - ForegroundCol.a)
+	);
 }
