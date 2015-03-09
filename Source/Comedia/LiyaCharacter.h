@@ -117,6 +117,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Prince")
 	bool UpdateHidding(bool Hidding);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Prince")
+	bool ResetPrinceAnims();
 #pragma endregion AnimBlueprint
 
 	virtual void BeginPlay() override;

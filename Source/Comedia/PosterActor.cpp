@@ -307,12 +307,11 @@ void APosterActor::Grabbing(bool Grabbing)
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
 		case INIT:
-		case STICKED:
 			if (!_ResetCalled)
 			{
 				return;
 			}
-
+		case STICKED:
 			State = (PosterState)((State & HEADISROOT) | GRABBED);
 			
 			if (!Character)
@@ -474,6 +473,7 @@ void APosterActor::Tick(float DeltaSeconds)
 
 	Super::Tick(DeltaSeconds);
 	ALiyaCharacter* Character = 0;
+	Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case INIT:
@@ -485,7 +485,6 @@ void APosterActor::Tick(float DeltaSeconds)
 				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-				Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 				//UE_LOG(LogGPCode, Warning, TEXT("%f :: %f"), Ratio, _LastAnimatedObjectPosition);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
 				{
@@ -508,7 +507,6 @@ void APosterActor::Tick(float DeltaSeconds)
 		_SoldierEnabled = false;
 		_UpdateEffector();
 		UpdateChain();
-		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 		if (!Character)
 		{
 			UE_LOG(LogGPCode, Error, TEXT("No Character"));
@@ -533,7 +531,6 @@ void APosterActor::Tick(float DeltaSeconds)
 				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
 				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-				Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
 				{
 					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
@@ -553,6 +550,13 @@ void APosterActor::Tick(float DeltaSeconds)
 	case RESET_FIRST_FRAME:
 		_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
 		_Reset(0.f);
+
+		if (Character)
+		{
+			Character->ResetPrinceAnims();
+			Character->NotifyReleasePoster();
+		}
+
 		State = RESET_SECOND_FRAME;
 		break;
 	case RESET_SECOND_FRAME:
@@ -586,15 +590,16 @@ void APosterActor::Tick(float DeltaSeconds)
 		FTransform MiddleBone = PosterMesh->GetBoneTransform((PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2) / 2 + 1);
 
 		FVector Loc = MiddleBone.GetLocation();
-		Loc.Z -= 100.f;
+		Loc.Z -= 150.f;
 
 		DoorComponent->SetWorldTransform(
 			FTransform(
 				MiddleBone.Rotator() + FRotator(0.f, -90.f, -90.f),
 				Loc,
-				FVector(1.f, 1.f, 1.f)
+				FVector(3.f, 3.f, 3.f)
 			)
 		);
+		DoorComponent->AddRelativeLocation(FVector(10.f, 0.f, 0.f));
 	}
 
 	if (_SoldierComponent)
