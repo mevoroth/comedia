@@ -396,6 +396,11 @@ void APosterActor::Grabbing(bool Grabbing)
 
 void APosterActor::InRange(bool HeadIsRoot)
 {
+	if (!bIsGrabbable)
+	{
+		return;
+	}
+
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case INIT:
@@ -422,6 +427,11 @@ void APosterActor::InRange(bool HeadIsRoot)
 
 void APosterActor::OutRange()
 {
+	if (!bIsGrabbable)
+	{
+		return;
+	}
+
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case INIT:
@@ -565,11 +575,11 @@ void APosterActor::Tick(float DeltaSeconds)
 	}
 
 	// Update feedbacks
-	bShowFeedback = bShowFeedback || ((State & GRABBABLE) != 0 && _ResetCalled);
+	bShowFeedback = bShowFeedback || (bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled);
 	if (FeedbackMesh)
 	{
-		PosterMesh->SetRenderCustomDepth((State & GRABBABLE) != 0 && _ResetCalled);
-		FeedbackMesh->SetVisibility((State & GRABBABLE) != 0 && _ResetCalled, true);
+		PosterMesh->SetRenderCustomDepth(bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled);
+		FeedbackMesh->SetVisibility(bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled, true);
 	}
 	if (_FeedbackObject)
 	{
@@ -819,7 +829,7 @@ void APosterActor::_Soldier(float DeltaSeconds)
 		{
 			if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
 			{
-				_SoldierComponent->GetChildComponent(i)->SetVisibility(ToggleCount % 2 == 0 ? false : true, true);
+				_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
 				break;
 			}
 		}
