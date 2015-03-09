@@ -44,8 +44,8 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	FeedbackMesh->SetRelativeLocation(FVector::ZeroVector);
 	FeedbackMesh->SetVisibility(false);
 
-	ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
-	_MeshMaterialInst = MeshMaterial.Object;
+	//ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
+	//MeshMaterialInst = MeshMaterial.Object;
 
 	DoorComponent = FOI.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("DoorComponent"));
 	DoorComponent->TranslucencySortPriority = 100;
@@ -466,10 +466,10 @@ void APosterActor::Tick(float DeltaSeconds)
 			if (LevelScriptActor)
 			{
 				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
-				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
+				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
-				UE_LOG(LogGPCode, Warning, TEXT("%f :: %f"), Ratio, _LastAnimatedObjectPosition);
+				//UE_LOG(LogGPCode, Warning, TEXT("%f :: %f"), Ratio, _LastAnimatedObjectPosition);
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
 				{
 					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
@@ -514,7 +514,7 @@ void APosterActor::Tick(float DeltaSeconds)
 			if (LevelScriptActor)
 			{
 				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
-				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, _MeshMaterialInst);
+				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
 				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
 				Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
