@@ -132,15 +132,17 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 		{
 			//Interpolate cam position and rotation
 			ElapsedTravellingScriptedCamera += DeltaSeconds;
-			float AlphaTravelling = ElapsedTravellingScriptedCamera / LengthTravellingScriptedCamera;
+			float AlphaTravelling = FMath::Clamp(ElapsedTravellingScriptedCamera / LengthTravellingScriptedCamera, 0.0f, 1.0f);
 			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), OverrideScriptedCameraPosition.GetLocation(), AlphaTravelling);
 			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), OverrideScriptedCameraPosition.GetRotation(), AlphaTravelling);
 			Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
+			UE_LOG(LogGPCode, Log, TEXT("Fuck: %f"), AlphaTravelling);
 		}
 		else
 		{
-			Camera->SetWorldTransform(OverrideScriptedCameraPosition);
+			Camera->SetWorldLocationAndRotation(OverrideScriptedCameraPosition.GetLocation(), OverrideScriptedCameraPosition.GetRotation());
+			//Camera->SetWorldTransform(OverrideScriptedCameraPosition);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
 		}
 
