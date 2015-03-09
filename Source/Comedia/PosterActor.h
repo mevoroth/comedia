@@ -66,6 +66,12 @@ private_subobject:
 	UBoxComponent* CallTrigger;
 
 public:
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
+	void PrinceGoThroughDoor(FVector Position);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
+	void PrinceHiding(bool bHiding, FVector Position);
+
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	float DetachRatio() const;
 
@@ -75,6 +81,8 @@ public:
 	void SetEffector(const FTransform& Effector);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void Grabbing(bool Grabbing);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
+	bool IsGrabbing() const;
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")
 	void InRange(bool HeadIsRoot);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Poster")

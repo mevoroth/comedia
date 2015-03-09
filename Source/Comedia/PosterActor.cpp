@@ -1019,3 +1019,8 @@ bool APosterActor::IsPrinceCallable() const
 {
 	return KeyPoints.Num() > 0;
 }
+
+bool APosterActor::IsGrabbing() const
+{
+	return (State & GRABBED) != 0;
+}

@@ -1,4 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
+	259090811	StopTearing			\Default Work Unit\VS\StopTearing	
+	357264855	SecretPassage			\Default Work Unit\VS\SecretPassage	
 	415739490	moving_corpse			\Default Work Unit\VS\moving_corpse	
 	1491659777	Liyacalls			\Default Work Unit\VS\Liyacalls	
 	1653961176	Corpseflies			\Default Work Unit\VS\Corpseflies	
@@ -64,6 +66,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	207038404	WarassetsCannon Medium Distant-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\WarassetsCannon Medium Distant-004_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Random war events\Heavy war events\WarassetsCannon Medium Distant-004		224769
 	225628905	WarassetsAK47 V1 4x SingleShots huge-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\WarassetsAK47 V1 4x SingleShots huge-004_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Random war events\Light war events\WarassetsAK47 V1 4x SingleShots huge-004		308380
 	227292541	WarassetsAK47-2 Bursts 9x 05-006	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\WarassetsAK47-2 Bursts 9x 05-006_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Random war events\Light war events\WarassetsAK47-2 Bursts 9x 05-006		105443
+	230097331	Secret passage	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_SECRETPATH_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Feedbacks\Secret passage		295603
 	236108985	WarassetsMosin Nagant Shot Sequence 5x 08-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\WarassetsMosin Nagant Shot Sequence 5x 08-002_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Random war events\Light war events\WarassetsMosin Nagant Shot Sequence 5x 08-002		66571
 	242772020	Explo_Medium_15_Deep	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Explo_Medium_15_Deep_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Random war events\Heavy war events\Explo_Medium_15_Deep		47675
 	247470190	WarassetsCannon Medium Distant-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\WarassetsCannon Medium Distant-003_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Random war events\Heavy war events\WarassetsCannon Medium Distant-003		183291

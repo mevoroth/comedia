@@ -202,11 +202,14 @@ void PathCharacter::_LaunchAnimation(TEnumAsByte<ENodeType::Type> CorrespondingN
 		if (bStarting)
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Start Hidding Animation"));
+			LastCrossedNode->PosterOwner->PrinceHiding(true, LastCrossedNode->GetNodeLocation());
 			bIsHidden = true;
+
 		}
 		else
 		{
 			UE_LOG(LogGPCode, Log, TEXT("Start exit hidding animation"));
+			LastCrossedNode->PosterOwner->PrinceHiding(false, LastCrossedNode->GetNodeLocation());
 			bIsHidden = false;
 		}
 
@@ -241,6 +244,7 @@ void PathCharacter::_CrossNextNode()
 		if (LastCrossedNode->NodeType == ENodeType::NT_HiddingNode)
 		{
 			_LaunchAnimation(ENodeType::NT_HiddingNode, true);
+			
 		}
 		//Check if character reach a door node
 		else if (LastCrossedNode->NodeType == ENodeType::NT_DoorNode)
@@ -250,6 +254,7 @@ void PathCharacter::_CrossNextNode()
 				PathNode* LinkedNode = CurrentPathGraph->GetDoorNode(LastCrossedNode->PosterOwner->DoorLinkedPoster);
 				if (LinkedNode != nullptr)
 				{
+					LastCrossedNode->PosterOwner->PrinceGoThroughDoor(LastCrossedNode->GetNodeLocation());
 					LinkedNode->NodeType = LastCrossedNode->NodeType = ENodeType::NT_BasicNode;
 					//Set poster grabbable when character go through a poster
 					LastCrossedNode->PosterOwner->bIsGrabbable = true;

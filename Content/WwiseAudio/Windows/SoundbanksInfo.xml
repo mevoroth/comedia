@@ -17,8 +17,10 @@
 				<Event Id="1653961176" Name="Corpseflies"/>
 				<Event Id="1491659777" Name="Liyacalls"/>
 				<Event Id="415739490" Name="moving_corpse"/>
+				<Event Id="357264855" Name="SecretPassage"/>
 				<Event Id="2580551146" Name="StartVS"/>
 				<Event Id="1803197027" Name="Stick"/>
+				<Event Id="259090811" Name="StopTearing"/>
 				<Event Id="2046419128" Name="Tearingposter"/>
 				<Event Id="4007042535" Name="TP_PRINCE"/>
 			</IncludedEvents>
@@ -186,6 +188,10 @@
 				<File Id="227292541" Language="SFX">
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-006.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="230097331" Language="SFX">
+					<ShortName>S_SFX_POC_SECRETPATH.wav</ShortName>
+					<Path>SFX\S_SFX_POC_SECRETPATH_9209B708.wem</Path>
 				</File>
 				<File Id="236108985" Language="SFX">
 					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-002.wav</ShortName>
