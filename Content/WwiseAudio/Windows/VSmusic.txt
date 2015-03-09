@@ -1,0 +1,37 @@
+Event	ID	Name			Wwise Object Path	Notes
+	531344210	FadeinVibrametal3			\Default Work Unit\VS\FadeinVibrametal3	
+	725735106	FadeinPerc			\Default Work Unit\VS\FadeinPerc	
+	1384703060	CrossMusic			\Default Work Unit\VS\CrossMusic	
+	2082104583	StartVSmus			\Default Work Unit\VS\StartVSmus	
+	2291874042	FadeinBellls			\Default Work Unit\VS\FadeinBellls	
+	2650841211	FadeinOrchestra			\Default Work Unit\VS\FadeinOrchestra	
+	3137572166	FadeinGroundBass			\Default Work Unit\VS\FadeinGroundBass	
+	3678643990	FadeinKeysnare			\Default Work Unit\VS\FadeinKeysnare	
+	3802016694	Crosscinemat			\Default Work Unit\VS\Crosscinemat	
+	3840998157	FadeinMetal4			\Default Work Unit\VS\FadeinMetal4	
+	3930107678	FadeinMisc			\Default Work Unit\VS\FadeinMisc	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	660161944	MusicCueMetal4			\Default Work Unit\MusicCueMetal4	
+	758816271	MusicCueGbass			\Default Work Unit\MusicCueGbass	
+	2187678061	MusicCueVibra			\Default Work Unit\MusicCueVibra	
+	2524081563	MusicCueKeysnare			\Default Work Unit\MusicCueKeysnare	
+	2640867255	MusicCuePerc			\Default Work Unit\MusicCuePerc	
+	3109239329	MusicCueMiscCeramic			\Default Work Unit\MusicCueMiscCeramic	
+	3549244603	MusicCueBells			\Default Work Unit\MusicCueBells	
+	3942776840	MusicCueOrchestra			\Default Work Unit\MusicCueOrchestra	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	111096390	Intro_Misc	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Misc_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Misc		7500736
+	376941250	Intro_Windbells	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Windbells_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Windbells		6521951
+	413226637	Intro_Vibra	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Vibra_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Vibra		6849004
+	542536767	Intro_Chords	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Chords_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Chords		6884531
+	579602903	Corrupt_orchestra	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_orchestra_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_orchestra		8529483
+	685649671	Intro_GroundBass	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_GroundBass_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_GroundBass		6711758
+	753405024	Corrupt_Bells	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_Bells_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_Bells		7252751
+	814228929	Corrupt_Drum_bass	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_Drum_bass_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_Drum_bass		7761088
+	818002858	Corrupt_keysnare	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_keysnare_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_keysnare		8813833
+	872046843	Corrupt_Perc	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_Perc_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_Perc		10165416
+	950844973	Teaser test 3	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Teaser test 3_AD751C0B.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Cinematic\Outro\Teaser test 3		5722990
+	1071230320	Corrupt_Vibraphone	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_Vibraphone_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_Vibraphone		7905874
+
