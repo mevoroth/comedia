@@ -133,12 +133,16 @@ public:
 #pragma region Feedbacks
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Feedbacks")
 	virtual void SetFeedbackObject(USceneComponent* FeedbackObject);
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Feedbacks")
+	virtual bool IsPrinceCallable() const;
 #pragma endregion Feedbacks
 
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void Tick(float DeltaSeconds) override;
+#if !defined UE_BUILD_SHIPPING
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster")
 	USceneComponent* LeftGrabbedCamPosition;
