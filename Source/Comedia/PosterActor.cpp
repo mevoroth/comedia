@@ -68,6 +68,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+#if !defined UE_BUILD_SHIPPING
 void APosterActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	UE_LOG(LogGPCode, Log, TEXT("PostEditChangeProperty"));
@@ -77,6 +78,7 @@ void APosterActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChanged
 		KeyNodeTypes.SetNumZeroed(KeyPoints.Num());
 	}
 }
+#endif
 
 void APosterActor::BeginPlay()
 {
@@ -426,6 +428,7 @@ void APosterActor::OutRange()
 	case INIT:
 	case STICKED:
 		State = (PosterState)(State & ~GRABBABLE);
+		bShowFeedback = false;
 		break;
 	}
 }
@@ -558,11 +561,11 @@ void APosterActor::Tick(float DeltaSeconds)
 	}
 
 	// Update feedbacks
-	bShowFeedback = (State & GRABBABLE) != 0 && _ResetCalled;
-	PosterMesh->SetRenderCustomDepth(bShowFeedback);
+	bShowFeedback = bShowFeedback || ((State & GRABBABLE) != 0 && _ResetCalled);
 	if (FeedbackMesh)
 	{
-		FeedbackMesh->SetVisibility(bShowFeedback, true);
+		PosterMesh->SetRenderCustomDepth((State & GRABBABLE) != 0 && _ResetCalled);
+		FeedbackMesh->SetVisibility((State & GRABBABLE) != 0 && _ResetCalled, true);
 	}
 	if (_FeedbackObject)
 	{
@@ -942,6 +945,7 @@ void APosterActor::OnResetFinished_Implementation()
 		if (AssociatedBlockingVolume)
 		{
 			AssociatedBlockingVolume->SetActorEnableCollision(true);
+			UE_LOG(LogGPCode, Warning, TEXT("ON : %s"), *AssociatedBlockingVolume->GetName());
 		}
 		_ResetCalled = true;
 	}
@@ -952,6 +956,7 @@ void APosterActor::OnGrab_Implementation(const FVector& Position)
 {
 	if (AssociatedBlockingVolume)
 	{
+		UE_LOG(LogGPCode, Warning, TEXT("OFF : %s"), *AssociatedBlockingVolume->GetName());
 		AssociatedBlockingVolume->SetActorEnableCollision(false);
 		OnWayFound();
 	}
@@ -993,4 +998,9 @@ void APosterActor::_CancelOverridingCamPosition()
 		Character->OverrideScriptedCameraPosition = FTransform();
 
 	}
+}
+
+bool APosterActor::IsPrinceCallable() const
+{
+	return KeyPoints.Num() > 0;
 }
