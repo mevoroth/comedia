@@ -9,11 +9,13 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	2470532526	Knife loop			\Default Work Unit\Master Audio Bus\HDR BUS\Knife loop	
 	3224081837	Normal SFX			\Default Work Unit\Master Audio Bus\HDR BUS\Normal SFX	
 	3430673687	Paper Bus			\Default Work Unit\Master Audio Bus\Monrovia\Paper Bus	
+	3472939855	Voice bus			\Default Work Unit\Master Audio Bus\Monrovia\Voice bus	
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 	4236861272	Dialogs			\Default Work Unit\Master Audio Bus\HDR BUS\Dialogs	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 	19910373	Reverb_city			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_city	
+	596825374	REvvoice			\Default Work Unit\Master Audio Bus\Monrovia\Voice bus\REvvoice	
 	3610144935	ReverbAmb			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances\ReverbAmb	
 
 Effect plug-ins	ID	Name	Type				Notes

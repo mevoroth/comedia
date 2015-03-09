@@ -1,0 +1,18 @@
+Event	ID	Name			Wwise Object Path	Notes
+	135425691	Dialogstep_Princefound			\Default Work Unit\VS\Dialogstep_Princefound	
+	1494817907	DialogStep			\Default Work Unit\VS\DialogStep	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	38592185	S_DIA_VS_Areyouok	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Areyouok_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Areyouok		79197
+	84126565	S_DIA_VS_Getout	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Getout_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Getout		82051
+	172264890	S_DIA_VS_Cinematiq	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Cinematiq_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Cinematiq		459330
+	264191319	S_DIA_VS_Hideinthere	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Hideinthere_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Hideinthere		430329
+	292177664	S_DIA_VS_Listen Prince	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Listen Prince_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Listen Prince		364356
+	336649758	Dialoginit	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Dialoginit_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\Dialoginit		289669
+	438401864	S_DIA_VS_Whyleavealone	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Whyleavealone_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Whyleavealone		96967
+	533590662	S_DIA_VS_Alrightdoor	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Alrightdoor_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Alrightdoor		206069
+	584425979	S_DIA_VS_Longwayhome-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Longwayhome-002_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Longwayhome-002		114545
+	776450925	S_DIA_VS_Longwayhome-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Longwayhome-001_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Longwayhome-001		140895
+	850438854	S_DIA_VS_Speechfooot	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Speechfooot_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Speechfooot		1034869
+	874248980	S_DIA_VS_Hereyouare	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Hereyouare_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Hereyouare		56638
+
