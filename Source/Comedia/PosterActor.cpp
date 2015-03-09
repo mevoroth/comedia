@@ -575,7 +575,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	{
 		_FeedbackObject->SetVisibility(bShowFeedback, true);
 		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
-		_FeedbackObject->SetRelativeRotation(FRotator(0.f, Character->Camera->GetComponentRotation().Yaw, 0.f));
+		_FeedbackObject->SetRelativeRotation(FRotator(0.f, 25.0f, 0.f));
 	}
 
 	if (DoorComponent)
