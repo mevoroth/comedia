@@ -15,9 +15,12 @@ FrameRow
 Orientation
 
 // SpritePos : Ratio of Background Texture
+float RatioPoster = BackgroundTexSize.y / BackgroundTexSize.x;
+float RatioSoldierPosterY = SpriteTexSize.y / BackgroundTexSize.y;
+
 float2 RatioSoldierPoster = float2(
-	BackgroundSize.x / (SpriteTexSize.x),
-	BackgroundSize.y / (SpriteTexSize.y)
+	(BackgroundSize.x * SpriteSize.x) / (SpriteTexSize.x),
+	(BackgroundSize.y * SpriteSize.y) / (SpriteTexSize.y * RatioPoster)
 );
 
 SpritePos = float2(
@@ -26,8 +29,8 @@ SpritePos = float2(
 );
 
 SpriteSize = SpritePos + float2(
-	SpriteSize.x * BackgroundSize.x / (BackgroundTexSize.x * RatioSoldierPoster.x),
-	SpriteSize.y * BackgroundSize.y / (BackgroundTexSize.y * RatioSoldierPoster.y)
+	SpriteSize.x * RatioPoster * RatioSoldierPoster.x / RatioSoldierPoster.y,
+	SpriteSize.y
 );
 
 if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
@@ -61,7 +64,7 @@ if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 	}
 	
 	float4 BackgroundCol = Background.Sample(BackgroundSampler, TexCoord.xy);
-
+	
 	return float4(
 		SpriteCol.rgb * SpriteCol.a + BackgroundCol.rgb * (1 - SpriteCol.a),
 		SpriteCol.a * SpriteCol.a + BackgroundCol.a * (1 - SpriteCol.a)
