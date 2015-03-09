@@ -250,6 +250,7 @@ void PathCharacter::_CrossNextNode()
 				PathNode* LinkedNode = CurrentPathGraph->GetDoorNode(LastCrossedNode->PosterOwner->DoorLinkedPoster);
 				if (LinkedNode != nullptr)
 				{
+					LinkedNode->NodeType = LastCrossedNode->NodeType = ENodeType::NT_BasicNode;
 					//Set poster grabbable when character go through a poster
 					LastCrossedNode->PosterOwner->bIsGrabbable = true;
 
