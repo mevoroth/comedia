@@ -24,6 +24,7 @@
 				<Event Id="2650841211" Name="FadeinOrchestra"/>
 				<Event Id="725735106" Name="FadeinPerc"/>
 				<Event Id="531344210" Name="FadeinVibrametal3"/>
+				<Event Id="1491659777" Name="Liyacalls"/>
 				<Event Id="2580551146" Name="StartVS"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
@@ -63,6 +64,10 @@
 					<ShortName>WarassetsAK47 V1 4x SingleShots huge-002.wav</ShortName>
 					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="34113952" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-006.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-006_9209B708.wem</Path>
+				</File>
 				<File Id="40209752" Language="SFX">
 					<ShortName>WarassetsHand Mortar Large Distant-004.wav</ShortName>
 					<Path>SFX\WarassetsHand Mortar Large Distant-004_5A140B9B.wem</Path>
@@ -74,6 +79,10 @@
 				<File Id="66066790" Language="SFX">
 					<ShortName>OuagadougouStreet_SFXB.129.wav</ShortName>
 					<Path>SFX\OuagadougouStreet_SFXB.129_9209B708.wem</Path>
+				</File>
+				<File Id="77567590" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-008.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-008_9209B708.wem</Path>
 				</File>
 				<File Id="83720713" Language="SFX">
 					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-004.wav</ShortName>
@@ -131,6 +140,10 @@
 					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-001.wav</ShortName>
 					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-001_5A140B9B.wem</Path>
 				</File>
+				<File Id="206771926" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-009.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-009_9209B708.wem</Path>
+				</File>
 				<File Id="206801395" Language="SFX">
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-008.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-008_5A140B9B.wem</Path>
@@ -166,6 +179,10 @@
 				<File Id="276029912" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-004.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="283593798" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-001_9209B708.wem</Path>
 				</File>
 				<File Id="302425522" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x Bursts natural-002.wav</ShortName>
@@ -295,6 +312,14 @@
 					<ShortName>Corrupt_orchestra.wav</ShortName>
 					<Path>SFX\Corrupt_orchestra_4AF0AF3A.wem</Path>
 				</File>
+				<File Id="614845258" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-007.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-007_9209B708.wem</Path>
+				</File>
+				<File Id="623922328" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-003.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-003_9209B708.wem</Path>
+				</File>
 				<File Id="625090475" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-005.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-005_5A140B9B.wem</Path>
@@ -314,6 +339,10 @@
 				<File Id="662110302" Language="SFX">
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-004.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="670576219" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-010.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-010_9209B708.wem</Path>
 				</File>
 				<File Id="685649671" Language="SFX">
 					<ShortName>Intro_GroundBass.wav</ShortName>
@@ -338,6 +367,10 @@
 				<File Id="733082762" Language="SFX">
 					<ShortName>WarassetsBoulder Explosion-003.wav</ShortName>
 					<Path>SFX\WarassetsBoulder Explosion-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="733316483" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-005.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-005_9209B708.wem</Path>
 				</File>
 				<File Id="743078939" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-003.wav</ShortName>
@@ -383,6 +416,10 @@
 					<ShortName>WarassetsHand Mortar Large Distant-002.wav</ShortName>
 					<Path>SFX\WarassetsHand Mortar Large Distant-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="849451207" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-002_9209B708.wem</Path>
+				</File>
 				<File Id="864210333" Language="SFX">
 					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-005.wav</ShortName>
 					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-005_5A140B9B.wem</Path>
@@ -398,6 +435,10 @@
 				<File Id="876896833" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-004.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="896959730" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-004.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-004_9209B708.wem</Path>
 				</File>
 				<File Id="915030595" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x Bursts natural-004.wav</ShortName>
