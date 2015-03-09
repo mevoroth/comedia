@@ -24,6 +24,18 @@ namespace ENodeType
 	};
 }
 
+UENUM(BlueprintType)
+namespace ESoldierState
+{
+	enum Type
+	{
+		ST_Idle          UMETA(DisplayName = "Idle"),
+		ST_Walking       UMETA(DisplayName = "Walking"),
+		ST_ShootingFace  UMETA(DisplayName = "ShootingFace"),
+		ST_ShootingSide  UMETA(DisplayName = "ShootingSide")
+	};
+}
+
 UCLASS()
 class COMEDIA_API APosterActor : public AActor
 {
@@ -156,6 +168,12 @@ public:
 	/** Reset Poster Animation */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	float ResetSpeed;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	TEnumAsByte<ESoldierState::Type> SoldierState;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	bool bSoldierFlipped;
 
 	/** Fire Range Distance */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
