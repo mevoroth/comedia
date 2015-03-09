@@ -14,10 +14,19 @@
 			<ShortName>VSbank</ShortName>
 			<Path>VSbank.bnk</Path>
 			<IncludedEvents>
+				<Event Id="1653961176" Name="Corpseflies"/>
 				<Event Id="1491659777" Name="Liyacalls"/>
+				<Event Id="415739490" Name="moving_corpse"/>
 				<Event Id="2580551146" Name="StartVS"/>
+				<Event Id="1803197027" Name="Stick"/>
+				<Event Id="2046419128" Name="Tearingposter"/>
+				<Event Id="4007042535" Name="TP_PRINCE"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="284442" Language="SFX">
+					<ShortName>Tearmed-008.wav</ShortName>
+					<Path>SFX\Tearmed-008_9209B708.wem</Path>
+				</File>
 				<File Id="1953402" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-005.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-005_5A140B9B.wem</Path>
@@ -50,6 +59,10 @@
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-004.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-004_5A140B9B.wem</Path>
 				</File>
+				<File Id="24476364" Language="SFX">
+					<ShortName>Tearmed-012.wav</ShortName>
+					<Path>SFX\Tearmed-012_9209B708.wem</Path>
+				</File>
 				<File Id="28076947" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x SingleShots huge-002.wav</ShortName>
 					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-002_5A140B9B.wem</Path>
@@ -70,9 +83,21 @@
 					<ShortName>OuagadougouStreet_SFXB.129.wav</ShortName>
 					<Path>SFX\OuagadougouStreet_SFXB.129_9209B708.wem</Path>
 				</File>
+				<File Id="67400036" Language="SFX">
+					<ShortName>Tearheavy-004.wav</ShortName>
+					<Path>SFX\Tearheavy-004_9209B708.wem</Path>
+				</File>
+				<File Id="71943840" Language="SFX">
+					<ShortName>Tearmed-009.wav</ShortName>
+					<Path>SFX\Tearmed-009_9209B708.wem</Path>
+				</File>
 				<File Id="77567590" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-008.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-008_9209B708.wem</Path>
+				</File>
+				<File Id="82625878" Language="SFX">
+					<ShortName>Tearheavy-014.wav</ShortName>
+					<Path>SFX\Tearheavy-014_9209B708.wem</Path>
 				</File>
 				<File Id="83720713" Language="SFX">
 					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-004.wav</ShortName>
@@ -106,9 +131,17 @@
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-003.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-003_5A140B9B.wem</Path>
 				</File>
+				<File Id="131371983" Language="SFX">
+					<ShortName>Tearlight-007.wav</ShortName>
+					<Path>SFX\Tearlight-007_9209B708.wem</Path>
+				</File>
 				<File Id="141104663" Language="SFX">
 					<ShortName>WarassetsBoulder Explosion-002.wav</ShortName>
 					<Path>SFX\WarassetsBoulder Explosion-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="144588654" Language="SFX">
+					<ShortName>Tearheavy-002.wav</ShortName>
+					<Path>SFX\Tearheavy-002_9209B708.wem</Path>
 				</File>
 				<File Id="153624781" Language="SFX">
 					<ShortName>WarassetsCannon Medium Distant-001.wav</ShortName>
@@ -122,9 +155,17 @@
 					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-002.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="189863883" Language="SFX">
+					<ShortName>Tearheavy-008.wav</ShortName>
+					<Path>SFX\Tearheavy-008_9209B708.wem</Path>
+				</File>
 				<File Id="195223667" Language="SFX">
 					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-001.wav</ShortName>
 					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="197639371" Language="SFX">
+					<ShortName>Corpses IN.wav</ShortName>
+					<Path>SFX\Corpses IN_9209B708.wem</Path>
 				</File>
 				<File Id="206771926" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-009.wav</ShortName>
@@ -162,17 +203,45 @@
 					<ShortName>WarassetsStandboeller Small Distant-003.wav</ShortName>
 					<Path>SFX\WarassetsStandboeller Small Distant-003_5A140B9B.wem</Path>
 				</File>
+				<File Id="275539503" Language="SFX">
+					<ShortName>Tearheavy-010.wav</ShortName>
+					<Path>SFX\Tearheavy-010_9209B708.wem</Path>
+				</File>
 				<File Id="276029912" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-004.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="278431778" Language="SFX">
+					<ShortName>Tearlight-009.wav</ShortName>
+					<Path>SFX\Tearlight-009_9209B708.wem</Path>
 				</File>
 				<File Id="283593798" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-001.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-001_9209B708.wem</Path>
 				</File>
+				<File Id="286351415" Language="SFX">
+					<ShortName>TP prince.wav</ShortName>
+					<Path>SFX\TP prince_9209B708.wem</Path>
+				</File>
+				<File Id="295952681" Language="SFX">
+					<ShortName>Tearlight-001.wav</ShortName>
+					<Path>SFX\Tearlight-001_9209B708.wem</Path>
+				</File>
+				<File Id="300905853" Language="SFX">
+					<ShortName>Tearmed-005.wav</ShortName>
+					<Path>SFX\Tearmed-005_9209B708.wem</Path>
+				</File>
 				<File Id="302425522" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x Bursts natural-002.wav</ShortName>
 					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="311360767" Language="SFX">
+					<ShortName>Tearheavy-013.wav</ShortName>
+					<Path>SFX\Tearheavy-013_9209B708.wem</Path>
+				</File>
+				<File Id="311495301" Language="SFX">
+					<ShortName>Tearmed-001.wav</ShortName>
+					<Path>SFX\Tearmed-001_9209B708.wem</Path>
 				</File>
 				<File Id="312058861" Language="SFX">
 					<ShortName>WarassetsStandboeller Small Distant-004.wav</ShortName>
@@ -222,9 +291,21 @@
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-009.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-009_5A140B9B.wem</Path>
 				</File>
+				<File Id="375810154" Language="SFX">
+					<ShortName>Tearheavy-012.wav</ShortName>
+					<Path>SFX\Tearheavy-012_9209B708.wem</Path>
+				</File>
 				<File Id="381862445" Language="SFX">
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-001.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="383570517" Language="SFX">
+					<ShortName>Tearheavy-009.wav</ShortName>
+					<Path>SFX\Tearheavy-009_FA430AAB.wem</Path>
+				</File>
+				<File Id="393818428" Language="SFX">
+					<ShortName>Tearmed-014.wav</ShortName>
+					<Path>SFX\Tearmed-014_9209B708.wem</Path>
 				</File>
 				<File Id="394939005" Language="SFX">
 					<ShortName>WarassetsStandboeller Small Distant-002.wav</ShortName>
@@ -246,6 +327,10 @@
 					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-006.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-006_5A140B9B.wem</Path>
 				</File>
+				<File Id="432856404" Language="SFX">
+					<ShortName>Tearmed-013.wav</ShortName>
+					<Path>SFX\Tearmed-013_9209B708.wem</Path>
+				</File>
 				<File Id="445796786" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x Bursts natural-003.wav</ShortName>
 					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-003_5A140B9B.wem</Path>
@@ -254,9 +339,25 @@
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-005.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-005_5A140B9B.wem</Path>
 				</File>
+				<File Id="456966240" Language="SFX">
+					<ShortName>Tearlight-005.wav</ShortName>
+					<Path>SFX\Tearlight-005_9209B708.wem</Path>
+				</File>
+				<File Id="480792329" Language="SFX">
+					<ShortName>Tearlight-008.wav</ShortName>
+					<Path>SFX\Tearlight-008_9209B708.wem</Path>
+				</File>
 				<File Id="482980505" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-003.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="500845397" Language="SFX">
+					<ShortName>Tearmed-007.wav</ShortName>
+					<Path>SFX\Tearmed-007_9209B708.wem</Path>
+				</File>
+				<File Id="516994881" Language="SFX">
+					<ShortName>Tearlight.wav</ShortName>
+					<Path>SFX\Tearlight_00191951.wem</Path>
 				</File>
 				<File Id="523776118" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001.wav</ShortName>
@@ -265,6 +366,14 @@
 				<File Id="533805615" Language="SFX">
 					<ShortName>Explosion Cannon Fire 02.wav</ShortName>
 					<Path>SFX\Explosion Cannon Fire 02_5A140B9B.wem</Path>
+				</File>
+				<File Id="544328485" Language="SFX">
+					<ShortName>Corpses OUT.wav</ShortName>
+					<Path>SFX\Corpses OUT_9209B708.wem</Path>
+				</File>
+				<File Id="550232835" Language="SFX">
+					<ShortName>Tearlight-004.wav</ShortName>
+					<Path>SFX\Tearlight-004_9209B708.wem</Path>
 				</File>
 				<File Id="555842963" Language="SFX">
 					<ShortName>WarassetsStandboeller Small Distant-001.wav</ShortName>
@@ -282,6 +391,10 @@
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-001.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-001_5A140B9B.wem</Path>
 				</File>
+				<File Id="611759227" Language="SFX">
+					<ShortName>Tearmed-003.wav</ShortName>
+					<Path>SFX\Tearmed-003_9209B708.wem</Path>
+				</File>
 				<File Id="614845258" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-007.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-007_9209B708.wem</Path>
@@ -298,6 +411,10 @@
 					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-001.wav</ShortName>
 					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-001_5A140B9B.wem</Path>
 				</File>
+				<File Id="650233018" Language="SFX">
+					<ShortName>Tearmed-002.wav</ShortName>
+					<Path>SFX\Tearmed-002_9209B708.wem</Path>
+				</File>
 				<File Id="652154375" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-006.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-006_5A140B9B.wem</Path>
@@ -305,6 +422,18 @@
 				<File Id="653604826" Language="SFX">
 					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-004.wav</ShortName>
 					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="654581699" Language="SFX">
+					<ShortName>Tearlight-011.wav</ShortName>
+					<Path>SFX\Tearlight-011_9209B708.wem</Path>
+				</File>
+				<File Id="658266768" Language="SFX">
+					<ShortName>Tearlight-010.wav</ShortName>
+					<Path>SFX\Tearlight-010_9209B708.wem</Path>
+				</File>
+				<File Id="658431707" Language="SFX">
+					<ShortName>Tearlight-015.wav</ShortName>
+					<Path>SFX\Tearlight-015_9209B708.wem</Path>
 				</File>
 				<File Id="662110302" Language="SFX">
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-004.wav</ShortName>
@@ -314,6 +443,10 @@
 					<ShortName>S_DIA_VS_LIYACALLS-010.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-010_9209B708.wem</Path>
 				</File>
+				<File Id="689737330" Language="SFX">
+					<ShortName>Tearmed-011.wav</ShortName>
+					<Path>SFX\Tearmed-011_9209B708.wem</Path>
+				</File>
 				<File Id="696444877" Language="SFX">
 					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-002.wav</ShortName>
 					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-002_5A140B9B.wem</Path>
@@ -321,6 +454,10 @@
 				<File Id="703592306" Language="SFX">
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-006.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="707549851" Language="SFX">
+					<ShortName>Tearlight-006.wav</ShortName>
+					<Path>SFX\Tearlight-006_9209B708.wem</Path>
 				</File>
 				<File Id="712780750" Language="SFX">
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-003.wav</ShortName>
@@ -362,6 +499,14 @@
 					<ShortName>ForestMorningBirds_SFXB.75.wav</ShortName>
 					<Path>SFX\ForestMorningBirds_SFXB.75_AB18AC3D.wem</Path>
 				</File>
+				<File Id="802182126" Language="SFX">
+					<ShortName>Tearlight-012.wav</ShortName>
+					<Path>SFX\Tearlight-012_9209B708.wem</Path>
+				</File>
+				<File Id="818433470" Language="SFX">
+					<ShortName>Tearheavy-007.wav</ShortName>
+					<Path>SFX\Tearheavy-007_9209B708.wem</Path>
+				</File>
 				<File Id="829410330" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-002.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-002_5A140B9B.wem</Path>
@@ -374,6 +519,10 @@
 					<ShortName>S_DIA_VS_LIYACALLS-002.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-002_9209B708.wem</Path>
 				</File>
+				<File Id="863517882" Language="SFX">
+					<ShortName>S_SFX_VS_Stickback2.wav</ShortName>
+					<Path>SFX\S_SFX_VS_Stickback2_9209B708.wem</Path>
+				</File>
 				<File Id="864210333" Language="SFX">
 					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-005.wav</ShortName>
 					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-005_5A140B9B.wem</Path>
@@ -382,13 +531,33 @@
 					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-001.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-001_5A140B9B.wem</Path>
 				</File>
+				<File Id="876868002" Language="SFX">
+					<ShortName>Tearlight-003.wav</ShortName>
+					<Path>SFX\Tearlight-003_9209B708.wem</Path>
+				</File>
 				<File Id="876896833" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-004.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-004_5A140B9B.wem</Path>
 				</File>
+				<File Id="885351302" Language="SFX">
+					<ShortName>S_SFX_VS_Stickback.wav</ShortName>
+					<Path>SFX\S_SFX_VS_Stickback_9209B708.wem</Path>
+				</File>
+				<File Id="895222826" Language="SFX">
+					<ShortName>Tearlight-002.wav</ShortName>
+					<Path>SFX\Tearlight-002_9209B708.wem</Path>
+				</File>
 				<File Id="896959730" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-004.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-004_9209B708.wem</Path>
+				</File>
+				<File Id="897570208" Language="SFX">
+					<ShortName>Tearheavy-001.wav</ShortName>
+					<Path>SFX\Tearheavy-001_9209B708.wem</Path>
+				</File>
+				<File Id="905012821" Language="SFX">
+					<ShortName>Tearheavy-006.wav</ShortName>
+					<Path>SFX\Tearheavy-006_9209B708.wem</Path>
 				</File>
 				<File Id="915030595" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x Bursts natural-004.wav</ShortName>
@@ -398,23 +567,85 @@
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-002.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="927109518" Language="SFX">
+					<ShortName>Tearheavy-003.wav</ShortName>
+					<Path>SFX\Tearheavy-003_9209B708.wem</Path>
+				</File>
 				<File Id="946588468" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002.wav</ShortName>
 					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="952160673" Language="SFX">
+					<ShortName>Tearmed-010.wav</ShortName>
+					<Path>SFX\Tearmed-010_9209B708.wem</Path>
+				</File>
+				<File Id="973649855" Language="SFX">
+					<ShortName>Tearmed-006.wav</ShortName>
+					<Path>SFX\Tearmed-006_9209B708.wem</Path>
 				</File>
 				<File Id="998259513" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-006.wav</ShortName>
 					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-006_5A140B9B.wem</Path>
 				</File>
+				<File Id="1005194290" Language="SFX">
+					<ShortName>Tearheavy-011.wav</ShortName>
+					<Path>SFX\Tearheavy-011_9209B708.wem</Path>
+				</File>
+				<File Id="1011354460" Language="SFX">
+					<ShortName>Tearheavy-005.wav</ShortName>
+					<Path>SFX\Tearheavy-005_9209B708.wem</Path>
+				</File>
+				<File Id="1013526427" Language="SFX">
+					<ShortName>Tearmed-004.wav</ShortName>
+					<Path>SFX\Tearmed-004_9209B708.wem</Path>
+				</File>
+				<File Id="1015951777" Language="SFX">
+					<ShortName>Fliesloop.wav</ShortName>
+					<Path>SFX\Fliesloop_12E227A4.wem</Path>
+				</File>
+				<File Id="1024672738" Language="SFX">
+					<ShortName>Tearlight-013.wav</ShortName>
+					<Path>SFX\Tearlight-013_ACB11255.wem</Path>
+				</File>
 				<File Id="1027068266" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004.wav</ShortName>
 					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="1044845292" Language="SFX">
+					<ShortName>Tearheavy-015.wav</ShortName>
+					<Path>SFX\Tearheavy-015_9209B708.wem</Path>
 				</File>
 				<File Id="1048698904" Language="SFX">
 					<ShortName>WarassetsCannon Medium Distant-002.wav</ShortName>
 					<Path>SFX\WarassetsCannon Medium Distant-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="1067278692" Language="SFX">
+					<ShortName>Tearlight-014.wav</ShortName>
+					<Path>SFX\Tearlight-014_9209B708.wem</Path>
+				</File>
 			</IncludedMemoryFiles>
+			<ExcludedMemoryFiles>
+				<File Id="93016617" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-003.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-003_85F2C191.wem</Path>
+				</File>
+				<File Id="121496141" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-002_9209B708.wem</Path>
+				</File>
+				<File Id="720166042" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-005.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-005_9209B708.wem</Path>
+				</File>
+				<File Id="827410737" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-004.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-004_9209B708.wem</Path>
+				</File>
+				<File Id="943328198" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-001_9209B708.wem</Path>
+				</File>
+			</ExcludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="465169785" Language="SFX">
 			<ShortName>VSmusic</ShortName>
@@ -693,6 +924,64 @@
 		<SoundBank Id="906603238" Language="SFX">
 			<ShortName>Torture</ShortName>
 			<Path>Torture.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1223243288" Language="SFX">
+			<ShortName>VSdialog</ShortName>
+			<Path>VSdialog.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1494817907" Name="DialogStep"/>
+				<Event Id="135425691" Name="Dialogstep_Princefound"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="38592185" Language="SFX">
+					<ShortName>S_DIA_VS_Areyouok.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Areyouok_9209B708.wem</Path>
+				</File>
+				<File Id="84126565" Language="SFX">
+					<ShortName>S_DIA_VS_Getout.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Getout_9209B708.wem</Path>
+				</File>
+				<File Id="172264890" Language="SFX">
+					<ShortName>S_DIA_VS_Cinematiq.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Cinematiq_9209B708.wem</Path>
+				</File>
+				<File Id="264191319" Language="SFX">
+					<ShortName>S_DIA_VS_Hideinthere.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Hideinthere_9209B708.wem</Path>
+				</File>
+				<File Id="292177664" Language="SFX">
+					<ShortName>S_DIA_VS_Listen Prince.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Listen Prince_9209B708.wem</Path>
+				</File>
+				<File Id="336649758" Language="SFX">
+					<ShortName>Dialoginit.wav</ShortName>
+					<Path>SFX\Dialoginit_9209B708.wem</Path>
+				</File>
+				<File Id="438401864" Language="SFX">
+					<ShortName>S_DIA_VS_Whyleavealone.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Whyleavealone_9209B708.wem</Path>
+				</File>
+				<File Id="533590662" Language="SFX">
+					<ShortName>S_DIA_VS_Alrightdoor.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Alrightdoor_9209B708.wem</Path>
+				</File>
+				<File Id="584425979" Language="SFX">
+					<ShortName>S_DIA_VS_Longwayhome-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Longwayhome-002_9209B708.wem</Path>
+				</File>
+				<File Id="776450925" Language="SFX">
+					<ShortName>S_DIA_VS_Longwayhome-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Longwayhome-001_9209B708.wem</Path>
+				</File>
+				<File Id="850438854" Language="SFX">
+					<ShortName>S_DIA_VS_Speechfooot.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Speechfooot_9209B708.wem</Path>
+				</File>
+				<File Id="874248980" Language="SFX">
+					<ShortName>S_DIA_VS_Hereyouare.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Hereyouare_9209B708.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1350668815" Language="SFX">
 			<ShortName>POCBANK</ShortName>
