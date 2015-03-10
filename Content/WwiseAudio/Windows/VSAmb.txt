@@ -1,0 +1,20 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2145862855	Chantfemme			\Default Work Unit\VS\Chantfemme	
+	3157003241	Test			\Default Work Unit\VS\Test	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	110868348	Chant femme-011	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-011_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-011		115443
+	154870931	Chant femme-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-004_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-004		136039
+	159982219	Chant femme-008	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-008_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-008		120027
+	175517482	Chant femme-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-003_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-003		124003
+	191164516	Chant femme-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-001_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-001		239308
+	277870594	Chant femme-006	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-006_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-006		236984
+	322336162	Chant femme-007	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-007_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-007		119689
+	505546381	Chant femme-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-002_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-002		121809
+	526253001	Chant femme-009	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-009_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-009		161395
+	580405149	Chant femme-005	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-005_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-005		142826
+	599122846	liya	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Mood Video OST_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Testpurpose\liya		4345235
+	637093544	Chant femme-013	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-013_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-013		144530
+	729443163	Chant femme-010	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-010_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-010		115539
+	798921528	Chant femme-012	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-012_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-012		105062
+

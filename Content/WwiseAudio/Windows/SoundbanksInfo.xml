@@ -653,6 +653,72 @@
 				</File>
 			</ExcludedMemoryFiles>
 		</SoundBank>
+		<SoundBank Id="353166480" Language="SFX">
+			<ShortName>VSAmb</ShortName>
+			<Path>VSAmb.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2145862855" Name="Chantfemme"/>
+				<Event Id="3157003241" Name="Test"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="110868348" Language="SFX">
+					<ShortName>Chant femme-011.wav</ShortName>
+					<Path>SFX\Chant femme-011_9209B708.wem</Path>
+				</File>
+				<File Id="154870931" Language="SFX">
+					<ShortName>Chant femme-004.wav</ShortName>
+					<Path>SFX\Chant femme-004_9209B708.wem</Path>
+				</File>
+				<File Id="159982219" Language="SFX">
+					<ShortName>Chant femme-008.wav</ShortName>
+					<Path>SFX\Chant femme-008_9209B708.wem</Path>
+				</File>
+				<File Id="175517482" Language="SFX">
+					<ShortName>Chant femme-003.wav</ShortName>
+					<Path>SFX\Chant femme-003_9209B708.wem</Path>
+				</File>
+				<File Id="191164516" Language="SFX">
+					<ShortName>Chant femme-001.wav</ShortName>
+					<Path>SFX\Chant femme-001_9209B708.wem</Path>
+				</File>
+				<File Id="277870594" Language="SFX">
+					<ShortName>Chant femme-006.wav</ShortName>
+					<Path>SFX\Chant femme-006_9209B708.wem</Path>
+				</File>
+				<File Id="322336162" Language="SFX">
+					<ShortName>Chant femme-007.wav</ShortName>
+					<Path>SFX\Chant femme-007_9209B708.wem</Path>
+				</File>
+				<File Id="505546381" Language="SFX">
+					<ShortName>Chant femme-002.wav</ShortName>
+					<Path>SFX\Chant femme-002_9209B708.wem</Path>
+				</File>
+				<File Id="526253001" Language="SFX">
+					<ShortName>Chant femme-009.wav</ShortName>
+					<Path>SFX\Chant femme-009_9209B708.wem</Path>
+				</File>
+				<File Id="580405149" Language="SFX">
+					<ShortName>Chant femme-005.wav</ShortName>
+					<Path>SFX\Chant femme-005_9209B708.wem</Path>
+				</File>
+				<File Id="599122846" Language="SFX">
+					<ShortName>Mood Video OST.wav</ShortName>
+					<Path>SFX\Mood Video OST_9209B708.wem</Path>
+				</File>
+				<File Id="637093544" Language="SFX">
+					<ShortName>Chant femme-013.wav</ShortName>
+					<Path>SFX\Chant femme-013_9209B708.wem</Path>
+				</File>
+				<File Id="729443163" Language="SFX">
+					<ShortName>Chant femme-010.wav</ShortName>
+					<Path>SFX\Chant femme-010_9209B708.wem</Path>
+				</File>
+				<File Id="798921528" Language="SFX">
+					<ShortName>Chant femme-012.wav</ShortName>
+					<Path>SFX\Chant femme-012_9209B708.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="465169785" Language="SFX">
 			<ShortName>VSmusic</ShortName>
 			<Path>VSmusic.bnk</Path>
