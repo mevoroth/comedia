@@ -4,7 +4,7 @@
 #include "DamonFalconActor.h"
 #include "LiyaCharacter.h"
 
-ADamonFalconActor::ADamonFalconActor(const class FPostConstructInitializeProperties& PCIP)
+ADamonFalconActor::ADamonFalconActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	RotatedObject = 0;
