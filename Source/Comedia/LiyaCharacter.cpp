@@ -326,7 +326,7 @@ void ALiyaCharacter::SetHeightDisplacement(float Height)
 	GetMesh()->SetWorldLocation(FVector(
 		GetMesh()->GetComponentLocation().X,
 		GetMesh()->GetComponentLocation().Y,
-		_InitHeight + Height * (_RunningSpeedAnimBP / _CurrentSpeedMultiplier) * JumpHeight
+		_InitHeight + Height * (_RunningSpeedAnimBP / (_CurrentSpeedMultiplier * MaxSpeed)) * JumpHeight
 	));
 }
 
