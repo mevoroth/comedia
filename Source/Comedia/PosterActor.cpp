@@ -655,7 +655,7 @@ bool APosterActor::SoldierKills()
 	}
 
 	// Liya killed
-	if (IsInFireRange(Player->GetActorLocation()))
+	if ((State & ~(GRABBABLE | HEADISROOT)) != GRABBED && IsInFireRange(Player->GetActorLocation()))
 	{
 		OnKillLiyah();
 		return true;
@@ -957,7 +957,7 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 
 	//DrawDebugSphere(GetWorld(), SoldierPos, 500.f, 64, FColor::Red);
 	return FVector::DotProduct(
-		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal() * ((State & ~(GRABBABLE | HEADISROOT)) == STICKED ? -1 : 1),
+		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
 		(Position - SoldierPos).UnsafeNormal()
 	) > FMath::Cos(FireRangeAngle / 2.f) && FVector::DistSquared(Position, SoldierPos) < FireRangeDistance;
 }
