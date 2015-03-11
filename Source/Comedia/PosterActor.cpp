@@ -802,7 +802,9 @@ void APosterActor::_Soldier(float DeltaSeconds)
 			{
 				SoldierState = ESoldierState::ST_Walking;
 
-				if (_SoldierCurrentPos > _SoldierPreviousPos && bSoldierFlipped || _SoldierCurrentPos < _SoldierPreviousPos && !bSoldierFlipped)
+				bSoldierFlipped = _SoldierCurrentPos > _SoldierPreviousPos;
+
+				if ((State & ~(GRABBABLE | HEADISROOT)) != STICKED)
 				{
 					bSoldierFlipped = !bSoldierFlipped;
 				}
