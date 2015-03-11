@@ -278,6 +278,11 @@ void APosterActor::UpdateChain()
 			check(DeltaRotation.IsNormalized());
 
 			_BonesBuff[BoneIndex - 1].SetRotation(DeltaRotation * _BonesBuff[BoneIndex - 1].GetRotation());
+			FRotator R = _BonesBuff[BoneIndex - 1].GetRotation().Rotator();
+			//R.Yaw = 0.f;
+			R.Pitch = 0.f;
+			_BonesBuff[BoneIndex - 1].SetRotation(R.Quaternion());
+
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex), _BonesBuff[BoneIndex - 1], EBoneSpaces::WorldSpace);
 		}
 	}
