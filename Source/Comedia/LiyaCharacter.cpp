@@ -176,7 +176,7 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 void ALiyaCharacter::_Controls(float DeltaSeconds)
 {
 	FVector2D TmpSpeed;
-	if (_Accel.SizeSquared() > 0.1f)
+	if (_Accel.SizeSquared() > DeadZone)
 	{
 		float Size = _Speed.Size();
 		_Speed = _Accel.SafeNormal() * (Size + _Accel.SizeSquared() * AccelMultiplier * DeltaSeconds);
@@ -187,21 +187,23 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 			_Speed = _Speed.SafeNormal() * MaxSpeed;
 		}
 
-		if (_Speed.SizeSquared() < DeadZone)
+		//if (_Speed.SizeSquared() < DeadZone)
+		//{
+		//	TmpSpeed = FVector2D(0.f, 0.f);
+		//}
+		//else
+		//{
+
+		float StickValue = FMath::Pow(_Accel.Size(), 1.5f);
+		if (_Speed.Size() > StickValue)
 		{
-			TmpSpeed = FVector2D(0.f, 0.f);
+			TmpSpeed = _Speed.SafeNormal() * StickValue;
 		}
 		else
 		{
-			if (_Speed.SizeSquared() > _Accel.SizeSquared())
-			{
-				TmpSpeed = _Speed.SafeNormal() * _Accel.Size();
-			}
-			else
-			{
-				TmpSpeed = _Speed;
-			}
+			TmpSpeed = _Speed;
 		}
+		//}
 
 		float RotationFromCamera = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(_Speed.Y, _Speed.X));
 		float RotationFromPoster = FMath::Atan2(_GrabDirection.Y, _GrabDirection.X);
