@@ -594,12 +594,12 @@ void APosterActor::Tick(float DeltaSeconds)
 
 	if (SoldierPatrolEnabled)
 	{
+		_Soldier(DeltaSeconds);
 		if (SoldierKills())
 		{
 			UE_LOG(LogGPCode, Warning, TEXT("IL EST MOURRU"));
 			return;
 		}
-		_Soldier(DeltaSeconds);
 	}
 }
 
@@ -619,23 +619,6 @@ void APosterActor::_UpdateCompositedTexture()
 			if (bLastIsSideNode
 				|| !FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
 			{
-				//PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
-				//APosterActor* LeftPoster = 0;
-				//APosterActor* RightPoster = 0;
-				//if (Node->RightNode)
-				//{
-				//	RightPoster = Node->RightNode->PosterOwner;
-				//}
-
-				//while (Node->LeftNode && Node->LeftNode->PosterOwner == this)
-				//{
-				//	Node = Node->LeftNode;
-				//}
-				//if (Node->LeftNode && Node->LeftNode->PosterOwner != this)
-				//{
-				//	LeftPoster = Node->LeftNode->PosterOwner;
-				//}
-
 				_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
 				if (!bLastIsSideNode)
 					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
@@ -788,65 +771,72 @@ bool APosterActor::PrinceIsInFireRange()
 
 void APosterActor::_Soldier(float DeltaSeconds)
 {
+	float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+	float Min, Max;
+	_TimelineComponent->GetTimeRange(Min, Max);
+	float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
+	float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
+
+	//Update soldier state
+	if (SoldierState == ESoldierState::ST_Idle || SoldierState == ESoldierState::ST_Walking)
+	{
+		if (_SoldierPreviousPos == _SoldierCurrentPos)
+		{
+			SoldierState = ESoldierState::ST_Idle;
+		}
+		else
+		{
+			SoldierState = ESoldierState::ST_Walking;
+
+			bSoldierFlipped = _SoldierCurrentPos > _SoldierPreviousPos;
+
+			if ((State & ~(GRABBABLE | HEADISROOT)) != STICKED)
+			{
+				bSoldierFlipped = !bSoldierFlipped;
+			}
+		}
+	}
+
+	_SoldierPreviousPos = _SoldierCurrentPos;
+	_SoldierCurrentPos = SampledSoldier;
+		
+	SampledSoldier *= Nodes;
+	SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
+	FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
+	A.Z = _SoldierComponent->GetComponentLocation().Z;
+	FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1));
+	B.Z = A.Z;
+	FRotator AR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
+	FRotator BR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
+	
+	//MiddleBone.Rotator() + FRotator(0.f, -90.f, -90.f)
+	_SoldierComponent->SetWorldLocationAndRotation(
+		FMath::Lerp<FVector>(
+			A, B,
+			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+		),
+		FMath::Lerp<FRotator>(
+			AR, BR,
+			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+		) + FRotator(0.f, -90.f, -90.f)
+	);
+	int32 ToggleCount = 0;
+	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
+	{
+		++ToggleCount;
+	}
+
+	for (int32 i = 0, c = _SoldierComponent->GetNumChildrenComponents(); i < c; ++i)
+	{
+		if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
+		{
+			_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
+			break;
+		}
+	}
+
 	if (_SoldierEnabled)
 	{
-		float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
-		float Min, Max;
-		_TimelineComponent->GetTimeRange(Min, Max);
-		float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
-		float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
-
-		//Update soldier state
-		if (SoldierState == ESoldierState::ST_Idle || SoldierState == ESoldierState::ST_Walking)
-		{
-			if (_SoldierPreviousPos == _SoldierCurrentPos)
-			{
-				SoldierState = ESoldierState::ST_Idle;
-			}
-			else
-			{
-				SoldierState = ESoldierState::ST_Walking;
-
-				bSoldierFlipped = _SoldierCurrentPos > _SoldierPreviousPos;
-
-				if ((State & ~(GRABBABLE | HEADISROOT)) != STICKED)
-				{
-					bSoldierFlipped = !bSoldierFlipped;
-				}
-			}
-		}
-
-		_SoldierPreviousPos = _SoldierCurrentPos;
-		_SoldierCurrentPos = SampledSoldier;
-		
-		SampledSoldier *= Nodes;
-		SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
-		FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
-		A.Z = _SoldierComponent->GetComponentLocation().Z;
-		FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1));
-		B.Z = A.Z;
-
-		_SoldierComponent->SetWorldLocation(
-			FMath::Lerp<FVector>(
-				A, B,
-				SampledSoldier - FMath::FloorToFloat(SampledSoldier)
-			)
-		);
-		int32 ToggleCount = 0;
-		for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
-		{
-			++ToggleCount;
-		}
-
-		for (int32 i = 0, c = _SoldierComponent->GetNumChildrenComponents(); i < c; ++i)
-		{
-			if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
-			{
-				_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
-				break;
-			}
-		}
-
 		_SoldierElapsedTime += DeltaSeconds;
 	}
 }
@@ -946,7 +936,18 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 
 	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
 	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
-	FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
+	//FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
+
+	float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+	float CurrentPosInd = FMath::Clamp(_SoldierCurrentPos * Nodes, 0.f, Nodes);
+
+	FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(CurrentPosInd) + 1));
+	A.Z = _SoldierComponent->GetComponentLocation().Z;
+	FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(CurrentPosInd) + 1));
+	B.Z = A.Z;
+
+	FVector SoldierPos = FMath::Lerp<FVector>(A, B, CurrentPosInd - FMath::FloorToInt(CurrentPosInd));
+
 	SoldierPos.Z = Position.Z;
 	//UE_LOG(LogGPCode, Warning, TEXT("ANGLE : %s"), *(Position - SoldierPos).UnsafeNormal().ToString());
 	//UE_LOG(LogGPCode, Warning, TEXT("BALLZ : %s"), *FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal().ToString());
@@ -956,7 +957,7 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 
 	//DrawDebugSphere(GetWorld(), SoldierPos, 500.f, 64, FColor::Red);
 	return FVector::DotProduct(
-		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal(),
+		FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal() * ((State & ~(GRABBABLE | HEADISROOT)) == STICKED ? -1 : 1),
 		(Position - SoldierPos).UnsafeNormal()
 	) > FMath::Cos(FireRangeAngle / 2.f) && FVector::DistSquared(Position, SoldierPos) < FireRangeDistance;
 }
