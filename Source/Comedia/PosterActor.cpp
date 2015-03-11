@@ -488,29 +488,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	{
 	case INIT:
 		_Reset(DeltaSeconds);
-		{
-			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-			if (LevelScriptActor)
-			{
-				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
-				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
-				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-				//UE_LOG(LogGPCode, Warning, TEXT("%f :: %f"), Ratio, _LastAnimatedObjectPosition);
-				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
-				{
-					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
-					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
-					_LastAnimatedObjectPosition = Ratio;
-					if (Character)
-						Character->UpdateRunAnim(true);
-				}
-				else
-				{
-					if (Character && Ratio != -1.f)
-						Character->UpdateRunAnim(false);
-				}
-			}
-		}
+		_UpdateCompositedTexture();
 		break;
 	case ONSTICK:
 	case GRABBED:
@@ -534,28 +512,7 @@ void APosterActor::Tick(float DeltaSeconds)
 		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
 		UpdateChain();
 		_SoldierEnabled = true;
-		{
-			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-			if (LevelScriptActor)
-			{
-				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
-				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
-				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
-				{
-					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
-					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
-					_LastAnimatedObjectPosition = Ratio;
-					if (Character)
-						Character->UpdateRunAnim(true);
-				}
-				else
-				{
-					if (Character && Ratio != -1.f)
-						Character->UpdateRunAnim(false);
-				}
-			}
-		}
+		_UpdateCompositedTexture();
 		break;
 	case RESET_FIRST_FRAME:
 		_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
@@ -638,6 +595,55 @@ void APosterActor::Tick(float DeltaSeconds)
 			return;
 		}
 		_Soldier(DeltaSeconds);
+	}
+}
+
+void APosterActor::_UpdateCompositedTexture()
+{
+	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (LevelScriptActor)
+	{
+		float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
+		UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
+		MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+		PosterState FilteredState = (PosterState)(State & ~(GRABBABLE | HEADISROOT));
+		if (Ratio != -1.f)
+		{
+			bool bLastIsSideNode = (LevelScriptActor->PathMainCharacter.LastCrossedNode->NodeType == ENodeType::NT_SideNode);
+			if (bLastIsSideNode
+				|| !FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
+			{
+				//PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
+				//APosterActor* LeftPoster = 0;
+				//APosterActor* RightPoster = 0;
+				//if (Node->RightNode)
+				//{
+				//	RightPoster = Node->RightNode->PosterOwner;
+				//}
+
+				//while (Node->LeftNode && Node->LeftNode->PosterOwner == this)
+				//{
+				//	Node = Node->LeftNode;
+				//}
+				//if (Node->LeftNode && Node->LeftNode->PosterOwner != this)
+				//{
+				//	LeftPoster = Node->LeftNode->PosterOwner;
+				//}
+
+				_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
+				if (!bLastIsSideNode)
+					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
+				_LastAnimatedObjectPosition = Ratio;
+				if (Character)
+					Character->UpdateRunAnim(true);
+			}
+			else
+			{
+				if (Character)
+					Character->UpdateRunAnim(false);
+			}
+		}
 	}
 }
 

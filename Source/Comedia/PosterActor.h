@@ -280,12 +280,16 @@ private:
 	USceneComponent* _SoldierComponent;
 	UCurveFloat* _TimelineComponent;
 
+#pragma region Soldier
 	bool _SoldierEnabled;
 	void _Soldier(float DeltaSeconds);
 	float _SoldierElapsedTime;
 	float _SoldierCurrentPos;
 	float _SoldierPreviousPos;
 	float _GetSoldierDirection() const;
+#pragma endregion Soldier
+
+	void _UpdateCompositedTexture();
 
 	void _CancelOverridingCamPosition();
 
