@@ -3,6 +3,7 @@
 #pragma once
 
 #include "RespawnZoneActor.h"
+#include "Engine/TriggerBox.h"
 #include "GameFramework/Actor.h"
 #include "PosterActor.generated.h"
 
@@ -239,6 +240,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Feedbacks")
 	bool bShowFeedback;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Ending")
+	ATriggerBox* EndingTrigger;
 private:
 	PosterState State;
 	/** Root to target distance */

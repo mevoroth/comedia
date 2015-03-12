@@ -31,6 +31,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, FireRangeAngle(90.f)
 	, DoorEnabled(false)
 	, bShowFeedback(false)
+	, EndingTrigger(0)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -487,6 +488,12 @@ void APosterActor::Tick(float DeltaSeconds)
 	check(GetWorld());
 
 	Super::Tick(DeltaSeconds);
+
+	if (EndingTrigger)
+	{
+		EndingTrigger->SetActorEnableCollision((State & ~(HEADISROOT | GRABBABLE)) == STICKED);
+	}
+
 	ALiyaCharacter* Character = 0;
 	Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 	switch (State & ~(GRABBABLE | HEADISROOT))
