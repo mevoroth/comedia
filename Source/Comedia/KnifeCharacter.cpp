@@ -6,7 +6,7 @@
 #include "IwacLevelScriptActor.h"
 
 
-AKnifeCharacter::AKnifeCharacter(const class FPostConstructInitializeProperties& PCIP)
+AKnifeCharacter::AKnifeCharacter(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	//Get blueprint class for trail instantiation
@@ -46,9 +46,9 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 	
 
 	//Set character move
-	CharacterMovement->SetMovementMode(EMovementMode::MOVE_Flying);
-	CharacterMovement->MaxFlySpeed = KnifeSpeed;
-	CharacterMovement->RequestDirectMove(GetActorForwardVector(), true);
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+	GetCharacterMovement()->MaxFlySpeed = KnifeSpeed;
+	GetCharacterMovement()->RequestDirectMove(GetActorForwardVector(), true);
 
 	//Check knife destroyed
 	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
@@ -73,7 +73,7 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 	Trace.AddIgnoredActor(IwacLevelScript->TreeActor);
 	GetWorld()->LineTraceSingle(Hit, GetActorLocation(), GetActorLocation() + FVector::UpVector * -1000.0f, ECC_Visibility, Trace);
 	FVector CurrentKnifePosition = GetActorLocation();
-	CurrentKnifePosition.Z = Hit.Location.Z + CapsuleComponent->GetScaledCapsuleHalfHeight();
+	CurrentKnifePosition.Z = Hit.Location.Z + GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 	SetActorLocation(CurrentKnifePosition);
 }
 

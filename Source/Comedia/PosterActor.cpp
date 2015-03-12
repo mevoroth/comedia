@@ -278,6 +278,11 @@ void APosterActor::UpdateChain()
 			check(DeltaRotation.IsNormalized());
 
 			_BonesBuff[BoneIndex - 1].SetRotation(DeltaRotation * _BonesBuff[BoneIndex - 1].GetRotation());
+			FRotator R = _BonesBuff[BoneIndex - 1].GetRotation().Rotator();
+			//R.Yaw = 0.f;
+			R.Pitch = 0.f;
+			_BonesBuff[BoneIndex - 1].SetRotation(R.Quaternion());
+
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex), _BonesBuff[BoneIndex - 1], EBoneSpaces::WorldSpace);
 		}
 	}
@@ -488,29 +493,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	{
 	case INIT:
 		_Reset(DeltaSeconds);
-		{
-			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-			if (LevelScriptActor)
-			{
-				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
-				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
-				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-				//UE_LOG(LogGPCode, Warning, TEXT("%f :: %f"), Ratio, _LastAnimatedObjectPosition);
-				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
-				{
-					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
-					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
-					_LastAnimatedObjectPosition = Ratio;
-					if (Character)
-						Character->UpdateRunAnim(true);
-				}
-				else
-				{
-					if (Character && Ratio != -1.f)
-						Character->UpdateRunAnim(false);
-				}
-			}
-		}
+		_UpdateCompositedTexture();
 		break;
 	case ONSTICK:
 	case GRABBED:
@@ -534,28 +517,7 @@ void APosterActor::Tick(float DeltaSeconds)
 		_StickedAlpha = FMath::Clamp(_StickedAlpha + DeltaSeconds, 0.f, 1.f);
 		UpdateChain();
 		_SoldierEnabled = true;
-		{
-			AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-			if (LevelScriptActor)
-			{
-				float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
-				UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
-				MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
-				if (!FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
-				{
-					_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
-					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
-					_LastAnimatedObjectPosition = Ratio;
-					if (Character)
-						Character->UpdateRunAnim(true);
-				}
-				else
-				{
-					if (Character && Ratio != -1.f)
-						Character->UpdateRunAnim(false);
-				}
-			}
-		}
+		_UpdateCompositedTexture();
 		break;
 	case RESET_FIRST_FRAME:
 		_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
@@ -632,12 +594,44 @@ void APosterActor::Tick(float DeltaSeconds)
 
 	if (SoldierPatrolEnabled)
 	{
+		_Soldier(DeltaSeconds);
 		if (SoldierKills())
 		{
 			UE_LOG(LogGPCode, Warning, TEXT("IL EST MOURRU"));
 			return;
 		}
-		_Soldier(DeltaSeconds);
+	}
+}
+
+void APosterActor::_UpdateCompositedTexture()
+{
+	AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (LevelScriptActor)
+	{
+		float Ratio = LevelScriptActor->PathMainCharacter.GetCharacterPosition(this);
+		UMaterialInstanceDynamic* MatInstance = PosterMesh->CreateDynamicMaterialInstance(0, MeshMaterialInst);
+		MatInstance->SetScalarParameterValue(FName(TEXT("SpritePosX")), Ratio);
+		PosterState FilteredState = (PosterState)(State & ~(GRABBABLE | HEADISROOT));
+		if (Ratio != -1.f)
+		{
+			bool bLastIsSideNode = (LevelScriptActor->PathMainCharacter.LastCrossedNode->NodeType == ENodeType::NT_SideNode);
+			if (bLastIsSideNode
+				|| !FMath::IsNearlyEqual(Ratio, _LastAnimatedObjectPosition))
+			{
+				_LastOrientation = FMath::Sign(Ratio - _LastAnimatedObjectPosition);
+				if (!bLastIsSideNode)
+					MatInstance->SetScalarParameterValue(FName(TEXT("Orientation")), _LastOrientation);
+				_LastAnimatedObjectPosition = Ratio;
+				if (Character)
+					Character->UpdateRunAnim(true);
+			}
+			else
+			{
+				if (Character)
+					Character->UpdateRunAnim(false);
+			}
+		}
 	}
 }
 
@@ -661,7 +655,7 @@ bool APosterActor::SoldierKills()
 	}
 
 	// Liya killed
-	if (IsInFireRange(Player->GetActorLocation()))
+	if ((State & ~(GRABBABLE | HEADISROOT)) != GRABBED && IsInFireRange(Player->GetActorLocation()))
 	{
 		OnKillLiyah();
 		return true;
@@ -777,63 +771,72 @@ bool APosterActor::PrinceIsInFireRange()
 
 void APosterActor::_Soldier(float DeltaSeconds)
 {
+	float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+	float Min, Max;
+	_TimelineComponent->GetTimeRange(Min, Max);
+	float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
+	float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
+
+	//Update soldier state
+	if (SoldierState == ESoldierState::ST_Idle || SoldierState == ESoldierState::ST_Walking)
+	{
+		if (_SoldierPreviousPos == _SoldierCurrentPos)
+		{
+			SoldierState = ESoldierState::ST_Idle;
+		}
+		else
+		{
+			SoldierState = ESoldierState::ST_Walking;
+
+			bSoldierFlipped = _SoldierCurrentPos > _SoldierPreviousPos;
+
+			if ((State & ~(GRABBABLE | HEADISROOT)) != STICKED)
+			{
+				bSoldierFlipped = !bSoldierFlipped;
+			}
+		}
+	}
+
+	_SoldierPreviousPos = _SoldierCurrentPos;
+	_SoldierCurrentPos = SampledSoldier;
+		
+	SampledSoldier *= Nodes;
+	SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
+	FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
+	A.Z = _SoldierComponent->GetComponentLocation().Z;
+	FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1));
+	B.Z = A.Z;
+	FRotator AR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
+	FRotator BR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
+	
+	//MiddleBone.Rotator() + FRotator(0.f, -90.f, -90.f)
+	_SoldierComponent->SetWorldLocationAndRotation(
+		FMath::Lerp<FVector>(
+			A, B,
+			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+		),
+		FMath::Lerp<FRotator>(
+			AR, BR,
+			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+		) + FRotator(0.f, -90.f, -90.f)
+	);
+	int32 ToggleCount = 0;
+	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
+	{
+		++ToggleCount;
+	}
+
+	for (int32 i = 0, c = _SoldierComponent->GetNumChildrenComponents(); i < c; ++i)
+	{
+		if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
+		{
+			_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
+			break;
+		}
+	}
+
 	if (_SoldierEnabled)
 	{
-		float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
-		float Min, Max;
-		_TimelineComponent->GetTimeRange(Min, Max);
-		float NormalizedElapsedTime = FMath::Fmod(_SoldierElapsedTime, Max - Min);
-		float SampledSoldier = _TimelineComponent->GetFloatValue(FMath::Fmod(_SoldierElapsedTime, Max - Min));
-
-		//Update soldier state
-		if (SoldierState == ESoldierState::ST_Idle || SoldierState == ESoldierState::ST_Walking)
-		{
-			if (_SoldierPreviousPos == _SoldierCurrentPos)
-			{
-				SoldierState = ESoldierState::ST_Idle;
-			}
-			else
-			{
-				SoldierState = ESoldierState::ST_Walking;
-
-				if (_SoldierCurrentPos > _SoldierPreviousPos && bSoldierFlipped || _SoldierCurrentPos < _SoldierPreviousPos && !bSoldierFlipped)
-				{
-					bSoldierFlipped = !bSoldierFlipped;
-				}
-			}
-		}
-
-		_SoldierPreviousPos = _SoldierCurrentPos;
-		_SoldierCurrentPos = SampledSoldier;
-		
-		SampledSoldier *= Nodes;
-		SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
-		FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
-		A.Z = _SoldierComponent->GetComponentLocation().Z;
-		FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1));
-		B.Z = A.Z;
-
-		_SoldierComponent->SetWorldLocation(
-			FMath::Lerp<FVector>(
-				A, B,
-				SampledSoldier - FMath::FloorToFloat(SampledSoldier)
-			)
-		);
-		int32 ToggleCount = 0;
-		for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
-		{
-			++ToggleCount;
-		}
-
-		for (int32 i = 0, c = _SoldierComponent->GetNumChildrenComponents(); i < c; ++i)
-		{
-			if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
-			{
-				_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
-				break;
-			}
-		}
-
 		_SoldierElapsedTime += DeltaSeconds;
 	}
 }
@@ -933,7 +936,18 @@ bool APosterActor::IsInFireRange(const FVector& Position) const
 
 	FVector Head = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
 	FVector Tail = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
-	FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
+	//FVector SoldierPos = FMath::Lerp<FVector>(Head, Tail, _SoldierCurrentPos);
+
+	float Nodes = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
+	float CurrentPosInd = FMath::Clamp(_SoldierCurrentPos * Nodes, 0.f, Nodes);
+
+	FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(CurrentPosInd) + 1));
+	A.Z = _SoldierComponent->GetComponentLocation().Z;
+	FVector B = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::CeilToInt(CurrentPosInd) + 1));
+	B.Z = A.Z;
+
+	FVector SoldierPos = FMath::Lerp<FVector>(A, B, CurrentPosInd - FMath::FloorToInt(CurrentPosInd));
+
 	SoldierPos.Z = Position.Z;
 	//UE_LOG(LogGPCode, Warning, TEXT("ANGLE : %s"), *(Position - SoldierPos).UnsafeNormal().ToString());
 	//UE_LOG(LogGPCode, Warning, TEXT("BALLZ : %s"), *FVector::CrossProduct(Tail - Head, FVector::UpVector).UnsafeNormal().ToString());

@@ -15,6 +15,10 @@ class COMEDIA_API AWoolGroundActor : public AActor
 {
 	GENERATED_UCLASS_BODY()
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Wool Shader")
+	float Deepness;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Wool Shader")
+	float InitialDepth;
 
 	UStaticMeshComponent* GroundMesh;
 
