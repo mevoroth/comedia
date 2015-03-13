@@ -72,6 +72,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
 	ARespawnZoneActor* CurrentRespawnZone;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
+	bool bDialogRunning;
+
 	float LengthTravellingScriptedCamera = 2.0f;
 	float LengthTravellingBackScriptedCamera = 0.0f;
 	float ElapsedTravellingScriptedCamera = 0.0f;

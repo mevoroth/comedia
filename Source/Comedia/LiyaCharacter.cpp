@@ -356,7 +356,10 @@ void ALiyaCharacter::CallCharacter()
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
 			if (LevelScript->PathMainCharacter.MoveTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
 			{
-				OncallCharacter();
+				if (!bDialogRunning)
+				{
+					OncallCharacter();
+				}
 				_CallCooldown = CallCooldown;
 			}
 		}
