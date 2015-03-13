@@ -1,18 +1,28 @@
 Event	ID	Name			Wwise Object Path	Notes
-	135425691	Dialogstep_Princefound			\Default Work Unit\VS\Dialogstep_Princefound	
-	1494817907	DialogStep			\Default Work Unit\VS\DialogStep	
+	1042110684	Dialog_heryouare			\Default Work Unit\VS\Dialogs\Dialog_heryouare	
+	1093683547	Dialog_Princecall			\Default Work Unit\VS\Dialogs\Dialog_Princecall	
+	2750274410	Dialog_Lost_liya			\Default Work Unit\VS\Dialogs\Dialog_Lost_liya	
+	2901257146	Dialog_init			\Default Work Unit\VS\Dialogs\Dialog_init	
+	3555504738	Dialog_ListenPrince			\Default Work Unit\VS\Dialogs\Dialog_ListenPrince	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	38592185	S_DIA_VS_Areyouok	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Areyouok_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Areyouok		79197
-	84126565	S_DIA_VS_Getout	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Getout_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Getout		82051
-	172264890	S_DIA_VS_Cinematiq	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Cinematiq_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Cinematiq		459330
-	264191319	S_DIA_VS_Hideinthere	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Hideinthere_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Hideinthere		430329
-	292177664	S_DIA_VS_Listen Prince	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Listen Prince_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Listen Prince		364356
-	336649758	Dialoginit	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Dialoginit_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\Dialoginit		289669
-	438401864	S_DIA_VS_Whyleavealone	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Whyleavealone_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Whyleavealone		96967
-	533590662	S_DIA_VS_Alrightdoor	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Alrightdoor_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Alrightdoor		206069
-	584425979	S_DIA_VS_Longwayhome-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Longwayhome-002_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Longwayhome-002		114545
-	776450925	S_DIA_VS_Longwayhome-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Longwayhome-001_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Longwayhome-001		140895
-	850438854	S_DIA_VS_Speechfooot	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Speechfooot_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Speechfooot		1034869
-	874248980	S_DIA_VS_Hereyouare	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Hereyouare_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence Liya\S_DIA_VS_Hereyouare		56638
+	93016617	S_DIA_VS_Wherareyou-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Wherareyou-003_85F2C191.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Lost\S_DIA_VS_Wherareyou-003		53891
+	103330291	Liya init-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Liya init-001_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\Liya init-001		73038
+	121496141	S_DIA_VS_Wherareyou-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Wherareyou-002_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Lost\S_DIA_VS_Wherareyou-002		62739
+	196941266	Liya init-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Liya init-003_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\Liya init-003		108208
+	198788636	I'm sorry	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\I'm sorry_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\I'm sorry		92903
+	292177664	S_DIA_VS_Listen Prince	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Listen Prince_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\S_DIA_VS_Listen Prince		364356
+	354423767	Calls3	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls3_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls3		77498
+	439671575	Calls6	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls6_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls6		69793
+	595011330	Calls4	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls4_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls4		82535
+	719710639	Mmm	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Mmm_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\Mmm		42591
+	720166042	S_DIA_VS_Wherareyou-005	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Wherareyou-005_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Lost\S_DIA_VS_Wherareyou-005		132565
+	827410737	S_DIA_VS_Wherareyou-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Wherareyou-004_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Lost\S_DIA_VS_Wherareyou-004		69916
+	827636828	Liya init-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Liya init-002_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\Liya init-002		87547
+	842508635	Calls1	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls1_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls1		76325
+	874248980	S_DIA_VS_Hereyouare	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Hereyouare_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\S_DIA_VS_Hereyouare		56638
+	937744540	Calls2	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls2_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls2		86601
+	943328198	S_DIA_VS_Wherareyou-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_Wherareyou-001_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Lost\S_DIA_VS_Wherareyou-001		65774
+	958288286	I'm allright	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\I'm allright_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\I'm allright		93646
+	1000706071	Calls5	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls5_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls5		51903
 
