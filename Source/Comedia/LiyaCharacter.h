@@ -64,6 +64,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float CallCooldown;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float WalkingRatio;
 #pragma endregion GD Settings
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Settings")
@@ -123,11 +126,10 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Prince")
 	bool ResetPrinceAnims();
-#pragma endregion AnimBlueprint
-
+#pragma endregion AnimBlueprin
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
-
+	void SwitchWalkingState();
 protected:
 #pragma region Controls
 	/** Handles moving forward/backward */
@@ -156,6 +158,7 @@ private:
 	FVector2D _Accel;
 	FVector2D _Speed;
 	float _Rotation;
+	bool _bWalking;
 
 	FVector _GrabPivot;
 	float _GrabMaxDistance;
