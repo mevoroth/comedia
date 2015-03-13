@@ -6,7 +6,7 @@
 #include "Scalability.h"
 
 
-AComediaGameMode::AComediaGameMode(const class FPostConstructInitializeProperties& PCIP)
+AComediaGameMode::AComediaGameMode(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	//Set default pawn class to our blueprinted character
@@ -31,7 +31,7 @@ void AComediaGameMode::BeginPlay()
 		Settings->SetFullscreenMode(EWindowMode::Fullscreen);
 		Settings->SetVSyncEnabled(true);
 		Settings->ScalabilityQuality = Scalability::FQualityLevels();
-		Settings->ApplySettings();
+		Settings->ApplySettings(true);
 	}
 }
 

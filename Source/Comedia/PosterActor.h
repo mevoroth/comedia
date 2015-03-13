@@ -3,6 +3,7 @@
 #pragma once
 
 #include "RespawnZoneActor.h"
+#include "Engine/TriggerBox.h"
 #include "GameFramework/Actor.h"
 #include "PosterActor.generated.h"
 
@@ -239,6 +240,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Feedbacks")
 	bool bShowFeedback;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Ending")
+	ATriggerBox* EndingTrigger;
 private:
 	PosterState State;
 	/** Root to target distance */
@@ -280,12 +284,16 @@ private:
 	USceneComponent* _SoldierComponent;
 	UCurveFloat* _TimelineComponent;
 
+#pragma region Soldier
 	bool _SoldierEnabled;
 	void _Soldier(float DeltaSeconds);
 	float _SoldierElapsedTime;
 	float _SoldierCurrentPos;
 	float _SoldierPreviousPos;
 	float _GetSoldierDirection() const;
+#pragma endregion Soldier
+
+	void _UpdateCompositedTexture();
 
 	void _CancelOverridingCamPosition();
 
