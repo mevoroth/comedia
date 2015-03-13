@@ -111,8 +111,6 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	_OverridingAudioListener();
 
 	_CallCooldown -= DeltaSeconds;
-
-	UE_LOG(LogGPCode, Log, TEXT("Walking: %d"), _bWalking ? 1 : 0);
 }
 
 void ALiyaCharacter::SwitchWalkingState()
@@ -147,7 +145,6 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), OverrideScriptedCameraPosition.GetRotation(), AlphaTravelling);
 			Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
-			UE_LOG(LogGPCode, Log, TEXT("Fuck: %f"), AlphaTravelling);
 		}
 		else
 		{
