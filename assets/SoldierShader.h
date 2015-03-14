@@ -31,7 +31,7 @@ SpritePos = float2(
 );
 
 SpriteSize = SpritePos + float2(
-	SpriteSize.x * RatioPoster * RatioSoldierPoster.x / RatioSoldierPoster.y,
+	Orientation * SpriteSize.x * RatioPoster * RatioSoldierPoster.x / RatioSoldierPoster.y,
 	SpriteSize.y
 );
 
@@ -40,7 +40,7 @@ if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 {
 	float2 UV;
 
-	if (Orientation > 0)
+	if (Orientation >= 0)
 	{
 		UV = float2(
 			(TexCoord.x - SpritePos.x) / (SpriteSize.x - SpritePos.x),
@@ -50,7 +50,7 @@ if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 	else
 	{
 		UV = float2(
-			1 - (TexCoord.x - SpritePos.x) / (SpriteSize.x - SpritePos.x),
+			(TexCoord.x - SpritePos.x) / (Orientation * SpriteSize.x - SpritePos.x),
 			(TexCoord.y - SpritePos.y) / (SpriteSize.y - SpritePos.y)
 		);
 	}
@@ -72,7 +72,7 @@ if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 		SpriteCol.a * SpriteCol.a + BackgroundCol.a * (1 - SpriteCol.a)
 	);
 	ForegroundCol.a *= ForegroundAlpha;
-
+	return float4(1,0,0,1);
 	return float4(
 		ForegroundCol.rgb * ForegroundCol.a + FinalCol.rgb * (1 - ForegroundCol.a),
 		ForegroundCol.a * ForegroundCol.a + FinalCol.a * (1 - ForegroundCol.a)
