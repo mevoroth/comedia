@@ -122,10 +122,11 @@ void APosterActor::BeginPlay()
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1))
 	);
 
-	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
-	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
+	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size() * 0.95f;
+	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size() * 0.95f;
 
-	_MaxDistanceBetweenGrip = FVector::DistSquared(GetGripHead(), GetGripTail());
+	//_MaxDistanceBetweenGrip = FVector::DistSquared(GetGripHead(), GetGripTail());
+	_MaxDistanceBetweenGrip = _MaxDistance;
 
 	FireRangeAngle = FMath::DegreesToRadians(FireRangeAngle);
 	FireRangeDistance *= FireRangeDistance; // Square
@@ -258,7 +259,7 @@ void APosterActor::UpdateChain()
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
 #if defined WITH_EDITOR
-			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor(255 * (float)BoneIndex / BoneLast, 0, 0));
+			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
 #endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
@@ -280,11 +281,19 @@ void APosterActor::UpdateChain()
 
 			_BonesBuff[BoneIndex - 1].SetRotation(DeltaRotation * _BonesBuff[BoneIndex - 1].GetRotation());
 			FRotator R = _BonesBuff[BoneIndex - 1].GetRotation().Rotator();
-			//R.Yaw = 0.f;
-			R.Pitch = 0.f;
+			R.Pitch = FMath::Fmod(R.Pitch + 360.f, 360.f);
+			if (R.Pitch > 180.f)
+			{
+				R.Pitch -= 360.f;
+			}
+			R.Pitch = FMath::Clamp(R.Pitch, -5.f, 5.f);
+			R.Roll = FMath::Clamp(R.Roll, 85.f, 95.f);
 			_BonesBuff[BoneIndex - 1].SetRotation(R.Quaternion());
 
-			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex), _BonesBuff[BoneIndex - 1], EBoneSpaces::WorldSpace);
+			if (BoneIndex != First)
+			{
+				PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex), _BonesBuff[BoneIndex - 1], EBoneSpaces::WorldSpace);
+			}
 		}
 	}
 }
@@ -300,9 +309,9 @@ void APosterActor::SetEffector(const FTransform& Effector)
 	float Dist = (State & HEADISROOT) ? _HeadDist : _TailDist;
 
 	_Effector = Effector;
-	_Effector.AddToTranslation(
-		(State & HEADISROOT ? -1 : 1) * PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
-	);
+	//_Effector.AddToTranslation(
+	//	(State & HEADISROOT ? 1 : -1) * PosterMesh->GetBoneTransform(First).GetUnitAxis(EAxis::X).SafeNormal() * Dist
+	//);
 }
 
 void APosterActor::Grabbing(bool Grabbing)
@@ -356,7 +365,7 @@ void APosterActor::Grabbing(bool Grabbing)
 		switch (State & ~(GRABBABLE | HEADISROOT))
 		{
 		case GRABBED:
-			State = (PosterState)((State & HEADISROOT) | INIT);
+			State = (PosterState)((State & HEADISROOT) | GRABBABLE | INIT);
 			for (int32 BoneIndex = 0, BoneCount = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1; BoneIndex < BoneCount; ++BoneIndex)
 			{
 				_BonesBuff[BoneIndex] = PosterMesh->GetBoneTransform(BoneIndex + 1);
@@ -528,7 +537,7 @@ void APosterActor::Tick(float DeltaSeconds)
 		break;
 	case RESET_FIRST_FRAME:
 		_ResetAlpha = 1.f + (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) * DelayBetweenBones + DelayBeforeReset;
-		_Reset(0.f);
+		_Reset(_ResetAlpha);
 
 		if (Character)
 		{
@@ -539,7 +548,7 @@ void APosterActor::Tick(float DeltaSeconds)
 		State = RESET_SECOND_FRAME;
 		break;
 	case RESET_SECOND_FRAME:
-		State = INIT;
+		State = (PosterState)((State & HEADISROOT) | INIT);
 		break;
 	}
 
@@ -827,6 +836,7 @@ void APosterActor::_Soldier(float DeltaSeconds)
 			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
 		) + FRotator(0.f, -90.f, -90.f)
 	);
+	//_SoldierComponent->AddRelativeLocation(FVector(10.f, 0.f, 0.f));
 	int32 ToggleCount = 0;
 	for (int32 i = 0, c = ConeToggle.Num(); i < c && ConeToggle[i] < NormalizedElapsedTime; ++i)
 	{
@@ -861,6 +871,10 @@ void APosterActor::_UpdateEffector()
 	{
 		FTransform RHSocketTransform = Player->GetMesh()->GetSocketTransform(FName(TEXT("RHandSocket")));
 		FTransform LHSocketTransform = Player->GetMesh()->GetSocketTransform(FName(TEXT("LHandSocket")));
+
+		DrawDebugSphere(GetWorld(),
+			FMath::Lerp<FVector>(LHSocketTransform.GetLocation(), RHSocketTransform.GetLocation(), 0.5f),
+			10.f, 32, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
 
 		SetEffector(FTransform(
 			FQuat::Slerp(LHSocketTransform.GetRotation(), RHSocketTransform.GetRotation(), 0.5f),

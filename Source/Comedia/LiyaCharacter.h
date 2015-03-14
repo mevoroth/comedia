@@ -42,6 +42,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	float MaxAngularSpeed;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float MaxAngularSpeedWhenGrab;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float MaxSpeed;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
