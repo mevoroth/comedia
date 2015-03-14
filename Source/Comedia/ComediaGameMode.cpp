@@ -24,8 +24,10 @@ void AComediaGameMode::BeginPlay()
 {
 	if (GEngine)
 	{
+		FDisplayMetrics CurrentDisplayMetric;
+		FDisplayMetrics::GetDisplayMetrics(CurrentDisplayMetric);
 		UGameUserSettings* Settings = GEngine->GetGameUserSettings();
-		Settings->SetScreenResolution(FIntPoint(1920, 1200));
+		Settings->SetScreenResolution(FIntPoint(CurrentDisplayMetric.PrimaryDisplayWidth, CurrentDisplayMetric.PrimaryDisplayHeight));
 		Settings->SetFullscreenMode(EWindowMode::Fullscreen);
 		Settings->SetVSyncEnabled(true);
 		Settings->ScalabilityQuality = Scalability::FQualityLevels();

@@ -24,6 +24,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, JumpHeight(17.5f)
 	, CallCooldown(1.f)
 	, _CallCooldown(0.f)
+	, WalkingRatio(0.25f)
 {
 }
 
@@ -47,6 +48,8 @@ void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompo
 	InputComponent->BindAxis(FName(TEXT("LookUp")), this, &ALiyaCharacter::AddCameraPitch);
 
 	InputComponent->BindAction(FName(TEXT("Call")), EInputEvent::IE_Pressed, this, &ALiyaCharacter::CallCharacter);
+	InputComponent->BindAction(FName(TEXT("Walk")), EInputEvent::IE_Pressed, this, &ALiyaCharacter::SwitchWalkingState);
+	InputComponent->BindAction(FName(TEXT("Walk")), EInputEvent::IE_Released, this, &ALiyaCharacter::SwitchWalkingState);
 }
 
 void ALiyaCharacter::MoveForward(float Val)
@@ -110,6 +113,11 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	_CallCooldown -= DeltaSeconds;
 }
 
+void ALiyaCharacter::SwitchWalkingState()
+{
+	_bWalking = !_bWalking;
+}
+
 void ALiyaCharacter::_OverridingAudioListener()
 {
 	AIwacPlayerController* PlayerController = Cast<AIwacPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -137,7 +145,6 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), OverrideScriptedCameraPosition.GetRotation(), AlphaTravelling);
 			Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
 			Camera->AddRelativeLocation((GetActorLocation() - GrabbingPlayerLocation) * RatioCameraFollow);
-			UE_LOG(LogGPCode, Log, TEXT("Fuck: %f"), AlphaTravelling);
 		}
 		else
 		{
@@ -195,6 +202,12 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 		//{
 
 		float StickValue = FMath::Pow(_Accel.Size(), 1.5f);
+
+		if (_bWalking)
+		{
+			StickValue *= WalkingRatio;
+		}
+
 		if (_Speed.Size() > StickValue)
 		{
 			TmpSpeed = _Speed.SafeNormal() * StickValue;
@@ -358,7 +371,10 @@ void ALiyaCharacter::CallCharacter()
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
 			if (LevelScript->PathMainCharacter.MoveTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
 			{
-				OncallCharacter();
+				if (!bDialogRunning)
+				{
+					OncallCharacter();
+				}
 				_CallCooldown = CallCooldown;
 			}
 		}
