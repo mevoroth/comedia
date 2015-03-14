@@ -111,6 +111,15 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 	_OverridingAudioListener();
 
 	_CallCooldown -= DeltaSeconds;
+
+	//Compute cam position to see prince & liyah
+	//AMainLevelScriptActor* MainLvlScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	//APosterActor* PrincePoster = MainLvlScriptActor->PathMainCharacter.LastCrossedNode->PosterOwner;
+	//FVector PrincePosition = FMath::Lerp<FVector>(PrincePoster->LeftGrabbedCamPosition->GetComponentLocation(), PrincePoster->RightGrabbedCamPosition->GetComponentLocation(), MainLvlScriptActor->PathMainCharacter.LocalPosition);
+	//FVector LiyaToPrinceVect = PrincePosition - GetActorLocation();
+	//LiyaToPrinceVect.Normalize();
+	//FVector CamPos = GetActorLocation() + _OriginalPivotCamPosition + (-(LiyaToPrinceVect)* 100.0f);
+	//DrawDebugSphere(GetWorld(), CamPos, 32.0f, 32, FColor::Magenta);
 }
 
 void ALiyaCharacter::SwitchWalkingState()
