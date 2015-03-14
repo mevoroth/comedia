@@ -29,6 +29,9 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 	bHasKnifeSpawned = false;
 	CurrentNbLightning = 0;
 	EndDelayLightningPhase = 3.0f;
+
+	MinReverseLengthIron = 2.0f;
+	MaxReverseLengthIron = 5.0f;
 }
 
 void AIwacLevelScriptActor::BeginPlay()
@@ -239,6 +242,18 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 {
 	check(_SpawnedIronActor); //Check if IronActor has spawned
 
+	RemainingReverseTime -= DeltaSeconds;
+
+	//if RemainingReverseTime under 0
+	if (RemainingReverseTime < 0.0f)
+	{
+		//Invert Iron rotation 
+		_SpawnedIronActor->bInverseRotation = !_SpawnedIronActor->bInverseRotation;
+
+		//Set remaining reverse time betwen min and max variables
+		RemainingReverseTime = FMath::FRandRange(MinReverseLengthIron, MaxReverseLengthIron);
+	}
+
 	//Check if waiting time before phase beginning elapsed
 	if (_RemainingTime > 0)
 	{
@@ -372,4 +387,7 @@ void AIwacLevelScriptActor::_IronSpawning()
 		//Set initial rotation speed
 		_SpawnedIronActor->RotationSpeed = 0.0f;
 	}
+
+	//Set remaining reverse time betwen min and max variables
+	RemainingReverseTime = FMath::FRandRange(MinReverseLengthIron, MaxReverseLengthIron);
 }

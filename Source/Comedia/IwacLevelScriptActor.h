@@ -138,6 +138,15 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	float LengthIronPhase;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float MinReverseLengthIron;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float MaxReverseLengthIron;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float RemainingReverseTime;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	float CurrentTimeHitIron;
 
@@ -149,6 +158,8 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	bool bTouchedIronLastTick;
+
+
 #pragma endregion IronPhase
 
 	virtual void BeginPlay() override;

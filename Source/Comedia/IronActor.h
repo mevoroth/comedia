@@ -17,6 +17,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]Iron Property")
 	bool bFirstSpawn;
 
+	bool bInverseRotation;
+
 	float RotationSpeed = 1.0f;
 
 	AIronActor(const FObjectInitializer& ObjectInitializer);

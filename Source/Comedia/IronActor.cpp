@@ -8,13 +8,14 @@ AIronActor::AIronActor(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	PrimaryActorTick.bCanEverTick = true;
+	bInverseRotation = false;
 }
 
 void AIronActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	AddActorLocalRotation(FRotator(0.0f, RotationSpeed * DeltaSeconds, 0.0f));
+	AddActorLocalRotation(FRotator(0.0f, RotationSpeed * DeltaSeconds * ((bInverseRotation) ? -1.0f : 1.0f), 0.0f));
 }
 
 void AIronActor::UpdateFirstSpawnState()
