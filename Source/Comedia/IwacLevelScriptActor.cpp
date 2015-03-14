@@ -28,11 +28,15 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializ
 	bPlayerHasFailed = false;
 	bHasKnifeSpawned = false;
 	CurrentNbLightning = 0;
+	EndDelayLightningPhase = 3.0f;
 }
 
 void AIwacLevelScriptActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	bFirstIronSpawn = true;
+
 
 	if (TorturePhase != ETorturePhase::TP_EmptyPhase)
 	{
@@ -219,7 +223,7 @@ void AIwacLevelScriptActor::_TickLightningPhase(float DeltaSeconds)
 	TimeSpendLightningPhase += DeltaSeconds;
 
 	//Check if lightning limit not reached
-	if (CurrentNbLightning < MaxNbLightning)
+	if (CurrentNbLightning < MaxNbLightning && TimeSpendLightningPhase < LengthLightningPhase - EndDelayLightningPhase)
 	{
 		//Decrease remaining time before next lightning spawn
 		_RemainingTime -= DeltaSeconds;
@@ -350,6 +354,8 @@ void AIwacLevelScriptActor::_IronSpawning()
 		//Spawn Iron actor and set location on tree, to rotate around it
 		_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
 		_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
+		_SpawnedIronActor->bFirstSpawn = bFirstIronSpawn;
+		bFirstIronSpawn = false;
 
 		//Rotate it to be at the opposite side of the player
 		//Compute angle

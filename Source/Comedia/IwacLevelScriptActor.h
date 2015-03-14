@@ -92,6 +92,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	int32 MaxNbLightning;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
+	float EndDelayLightningPhase;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float LengthLightningPhase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
@@ -181,6 +184,8 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
 	void ReinitCurrentPhase();
+
+	bool bFirstIronSpawn;
 
 private:
 	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;
