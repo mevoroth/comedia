@@ -20,6 +20,13 @@ void AIronActor::Tick(float DeltaSeconds)
 
 void AIronActor::UpdateFirstSpawnState()
 {
-	AIwacLevelScriptActor* LevelScriptActor = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-	bFirstSpawn = LevelScriptActor->bFirstIronSpawn;
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		AIwacLevelScriptActor* LevelScriptActor = Cast<AIwacLevelScriptActor>(World->GetLevelScriptActor());
+		if (LevelScriptActor)
+		{
+			bFirstSpawn = LevelScriptActor->bFirstIronSpawn;
+		}
+	}
 }

@@ -9,7 +9,7 @@
  * 
  */
 UCLASS()
-class COMEDIA_API AIronActor : public AActor
+class COMEDIA_API AIronActor : public APawn
 {
 	GENERATED_BODY()
 	
