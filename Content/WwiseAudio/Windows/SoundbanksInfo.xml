@@ -16,7 +16,6 @@
 			<IncludedEvents>
 				<Event Id="1653961176" Name="Corpseflies"/>
 				<Event Id="3049293586" Name="Footsteps_Prince"/>
-				<Event Id="1491659777" Name="Liyacalls"/>
 				<Event Id="415739490" Name="moving_corpse"/>
 				<Event Id="246825020" Name="Moving_soldier"/>
 				<Event Id="357264855" Name="SecretPassage"/>
@@ -71,9 +70,9 @@
 					<ShortName>WarassetsAK47 V1 4x SingleShots huge-002.wav</ShortName>
 					<Path>SFX\WarassetsAK47 V1 4x SingleShots huge-002_5A140B9B.wem</Path>
 				</File>
-				<File Id="34113952" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-006.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-006_9209B708.wem</Path>
+				<File Id="37334847" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-013.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-013_9209B708.wem</Path>
 				</File>
 				<File Id="37530646" Language="SFX">
 					<ShortName>PrinceFootsteps-001.wav</ShortName>
@@ -103,10 +102,6 @@
 					<ShortName>Moving_soldierfoot-002.wav</ShortName>
 					<Path>SFX\Moving_soldierfoot-002_9209B708.wem</Path>
 				</File>
-				<File Id="77567590" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-008.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-008_9209B708.wem</Path>
-				</File>
 				<File Id="82625878" Language="SFX">
 					<ShortName>Tearheavy-014.wav</ShortName>
 					<Path>SFX\Tearheavy-014_9209B708.wem</Path>
@@ -114,10 +109,6 @@
 				<File Id="83720713" Language="SFX">
 					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-004.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-004_5A140B9B.wem</Path>
-				</File>
-				<File Id="84126565" Language="SFX">
-					<ShortName>S_DIA_VS_Getout.wav</ShortName>
-					<Path>SFX\S_DIA_VS_Getout_9209B708.wem</Path>
 				</File>
 				<File Id="84155188" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-006.wav</ShortName>
@@ -155,6 +146,10 @@
 					<ShortName>Tearlight-007.wav</ShortName>
 					<Path>SFX\Tearlight-007_9209B708.wem</Path>
 				</File>
+				<File Id="138719345" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-002_9209B708.wem</Path>
+				</File>
 				<File Id="141104663" Language="SFX">
 					<ShortName>WarassetsBoulder Explosion-002.wav</ShortName>
 					<Path>SFX\WarassetsBoulder Explosion-002_5A140B9B.wem</Path>
@@ -179,6 +174,10 @@
 					<ShortName>Moving_soldier-013.wav</ShortName>
 					<Path>SFX\Moving_soldier-013_9209B708.wem</Path>
 				</File>
+				<File Id="187579217" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-004_9209B708.wem</Path>
+				</File>
 				<File Id="189863883" Language="SFX">
 					<ShortName>Tearheavy-008.wav</ShortName>
 					<Path>SFX\Tearheavy-008_9209B708.wem</Path>
@@ -187,13 +186,13 @@
 					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-001.wav</ShortName>
 					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-001_5A140B9B.wem</Path>
 				</File>
+				<File Id="195501043" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-009.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-009_9209B708.wem</Path>
+				</File>
 				<File Id="197639371" Language="SFX">
 					<ShortName>Corpses IN.wav</ShortName>
 					<Path>SFX\Corpses IN_9209B708.wem</Path>
-				</File>
-				<File Id="206771926" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-009.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-009_9209B708.wem</Path>
 				</File>
 				<File Id="206801395" Language="SFX">
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-008.wav</ShortName>
@@ -202,6 +201,10 @@
 				<File Id="207038404" Language="SFX">
 					<ShortName>WarassetsCannon Medium Distant-004.wav</ShortName>
 					<Path>SFX\WarassetsCannon Medium Distant-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="214325416" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-010.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-010_9209B708.wem</Path>
 				</File>
 				<File Id="225628905" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x SingleShots huge-004.wav</ShortName>
@@ -235,9 +238,9 @@
 					<ShortName>WarassetsStandboeller Small Distant-003.wav</ShortName>
 					<Path>SFX\WarassetsStandboeller Small Distant-003_5A140B9B.wem</Path>
 				</File>
-				<File Id="264191319" Language="SFX">
-					<ShortName>S_DIA_VS_Hideinthere.wav</ShortName>
-					<Path>SFX\S_DIA_VS_Hideinthere_9209B708.wem</Path>
+				<File Id="273957997" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-003_9209B708.wem</Path>
 				</File>
 				<File Id="275539503" Language="SFX">
 					<ShortName>Tearheavy-010.wav</ShortName>
@@ -258,10 +261,6 @@
 				<File Id="283538325" Language="SFX">
 					<ShortName>Moving_soldierfoot-007.wav</ShortName>
 					<Path>SFX\Moving_soldierfoot-007_9209B708.wem</Path>
-				</File>
-				<File Id="283593798" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-001.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-001_9209B708.wem</Path>
 				</File>
 				<File Id="286351415" Language="SFX">
 					<ShortName>TP prince.wav</ShortName>
@@ -347,6 +346,10 @@
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-009.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-009_5A140B9B.wem</Path>
 				</File>
+				<File Id="363071318" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-001_9209B708.wem</Path>
+				</File>
 				<File Id="375810154" Language="SFX">
 					<ShortName>Tearheavy-012.wav</ShortName>
 					<Path>SFX\Tearheavy-012_9209B708.wem</Path>
@@ -403,6 +406,10 @@
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-005.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-005_5A140B9B.wem</Path>
 				</File>
+				<File Id="449561365" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-016.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-016_9209B708.wem</Path>
+				</File>
 				<File Id="456966240" Language="SFX">
 					<ShortName>Tearlight-005.wav</ShortName>
 					<Path>SFX\Tearlight-005_9209B708.wem</Path>
@@ -443,10 +450,6 @@
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001.wav</ShortName>
 					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001_5A140B9B.wem</Path>
 				</File>
-				<File Id="533590662" Language="SFX">
-					<ShortName>S_DIA_VS_Alrightdoor.wav</ShortName>
-					<Path>SFX\S_DIA_VS_Alrightdoor_9209B708.wem</Path>
-				</File>
 				<File Id="533805615" Language="SFX">
 					<ShortName>Explosion Cannon Fire 02.wav</ShortName>
 					<Path>SFX\Explosion Cannon Fire 02_5A140B9B.wem</Path>
@@ -462,6 +465,10 @@
 				<File Id="555842963" Language="SFX">
 					<ShortName>WarassetsStandboeller Small Distant-001.wav</ShortName>
 					<Path>SFX\WarassetsStandboeller Small Distant-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="558682521" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-006_9209B708.wem</Path>
 				</File>
 				<File Id="560780702" Language="SFX">
 					<ShortName>Moving_soldier-006.wav</ShortName>
@@ -486,14 +493,6 @@
 				<File Id="611759227" Language="SFX">
 					<ShortName>Tearmed-003.wav</ShortName>
 					<Path>SFX\Tearmed-003_9209B708.wem</Path>
-				</File>
-				<File Id="614845258" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-007.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-007_9209B708.wem</Path>
-				</File>
-				<File Id="623922328" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-003.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-003_9209B708.wem</Path>
 				</File>
 				<File Id="625090475" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-005.wav</ShortName>
@@ -543,10 +542,6 @@
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-004.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-004_5A140B9B.wem</Path>
 				</File>
-				<File Id="670576219" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-010.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-010_9209B708.wem</Path>
-				</File>
 				<File Id="688510213" Language="SFX">
 					<ShortName>Moving_soldierfoot-003.wav</ShortName>
 					<Path>SFX\Moving_soldierfoot-003_9209B708.wem</Path>
@@ -582,10 +577,6 @@
 				<File Id="733082762" Language="SFX">
 					<ShortName>WarassetsBoulder Explosion-003.wav</ShortName>
 					<Path>SFX\WarassetsBoulder Explosion-003_5A140B9B.wem</Path>
-				</File>
-				<File Id="733316483" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-005.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-005_9209B708.wem</Path>
 				</File>
 				<File Id="743078939" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-003.wav</ShortName>
@@ -627,6 +618,14 @@
 					<ShortName>Tearheavy-007.wav</ShortName>
 					<Path>SFX\Tearheavy-007_9209B708.wem</Path>
 				</File>
+				<File Id="826014673" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-011.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-011_9209B708.wem</Path>
+				</File>
+				<File Id="828864535" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-008.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-008_9209B708.wem</Path>
+				</File>
 				<File Id="829410330" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-002.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-002_5A140B9B.wem</Path>
@@ -634,10 +633,6 @@
 				<File Id="846466455" Language="SFX">
 					<ShortName>WarassetsHand Mortar Large Distant-002.wav</ShortName>
 					<Path>SFX\WarassetsHand Mortar Large Distant-002_5A140B9B.wem</Path>
-				</File>
-				<File Id="849451207" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-002.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-002_9209B708.wem</Path>
 				</File>
 				<File Id="854569430" Language="SFX">
 					<ShortName>Moving_soldier-002.wav</ShortName>
@@ -683,13 +678,13 @@
 					<ShortName>Tearlight-002.wav</ShortName>
 					<Path>SFX\Tearlight-002_9209B708.wem</Path>
 				</File>
-				<File Id="896959730" Language="SFX">
-					<ShortName>S_DIA_VS_LIYACALLS-004.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACALLS-004_9209B708.wem</Path>
-				</File>
 				<File Id="897570208" Language="SFX">
 					<ShortName>Tearheavy-001.wav</ShortName>
 					<Path>SFX\Tearheavy-001_9209B708.wem</Path>
+				</File>
+				<File Id="898758585" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-014.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-014_9209B708.wem</Path>
 				</File>
 				<File Id="905012821" Language="SFX">
 					<ShortName>Tearheavy-006.wav</ShortName>
@@ -698,6 +693,10 @@
 				<File Id="915030595" Language="SFX">
 					<ShortName>WarassetsAK47 V1 4x Bursts natural-004.wav</ShortName>
 					<Path>SFX\WarassetsAK47 V1 4x Bursts natural-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="918430595" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-005_9209B708.wem</Path>
 				</File>
 				<File Id="921998893" Language="SFX">
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-002.wav</ShortName>
@@ -710,6 +709,10 @@
 				<File Id="927109518" Language="SFX">
 					<ShortName>Tearheavy-003.wav</ShortName>
 					<Path>SFX\Tearheavy-003_9209B708.wem</Path>
+				</File>
+				<File Id="942327293" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-015.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-015_9209B708.wem</Path>
 				</File>
 				<File Id="946588468" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002.wav</ShortName>
@@ -743,6 +746,10 @@
 					<ShortName>Tearmed-004.wav</ShortName>
 					<Path>SFX\Tearmed-004_9209B708.wem</Path>
 				</File>
+				<File Id="1013916400" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-007.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-007_9209B708.wem</Path>
+				</File>
 				<File Id="1015951777" Language="SFX">
 					<ShortName>Fliesloop.wav</ShortName>
 					<Path>SFX\Fliesloop_12E227A4.wem</Path>
@@ -754,6 +761,10 @@
 				<File Id="1027068266" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004.wav</ShortName>
 					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="1042815631" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-012.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-012_9209B708.wem</Path>
 				</File>
 				<File Id="1044845292" Language="SFX">
 					<ShortName>Tearheavy-015.wav</ShortName>
@@ -1122,8 +1133,29 @@
 				<Event Id="3555504738" Name="Dialog_ListenPrince"/>
 				<Event Id="2750274410" Name="Dialog_Lost_liya"/>
 				<Event Id="1093683547" Name="Dialog_Princecall"/>
+				<Event Id="1491659777" Name="Liyacalls"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="1764685" Language="SFX">
+					<ShortName>Calls1.wav</ShortName>
+					<Path>SFX\Calls1_9209B708.wem</Path>
+				</File>
+				<File Id="34113952" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-006.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-006_9209B708.wem</Path>
+				</File>
+				<File Id="77561436" Language="SFX">
+					<ShortName>Calls4.wav</ShortName>
+					<Path>SFX\Calls4_9209B708.wem</Path>
+				</File>
+				<File Id="77567590" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-008.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-008_9209B708.wem</Path>
+				</File>
+				<File Id="84126565" Language="SFX">
+					<ShortName>S_DIA_VS_Getout.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Getout_9209B708.wem</Path>
+				</File>
 				<File Id="93016617" Language="SFX">
 					<ShortName>S_DIA_VS_Wherareyou-003.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Wherareyou-003_85F2C191.wem</Path>
@@ -1144,21 +1176,53 @@
 					<ShortName>I'm sorry.wav</ShortName>
 					<Path>SFX\I'm sorry_9209B708.wem</Path>
 				</File>
+				<File Id="206771926" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-009.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-009_9209B708.wem</Path>
+				</File>
+				<File Id="234039479" Language="SFX">
+					<ShortName>Calls6.wav</ShortName>
+					<Path>SFX\Calls6_9209B708.wem</Path>
+				</File>
+				<File Id="264191319" Language="SFX">
+					<ShortName>S_DIA_VS_Hideinthere.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Hideinthere_9209B708.wem</Path>
+				</File>
+				<File Id="283593798" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-001_9209B708.wem</Path>
+				</File>
 				<File Id="292177664" Language="SFX">
 					<ShortName>S_DIA_VS_Listen Prince.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Listen Prince_9209B708.wem</Path>
 				</File>
-				<File Id="354423767" Language="SFX">
+				<File Id="434206026" Language="SFX">
 					<ShortName>Calls3.wav</ShortName>
 					<Path>SFX\Calls3_9209B708.wem</Path>
 				</File>
-				<File Id="439671575" Language="SFX">
-					<ShortName>Calls6.wav</ShortName>
-					<Path>SFX\Calls6_9209B708.wem</Path>
+				<File Id="533590662" Language="SFX">
+					<ShortName>S_DIA_VS_Alrightdoor.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Alrightdoor_9209B708.wem</Path>
 				</File>
-				<File Id="595011330" Language="SFX">
-					<ShortName>Calls4.wav</ShortName>
-					<Path>SFX\Calls4_9209B708.wem</Path>
+				<File Id="592919700" Language="SFX">
+					<ShortName>Okliya.wav</ShortName>
+					<Path>SFX\Okliya_9209B708.wem</Path>
+				</File>
+				<File Id="614845258" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-007.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-007_9209B708.wem</Path>
+				</File>
+				<File Id="623922328" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-003.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-003_9209B708.wem</Path>
+				</File>
+				<File Id="666673536" Language="SFX">
+					<ShortName>Calls5.wav</ShortName>
+					<Path>SFX\Calls5_9209B708.wem</Path>
+				</File>
+				<File Id="670576219" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-010.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-010_9209B708.wem</Path>
 				</File>
 				<File Id="719710639" Language="SFX">
 					<ShortName>Mmm.wav</ShortName>
@@ -1168,6 +1232,18 @@
 					<ShortName>S_DIA_VS_Wherareyou-005.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Wherareyou-005_9209B708.wem</Path>
 				</File>
+				<File Id="733316483" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-005.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-005_9209B708.wem</Path>
+				</File>
+				<File Id="739581223" Language="SFX">
+					<ShortName>Calls2.wav</ShortName>
+					<Path>SFX\Calls2_9209B708.wem</Path>
+				</File>
+				<File Id="765491009" Language="SFX">
+					<ShortName>On my way.wav</ShortName>
+					<Path>SFX\On my way_9209B708.wem</Path>
+				</File>
 				<File Id="827410737" Language="SFX">
 					<ShortName>S_DIA_VS_Wherareyou-004.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Wherareyou-004_9209B708.wem</Path>
@@ -1176,17 +1252,21 @@
 					<ShortName>Liya init-002.wav</ShortName>
 					<Path>SFX\Liya init-002_9209B708.wem</Path>
 				</File>
-				<File Id="842508635" Language="SFX">
-					<ShortName>Calls1.wav</ShortName>
-					<Path>SFX\Calls1_9209B708.wem</Path>
+				<File Id="849451207" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-002_9209B708.wem</Path>
 				</File>
 				<File Id="874248980" Language="SFX">
 					<ShortName>S_DIA_VS_Hereyouare.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Hereyouare_9209B708.wem</Path>
 				</File>
-				<File Id="937744540" Language="SFX">
-					<ShortName>Calls2.wav</ShortName>
-					<Path>SFX\Calls2_9209B708.wem</Path>
+				<File Id="883231183" Language="SFX">
+					<ShortName>paYes.wav</ShortName>
+					<Path>SFX\paYes_9209B708.wem</Path>
+				</File>
+				<File Id="896959730" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-004.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-004_9209B708.wem</Path>
 				</File>
 				<File Id="943328198" Language="SFX">
 					<ShortName>S_DIA_VS_Wherareyou-001.wav</ShortName>
@@ -1196,9 +1276,13 @@
 					<ShortName>I'm allright.wav</ShortName>
 					<Path>SFX\I'm allright_9209B708.wem</Path>
 				</File>
-				<File Id="1000706071" Language="SFX">
-					<ShortName>Calls5.wav</ShortName>
-					<Path>SFX\Calls5_9209B708.wem</Path>
+				<File Id="962365256" Language="SFX">
+					<ShortName>Ok I'm right here.wav</ShortName>
+					<Path>SFX\Ok I'm right here_9209B708.wem</Path>
+				</File>
+				<File Id="1005411041" Language="SFX">
+					<ShortName>Ok.wav</ShortName>
+					<Path>SFX\Ok_9209B708.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -1207,42 +1291,13 @@
 			<Path>POCBANK.bnk</Path>
 			<IncludedEvents>
 				<Event Id="906520831" Name="Grab"/>
-				<Event Id="780428406" Name="Handling"/>
 				<Event Id="2405648188" Name="Release"/>
 				<Event Id="3749639609" Name="Start_AMB_POC"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="37334847" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-013.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-013_9209B708.wem</Path>
-				</File>
 				<File Id="78091238" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERGRAB-002.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERGRAB-002_9209B708.wem</Path>
-				</File>
-				<File Id="138719345" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-002.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-002_9209B708.wem</Path>
-				</File>
-				<File Id="187579217" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-004.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-004_9209B708.wem</Path>
-				</File>
-				<File Id="195501043" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-009.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-009_9209B708.wem</Path>
-				</File>
-				<File Id="214325416" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-010.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-010_9209B708.wem</Path>
-				</File>
-				<File Id="273957997" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-003.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-003_9209B708.wem</Path>
-				</File>
-				<File Id="363071318" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-001.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-001_9209B708.wem</Path>
 				</File>
 				<File Id="378533836" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERRELEASE-003.wav</ShortName>
@@ -1252,14 +1307,6 @@
 					<ShortName>S_SFX_POC_PAPERRELEASE-004.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERRELEASE-004_9209B708.wem</Path>
 				</File>
-				<File Id="449561365" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-016.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-016_9209B708.wem</Path>
-				</File>
-				<File Id="558682521" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-006.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-006_9209B708.wem</Path>
-				</File>
 				<File Id="602830164" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERGRAB-001.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERGRAB-001_9209B708.wem</Path>
@@ -1268,37 +1315,9 @@
 					<ShortName>S_SFX_POC_PAPERRELEASE-002.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERRELEASE-002_9209B708.wem</Path>
 				</File>
-				<File Id="826014673" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-011.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-011_9209B708.wem</Path>
-				</File>
-				<File Id="828864535" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-008.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-008_9209B708.wem</Path>
-				</File>
-				<File Id="898758585" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-014.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-014_9209B708.wem</Path>
-				</File>
-				<File Id="918430595" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-005.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-005_9209B708.wem</Path>
-				</File>
-				<File Id="942327293" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-015.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-015_9209B708.wem</Path>
-				</File>
 				<File Id="969923550" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERGRAB-003.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERGRAB-003_9209B708.wem</Path>
-				</File>
-				<File Id="1013916400" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-007.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-007_9209B708.wem</Path>
-				</File>
-				<File Id="1042815631" Language="SFX">
-					<ShortName>S_SFX_POC_PAPERSEQ-012.wav</ShortName>
-					<Path>SFX\S_SFX_POC_PAPERSEQ-012_9209B708.wem</Path>
 				</File>
 				<File Id="1046163077" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERRELEASE-001.wav</ShortName>
