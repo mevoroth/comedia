@@ -21,4 +21,7 @@ public:
 
 	AIronActor(const FObjectInitializer& ObjectInitializer);
 	virtual void Tick(float DeltaSeconds);
+
+	UFUNCTION(BlueprintCallable, Category = "[Comedia]Iron Property")
+	void UpdateFirstSpawnState();
 };

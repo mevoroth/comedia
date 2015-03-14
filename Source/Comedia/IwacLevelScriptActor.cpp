@@ -35,7 +35,7 @@ void AIwacLevelScriptActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	_bFirstIronSpawn = true;
+	bFirstIronSpawn = true;
 
 
 	if (TorturePhase != ETorturePhase::TP_EmptyPhase)
@@ -354,8 +354,8 @@ void AIwacLevelScriptActor::_IronSpawning()
 		//Spawn Iron actor and set location on tree, to rotate around it
 		_SpawnedIronActor = GetWorld()->SpawnActor<AIronActor>(_IronClass);
 		_SpawnedIronActor->SetActorLocation(TreeActor->GetActorLocation());
-		_SpawnedIronActor->bFirstSpawn = _bFirstIronSpawn;
-		_bFirstIronSpawn = false;
+		_SpawnedIronActor->bFirstSpawn = bFirstIronSpawn;
+		bFirstIronSpawn = false;
 
 		//Rotate it to be at the opposite side of the player
 		//Compute angle

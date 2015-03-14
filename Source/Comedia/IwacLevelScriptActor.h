@@ -185,6 +185,8 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
 	void ReinitCurrentPhase();
 
+	bool bFirstIronSpawn;
+
 private:
 	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;
 
@@ -201,7 +203,6 @@ private:
 	float _RemainingTime;
 	ACharacter* _PlayerCharacter;
 	AIronActor* _SpawnedIronActor;
-	bool _bFirstIronSpawn;
 
 	void _TickKnifePhase(float DeltaSeconds);
 	void _TickLightningPhase(float DeltaSeconds);
