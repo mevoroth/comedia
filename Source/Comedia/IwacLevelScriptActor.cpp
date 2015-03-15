@@ -2,10 +2,13 @@
 
 #include "Comedia.h"
 #include "IwacLevelScriptActor.h"
+#include "LiyaCharacter.h"
 
 
-AIwacLevelScriptActor::AIwacLevelScriptActor(const class FPostConstructInitializeProperties& PCIP)
+AIwacLevelScriptActor::AIwacLevelScriptActor(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
+	, _PreviousPhaseWounds(0.f)
+	, _CurrentWounds(0.f)
 {
 
 	//Get blueprint class for knife instantiation
@@ -105,6 +108,11 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 		}
 		_PreviousTorturePhase = TorturePhase;
 
+		if (_CurrentWounds > _PreviousPhaseWounds)
+		{
+			_PreviousPhaseWounds = _CurrentWounds;
+		}
+
 		//Reinit delay first spawn
 		_RemainingTime = DelayFirstSpawn;
 	}
@@ -139,6 +147,14 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 			default:
 				break;
 			}
+
+			ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+			if (Character)
+			{
+				UMaterialInstanceDynamic* LiyaMat = Character->GetMesh()->CreateDynamicMaterialInstance(0);
+				LiyaMat->SetScalarParameterValue(FName(TEXT("WoundAlpha")), _CurrentWounds);
+			}
+
 		}
 	}
 }
@@ -146,6 +162,8 @@ void AIwacLevelScriptActor::Tick(float DeltaSeconds)
 void AIwacLevelScriptActor::PlayerTouchByKnife_Implementation()
 {
 	CurrentNbHitKnife++;
+
+	_UpdateWounds((float)CurrentNbHitKnife / (float)NbHitKnifeBeforeDie);
 
 	if (CurrentNbHitKnife >= NbHitKnifeBeforeDie)
 	{
@@ -157,6 +175,8 @@ void AIwacLevelScriptActor::PlayerTouchByLightning_Implementation()
 {
 	CurrentNbHitLightning++;
 
+	_UpdateWounds((float)CurrentNbHitLightning / (float)NbHitLightningBeforeDie);
+
 	if (CurrentNbHitLightning >= NbHitLightningBeforeDie)
 	{
 		PlayerFailed();
@@ -166,6 +186,8 @@ void AIwacLevelScriptActor::PlayerTouchByLightning_Implementation()
 void AIwacLevelScriptActor::PlayerTouchByIron_Implementation()
 {
 	CurrentTimeHitIron += GetWorld()->DeltaTimeSeconds;
+
+	_UpdateWounds((float)CurrentTimeHitIron / (float)TimeHitIronBeforeDie);
 
 	if (CurrentTimeHitIron >= TimeHitIronBeforeDie)
 	{
@@ -177,7 +199,16 @@ void AIwacLevelScriptActor::PlayerFailed_Implementation()
 {
 	UE_LOG(LogGPCode, Log, TEXT("Player failed!"));
 	bPlayerHasFailed = true;
+	_CurrentWounds = _PreviousPhaseWounds;
 	PlayMatineePlayerFailed();
+}
+
+void AIwacLevelScriptActor::_UpdateWounds(float WoundAlpha)
+{
+	if (WoundAlpha > _PreviousPhaseWounds)
+	{
+		_CurrentWounds = FMath::Min(WoundAlpha, 1.f);
+	}
 }
 
 void AIwacLevelScriptActor::ReinitCurrentPhase()

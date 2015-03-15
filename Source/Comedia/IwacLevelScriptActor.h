@@ -199,6 +199,16 @@ private:
 	ACharacter* _PlayerCharacter;
 	AIronActor* _SpawnedIronActor;
 
+
+#pragma region Liya Wounds
+	/** Wounds */
+	float _CurrentWounds;
+	/** Previous wounds */
+	float _PreviousPhaseWounds;
+#pragma endregion Liya Wounds
+
+	void _UpdateWounds(float WoundAlpha);
+
 	void _TickKnifePhase(float DeltaSeconds);
 	void _TickLightningPhase(float DeltaSeconds);
 	void _TickIronPhase(float DeltaSeconds);
