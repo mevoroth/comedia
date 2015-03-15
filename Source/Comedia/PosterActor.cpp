@@ -259,7 +259,7 @@ void APosterActor::UpdateChain()
 		for (int32 BoneIndex = 0, BoneLast = Count - 1; BoneIndex < BoneLast; ++BoneIndex)
 		{
 #if defined WITH_EDITOR
-			DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
+			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
 #endif
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
@@ -872,9 +872,9 @@ void APosterActor::_UpdateEffector()
 		FTransform RHSocketTransform = Player->GetMesh()->GetSocketTransform(FName(TEXT("RHandSocket")));
 		FTransform LHSocketTransform = Player->GetMesh()->GetSocketTransform(FName(TEXT("LHandSocket")));
 
-		DrawDebugSphere(GetWorld(),
-			FMath::Lerp<FVector>(LHSocketTransform.GetLocation(), RHSocketTransform.GetLocation(), 0.5f),
-			10.f, 32, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
+		//DrawDebugSphere(GetWorld(),
+		//	FMath::Lerp<FVector>(LHSocketTransform.GetLocation(), RHSocketTransform.GetLocation(), 0.5f),
+		//	10.f, 32, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
 
 		SetEffector(FTransform(
 			FQuat::Slerp(LHSocketTransform.GetRotation(), RHSocketTransform.GetRotation(), 0.5f),
