@@ -32,7 +32,7 @@ void ALiyaCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	_GrabArmLength = FVector::Dist(GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthStart"))), GetMesh()->GetSocketLocation(FName(TEXT("ArmLengthEnd"))));
-	_GrabArmLength *= 2;
+	//_GrabArmLength *= 2;
 	_InitHeight = GetMesh()->GetComponentLocation().Z;
 	_OriginalPivotCamPosition = Camera->RelativeLocation;
 }
@@ -228,15 +228,21 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 		//}
 
 		float RotationFromCamera = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(_Speed.Y, _Speed.X));
-		float RotationFromPoster = FMath::Atan2(_GrabDirection.Y, _GrabDirection.X);
+		//float RotationFromPoster = FMath::RadiansToDegrees(FMath::Atan2(_GrabDirection.Y, _GrabDirection.X));
+		float RotationFromPoster = Camera->GetComponentRotation().Yaw + FMath::RadiansToDegrees(FMath::Atan2(-_Speed.Y, -_Speed.X));
+		
+		float CurrentMaxAngularSpeed = FMath::Lerp<float>(MaxAngularSpeed, MaxAngularSpeedWhenGrab, _GrabSpeedAlpha / GrabSpeedAlphaTimer);
+
+		//_Rotation = RotationFromPoster;
 
 		FQuat CameraOriented(FVector::UpVector, FMath::DegreesToRadians(RotationFromCamera));
-		FQuat PosterOriented(FVector::UpVector, RotationFromPoster);
-		
-		float LerpedRotation = FQuat::Slerp(CameraOriented, PosterOriented, _GrabSpeedAlpha / GrabSpeedAlphaTimer).Rotator().Yaw - 90.f;
+		FQuat PosterOriented(FVector::UpVector, FMath::DegreesToRadians(RotationFromPoster));
+
+		float LerpedRotation = FQuat::Slerp(CameraOriented, PosterOriented, _GrabSpeedAlpha / GrabSpeedAlphaTimer).Rotator().Yaw;
 		LerpedRotation = FMath::Fmod(LerpedRotation + 360.f, 360.f);
-		
-		float FinalRotation = (_GrabSpeedAlphaIt < 0.f ? RotationFromCamera : FMath::RadiansToDegrees(RotationFromPoster)) - 90.f;
+		//_Rotation = LerpedRotation;
+
+		float FinalRotation = (_GrabSpeedAlphaIt < 0.f ? RotationFromCamera : RotationFromPoster);
 		FinalRotation = FMath::Fmod(FinalRotation + 360.f, 360.f);
 
 		if (FMath::Abs(LerpedRotation - FinalRotation) < FMath::Abs(_Rotation - FinalRotation))
@@ -247,9 +253,9 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 			{
 				AngularDelta -= 360.f;
 			}
-			if (FMath::Abs(AngularDelta) / DeltaSeconds > MaxAngularSpeed)
+			if (FMath::Abs(AngularDelta) / DeltaSeconds > CurrentMaxAngularSpeed)
 			{
-				_Rotation -= FMath::Sign(AngularDelta) * MaxAngularSpeed * DeltaSeconds;
+				_Rotation -= FMath::Sign(AngularDelta) * CurrentMaxAngularSpeed * DeltaSeconds;
 			}
 			else
 			{
@@ -273,7 +279,7 @@ void ALiyaCharacter::_Controls(float DeltaSeconds)
 	_ControlsMove(TmpSpeed);
 
 	GetMesh()->SetRelativeRotation(FRotator(
-		0.f, _Rotation, 0.f
+		0.f, _Rotation - 90.f, 0.f
 	));
 
 
@@ -291,24 +297,113 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 	AddMovementInput(Fw, Speed.X);
 	AddMovementInput(Right, Speed.Y);
 
-	FVector NewPos = ConsumeMovementInputVector() + GetActorLocation();
-	FVector GrabPivot = _GrabPivot;
-	GrabPivot.Z = 0.f;
-	NewPos.Z = 0.f;
-
-	float CurrentDist = FVector::Dist(NewPos, GrabPivot) - _GrabArmLength;
-	if (!GetGrabbing() || CurrentDist < FMath::Sqrt(_GrabMaxDistance) || CurrentDist < _GrabPreviousDistance)
+	if (GetGrabbing())
 	{
-		AddMovementInput(Fw, Speed.X);
-		AddMovementInput(Right, Speed.Y);
+		//FVector Dir = GetPendingMovementInputVector();
+		FVector NewPos = ConsumeMovementInputVector() + GetActorLocation();
+		FVector ActFW = GetActorForwardVector();
+		FVector GrabPivot = _GrabPivot;
+		FVector Hands = GetMesh()->GetSocketLocation(FName(TEXT("LHandSocket")));
+
+		ActFW.Z = 0.f;
+		ActFW.Normalize();
+		ActFW *= FVector::Dist(Hands, GetActorLocation());
+		NewPos.Z = 0.f;
+		NewPos += ActFW;
+		GrabPivot.Z = 0.f;
+
+		float CurrentDist = FVector::Dist(NewPos, GrabPivot);
+
+		if (CurrentDist < _GrabMaxDistance || CurrentDist < _GrabPreviousDistance)
+		{
+			AddMovementInput(Fw, Speed.X);
+			AddMovementInput(Right, Speed.Y);
+		}
+		_GrabPreviousDistance = CurrentDist;
+
+		//FVector GrabPivot = GetActorLocation() + GetActorForwardVector() * _GrabArmLength;
+		//FVector Normal = GrabPivot - NewPos;
+		//Dir.Z = 0.f;
+		//Normal.Z = 0.f;
+		//Dir.Normalize();
+		//Normal.Normalize();
+
+		//if (FVector::DistSquared(NewPos, _GrabPivot) < _GrabMaxDistance)
+		//{
+		//}
+
+		//if (FMath::IsNearlyEqual(FVector::DotProduct(-Normal, Dir), 1.f, 0.001f)
+		//	|| FVector::DistSquared(NewPos, _GrabPivot) < _GrabMaxDistance)
+		//{
+		//	AddMovementInput(Fw, Speed.X);
+		//	AddMovementInput(Right, Speed.Y);
+		//}
+		//else
+		//{
+		//	FVector2D Tangent0 = FVector2D(Speed.Y, -Speed.X);
+		//	FVector2D Tangent1 = FVector2D(-Speed.Y, Speed.X);
+		//	FVector Dest = GrabPivot + Dir * _GrabArmLength;
+		//	FVector Alt0;
+		//	FVector Alt1;
+
+		//	AddMovementInput(Fw, Tangent0.X);
+		//	AddMovementInput(Fw, Tangent0.Y);
+
+		//	Alt0 = GetActorLocation() + ConsumeMovementInputVector();
+
+		//	AddMovementInput(Fw, Tangent1.X);
+		//	AddMovementInput(Fw, Tangent1.Y);
+
+		//	Alt1 = GetActorLocation() + ConsumeMovementInputVector();
+
+		//	if (FVector::DistSquared(Dest, Alt0) <= FVector::DistSquared(Dest, Alt1))
+		//	{
+		//		AddMovementInput(Fw, Tangent0.X);
+		//		AddMovementInput(Fw, Tangent0.Y);
+		//	}
+		//	else
+		//	{
+		//		AddMovementInput(Fw, Tangent1.X);
+		//		AddMovementInput(Fw, Tangent1.Y);
+		//	}
+		//}
 	}
-	_GrabPreviousDistance = CurrentDist;
+
+	//DrawDebugDirectionalArrow(
+	//	GetWorld(),
+	//	GetActorLocation(),
+	//	GetActorLocation() + Fw * 100.f,
+	//	10000.f, FColor(FMath::Rand() % 256, FMath::Rand() % 256, FMath::Rand() % 256));
+	////UE_LOG(LogGPCode, Warning, TEXT("%s"), *GetMovementInputVector().ToString());
+	//FVector NewPos = ConsumeMovementInputVector() + GetActorLocation();
+
+	//FVector CurrentLoc = GetActorLocation();
+	//FVector GrabPivot = _GrabPivot;
+	//GrabPivot.Z = 0.f;
+	//NewPos.Z = 0.f;
+	//CurrentLoc.Z = 0.f;
+
+	////if (GetGrabbing())
+	////{
+	////	FVector SpeedVec = FVector(-_Speed.X, _Speed.Y, 0.f);
+	////	SetActorRotation(SpeedVec.Rotation() + FRotator(0.f, +90.f, 0.f));
+	////}
+
+	//NewPos += GetActorForwardVector() * _GrabArmLength;
+
+	//float CurrentDist = FVector::Dist(NewPos, GrabPivot);
+	//if (!GetGrabbing() || CurrentDist < (FMath::Sqrt(_GrabMaxDistance)) || CurrentDist < _GrabPreviousDistance)
+	//{
+	//	AddMovementInput(Fw, Speed.X);
+	//	AddMovementInput(Right, Speed.Y);
+	//}
+	//_GrabPreviousDistance = CurrentDist;
 }
 
 void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)
 {
 	_GrabSpeedAlphaIt = 1.f;
-	_GrabMaxDistance = PosterMaxDistance;
+	_GrabMaxDistance = FMath::Sqrt(PosterMaxDistance) * 1.01f;
 }
 
 void ALiyaCharacter::NotifyReleasePoster()

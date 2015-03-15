@@ -30,10 +30,20 @@ SpritePos = float2(
 	(OffsetBackground.y + BackgroundSize.y * SpritePos.y * BackgroundTexSize.y) / BackgroundTexSize.y
 );
 
-SpriteSize = SpritePos + float2(
-	SpriteSize.x * RatioPoster * RatioSoldierPoster.x / RatioSoldierPoster.y,
-	SpriteSize.y
-);
+float ComputedSize = SpriteSize.x * RatioPoster * RatioSoldierPoster.x / RatioSoldierPoster.y;
+
+SpriteSize = SpritePos + float2(0, SpriteSize.y);
+
+if (Orientation > 0)
+{
+	SpriteSize.x += ComputedSize;
+}
+else
+{
+	SpritePos.x -= ComputedSize;
+SpritePos.x += (Orientation < 0 ? 1 : 0) * ComputedSize;
+SpriteSize.x += (Orientation < 0 ? 1 : 0) * ComputedSize;
+}
 
 if (TexCoord.x > SpritePos.x && TexCoord.x <= SpriteSize.x
 	&& TexCoord.y > SpritePos.y && TexCoord.y <= SpriteSize.y)
