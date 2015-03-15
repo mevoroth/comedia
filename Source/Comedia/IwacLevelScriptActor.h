@@ -92,6 +92,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	int32 MaxNbLightning;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
+	float EndDelayLightningPhase;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
 	float LengthLightningPhase;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] LightningPhase")
@@ -135,6 +138,15 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	float LengthIronPhase;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float MinReverseLengthIron;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float MaxReverseLengthIron;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float RemainingReverseTime;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	float CurrentTimeHitIron;
 
@@ -146,6 +158,8 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	bool bTouchedIronLastTick;
+
+
 #pragma endregion IronPhase
 
 	virtual void BeginPlay() override;
@@ -181,6 +195,8 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 
 	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
 	void ReinitCurrentPhase();
+
+	bool bFirstIronSpawn;
 
 private:
 	TEnumAsByte<ETorturePhase::Type> _PreviousTorturePhase;
