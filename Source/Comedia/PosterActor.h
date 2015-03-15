@@ -130,6 +130,8 @@ public:
 	virtual void SetSoldierTimelineComponent(UCurveFloat* TimelineComponent);
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Soldier")
 	virtual bool SoldierKills();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Soldier")
+	virtual bool OnSoldierWalk(const FVector& Position);
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
 	void OnKillLiyah();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")

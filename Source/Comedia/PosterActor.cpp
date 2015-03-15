@@ -825,6 +825,14 @@ void APosterActor::_Soldier(float DeltaSeconds)
 	FRotator AR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
 	FRotator BR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
 	
+	if (State == ESoldierState::ST_Walking)
+	{
+		OnSoldierWalk(FMath::Lerp<FVector>(
+			A, B,
+			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+		));
+	}
+
 	//MiddleBone.Rotator() + FRotator(0.f, -90.f, -90.f)
 	_SoldierComponent->SetWorldLocationAndRotation(
 		FMath::Lerp<FVector>(
