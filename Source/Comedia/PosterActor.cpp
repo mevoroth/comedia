@@ -33,6 +33,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, bShowFeedback(false)
 	, EndingTrigger(0)
 	, _WayFound(false)
+	, DetachThreshold(10000.f)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -530,12 +531,8 @@ void APosterActor::Tick(float DeltaSeconds)
 			FVector Orig = _BonesInit[MiddleBoneInd - 1].GetLocation();
 			Pos.Z = 0.f;
 			Orig.Z = 0.f;
-			UE_LOG(LogGPCode, Warning, TEXT("%f"), FVector::DistSquared(
-				Orig, Pos
-				));
-			if (FVector::DistSquared(
-				Orig, Pos
-			) > 10000)
+
+			if (FVector::DistSquared(Orig, Pos) > DetachThreshold)
 			{
 				if (AssociatedBlockingVolume && !_WayFound)
 				{

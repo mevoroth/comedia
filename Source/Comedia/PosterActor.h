@@ -221,6 +221,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	ABlockingVolume* AssociatedBlockingVolume;
 
+	/** Detach threshold for blocking volume */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
+	float DetachThreshold;
+
 	/** For Soldier cone toggle */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	TArray<float> ConeToggle;
