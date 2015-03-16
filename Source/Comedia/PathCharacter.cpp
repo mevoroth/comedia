@@ -72,7 +72,7 @@ bool PathCharacter::MoveTo(const PathNode* TargetNode)
 		CurrentNode = LastCrossedNode;
 		NextNode = CurrentNode->RightNode;
 		PathNodes.Add(CurrentNode);
-		while (NextNode != nullptr && !bPathFound)
+		while (NextNode != nullptr && !bPathFound && NextNode != LastCrossedNode)
 		{
 			//Add next node
 			PathNodes.Add(NextNode);
@@ -90,7 +90,6 @@ bool PathCharacter::MoveTo(const PathNode* TargetNode)
 				NextNode = CurrentNode->LeftNode;
 			}
 		}
-
 		//Check target not found on right
 		if (!bPathFound)
 		{
@@ -100,7 +99,7 @@ bool PathCharacter::MoveTo(const PathNode* TargetNode)
 			NextNode = CurrentNode->LeftNode;
 			PathNodes.Add(CurrentNode);
 
-			while (NextNode != nullptr && !bPathFound)
+			while (NextNode != nullptr && !bPathFound && NextNode != LastCrossedNode)
 			{
 				//Add next node
 				PathNodes.Add(NextNode);
