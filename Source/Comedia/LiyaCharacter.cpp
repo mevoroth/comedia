@@ -179,7 +179,9 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 			float AlphaTravelling = (LengthTravellingBackScriptedCamera - ElapsedTravellingScriptedCamera) / LengthTravellingBackScriptedCamera;
 			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), LastCamPosition.GetLocation(), AlphaTravelling);
 			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), LastCamPosition.GetRotation(), AlphaTravelling);
-			Camera->SetRelativeTransform(FTransform(CurrentCamQuat, CurrentCamLocation));
+			//Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
+			Camera->SetRelativeLocationAndRotation(CurrentCamLocation, CurrentCamQuat.Rotator());
+			//Camera->SetRelativeTransform(FTransform(CurrentCamQuat, CurrentCamLocation));
 		}
 		else
 		{

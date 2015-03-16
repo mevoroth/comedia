@@ -111,8 +111,8 @@ public:
 	void OnResetFinished();
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
 	virtual bool ToggleFootStep();
-	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
-	bool OnWayFound();
+	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Poster")
+	void OnWayFound();
 #pragma endregion Poster Events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Poster")
@@ -307,5 +307,6 @@ private:
 
 #pragma region Poster Events
 	bool _ResetCalled;
+	bool _WayFound;
 #pragma endregion Poster Events
 };
