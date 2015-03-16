@@ -35,6 +35,7 @@ AIwacLevelScriptActor::AIwacLevelScriptActor(const class FObjectInitializer& PCI
 
 	MinReverseLengthIron = 2.0f;
 	MaxReverseLengthIron = 5.0f;
+	BreakReverseLength = 1.0f;
 }
 
 void AIwacLevelScriptActor::BeginPlay()
@@ -42,7 +43,7 @@ void AIwacLevelScriptActor::BeginPlay()
 	Super::BeginPlay();
 
 	bFirstIronSpawn = true;
-
+	RemainingBreakReverseTime = BreakReverseLength;
 
 	if (TorturePhase != ETorturePhase::TP_EmptyPhase)
 	{
@@ -273,16 +274,32 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 {
 	check(_SpawnedIronActor); //Check if IronActor has spawned
 
-	RemainingReverseTime -= DeltaSeconds;
-
 	//if RemainingReverseTime under 0
 	if (RemainingReverseTime < 0.0f)
 	{
-		//Invert Iron rotation 
-		_SpawnedIronActor->bInverseRotation = !_SpawnedIronActor->bInverseRotation;
+		if (RemainingBreakReverseTime < 0.0f)
+		{
+			//Invert Iron rotation 
+			_SpawnedIronActor->bInverseRotation = !_SpawnedIronActor->bInverseRotation;
 
-		//Set remaining reverse time betwen min and max variables
-		RemainingReverseTime = FMath::FRandRange(MinReverseLengthIron, MaxReverseLengthIron);
+			//Set remaining reverse time betwen min and max variables
+			RemainingReverseTime = FMath::FRandRange(MinReverseLengthIron, MaxReverseLengthIron);
+
+			RemainingBreakReverseTime = BreakReverseLength;
+		}
+		else
+		{
+			RemainingBreakReverseTime -= DeltaSeconds;
+		}
+
+		_SpawnedIronActor->RotationSpeed = 0.0f;
+	}
+	else
+	{
+		RemainingReverseTime -= DeltaSeconds;
+
+		//Increase rotation speed depending of time spend in Iron phase
+		_SpawnedIronActor->RotationSpeed = FMath::Lerp(LightRotationSpeedMin, LightRotationSpeedMax, TimeSpendIronPhase / LengthIronPhase);
 	}
 
 	//Check if waiting time before phase beginning elapsed
@@ -294,9 +311,6 @@ void AIwacLevelScriptActor::_TickIronPhase(float DeltaSeconds)
 	{
 		//Increase time spend in Iron Phase
 		TimeSpendIronPhase += DeltaSeconds;
-
-		//Increase rotation speed depending of time spend in Iron phase
-		_SpawnedIronActor->RotationSpeed = FMath::Lerp(LightRotationSpeedMin, LightRotationSpeedMax, TimeSpendIronPhase / LengthIronPhase);
 
 		//Raycast from Iron point light to player to check if player is behind the tree
 		FHitResult Hit(ForceInit);
