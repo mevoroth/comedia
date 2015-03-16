@@ -147,6 +147,12 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
 	float RemainingReverseTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float BreakReverseLength;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia] IronPhase")
+	float RemainingBreakReverseTime;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "[Comedia] IronPhase")
 	float CurrentTimeHitIron;
 
