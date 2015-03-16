@@ -403,17 +403,17 @@ void AIwacLevelScriptActor::_IronSpawning()
 		_SpawnedIronActor->bFirstSpawn = bFirstIronSpawn;
 		bFirstIronSpawn = false;
 
-		//Rotate it to be at the opposite side of the player
-		//Compute angle
-		FVector VectTreeIron = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation() - TreeActor->GetActorLocation();
-		FVector VectTreePlayer = _PlayerCharacter->GetActorLocation() - TreeActor->GetActorLocation();
-		VectTreeIron.Z = VectTreePlayer.Z = 0.0f;
-		VectTreeIron.Normalize();
-		VectTreePlayer.Normalize();
-		float AngleIronPlayer = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(VectTreeIron, VectTreePlayer)));
-		float SignAngleIronPlayer = FMath::Sign<float>(FVector::CrossProduct(VectTreePlayer, VectTreeIron).Z);
-		//Rotate
-		_SpawnedIronActor->AddActorWorldRotation(FRotator(0.0f, 180.0f - AngleIronPlayer * SignAngleIronPlayer, 0.0f));
+		////Rotate it to be at the opposite side of the player
+		////Compute angle
+		//FVector VectTreeIron = _SpawnedIronActor->FindComponentByClass<UPointLightComponent>()->GetComponentLocation() - TreeActor->GetActorLocation();
+		//FVector VectTreePlayer = _PlayerCharacter->GetActorLocation() - TreeActor->GetActorLocation();
+		//VectTreeIron.Z = VectTreePlayer.Z = 0.0f;
+		//VectTreeIron.Normalize();
+		//VectTreePlayer.Normalize();
+		//float AngleIronPlayer = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(VectTreeIron, VectTreePlayer)));
+		//float SignAngleIronPlayer = FMath::Sign<float>(FVector::CrossProduct(VectTreePlayer, VectTreeIron).Z);
+		////Rotate
+		//_SpawnedIronActor->AddActorWorldRotation(FRotator(0.0f, 180.0f - AngleIronPlayer * SignAngleIronPlayer, 0.0f));
 
 		//Set initial rotation speed
 		_SpawnedIronActor->RotationSpeed = 0.0f;
