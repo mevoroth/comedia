@@ -32,6 +32,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, DoorEnabled(false)
 	, bShowFeedback(false)
 	, EndingTrigger(0)
+	, _WayFound(false)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -523,6 +524,26 @@ void APosterActor::Tick(float DeltaSeconds)
 		}
 		Character->UpdateGrabPoint(State & HEADISROOT ? GetGripHeadUpdated() : GetGripTailUpdated());
 		Character->UpdateGrabPivot(State & HEADISROOT ? GetGripTailUpdated() : GetGripHeadUpdated());
+		{
+			int32 MiddleBoneInd = (PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1) / 2 + 1;
+			FVector Pos = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(MiddleBoneInd));
+			FVector Orig = _BonesInit[MiddleBoneInd - 1].GetLocation();
+			Pos.Z = 0.f;
+			Orig.Z = 0.f;
+			UE_LOG(LogGPCode, Warning, TEXT("%f"), FVector::DistSquared(
+				Orig, Pos
+				));
+			if (FVector::DistSquared(
+				Orig, Pos
+			) > 10000)
+			{
+				if (AssociatedBlockingVolume && !_WayFound)
+				{
+					OnWayFound();
+					_WayFound = true;
+				}
+			}
+		}
 		break;
 	case STICKED:
 		SetEffector(FTransform(
@@ -1005,6 +1026,7 @@ void APosterActor::OnResetFinished_Implementation()
 			AssociatedBlockingVolume->SetActorEnableCollision(true);
 			UE_LOG(LogGPCode, Warning, TEXT("ON : %s"), *AssociatedBlockingVolume->GetName());
 		}
+		_WayFound = false;
 		_ResetCalled = true;
 	}
 	_SoldierEnabled = true;
@@ -1012,14 +1034,16 @@ void APosterActor::OnResetFinished_Implementation()
 
 void APosterActor::OnGrab_Implementation(const FVector& Position)
 {
+}
+
+void APosterActor::OnWayFound_Implementation()
+{
 	if (AssociatedBlockingVolume)
 	{
 		UE_LOG(LogGPCode, Warning, TEXT("OFF : %s"), *AssociatedBlockingVolume->GetName());
 		AssociatedBlockingVolume->SetActorEnableCollision(false);
-		OnWayFound();
 	}
 }
-
 
 void APosterActor::OnKillLiyah_Implementation()
 {
