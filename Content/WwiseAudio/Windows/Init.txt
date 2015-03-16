@@ -5,6 +5,7 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	900140120	Monrovia			\Default Work Unit\Master Audio Bus\Monrovia	
 	1351780234	LoudSFX			\Default Work Unit\Master Audio Bus\HDR BUS\LoudSFX	
 	1404066300	Ambiances			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances	
+	2128182023	Distant rev			\Default Work Unit\Master Audio Bus\Monrovia\Distant rev	
 	2376466361	Other			\Default Work Unit\Master Audio Bus\HDR BUS\Other	
 	2470532526	Knife loop			\Default Work Unit\Master Audio Bus\HDR BUS\Knife loop	
 	3224081837	Normal SFX			\Default Work Unit\Master Audio Bus\HDR BUS\Normal SFX	
@@ -18,6 +19,7 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 	596825374	REvvoice			\Default Work Unit\Master Audio Bus\Monrovia\Voice bus\REvvoice	
 	702543394	Tunnels			\Default Work Unit\Master Audio Bus\Monrovia\Tunnels	
 	3610144935	ReverbAmb			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances\ReverbAmb	
+	4145015068	Reverb_house			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_house	
 
 Effect plug-ins	ID	Name	Type				Notes
 	48620415	Have_U_Ever_Been_Outside	Wwise RoomVerb			

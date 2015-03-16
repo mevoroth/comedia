@@ -132,6 +132,8 @@ public:
 	virtual bool SoldierKills();
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Soldier")
 	virtual bool OnSoldierWalk(const FVector& Position);
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Soldier")
+	virtual bool OnSoldierStopWalking();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
 	void OnKillLiyah();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
@@ -191,6 +193,8 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	TEnumAsByte<ESoldierState::Type> SoldierState;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	TEnumAsByte<ESoldierState::Type> PreviousSoldierState;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	bool bSoldierFlipped;

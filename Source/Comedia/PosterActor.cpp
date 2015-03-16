@@ -825,12 +825,19 @@ void APosterActor::_Soldier(float DeltaSeconds)
 	FRotator AR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
 	FRotator BR = PosterMesh->GetBoneRotationByName(PosterMesh->GetBoneName(FMath::CeilToInt(SampledSoldier) + 1), EBoneSpaces::WorldSpace);
 	
-	if (State == ESoldierState::ST_Walking)
+	if (PreviousSoldierState != SoldierState)
 	{
-		OnSoldierWalk(FMath::Lerp<FVector>(
-			A, B,
-			SampledSoldier - FMath::FloorToFloat(SampledSoldier)
-		));
+		if (SoldierState == ESoldierState::ST_Walking)
+		{
+			OnSoldierWalk(FMath::Lerp<FVector>(
+				A, B,
+				SampledSoldier - FMath::FloorToFloat(SampledSoldier)
+			));
+		}
+		else
+		{
+			OnSoldierStopWalking();
+		}
 	}
 
 	//MiddleBone.Rotator() + FRotator(0.f, -90.f, -90.f)
@@ -864,6 +871,8 @@ void APosterActor::_Soldier(float DeltaSeconds)
 	{
 		_SoldierElapsedTime += DeltaSeconds;
 	}
+
+	PreviousSoldierState = SoldierState;
 }
 
 void APosterActor::_UpdateEffector()
