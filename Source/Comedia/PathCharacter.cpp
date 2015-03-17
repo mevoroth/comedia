@@ -59,10 +59,6 @@ bool PathCharacter::MoveTo(const PathNode* TargetNode)
 	PathNode* CurrentNode;
 	PathNode* NextNode;
 
-	//Reinit PathCharacter variables
-	IndexCurrentTargetNode = 0;
-	LocalPosition = LastCrossedNode->NodePosition;
-
 	//DrawDebugSphere(World, GetNodeLocation(TargetNode), 64, 12, FColor::Red, false, 5.0f);
 	//DrawDebugSphere(World, GetNodeLocation(PathMainCharacter.LastCrossedNode), 64, 12, FColor::Green, false, 5.0f);
 	if (TargetNode != nullptr)
@@ -127,6 +123,29 @@ bool PathCharacter::MoveTo(const PathNode* TargetNode)
 		PathNodes.Empty();
 		PathNodes.Add(LastCrossedNode);
 	}
+
+	if (!bPathFound)
+	{
+		//Reinit PathCharacter variables
+		IndexCurrentTargetNode = 0;
+		LocalPosition = LastCrossedNode->NodePosition;
+	}
+	else
+	{
+		if (PathNodes.Num() > 1)
+		{
+			//Check if player moving in the same direction than before call
+			if (LocalPosition > LastCrossedNode->NodePosition && LastCrossedNode->RightNode == PathNodes[1] || LocalPosition < LastCrossedNode->NodePosition && LastCrossedNode->LeftNode == PathNodes[1])
+			{
+				IndexCurrentTargetNode = 1;
+			}
+			else
+			{
+				IndexCurrentTargetNode = 0;
+			}
+		}
+	}
+
 
 	//Check if character get out of hiding node
 	if (bPathFound && LastCrossedNode->NodeType == ENodeType::NT_HiddingNode)
