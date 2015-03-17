@@ -4,19 +4,18 @@ Event	ID	Name			Wwise Object Path	Notes
 	660322461	Stop_Sun_fail			\Default Work Unit\Torture\Stop_Sun_fail	
 	1287545852	Thunder_circle			\Default Work Unit\Torture\Thunder_circle	
 	2385628198	Footsteps			\Default Work Unit\Torture\Footsteps	
-	2394515795	Stop_Knife			\Default Work Unit\Torture\Stop_Knife	
 	2671209179	Knife_Fail			\Default Work Unit\Torture\Knife_Fail	
 	2811031212	Knife_Loop_Start			\Default Work Unit\Torture\Knife_Loop_Start	
 	3561017543	Thunder_hit			\Default Work Unit\Torture\Thunder_hit	
 	3632834637	Knife_Flyby			\Default Work Unit\Torture\Knife_Flyby	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
-	1444948632	Footsteps_ground			\Default Work Unit\Footsteps_ground	
+	2155740875	Foot_material			\Default Work Unit\Foot_material	
 
 Switch	ID	Name	Switch Group			Notes
-	3126687001	Paper	Footsteps_ground			
-	3387888028	Strafe	Footsteps_ground			
-	4004201255	Dirty	Footsteps_ground			
+	3126687001	Paper	Foot_material			
+	3387888028	Strafe	Foot_material			
+	4004201255	Dirty	Foot_material			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	3514092254	Sunburn_time			\Default Work Unit\Sunburn_time	
@@ -52,7 +51,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	205915549	S_SFX_TOR_SAW11	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_SAW11_834051F9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\Saw\S_SFX_TOR_SAW11		354703
 	226802094	S_SFX_POC_FOOTS-006	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-006_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-006		19222
 	229998549	S_SFX_DIE_TOR_HITLIYA_07	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_07_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Hurt\Short hurt\S_SFX_DIE_TOR_HITLIYA_07		77945
-	232904417	S_SFX_POC_FOOTSTRAFE-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-004_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-004		22425
+	232904417	S_SFX_POC_FOOTSTRAFE-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-004_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-004		22459
 	235467111	S_SFX_DIE_TOR_HITLIYA_03	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_03_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Hurt\Short hurt\S_SFX_DIE_TOR_HITLIYA_03		82154
 	244484198	Sizzle high	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_SUNBURNLOOP-001_29503F80.wem		\Actor-Mixer Hierarchy\Default Work Unit\Soleil\Burning\Fail Blend\Sizzle high		492722
 	248145761	S_SFX_POC_FOOTS-011	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-011_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-011		29907
@@ -84,14 +83,14 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	440835996	S_SFX_TOR_SAW04	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_SAW04_834051F9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\Saw\S_SFX_TOR_SAW04		193884
 	455784063	S_SFX_DIE_TOR_HITLIYA_14	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_14_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Hurt\Short hurt\S_SFX_DIE_TOR_HITLIYA_14		105524
 	468891264	S_SFX_TOR_TEARLP-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_TEARLP-001_834051F9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\TearLP\S_SFX_TOR_TEARLP-001		183490
-	514741865	S_SFX_POC_FOOTSTRAFE-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-001_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-001		29138
+	514741865	S_SFX_POC_FOOTSTRAFE-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-001_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-001		29172
 	521253662	Sparks thunder fail-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Sparks thunder fail-003_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Fail\Sparks))\Sparks thunder fail-003		126766
 	533337035	S_SFX_LIYASDRESS-011	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_LIYASDRESS-011_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\LIYASDRESS\S_SFX_LIYASDRESS-011		23950
 	553415406	S_SFX_DIE_TOR_HITLIYA_04	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_04_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Soleil\Burning\Hit liya trigger\S_SFX_DIE_TOR_HITLIYA_04		76518
 	559410239	S_SFX_POC_FOOTS-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-004_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-004		18747
 	560233774	S_SFX_POC_FOOTS-005	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-005_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-005		26467
 	563499839	S_SFX_DIE_TOR_HITLIYA_12	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_12_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Soleil\Burning\Hit liya trigger\S_SFX_DIE_TOR_HITLIYA_12		79203
-	565147389	S_SFX_POC_FOOTSTRAFE-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-003_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-003		27559
+	565147389	S_SFX_POC_FOOTSTRAFE-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-003_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-003		27593
 	565636235	Sizzle mid&high	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_SUNBURNLOOP_29503F80.wem		\Actor-Mixer Hierarchy\Default Work Unit\Soleil\Burning\Fail Blend\Sizzle mid&high		497178
 	569510579	S_SFX_DIE_TOR_HITLIYA_10	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_10_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Hurt\Short hurt\S_SFX_DIE_TOR_HITLIYA_10		80835
 	576890836	S_SFX_TOR_THundBuildup-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_THundBuildup-002_E566A47F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\S_SFX_TOR_THundBuildup-002		184645
@@ -135,14 +134,14 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	875690567	S_SFX_DIE_TOR_HITKNIFE05	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITKNIFE05_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife Events\Hit\S_SFX_DIE_TOR_HITKNIFE05		99868
 	877417282	S_SFX_TOR_THundBuildup-001	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_THundBuildup-001_E566A47F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Build\S_SFX_TOR_THundBuildup-001		178411
 	888730316	S_SFX_TOR_SAW09	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_SAW09_834051F9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\Saw\S_SFX_TOR_SAW09		289170
-	896024870	S_SFX_POC_FOOTSTRAFE-005	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-005_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-005		21445
+	896024870	S_SFX_POC_FOOTSTRAFE-005	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-005_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-005		21479
 	910208607	S_SFX_POC_FOOTS-015	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-015_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-015		28647
 	912415545	S_SFX_DIE_TOR_HITLIYA_13	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_13_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Soleil\Burning\Hit liya trigger\S_SFX_DIE_TOR_HITLIYA_13		78622
 	913493235	S_SFX_DIE_TOR_HITLIYA_13	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITLIYA_13_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Hurt\Short hurt\S_SFX_DIE_TOR_HITLIYA_13		78656
-	917288936	S_SFX_POC_FOOTSTRAFE-006	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-006_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-006		32187
+	917288936	S_SFX_POC_FOOTSTRAFE-006	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-006_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-006		32221
 	924498498	S_SFX_POC_FOOTS-012	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-012_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-012		18256
 	933485849	S_SFX_DIE_TOR_HITKNIFE01	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_DIE_TOR_HITKNIFE01_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife Events\Hit\S_SFX_DIE_TOR_HITKNIFE01		158853
-	943402261	S_SFX_POC_FOOTSTRAFE-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-002_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-002		26161
+	943402261	S_SFX_POC_FOOTSTRAFE-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTSTRAFE-002_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Strafe\S_SFX_POC_FOOTSTRAFE-002		26195
 	945625114	S_SFX_POC_FOOTS-014	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_FOOTS-014_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Footsteps\Footswitch\Paper\S_SFX_POC_FOOTS-014		32199
 	953409729	Thunder hit 03	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Thunder hit 03_391988D9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Foudre\Thunder fx\Thunder events\Thunder circles\Hits\Thunder hit 03		394983
 	960461678	S_SFX_TOR_RATTLE04	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_RATTLE04_834051F9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Couteau\Knife loops\Knife_texture_distance_blend\Rattle\S_SFX_TOR_RATTLE04		202896

@@ -1063,6 +1063,10 @@
 					<ShortName>Thunder Env events-003.wav</ShortName>
 					<Path>SFX\Thunder Env events-003_9209B708.wem</Path>
 				</File>
+				<File Id="1016891591" Language="SFX">
+					<ShortName>S_DIA_TOR_THUNDER.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_THUNDER_9209B708.wem</Path>
+				</File>
 				<File Id="1017913663" Language="SFX">
 					<ShortName>Thunder Env events-016.wav</ShortName>
 					<Path>SFX\Thunder Env events-016_9209B708.wem</Path>
@@ -1310,6 +1314,7 @@
 				<Event Id="527347948" Name="Music_Knife"/>
 				<Event Id="2616261669" Name="Music_Sun"/>
 				<Event Id="3567178845" Name="Music_Thunder"/>
+				<Event Id="4184794294" Name="Outro"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="27484448" Language="SFX">
@@ -1320,10 +1325,6 @@
 					<ShortName>S_MUS_DIE_TOR_INTRO.wav</ShortName>
 					<Path>SFX\S_MUS_DIE_TOR_INTRO_5DAE68DD.wem</Path>
 				</File>
-				<File Id="376015080" Language="SFX">
-					<ShortName>S_VX_CUT_TOR_KNIFE.wav</ShortName>
-					<Path>SFX\S_VX_CUT_TOR_KNIFE_862872AA.wem</Path>
-				</File>
 				<File Id="461330647" Language="SFX">
 					<ShortName>S_MUS_TOR_THUNDER.wav</ShortName>
 					<Path>SFX\S_MUS_TOR_THUNDER_11182432.wem</Path>
@@ -1332,13 +1333,13 @@
 					<ShortName>S_MUS_TOR_SUNv2&amp;OUTRO.wav</ShortName>
 					<Path>SFX\S_MUS_TOR_SUNv2&amp;OUTRO_84C9299C.wem</Path>
 				</File>
-				<File Id="750962119" Language="SFX">
-					<ShortName>S_VX_CUT_TOR_SUN.wav</ShortName>
-					<Path>SFX\S_VX_CUT_TOR_SUN_45F08874.wem</Path>
+				<File Id="776626243" Language="SFX">
+					<ShortName>S_DIA_TOR_INTRO.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_INTRO_9209B708.wem</Path>
 				</File>
-				<File Id="966561974" Language="SFX">
-					<ShortName>S_VX_CUT_TOR_THUNDER.wav</ShortName>
-					<Path>SFX\S_VX_CUT_TOR_THUNDER_B5849895.wem</Path>
+				<File Id="901811174" Language="SFX">
+					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_SUN_9209B708.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -1350,7 +1351,6 @@
 				<Event Id="2671209179" Name="Knife_Fail"/>
 				<Event Id="3632834637" Name="Knife_Flyby"/>
 				<Event Id="2811031212" Name="Knife_Loop_Start"/>
-				<Event Id="2394515795" Name="Stop_Knife"/>
 				<Event Id="660322461" Name="Stop_Sun_fail"/>
 				<Event Id="8782740" Name="Sun_fail"/>
 				<Event Id="1287545852" Name="Thunder_circle"/>
@@ -1476,7 +1476,7 @@
 				</File>
 				<File Id="232904417" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-004.wav</ShortName>
-					<Path>SFX\S_SFX_POC_FOOTSTRAFE-004_9209B708.wem</Path>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-004_5A140B9B.wem</Path>
 				</File>
 				<File Id="235467111" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_03.wav</ShortName>
@@ -1604,7 +1604,7 @@
 				</File>
 				<File Id="514741865" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-001.wav</ShortName>
-					<Path>SFX\S_SFX_POC_FOOTSTRAFE-001_9209B708.wem</Path>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-001_5A140B9B.wem</Path>
 				</File>
 				<File Id="521253662" Language="SFX">
 					<ShortName>Sparks thunder fail-003.wav</ShortName>
@@ -1632,7 +1632,7 @@
 				</File>
 				<File Id="565147389" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-003.wav</ShortName>
-					<Path>SFX\S_SFX_POC_FOOTSTRAFE-003_9209B708.wem</Path>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-003_5A140B9B.wem</Path>
 				</File>
 				<File Id="565636235" Language="SFX">
 					<ShortName>S_SFX_TOR_SUNBURNLOOP.wav</ShortName>
@@ -1808,7 +1808,7 @@
 				</File>
 				<File Id="896024870" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-005.wav</ShortName>
-					<Path>SFX\S_SFX_POC_FOOTSTRAFE-005_9209B708.wem</Path>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-005_5A140B9B.wem</Path>
 				</File>
 				<File Id="910208607" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-015.wav</ShortName>
@@ -1824,7 +1824,7 @@
 				</File>
 				<File Id="917288936" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-006.wav</ShortName>
-					<Path>SFX\S_SFX_POC_FOOTSTRAFE-006_9209B708.wem</Path>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-006_5A140B9B.wem</Path>
 				</File>
 				<File Id="924498498" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-012.wav</ShortName>
@@ -1836,7 +1836,7 @@
 				</File>
 				<File Id="943402261" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-002.wav</ShortName>
-					<Path>SFX\S_SFX_POC_FOOTSTRAFE-002_9209B708.wem</Path>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-002_5A140B9B.wem</Path>
 				</File>
 				<File Id="945625114" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-014.wav</ShortName>
