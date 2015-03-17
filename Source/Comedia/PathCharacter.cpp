@@ -17,33 +17,40 @@ PathCharacter::~PathCharacter()
 
 void PathCharacter::UpdateCharacter(float DeltaSeconds)
 {
-	if (PathNodes.Num() > 0 && IndexCurrentTargetNode < PathNodes.Num())
+	if (DelayMoving <= 0.0f)
 	{
-		float PosterSize = (LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation() - LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation()).Size();
-		//Check if two nodes on different posters, if so, tp character to other poster
-		if (LastCrossedNode->PosterOwner != PathNodes[IndexCurrentTargetNode]->PosterOwner)
+		if (PathNodes.Num() > 0 && IndexCurrentTargetNode < PathNodes.Num())
 		{
-			_CrossNextNode();
-		}
-		else //Else, move character to next node
-		{
-			if (LastCrossedNode->NodePosition < PathNodes[IndexCurrentTargetNode]->NodePosition)
+			float PosterSize = (LastCrossedNode->PosterOwner->GripTailComponent->GetComponentLocation() - LastCrossedNode->PosterOwner->GripHeadComponent->GetComponentLocation()).Size();
+			//Check if two nodes on different posters, if so, tp character to other poster
+			if (LastCrossedNode->PosterOwner != PathNodes[IndexCurrentTargetNode]->PosterOwner)
 			{
-				LocalPosition += MovingSpeed * DeltaSeconds / PosterSize;
-				if (LocalPosition > PathNodes[IndexCurrentTargetNode]->NodePosition)
+				_CrossNextNode();
+			}
+			else //Else, move character to next node
+			{
+				if (LastCrossedNode->NodePosition < PathNodes[IndexCurrentTargetNode]->NodePosition)
 				{
-					_CrossNextNode();
+					LocalPosition += MovingSpeed * DeltaSeconds / PosterSize;
+					if (LocalPosition > PathNodes[IndexCurrentTargetNode]->NodePosition)
+					{
+						_CrossNextNode();
+					}
+				}
+				else
+				{
+					LocalPosition -= MovingSpeed * DeltaSeconds / PosterSize;
+					if (LocalPosition < PathNodes[IndexCurrentTargetNode]->NodePosition)
+					{
+						_CrossNextNode();
+					}
 				}
 			}
-			else
-			{
-				LocalPosition -= MovingSpeed * DeltaSeconds / PosterSize;
-				if (LocalPosition < PathNodes[IndexCurrentTargetNode]->NodePosition)
-				{
-					_CrossNextNode();
-				}
-			}
 		}
+	}
+	else
+	{
+		DelayMoving -= DeltaSeconds;
 	}
 
 	//if (LastCrossedNode != nullptr && LastCrossedNode->PosterOwner != nullptr)
@@ -53,11 +60,13 @@ void PathCharacter::UpdateCharacter(float DeltaSeconds)
 	//}
 }
 
-bool PathCharacter::MoveTo(const PathNode* TargetNode)
+bool PathCharacter::MoveTo(const PathNode* TargetNode, float DelayMoving)
 {
 	bool bPathFound = false;
 	PathNode* CurrentNode;
 	PathNode* NextNode;
+
+	this->DelayMoving = DelayMoving;
 
 	//DrawDebugSphere(World, GetNodeLocation(TargetNode), 64, 12, FColor::Red, false, 5.0f);
 	//DrawDebugSphere(World, GetNodeLocation(PathMainCharacter.LastCrossedNode), 64, 12, FColor::Green, false, 5.0f);
@@ -280,11 +289,11 @@ void PathCharacter::_CrossNextNode()
 					SetCharacterNode(LinkedNode);
 					if (LinkedNode->RightNode != nullptr && LinkedNode->RightNode->NodeType != ENodeType::NT_SideNode)
 					{
-						MoveTo(LinkedNode->RightNode);
+						MoveTo(LinkedNode->RightNode, 0.0f);
 					}
 					else if (LinkedNode->LeftNode != nullptr && LinkedNode->LeftNode->NodeType != ENodeType::NT_SideNode)
 					{
-						MoveTo(LinkedNode->LeftNode);
+						MoveTo(LinkedNode->LeftNode, 0.0f);
 					}
 				}
 			}
