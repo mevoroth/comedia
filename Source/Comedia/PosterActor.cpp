@@ -128,11 +128,11 @@ void APosterActor::BeginPlay()
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1))
 	);
 
-	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size() * 0.95f;
-	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size() * 0.95f;
+	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
+	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
 
 	//_MaxDistanceBetweenGrip = FVector::DistSquared(GetGripHead(), GetGripTail());
-	_MaxDistanceBetweenGrip = _MaxDistance;
+	_MaxDistanceBetweenGrip = _MaxDistance ;
 
 	FireRangeAngle = FMath::DegreesToRadians(FireRangeAngle);
 	FireRangeDistance *= FireRangeDistance; // Square
