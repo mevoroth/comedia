@@ -279,6 +279,7 @@ private:
 	/** Reset Poster to origin */
 	void _Reset(float DeltaSeconds);
 	float _ResetAlpha;
+	bool _bResetHeadIsRoot;
 
 	FVector _PlaneForward;
 

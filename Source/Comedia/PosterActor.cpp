@@ -34,6 +34,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, EndingTrigger(0)
 	, _WayFound(false)
 	, DetachThreshold(10000.f)
+	, _bResetHeadIsRoot(false)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -355,6 +356,7 @@ void APosterActor::Grabbing(bool Grabbing)
 			}
 
 			OnGrab(Character->GetActorLocation());
+			_bResetHeadIsRoot = (State & HEADISROOT) != 0;
 			ToggleFootStep();
 			Character->NotifyGrab(_MaxDistanceBetweenGrip);
 			break;
@@ -430,7 +432,7 @@ void APosterActor::InRange(bool HeadIsRoot)
 			State = (PosterState)(State & ~HEADISROOT);
 		}
 		State = (PosterState)(State | GRABBABLE);
-		bShowFeedback = true;
+		bShowFeedback = _ResetCalled;
 		break;
 	case STICKED:
 		if (HeadIsRoot && (State & HEADISROOT)
@@ -571,7 +573,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	}
 
 	// Update feedbacks
-	bShowFeedback = bShowFeedback || (bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled);
+	//bShowFeedback = bShowFeedback || (bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled);
 	if (FeedbackMesh)
 	{
 		PosterMesh->SetRenderCustomDepth(bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled);
@@ -579,8 +581,7 @@ void APosterActor::Tick(float DeltaSeconds)
 	}
 	if (_FeedbackObject)
 	{
-		_FeedbackObject->SetVisibility(bShowFeedback, true);
-		Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
+		_FeedbackObject->SetVisibility(bShowFeedback || (bIsGrabbable && (State & GRABBABLE) != 0 && _ResetCalled), true);
 		_FeedbackObject->SetRelativeRotation(FRotator(0.f, 25.0f, 0.f));
 	}
 
@@ -938,7 +939,8 @@ void APosterActor::_Reset(float DeltaSeconds)
 {
 	float ResetAlphaNormalized = _ResetAlpha / ResetSpeed;
 
-	bool bHeadIsRoot = (State & HEADISROOT) != 0;
+	//bool bHeadIsRoot = (State & HEADISROOT) != 0;
+	bool bHeadIsRoot = _bResetHeadIsRoot;
 	int32 BoneIndex = (bHeadIsRoot ? 0 : PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2);
 	int32 Last = (bHeadIsRoot ? PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1 : -1);
 	int32 It = (bHeadIsRoot ? 1 : -1);
@@ -1040,6 +1042,7 @@ void APosterActor::OnResetFinished_Implementation()
 
 void APosterActor::OnGrab_Implementation(const FVector& Position)
 {
+	bShowFeedback = false;
 }
 
 void APosterActor::OnWayFound_Implementation()
@@ -1090,7 +1093,9 @@ void APosterActor::_CancelOverridingCamPosition()
 
 bool APosterActor::IsPrinceCallable() const
 {
-	return KeyPoints.Num() > 0;
+	PosterState St = (PosterState)(State & ~(HEADISROOT | GRABBABLE));
+	// Test on INIT and STICKED are hacks to avoid showing feedbacks when grabbing
+	return KeyPoints.Num() > 0 && (St == INIT || St == STICKED);
 }
 
 bool APosterActor::IsGrabbing() const
