@@ -49,8 +49,11 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	FeedbackMesh->SetRelativeLocation(FVector::ZeroVector);
 	FeedbackMesh->SetVisibility(false);
 
-	//ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
-	//MeshMaterialInst = MeshMaterial.Object;
+	CorruptedFeedbackMesh = FOI.CreateDefaultSubobject<USkeletalMeshComponent>(this, TEXT("CorruptedFeedbackMesh"));
+	CorruptedFeedbackMesh->Activate(true);
+	CorruptedFeedbackMesh->AttachTo(PosterMesh);
+	CorruptedFeedbackMesh->SetRelativeLocation(FVector::ZeroVector);
+	CorruptedFeedbackMesh->SetVisibility(false);
 
 	DoorComponent = FOI.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("DoorComponent"));
 	DoorComponent->TranslucencySortPriority = 100;
@@ -889,6 +892,42 @@ void APosterActor::_Soldier(float DeltaSeconds)
 	if (_SoldierEnabled)
 	{
 		_SoldierElapsedTime += DeltaSeconds;
+
+		// Very dirty code
+		AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
+		APosterActor* LeftPoster = 0;
+		APosterActor* RightPoster = 0;
+		if (Node->RightNode)
+		{
+			RightPoster = Node->RightNode->PosterOwner;
+		}
+
+		while (Node->LeftNode && Node->LeftNode->PosterOwner == this)
+		{
+			Node = Node->LeftNode;
+		}
+		if (Node->LeftNode && Node->LeftNode->PosterOwner != this)
+		{
+			LeftPoster = Node->LeftNode->PosterOwner;
+		}
+
+		float SoldierDir = _GetSoldierDirection();
+		bool bSidePosterActive = LeftPoster && SoldierDir > 0;
+		if (LeftPoster)
+		{
+			LeftPoster->CorruptedFeedbackMesh->SetVisibility(bSidePosterActive, true);
+			LeftPoster->CorruptedFeedbackMesh->SetHiddenInGame(!bSidePosterActive, true);
+		}
+
+		UE_LOG(LogGPCode, Warning, TEXT("BEFORE CA MARCHE? : %d"), bSidePosterActive ? 1 : 0);
+		bSidePosterActive = !bSidePosterActive && RightPoster &&  SoldierDir < 0;
+		UE_LOG(LogGPCode, Warning, TEXT("CA MARCHE? : %d"), bSidePosterActive ? 1 : 0);
+		if (RightPoster)
+		{
+			RightPoster->CorruptedFeedbackMesh->SetVisibility(bSidePosterActive, true);
+			RightPoster->CorruptedFeedbackMesh->SetHiddenInGame(!bSidePosterActive, true);
+		}
 	}
 
 	PreviousSoldierState = SoldierState;
