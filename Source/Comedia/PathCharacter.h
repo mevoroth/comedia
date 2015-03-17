@@ -18,6 +18,7 @@ public:
 	float PreviousLocalPosition;
 	float MovingSpeed = 300.0f;
 	bool bIsHidden = false;
+	float DelayMoving = 0.0f;
 
 	PathGraph* CurrentPathGraph;
 	UWorld* World;
@@ -25,7 +26,7 @@ public:
 	PathCharacter();
 	~PathCharacter();
 
-	bool MoveTo(const PathNode* TargetNode);
+	bool MoveTo(const PathNode* TargetNode, float DelayMoving);
 	void UpdateCharacter(float DeltaSeconds);
 	void SetCharacterNode(PathNode* LastCrossedNode);
 	float GetCharacterPosition(APosterActor* RelativePoster);

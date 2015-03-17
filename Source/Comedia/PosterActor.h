@@ -176,6 +176,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
 	ARespawnZoneActor* RespawnZone;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
+	float DelayCall;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	bool bIsGrabbable;
 
