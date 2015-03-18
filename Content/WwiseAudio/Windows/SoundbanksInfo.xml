@@ -15,7 +15,9 @@
 			<Path>VSbank.bnk</Path>
 			<IncludedEvents>
 				<Event Id="3231829122" Name="Cin_Burstshot_Prince"/>
+				<Event Id="67685155" Name="Cin_HitCorpse"/>
 				<Event Id="2259368400" Name="Cin_Oneshot_Prince"/>
+				<Event Id="3070694524" Name="Cin_Sweepshot"/>
 				<Event Id="1653961176" Name="Corpseflies"/>
 				<Event Id="3129425356" Name="Endscene"/>
 				<Event Id="3049293586" Name="Footsteps_Prince"/>
@@ -26,6 +28,7 @@
 				<Event Id="357264855" Name="SecretPassage"/>
 				<Event Id="2580551146" Name="StartVS"/>
 				<Event Id="1803197027" Name="Stick"/>
+				<Event Id="2420232120" Name="Stop_pendu"/>
 				<Event Id="3815088494" Name="Stop_soldier"/>
 				<Event Id="259090811" Name="StopTearing"/>
 				<Event Id="2046419128" Name="Tearingposter"/>
@@ -39,6 +42,10 @@
 				<File Id="1953402" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-005.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-005_5A140B9B.wem</Path>
+				</File>
+				<File Id="2889626" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Hitsoldier-004.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Hitsoldier-004_9209B708.wem</Path>
 				</File>
 				<File Id="2950969" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-001.wav</ShortName>
@@ -103,6 +110,10 @@
 				<File Id="74012609" Language="SFX">
 					<ShortName>Moving_soldierfoot-002.wav</ShortName>
 					<Path>SFX\Moving_soldierfoot-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="79997004" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Hitsoldier-003.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Hitsoldier-003_9209B708.wem</Path>
 				</File>
 				<File Id="82625878" Language="SFX">
 					<ShortName>Tearheavy-014.wav</ShortName>
@@ -195,6 +206,10 @@
 				<File Id="195501043" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERSEQ-009.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERSEQ-009_9209B708.wem</Path>
+				</File>
+				<File Id="196565061" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Hitsoldier-005.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Hitsoldier-005_9209B708.wem</Path>
 				</File>
 				<File Id="197639371" Language="SFX">
 					<ShortName>Corpses IN.wav</ShortName>
@@ -472,6 +487,10 @@
 					<ShortName>Explosions - Explosion Single Large 07.wav</ShortName>
 					<Path>SFX\Explosions - Explosion Single Large 07_5A140B9B.wem</Path>
 				</File>
+				<File Id="567198932" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Hitsoldier-001.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Hitsoldier-001_9209B708.wem</Path>
+				</File>
 				<File Id="568165928" Language="SFX">
 					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-001.wav</ShortName>
 					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-001_5A140B9B.wem</Path>
@@ -600,6 +619,10 @@
 					<ShortName>Tearlight-012.wav</ShortName>
 					<Path>SFX\Tearlight-012_9209B708.wem</Path>
 				</File>
+				<File Id="815700116" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Sweepshot.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Sweepshot_9209B708.wem</Path>
+				</File>
 				<File Id="818433470" Language="SFX">
 					<ShortName>Tearheavy-007.wav</ShortName>
 					<Path>SFX\Tearheavy-007_9209B708.wem</Path>
@@ -623,6 +646,10 @@
 				<File Id="846466455" Language="SFX">
 					<ShortName>WarassetsHand Mortar Large Distant-002.wav</ShortName>
 					<Path>SFX\WarassetsHand Mortar Large Distant-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="852283892" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Hitsoldier-002.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Hitsoldier-002_9209B708.wem</Path>
 				</File>
 				<File Id="854569430" Language="SFX">
 					<ShortName>Moving_soldier-002.wav</ShortName>
@@ -1209,7 +1236,7 @@
 				</File>
 				<File Id="639926184" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACIN.wav</ShortName>
-					<Path>SFX\S_DIA_VS_LIYACIN_5A140B9B.wem</Path>
+					<Path>SFX\S_DIA_VS_LIYACIN_CFDF7931.wem</Path>
 				</File>
 				<File Id="666673536" Language="SFX">
 					<ShortName>Calls5.wav</ShortName>
