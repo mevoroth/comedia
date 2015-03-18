@@ -137,6 +137,8 @@ void APosterActor::BeginPlay()
 	FireRangeAngle = FMath::DegreesToRadians(FireRangeAngle);
 	FireRangeDistance *= FireRangeDistance; // Square
 
+
+	bOriginalIsGrabbable = bIsGrabbable;
 	//Check if Poster is door linked to another poster and set it ungrabbable if needed
 	if (DoorLinkedPoster != nullptr)
 	{
