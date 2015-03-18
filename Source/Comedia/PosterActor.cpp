@@ -693,7 +693,7 @@ bool APosterActor::SoldierKills()
 	}
 
 	// Liya killed
-	if ((State & ~(GRABBABLE | HEADISROOT)) != GRABBED && IsInFireRange(Player->GetActorLocation()))
+	if ((State & ~(GRABBABLE | HEADISROOT)) != GRABBED && IsInFireRange(Player->GetActorLocation()) && RemainingTimeBeforeSoldierActive <= 0.0f)
 	{
 		OnKillLiyah();
 		return true;
@@ -833,6 +833,16 @@ void APosterActor::_Soldier(float DeltaSeconds)
 				bSoldierFlipped = !bSoldierFlipped;
 			}
 		}
+	}
+
+	//Countdown delay before soldier active
+	if (SoldierState == ESoldierState::ST_Idle)
+	{
+		RemainingTimeBeforeSoldierActive -= DeltaSeconds;
+	}
+	else if (RemainingTimeBeforeSoldierActive != TimeBeforeSoldierActive)
+	{
+		RemainingTimeBeforeSoldierActive = TimeBeforeSoldierActive;
 	}
 
 	_SoldierPreviousPos = _SoldierCurrentPos;
