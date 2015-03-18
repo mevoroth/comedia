@@ -886,6 +886,10 @@
 				<Event Id="2082104583" Name="StartVSmus"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="103516656" Language="SFX">
+					<ShortName>outro.wav</ShortName>
+					<Path>SFX\outro_3353F714.wem</Path>
+				</File>
 				<File Id="143456646" Language="SFX">
 					<ShortName>Intro_Metal3rev.wav</ShortName>
 					<Path>SFX\Intro_Metal3rev_5FF60323.wem</Path>
@@ -925,10 +929,6 @@
 				<File Id="872046843" Language="SFX">
 					<ShortName>Corrupt_Perc.wav</ShortName>
 					<Path>SFX\Corrupt_Perc_4AF0AF3A.wem</Path>
-				</File>
-				<File Id="950844973" Language="SFX">
-					<ShortName>Teaser test 3.wav</ShortName>
-					<Path>SFX\Teaser test 3_AD751C0B.wem</Path>
 				</File>
 				<File Id="1071230320" Language="SFX">
 					<ShortName>Corrupt_Vibraphone.wav</ShortName>
