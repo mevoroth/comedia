@@ -5,6 +5,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2750274410	Dialog_Lost_liya			\Default Work Unit\VS\Dialogs\Dialog_Lost_liya	
 	2901257146	Dialog_init			\Default Work Unit\VS\Dialogs\Dialog_init	
 	3555504738	Dialog_ListenPrince			\Default Work Unit\VS\Dialogs\Dialog_ListenPrince	
+	3710527641	Dialog_Whydid			\Default Work Unit\VS\Dialogs\Dialog_Whydid	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	1491659777	Liyacalls			\Default Work Unit\Liyacalls	
@@ -38,6 +39,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	592919700	Okliya	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Okliya_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Tone\HUshseq\Princeanswer\Okliya		65693
 	614845258	S_DIA_VS_LIYACALLS-007	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_LIYACALLS-007_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Tone\HUshseq\Hush\S_DIA_VS_LIYACALLS-007		24817
 	623922328	S_DIA_VS_LIYACALLS-003	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_LIYACALLS-003_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Tone\Normalseq\Normal\S_DIA_VS_LIYACALLS-003		51493
+	639926184	S_DIA_WHY	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_LIYACIN_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\S_DIA_WHY		381123
 	666673536	Calls5	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Calls5_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Prince\Princecalls\Calls5		51903
 	670576219	S_DIA_VS_LIYACALLS-010	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_VS_LIYACALLS-010_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Gameplay Voice\Calls Prince\Tone\HUshseq\Hush\S_DIA_VS_LIYACALLS-010		36589
 	719710639	Mmm	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Mmm_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Liya\Dialogs\Sequence init\Mmm		42625

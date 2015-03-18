@@ -14,10 +14,15 @@
 			<ShortName>VSbank</ShortName>
 			<Path>VSbank.bnk</Path>
 			<IncludedEvents>
+				<Event Id="3231829122" Name="Cin_Burstshot_Prince"/>
+				<Event Id="2259368400" Name="Cin_Oneshot_Prince"/>
 				<Event Id="1653961176" Name="Corpseflies"/>
+				<Event Id="3129425356" Name="Endscene"/>
 				<Event Id="3049293586" Name="Footsteps_Prince"/>
+				<Event Id="3013141810" Name="Footsteps_Prince_Discreet"/>
 				<Event Id="415739490" Name="moving_corpse"/>
 				<Event Id="246825020" Name="Moving_soldier"/>
+				<Event Id="695504409" Name="Penduloop"/>
 				<Event Id="357264855" Name="SecretPassage"/>
 				<Event Id="2580551146" Name="StartVS"/>
 				<Event Id="1803197027" Name="Stick"/>
@@ -78,6 +83,10 @@
 				<File Id="40209752" Language="SFX">
 					<ShortName>WarassetsHand Mortar Large Distant-004.wav</ShortName>
 					<Path>SFX\WarassetsHand Mortar Large Distant-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="42366964" Language="SFX">
+					<ShortName>S_SFX_PENDULOOP.wav</ShortName>
+					<Path>SFX\S_SFX_PENDULOOP_9209B708.wem</Path>
 				</File>
 				<File Id="66066790" Language="SFX">
 					<ShortName>OuagadougouStreet_SFXB.129.wav</ShortName>
@@ -174,6 +183,10 @@
 				<File Id="189863883" Language="SFX">
 					<ShortName>Tearheavy-008.wav</ShortName>
 					<Path>SFX\Tearheavy-008_9209B708.wem</Path>
+				</File>
+				<File Id="194183449" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_AkBurstPrince.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_AkBurstPrince_9209B708.wem</Path>
 				</File>
 				<File Id="195223667" Language="SFX">
 					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-001.wav</ShortName>
@@ -590,6 +603,10 @@
 				<File Id="818433470" Language="SFX">
 					<ShortName>Tearheavy-007.wav</ShortName>
 					<Path>SFX\Tearheavy-007_9209B708.wem</Path>
+				</File>
+				<File Id="823799610" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_AkOneshotPrince.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_AkOneshotPrince_9209B708.wem</Path>
 				</File>
 				<File Id="826014673" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERSEQ-011.wav</ShortName>
@@ -1106,6 +1123,7 @@
 				<Event Id="3555504738" Name="Dialog_ListenPrince"/>
 				<Event Id="2750274410" Name="Dialog_Lost_liya"/>
 				<Event Id="1093683547" Name="Dialog_Princecall"/>
+				<Event Id="3710527641" Name="Dialog_Whydid"/>
 				<Event Id="1491659777" Name="Liyacalls"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
@@ -1188,6 +1206,10 @@
 				<File Id="623922328" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-003.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="639926184" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACIN.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACIN_5A140B9B.wem</Path>
 				</File>
 				<File Id="666673536" Language="SFX">
 					<ShortName>Calls5.wav</ShortName>
