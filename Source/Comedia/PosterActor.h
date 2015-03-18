@@ -203,6 +203,11 @@ public:
 	TEnumAsByte<ESoldierState::Type> PreviousSoldierState;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	float TimeBeforeSoldierActive = 1.0f;
+
+	float RemainingTimeBeforeSoldierActive = 0.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	bool bSoldierFlipped;
 
 	/** Fire Range Distance */
