@@ -15,7 +15,9 @@
 			<Path>VSbank.bnk</Path>
 			<IncludedEvents>
 				<Event Id="3231829122" Name="Cin_Burstshot_Prince"/>
+				<Event Id="3287955815" Name="Cin_Dyingsoldier"/>
 				<Event Id="67685155" Name="Cin_HitCorpse"/>
+				<Event Id="2481220117" Name="Cin_Lostbullets"/>
 				<Event Id="2259368400" Name="Cin_Oneshot_Prince"/>
 				<Event Id="3070694524" Name="Cin_Sweepshot"/>
 				<Event Id="1653961176" Name="Corpseflies"/>
@@ -347,6 +349,10 @@
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-005.wav</ShortName>
 					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-005_5A140B9B.wem</Path>
 				</File>
+				<File Id="356185412" Language="SFX">
+					<ShortName>Dyingsoldier.wav</ShortName>
+					<Path>SFX\Dyingsoldier_9209B708.wem</Path>
+				</File>
 				<File Id="357732375" Language="SFX">
 					<ShortName>WarassetsHand Mortar Small Distant-004.wav</ShortName>
 					<Path>SFX\WarassetsHand Mortar Small Distant-004_5A140B9B.wem</Path>
@@ -586,6 +592,10 @@
 				<File Id="733082762" Language="SFX">
 					<ShortName>WarassetsBoulder Explosion-003.wav</ShortName>
 					<Path>SFX\WarassetsBoulder Explosion-003_5A140B9B.wem</Path>
+				</File>
+				<File Id="738151625" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Lostbullets.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Lostbullets_9209B708.wem</Path>
 				</File>
 				<File Id="743078939" Language="SFX">
 					<ShortName>WarassetsAK47-1 Double Tap 5x 08-003.wav</ShortName>
