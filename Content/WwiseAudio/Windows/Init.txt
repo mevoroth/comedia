@@ -18,11 +18,13 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 	19910373	Reverb_city			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_city	
 	596825374	REvvoice			\Default Work Unit\Master Audio Bus\Monrovia\Voice bus\REvvoice	
 	702543394	Tunnels			\Default Work Unit\Master Audio Bus\Monrovia\Tunnels	
+	1852546347	REV_DIALOG			\Default Work Unit\Master Audio Bus\HDR BUS\Dialogs\REV_DIALOG	
 	3610144935	ReverbAmb			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances\ReverbAmb	
 	4145015068	Reverb_house			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_house	
 
 Effect plug-ins	ID	Name	Type				Notes
 	48620415	Have_U_Ever_Been_Outside	Wwise RoomVerb			
 	427149404	Wwise RoomVerb (Custom)	Wwise RoomVerb			
+	535667444	Bathroom1	Wwise Matrix Reverb			
 	2945072214	My_Closet	Wwise RoomVerb			
 
