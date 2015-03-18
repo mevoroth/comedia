@@ -19,6 +19,7 @@ class COMEDIA_API ULowPassFilterComponent : public UActorComponent
 	void InitRecord(uint32 Latency);
 	void Push(float Value);
 	float GetCurrentRecord() const;
+	void Reset();
 
 private:
 	TCircularBuffer<float>* LastValues;

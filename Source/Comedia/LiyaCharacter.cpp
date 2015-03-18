@@ -26,6 +26,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, _CallCooldown(0.f)
 	, WalkingRatio(0.25f)
 {
+	FilterComponent = FOI.CreateDefaultSubobject<ULowPassFilterComponent>(this, TEXT("LowPassFilterGrab"));
 }
 
 void ALiyaCharacter::BeginPlay()
@@ -35,6 +36,7 @@ void ALiyaCharacter::BeginPlay()
 	//_GrabArmLength *= 2;
 	_InitHeight = GetMesh()->GetComponentLocation().Z;
 	_OriginalPivotCamPosition = Camera->RelativeLocation;
+	FilterComponent->InitRecord(3);
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -307,22 +309,22 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 		FVector GrabPivot = _GrabPivot;
 		FVector Hands = GetMesh()->GetSocketLocation(FName(TEXT("LHandSocket")));
 
-		ActFW.Z = 0.f;
-		ActFW.Normalize();
-		ActFW *= FVector::Dist(Hands, GetActorLocation());
-		NewPos += ActFW;
+		//ActFW.Z = 0.f;
+		//ActFW.Normalize();
+		//ActFW *= FVector::Dist(Hands, GetActorLocation());
+		//NewPos += ActFW;
 		NewPos.Z = 0.f;
 		GrabPivot.Z = 0.f;
-
 		float CurrentDist = FVector::Dist(NewPos, GrabPivot);
 
-		if (CurrentDist < _GrabMaxDistance || CurrentDist < _GrabPreviousDistance)
+		if (CurrentDist < _GrabMaxDistance || CurrentDist < FilterComponent->GetCurrentRecord())
 		{
 			AddMovementInput(Fw, Speed.X);
 			AddMovementInput(Right, Speed.Y);
 		}
+		FilterComponent->Push(CurrentDist);
 
-		_GrabPreviousDistance = CurrentDist;
+		//_GrabPreviousDistance = CurrentDist;
 
 		//FVector GrabPivot = GetActorLocation() + GetActorForwardVector() * _GrabArmLength;
 		//FVector Normal = GrabPivot - NewPos;
@@ -407,6 +409,8 @@ void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)
 {
 	_GrabSpeedAlphaIt = 1.f;
 	_GrabMaxDistance = FMath::Sqrt(PosterMaxDistance) * 1.01f;
+	FilterComponent->Reset();
+	FilterComponent->Push(_GrabMaxDistance);
 }
 
 void ALiyaCharacter::NotifyReleasePoster()
