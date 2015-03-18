@@ -264,7 +264,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Ending")
 	ATriggerBox* EndingTrigger;
+
+	bool bOriginalIsGrabbable;
 private:
+
 	PosterState State;
 	/** Root to target distance */
 	float _MaxDistance;

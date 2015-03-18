@@ -1,0 +1,1935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Android" SchemaVersion="10" SoundbankVersion="112">
+	<RootPaths>
+		<ProjectRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Android\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\louis-marie.alet\Documents\GitHub\comedia\Content\WwiseAudio\Android\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\GeneratedSoundBanks\Android</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<SoundBanks>
+		<SoundBank Id="239188210" Language="SFX">
+			<ShortName>VSbank</ShortName>
+			<Path>VSbank.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3231829122" Name="Cin_Burstshot_Prince"/>
+				<Event Id="2259368400" Name="Cin_Oneshot_Prince"/>
+				<Event Id="3070694524" Name="Cin_Sweepshot"/>
+				<Event Id="1653961176" Name="Corpseflies"/>
+				<Event Id="3129425356" Name="Endscene"/>
+				<Event Id="3049293586" Name="Footsteps_Prince"/>
+				<Event Id="3013141810" Name="Footsteps_Prince_Discreet"/>
+				<Event Id="415739490" Name="moving_corpse"/>
+				<Event Id="246825020" Name="Moving_soldier"/>
+				<Event Id="695504409" Name="Penduloop"/>
+				<Event Id="357264855" Name="SecretPassage"/>
+				<Event Id="2580551146" Name="StartVS"/>
+				<Event Id="1803197027" Name="Stick"/>
+				<Event Id="3815088494" Name="Stop_soldier"/>
+				<Event Id="259090811" Name="StopTearing"/>
+				<Event Id="2046419128" Name="Tearingposter"/>
+				<Event Id="4007042535" Name="TP_PRINCE"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="284442" Language="SFX">
+					<ShortName>Tearmed-008.wav</ShortName>
+					<Path>SFX\Tearmed-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1953402" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="2950969" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="5402268" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="6985705" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="7173264" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="11147287" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-008.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-008_63A3FE87.wem</Path>
+				</File>
+				<File Id="17458941" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="20845975" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="24476364" Language="SFX">
+					<ShortName>Tearmed-012.wav</ShortName>
+					<Path>SFX\Tearmed-012_DDC98EF4.wem</Path>
+				</File>
+				<File Id="37334847" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-013.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-013_DDC98EF4.wem</Path>
+				</File>
+				<File Id="37530646" Language="SFX">
+					<ShortName>PrinceFootsteps-001.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="40209752" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="42366964" Language="SFX">
+					<ShortName>S_SFX_PENDULOOP.wav</ShortName>
+					<Path>SFX\S_SFX_PENDULOOP_DDC98EF4.wem</Path>
+				</File>
+				<File Id="66066790" Language="SFX">
+					<ShortName>OuagadougouStreet_SFXB.129.wav</ShortName>
+					<Path>SFX\OuagadougouStreet_SFXB.129_DDC98EF4.wem</Path>
+				</File>
+				<File Id="67400036" Language="SFX">
+					<ShortName>Tearheavy-004.wav</ShortName>
+					<Path>SFX\Tearheavy-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="71943840" Language="SFX">
+					<ShortName>Tearmed-009.wav</ShortName>
+					<Path>SFX\Tearmed-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="74012609" Language="SFX">
+					<ShortName>Moving_soldierfoot-002.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="82625878" Language="SFX">
+					<ShortName>Tearheavy-014.wav</ShortName>
+					<Path>SFX\Tearheavy-014_DDC98EF4.wem</Path>
+				</File>
+				<File Id="83720713" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="84155188" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-006.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="99630150" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="104600075" Language="SFX">
+					<ShortName>ForestBirdsChirp_SFXB.70.wav</ShortName>
+					<Path>SFX\ForestBirdsChirp_SFXB.70_14165816.wem</Path>
+				</File>
+				<File Id="105406187" Language="SFX">
+					<ShortName>WarassetsBoulder Explosion-001.wav</ShortName>
+					<Path>SFX\WarassetsBoulder Explosion-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="107874318" Language="SFX">
+					<ShortName>Moving_soldierfoot-005.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="111830127" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-002.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="115084327" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="121142198" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-003.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="131371983" Language="SFX">
+					<ShortName>Tearlight-007.wav</ShortName>
+					<Path>SFX\Tearlight-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="138719345" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="141104663" Language="SFX">
+					<ShortName>WarassetsBoulder Explosion-002.wav</ShortName>
+					<Path>SFX\WarassetsBoulder Explosion-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="144588654" Language="SFX">
+					<ShortName>Tearheavy-002.wav</ShortName>
+					<Path>SFX\Tearheavy-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="153624781" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="170622134" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="184471533" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="184796083" Language="SFX">
+					<ShortName>Moving_soldier-013.wav</ShortName>
+					<Path>SFX\Moving_soldier-013_63A3FE87.wem</Path>
+				</File>
+				<File Id="187579217" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="189863883" Language="SFX">
+					<ShortName>Tearheavy-008.wav</ShortName>
+					<Path>SFX\Tearheavy-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="194183449" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_AkBurstPrince.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_AkBurstPrince_DDC98EF4.wem</Path>
+				</File>
+				<File Id="195223667" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-001.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="195501043" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-009.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="197639371" Language="SFX">
+					<ShortName>Corpses IN.wav</ShortName>
+					<Path>SFX\Corpses IN_DDC98EF4.wem</Path>
+				</File>
+				<File Id="206801395" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-008.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-008_63A3FE87.wem</Path>
+				</File>
+				<File Id="207038404" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="214325416" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-010.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="226801850" Language="SFX">
+					<ShortName>PrinceFootsteps-005.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="227292541" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-006.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="230097331" Language="SFX">
+					<ShortName>S_SFX_POC_SECRETPATH.wav</ShortName>
+					<Path>SFX\S_SFX_POC_SECRETPATH_DDC98EF4.wem</Path>
+				</File>
+				<File Id="236108985" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="242772020" Language="SFX">
+					<ShortName>Explo_Medium_15_Deep.wav</ShortName>
+					<Path>SFX\Explo_Medium_15_Deep_63A3FE87.wem</Path>
+				</File>
+				<File Id="247470190" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="259003074" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="273957997" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="275539503" Language="SFX">
+					<ShortName>Tearheavy-010.wav</ShortName>
+					<Path>SFX\Tearheavy-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="276029912" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-004.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="278431778" Language="SFX">
+					<ShortName>Tearlight-009.wav</ShortName>
+					<Path>SFX\Tearlight-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="278522517" Language="SFX">
+					<ShortName>PrinceFootsteps-008.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="283538325" Language="SFX">
+					<ShortName>Moving_soldierfoot-007.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-007_63A3FE87.wem</Path>
+				</File>
+				<File Id="286351415" Language="SFX">
+					<ShortName>TP prince.wav</ShortName>
+					<Path>SFX\TP prince_DDC98EF4.wem</Path>
+				</File>
+				<File Id="295952681" Language="SFX">
+					<ShortName>Tearlight-001.wav</ShortName>
+					<Path>SFX\Tearlight-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="300905853" Language="SFX">
+					<ShortName>Tearmed-005.wav</ShortName>
+					<Path>SFX\Tearmed-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="311360767" Language="SFX">
+					<ShortName>Tearheavy-013.wav</ShortName>
+					<Path>SFX\Tearheavy-013_DDC98EF4.wem</Path>
+				</File>
+				<File Id="311495301" Language="SFX">
+					<ShortName>Tearmed-001.wav</ShortName>
+					<Path>SFX\Tearmed-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="312058861" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="317073340" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-007.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-007_63A3FE87.wem</Path>
+				</File>
+				<File Id="334563340" Language="SFX">
+					<ShortName>PrinceFootsteps-004.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="336614025" Language="SFX">
+					<ShortName>Moving_soldier-008.wav</ShortName>
+					<Path>SFX\Moving_soldier-008_63A3FE87.wem</Path>
+				</File>
+				<File Id="336745573" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-005.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="337740990" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="340517003" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-003.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="344334885" Language="SFX">
+					<ShortName>Moving_soldierfoot-001.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="350044637" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="350610275" Language="SFX">
+					<ShortName>Explosions - Explosion Large 2x Low Rumble 02.wav</ShortName>
+					<Path>SFX\Explosions - Explosion Large 2x Low Rumble 02_63A3FE87.wem</Path>
+				</File>
+				<File Id="352995879" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-007.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-007_63A3FE87.wem</Path>
+				</File>
+				<File Id="355838398" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="357732375" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-004.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="359393471" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-009.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-009_63A3FE87.wem</Path>
+				</File>
+				<File Id="363071318" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="375810154" Language="SFX">
+					<ShortName>Tearheavy-012.wav</ShortName>
+					<Path>SFX\Tearheavy-012_DDC98EF4.wem</Path>
+				</File>
+				<File Id="381862445" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="382708769" Language="SFX">
+					<ShortName>Moving_soldier-009.wav</ShortName>
+					<Path>SFX\Moving_soldier-009_63A3FE87.wem</Path>
+				</File>
+				<File Id="383570517" Language="SFX">
+					<ShortName>Tearheavy-009.wav</ShortName>
+					<Path>SFX\Tearheavy-009_A6D362F7.wem</Path>
+				</File>
+				<File Id="391515968" Language="SFX">
+					<ShortName>Moving_soldier-001.wav</ShortName>
+					<Path>SFX\Moving_soldier-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="393818428" Language="SFX">
+					<ShortName>Tearmed-014.wav</ShortName>
+					<Path>SFX\Tearmed-014_DDC98EF4.wem</Path>
+				</File>
+				<File Id="394939005" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="401318392" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="405192892" Language="SFX">
+					<ShortName>WarassetsHand Mortar Small Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Small Distant-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="411774607" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="413427431" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-006.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="432856404" Language="SFX">
+					<ShortName>Tearmed-013.wav</ShortName>
+					<Path>SFX\Tearmed-013_DDC98EF4.wem</Path>
+				</File>
+				<File Id="449163153" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-005.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="449561365" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-016.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-016_DDC98EF4.wem</Path>
+				</File>
+				<File Id="456966240" Language="SFX">
+					<ShortName>Tearlight-005.wav</ShortName>
+					<Path>SFX\Tearlight-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="468760801" Language="SFX">
+					<ShortName>PrinceFootsteps-010.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="480792329" Language="SFX">
+					<ShortName>Tearlight-008.wav</ShortName>
+					<Path>SFX\Tearlight-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="482980505" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="485303787" Language="SFX">
+					<ShortName>PrinceFootsteps-009.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="486334515" Language="SFX">
+					<ShortName>PrinceFootsteps-003.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="487474707" Language="SFX">
+					<ShortName>Moving_soldier-004.wav</ShortName>
+					<Path>SFX\Moving_soldier-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="500845397" Language="SFX">
+					<ShortName>Tearmed-007.wav</ShortName>
+					<Path>SFX\Tearmed-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="516994881" Language="SFX">
+					<ShortName>Tearlight.wav</ShortName>
+					<Path>SFX\Tearlight_83160385.wem</Path>
+				</File>
+				<File Id="523776118" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="533805615" Language="SFX">
+					<ShortName>Explosion Cannon Fire 02.wav</ShortName>
+					<Path>SFX\Explosion Cannon Fire 02_63A3FE87.wem</Path>
+				</File>
+				<File Id="544328485" Language="SFX">
+					<ShortName>Corpses OUT.wav</ShortName>
+					<Path>SFX\Corpses OUT_DDC98EF4.wem</Path>
+				</File>
+				<File Id="550232835" Language="SFX">
+					<ShortName>Tearlight-004.wav</ShortName>
+					<Path>SFX\Tearlight-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="555842963" Language="SFX">
+					<ShortName>WarassetsStandboeller Small Distant-001.wav</ShortName>
+					<Path>SFX\WarassetsStandboeller Small Distant-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="558682521" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="560780702" Language="SFX">
+					<ShortName>Moving_soldier-006.wav</ShortName>
+					<Path>SFX\Moving_soldier-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="564640529" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-003.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="566421368" Language="SFX">
+					<ShortName>Explosions - Explosion Single Large 07.wav</ShortName>
+					<Path>SFX\Explosions - Explosion Single Large 07_63A3FE87.wem</Path>
+				</File>
+				<File Id="568165928" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Shot Sequence 01 6x 05-001.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Shot Sequence 01 6x 05-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="574650217" Language="SFX">
+					<ShortName>Moving_soldier-007.wav</ShortName>
+					<Path>SFX\Moving_soldier-007_63A3FE87.wem</Path>
+				</File>
+				<File Id="611759227" Language="SFX">
+					<ShortName>Tearmed-003.wav</ShortName>
+					<Path>SFX\Tearmed-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="625090475" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="627514223" Language="SFX">
+					<ShortName>Moving_soldierfoot-008.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-008_63A3FE87.wem</Path>
+				</File>
+				<File Id="629672077" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="645568409" Language="SFX">
+					<ShortName>Moving_soldier-012.wav</ShortName>
+					<Path>SFX\Moving_soldier-012_63A3FE87.wem</Path>
+				</File>
+				<File Id="649931550" Language="SFX">
+					<ShortName>PrinceFootsteps-002.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="650233018" Language="SFX">
+					<ShortName>Tearmed-002.wav</ShortName>
+					<Path>SFX\Tearmed-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="652154375" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-006.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="653604826" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-004.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="654581699" Language="SFX">
+					<ShortName>Tearlight-011.wav</ShortName>
+					<Path>SFX\Tearlight-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="658266768" Language="SFX">
+					<ShortName>Tearlight-010.wav</ShortName>
+					<Path>SFX\Tearlight-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="658431707" Language="SFX">
+					<ShortName>Tearlight-015.wav</ShortName>
+					<Path>SFX\Tearlight-015_DDC98EF4.wem</Path>
+				</File>
+				<File Id="662110302" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="688510213" Language="SFX">
+					<ShortName>Moving_soldierfoot-003.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="689737330" Language="SFX">
+					<ShortName>Tearmed-011.wav</ShortName>
+					<Path>SFX\Tearmed-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="696444877" Language="SFX">
+					<ShortName>WarassetsWinchester1300 Single Shots 01 6x 05-002.wav</ShortName>
+					<Path>SFX\WarassetsWinchester1300 Single Shots 01 6x 05-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="703592306" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-006.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="707549851" Language="SFX">
+					<ShortName>Tearlight-006.wav</ShortName>
+					<Path>SFX\Tearlight-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="709390081" Language="SFX">
+					<ShortName>Moving_soldier-003.wav</ShortName>
+					<Path>SFX\Moving_soldier-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="712780750" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="713359772" Language="SFX">
+					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Single Shots 01 6x 08-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="733082762" Language="SFX">
+					<ShortName>WarassetsBoulder Explosion-003.wav</ShortName>
+					<Path>SFX\WarassetsBoulder Explosion-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="743078939" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-003.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="757813133" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="762439768" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="764556851" Language="SFX">
+					<ShortName>Moving_soldierfoot-006.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="767748190" Language="SFX">
+					<ShortName>Moving_soldier-011.wav</ShortName>
+					<Path>SFX\Moving_soldier-011_63A3FE87.wem</Path>
+				</File>
+				<File Id="782678198" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-003.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="792848095" Language="SFX">
+					<ShortName>ForestMorningBirds_SFXB.75.wav</ShortName>
+					<Path>SFX\ForestMorningBirds_SFXB.75_8C1A05E9.wem</Path>
+				</File>
+				<File Id="802182126" Language="SFX">
+					<ShortName>Tearlight-012.wav</ShortName>
+					<Path>SFX\Tearlight-012_DDC98EF4.wem</Path>
+				</File>
+				<File Id="815700116" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_Sweepshot.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_Sweepshot_DDC98EF4.wem</Path>
+				</File>
+				<File Id="818433470" Language="SFX">
+					<ShortName>Tearheavy-007.wav</ShortName>
+					<Path>SFX\Tearheavy-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="823799610" Language="SFX">
+					<ShortName>S_SFX_VS_CIN_AkOneshotPrince.wav</ShortName>
+					<Path>SFX\S_SFX_VS_CIN_AkOneshotPrince_DDC98EF4.wem</Path>
+				</File>
+				<File Id="826014673" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-011.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="828864535" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-008.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="829410330" Language="SFX">
+					<ShortName>WarassetsDragunov PSL Single Shots 01 6x 08-002.wav</ShortName>
+					<Path>SFX\WarassetsDragunov PSL Single Shots 01 6x 08-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="846466455" Language="SFX">
+					<ShortName>WarassetsHand Mortar Large Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsHand Mortar Large Distant-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="854569430" Language="SFX">
+					<ShortName>Moving_soldier-002.wav</ShortName>
+					<Path>SFX\Moving_soldier-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="863517882" Language="SFX">
+					<ShortName>S_SFX_VS_Stickback2.wav</ShortName>
+					<Path>SFX\S_SFX_VS_Stickback2_DDC98EF4.wem</Path>
+				</File>
+				<File Id="864210333" Language="SFX">
+					<ShortName>WarassetsMosin Nagant Shot Sequence 5x 08-005.wav</ShortName>
+					<Path>SFX\WarassetsMosin Nagant Shot Sequence 5x 08-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="866496845" Language="SFX">
+					<ShortName>Moving_soldier-014.wav</ShortName>
+					<Path>SFX\Moving_soldier-014_63A3FE87.wem</Path>
+				</File>
+				<File Id="867006433" Language="SFX">
+					<ShortName>WarassetsAK47-2 Shot Sequence 11x 06-001.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Shot Sequence 11x 06-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="874541059" Language="SFX">
+					<ShortName>PrinceFootsteps-007.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="876868002" Language="SFX">
+					<ShortName>Tearlight-003.wav</ShortName>
+					<Path>SFX\Tearlight-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="876896833" Language="SFX">
+					<ShortName>WarassetsAK47-1 Double Tap 5x 08-004.wav</ShortName>
+					<Path>SFX\WarassetsAK47-1 Double Tap 5x 08-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="876971505" Language="SFX">
+					<ShortName>Moving_soldier-005.wav</ShortName>
+					<Path>SFX\Moving_soldier-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="885351302" Language="SFX">
+					<ShortName>S_SFX_VS_Stickback.wav</ShortName>
+					<Path>SFX\S_SFX_VS_Stickback_DDC98EF4.wem</Path>
+				</File>
+				<File Id="895222826" Language="SFX">
+					<ShortName>Tearlight-002.wav</ShortName>
+					<Path>SFX\Tearlight-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="897570208" Language="SFX">
+					<ShortName>Tearheavy-001.wav</ShortName>
+					<Path>SFX\Tearheavy-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="898758585" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-014.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-014_DDC98EF4.wem</Path>
+				</File>
+				<File Id="905012821" Language="SFX">
+					<ShortName>Tearheavy-006.wav</ShortName>
+					<Path>SFX\Tearheavy-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="918430595" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="921998893" Language="SFX">
+					<ShortName>WarassetsAK47-2 Bursts 9x 05-002.wav</ShortName>
+					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="924556001" Language="SFX">
+					<ShortName>Moving_soldier-010.wav</ShortName>
+					<Path>SFX\Moving_soldier-010_63A3FE87.wem</Path>
+				</File>
+				<File Id="927109518" Language="SFX">
+					<ShortName>Tearheavy-003.wav</ShortName>
+					<Path>SFX\Tearheavy-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="942327293" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-015.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-015_DDC98EF4.wem</Path>
+				</File>
+				<File Id="946588468" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="946927172" Language="SFX">
+					<ShortName>PrinceFootsteps-006.wav</ShortName>
+					<Path>SFX\PrinceFootsteps-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="952160673" Language="SFX">
+					<ShortName>Tearmed-010.wav</ShortName>
+					<Path>SFX\Tearmed-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="973649855" Language="SFX">
+					<ShortName>Tearmed-006.wav</ShortName>
+					<Path>SFX\Tearmed-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="998259513" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-006.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="1005194290" Language="SFX">
+					<ShortName>Tearheavy-011.wav</ShortName>
+					<Path>SFX\Tearheavy-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1011354460" Language="SFX">
+					<ShortName>Tearheavy-005.wav</ShortName>
+					<Path>SFX\Tearheavy-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1013526427" Language="SFX">
+					<ShortName>Tearmed-004.wav</ShortName>
+					<Path>SFX\Tearmed-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1013916400" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-007.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1015951777" Language="SFX">
+					<ShortName>Fliesloop.wav</ShortName>
+					<Path>SFX\Fliesloop_16E58750.wem</Path>
+				</File>
+				<File Id="1024672738" Language="SFX">
+					<ShortName>Tearlight-013.wav</ShortName>
+					<Path>SFX\Tearlight-013_AF59EA91.wem</Path>
+				</File>
+				<File Id="1027068266" Language="SFX">
+					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004.wav</ShortName>
+					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="1042815631" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERSEQ-012.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERSEQ-012_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1044845292" Language="SFX">
+					<ShortName>Tearheavy-015.wav</ShortName>
+					<Path>SFX\Tearheavy-015_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1048698904" Language="SFX">
+					<ShortName>WarassetsCannon Medium Distant-002.wav</ShortName>
+					<Path>SFX\WarassetsCannon Medium Distant-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="1059002750" Language="SFX">
+					<ShortName>Moving_soldierfoot-004.wav</ShortName>
+					<Path>SFX\Moving_soldierfoot-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="1067278692" Language="SFX">
+					<ShortName>Tearlight-014.wav</ShortName>
+					<Path>SFX\Tearlight-014_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="353166480" Language="SFX">
+			<ShortName>VSAmb</ShortName>
+			<Path>VSAmb.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2145862855" Name="Chantfemme"/>
+				<Event Id="3157003241" Name="Test"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="110868348" Language="SFX">
+					<ShortName>Chant femme-011.wav</ShortName>
+					<Path>SFX\Chant femme-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="154870931" Language="SFX">
+					<ShortName>Chant femme-004.wav</ShortName>
+					<Path>SFX\Chant femme-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="159982219" Language="SFX">
+					<ShortName>Chant femme-008.wav</ShortName>
+					<Path>SFX\Chant femme-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="175517482" Language="SFX">
+					<ShortName>Chant femme-003.wav</ShortName>
+					<Path>SFX\Chant femme-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="191164516" Language="SFX">
+					<ShortName>Chant femme-001.wav</ShortName>
+					<Path>SFX\Chant femme-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="277870594" Language="SFX">
+					<ShortName>Chant femme-006.wav</ShortName>
+					<Path>SFX\Chant femme-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="322336162" Language="SFX">
+					<ShortName>Chant femme-007.wav</ShortName>
+					<Path>SFX\Chant femme-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="505546381" Language="SFX">
+					<ShortName>Chant femme-002.wav</ShortName>
+					<Path>SFX\Chant femme-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="526253001" Language="SFX">
+					<ShortName>Chant femme-009.wav</ShortName>
+					<Path>SFX\Chant femme-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="580405149" Language="SFX">
+					<ShortName>Chant femme-005.wav</ShortName>
+					<Path>SFX\Chant femme-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="599122846" Language="SFX">
+					<ShortName>Mood Video OST.wav</ShortName>
+					<Path>SFX\Mood Video OST_E50BAB75.wem</Path>
+				</File>
+				<File Id="637093544" Language="SFX">
+					<ShortName>Chant femme-013.wav</ShortName>
+					<Path>SFX\Chant femme-013_DDC98EF4.wem</Path>
+				</File>
+				<File Id="729443163" Language="SFX">
+					<ShortName>Chant femme-010.wav</ShortName>
+					<Path>SFX\Chant femme-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="798921528" Language="SFX">
+					<ShortName>Chant femme-012.wav</ShortName>
+					<Path>SFX\Chant femme-012_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="465169785" Language="SFX">
+			<ShortName>VSmusic</ShortName>
+			<Path>VSmusic.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3802016694" Name="Crosscinemat"/>
+				<Event Id="1384703060" Name="CrossMusic"/>
+				<Event Id="2291874042" Name="FadeinBellls"/>
+				<Event Id="3137572166" Name="FadeinGroundBass"/>
+				<Event Id="3678643990" Name="FadeinKeysnare"/>
+				<Event Id="3840998157" Name="FadeinMetal4"/>
+				<Event Id="3930107678" Name="FadeinMisc"/>
+				<Event Id="2650841211" Name="FadeinOrchestra"/>
+				<Event Id="725735106" Name="FadeinPerc"/>
+				<Event Id="531344210" Name="FadeinVibrametal3"/>
+				<Event Id="2082104583" Name="StartVSmus"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="143456646" Language="SFX">
+					<ShortName>Intro_Metal3rev.wav</ShortName>
+					<Path>SFX\Intro_Metal3rev_294CAB17.wem</Path>
+				</File>
+				<File Id="256523319" Language="SFX">
+					<ShortName>Intro_GroundBass.wav</ShortName>
+					<Path>SFX\Intro_GroundBass_126DB0EA.wem</Path>
+				</File>
+				<File Id="484512425" Language="SFX">
+					<ShortName>Intro_Windbells.wav</ShortName>
+					<Path>SFX\Intro_Windbells_126DB0EA.wem</Path>
+				</File>
+				<File Id="579602903" Language="SFX">
+					<ShortName>Corrupt_orchestra.wav</ShortName>
+					<Path>SFX\Corrupt_orchestra_5105091E.wem</Path>
+				</File>
+				<File Id="691790231" Language="SFX">
+					<ShortName>Intro_Metal4rev.wav</ShortName>
+					<Path>SFX\Intro_Metal4rev_294CAB17.wem</Path>
+				</File>
+				<File Id="698322882" Language="SFX">
+					<ShortName>Intro_Misc.wav</ShortName>
+					<Path>SFX\Intro_Misc_126DB0EA.wem</Path>
+				</File>
+				<File Id="753405024" Language="SFX">
+					<ShortName>Corrupt_Bells.wav</ShortName>
+					<Path>SFX\Corrupt_Bells_5105091E.wem</Path>
+				</File>
+				<File Id="814228929" Language="SFX">
+					<ShortName>Corrupt_Drum_bass.wav</ShortName>
+					<Path>SFX\Corrupt_Drum_bass_5105091E.wem</Path>
+				</File>
+				<File Id="818002858" Language="SFX">
+					<ShortName>Corrupt_keysnare.wav</ShortName>
+					<Path>SFX\Corrupt_keysnare_5105091E.wem</Path>
+				</File>
+				<File Id="872046843" Language="SFX">
+					<ShortName>Corrupt_Perc.wav</ShortName>
+					<Path>SFX\Corrupt_Perc_5105091E.wem</Path>
+				</File>
+				<File Id="950844973" Language="SFX">
+					<ShortName>Teaser test 3.wav</ShortName>
+					<Path>SFX\Teaser test 3_ECC8A687.wem</Path>
+				</File>
+				<File Id="1071230320" Language="SFX">
+					<ShortName>Corrupt_Vibraphone.wav</ShortName>
+					<Path>SFX\Corrupt_Vibraphone_5105091E.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="529726550" Language="SFX">
+			<ShortName>ENV</ShortName>
+			<Path>ENV.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2256197126" Name="Knife_envstart2"/>
+				<Event Id="3626617759" Name="Sun_Envstart"/>
+				<Event Id="3857201847" Name="Thunder_envstart"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="15471767" Language="SFX">
+					<ShortName>Thunder Env events-045.wav</ShortName>
+					<Path>SFX\Thunder Env events-045_DDC98EF4.wem</Path>
+				</File>
+				<File Id="17596316" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Tear-HP-Loop.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Tear-HP-Loop_884979B4.wem</Path>
+				</File>
+				<File Id="29919511" Language="SFX">
+					<ShortName>Thunder Env events-040.wav</ShortName>
+					<Path>SFX\Thunder Env events-040_DDC98EF4.wem</Path>
+				</File>
+				<File Id="105457372" Language="SFX">
+					<ShortName>Thunder Env events-029.wav</ShortName>
+					<Path>SFX\Thunder Env events-029_DDC98EF4.wem</Path>
+				</File>
+				<File Id="122403591" Language="SFX">
+					<ShortName>Thunder Env events-020.wav</ShortName>
+					<Path>SFX\Thunder Env events-020_DDC98EF4.wem</Path>
+				</File>
+				<File Id="150702821" Language="SFX">
+					<ShortName>Thunder Env events-037.wav</ShortName>
+					<Path>SFX\Thunder Env events-037_DDC98EF4.wem</Path>
+				</File>
+				<File Id="160398610" Language="SFX">
+					<ShortName>Thunder Env events-031.wav</ShortName>
+					<Path>SFX\Thunder Env events-031_DDC98EF4.wem</Path>
+				</File>
+				<File Id="176602613" Language="SFX">
+					<ShortName>Thunder Env events-013.wav</ShortName>
+					<Path>SFX\Thunder Env events-013_DDC98EF4.wem</Path>
+				</File>
+				<File Id="186768456" Language="SFX">
+					<ShortName>Thunder Env events-030.wav</ShortName>
+					<Path>SFX\Thunder Env events-030_DDC98EF4.wem</Path>
+				</File>
+				<File Id="202874423" Language="SFX">
+					<ShortName>Thunder Env events-018.wav</ShortName>
+					<Path>SFX\Thunder Env events-018_DDC98EF4.wem</Path>
+				</File>
+				<File Id="213259494" Language="SFX">
+					<ShortName>Thunder Env events-023.wav</ShortName>
+					<Path>SFX\Thunder Env events-023_DDC98EF4.wem</Path>
+				</File>
+				<File Id="267062997" Language="SFX">
+					<ShortName>Thunder Env events-025.wav</ShortName>
+					<Path>SFX\Thunder Env events-025_DDC98EF4.wem</Path>
+				</File>
+				<File Id="298538016" Language="SFX">
+					<ShortName>Thunder Env events-001.wav</ShortName>
+					<Path>SFX\Thunder Env events-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="310709877" Language="SFX">
+					<ShortName>Thunder Env events-026.wav</ShortName>
+					<Path>SFX\Thunder Env events-026_DDC98EF4.wem</Path>
+				</File>
+				<File Id="351790980" Language="SFX">
+					<ShortName>Thunder Env events-008.wav</ShortName>
+					<Path>SFX\Thunder Env events-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="373496786" Language="SFX">
+					<ShortName>Thunder Env events-019.wav</ShortName>
+					<Path>SFX\Thunder Env events-019_DDC98EF4.wem</Path>
+				</File>
+				<File Id="434753035" Language="SFX">
+					<ShortName>Thunder Env events-021.wav</ShortName>
+					<Path>SFX\Thunder Env events-021_DDC98EF4.wem</Path>
+				</File>
+				<File Id="439475780" Language="SFX">
+					<ShortName>Thunder Env events-043.wav</ShortName>
+					<Path>SFX\Thunder Env events-043_DDC98EF4.wem</Path>
+				</File>
+				<File Id="458489299" Language="SFX">
+					<ShortName>Thunder Env events-005.wav</ShortName>
+					<Path>SFX\Thunder Env events-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="479206470" Language="SFX">
+					<ShortName>Thunder Env events-015.wav</ShortName>
+					<Path>SFX\Thunder Env events-015_DDC98EF4.wem</Path>
+				</File>
+				<File Id="523076004" Language="SFX">
+					<ShortName>Thunder Env events-042.wav</ShortName>
+					<Path>SFX\Thunder Env events-042_DDC98EF4.wem</Path>
+				</File>
+				<File Id="578017239" Language="SFX">
+					<ShortName>Thunder Env events-009.wav</ShortName>
+					<Path>SFX\Thunder Env events-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="595138675" Language="SFX">
+					<ShortName>Thunder Env events-041.wav</ShortName>
+					<Path>SFX\Thunder Env events-041_DDC98EF4.wem</Path>
+				</File>
+				<File Id="618358006" Language="SFX">
+					<ShortName>Thunder Env events-010.wav</ShortName>
+					<Path>SFX\Thunder Env events-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="636822297" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Sand-Loop.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Sand-Loop_CDF43C4F.wem</Path>
+				</File>
+				<File Id="651835577" Language="SFX">
+					<ShortName>Thunder Env events-017.wav</ShortName>
+					<Path>SFX\Thunder Env events-017_DDC98EF4.wem</Path>
+				</File>
+				<File Id="682037422" Language="SFX">
+					<ShortName>Thunder Env events-032.wav</ShortName>
+					<Path>SFX\Thunder Env events-032_DDC98EF4.wem</Path>
+				</File>
+				<File Id="691007076" Language="SFX">
+					<ShortName>Thunder Env events-027.wav</ShortName>
+					<Path>SFX\Thunder Env events-027_DDC98EF4.wem</Path>
+				</File>
+				<File Id="692317898" Language="SFX">
+					<ShortName>Thunder Env events-024.wav</ShortName>
+					<Path>SFX\Thunder Env events-024_DDC98EF4.wem</Path>
+				</File>
+				<File Id="708880227" Language="SFX">
+					<ShortName>Thunder Env events-022.wav</ShortName>
+					<Path>SFX\Thunder Env events-022_DDC98EF4.wem</Path>
+				</File>
+				<File Id="711635103" Language="SFX">
+					<ShortName>roomtone.wav</ShortName>
+					<Path>SFX\roomtone_3C85CD1A.wem</Path>
+				</File>
+				<File Id="724668617" Language="SFX">
+					<ShortName>Thunder Env events-004.wav</ShortName>
+					<Path>SFX\Thunder Env events-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="726495745" Language="SFX">
+					<ShortName>Thunder Env events-038.wav</ShortName>
+					<Path>SFX\Thunder Env events-038_DDC98EF4.wem</Path>
+				</File>
+				<File Id="732414363" Language="SFX">
+					<ShortName>Thunder Env events-028.wav</ShortName>
+					<Path>SFX\Thunder Env events-028_DDC98EF4.wem</Path>
+				</File>
+				<File Id="737170651" Language="SFX">
+					<ShortName>Thunder Env events-035.wav</ShortName>
+					<Path>SFX\Thunder Env events-035_DDC98EF4.wem</Path>
+				</File>
+				<File Id="759952912" Language="SFX">
+					<ShortName>Thunder Env events-011.wav</ShortName>
+					<Path>SFX\Thunder Env events-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="761898648" Language="SFX">
+					<ShortName>Thunder Env events-034.wav</ShortName>
+					<Path>SFX\Thunder Env events-034_DDC98EF4.wem</Path>
+				</File>
+				<File Id="870016500" Language="SFX">
+					<ShortName>Thunder Env events-002.wav</ShortName>
+					<Path>SFX\Thunder Env events-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="902529822" Language="SFX">
+					<ShortName>Thunder Env events-039.wav</ShortName>
+					<Path>SFX\Thunder Env events-039_DDC98EF4.wem</Path>
+				</File>
+				<File Id="930703658" Language="SFX">
+					<ShortName>Thunder Env events-033.wav</ShortName>
+					<Path>SFX\Thunder Env events-033_DDC98EF4.wem</Path>
+				</File>
+				<File Id="985211630" Language="SFX">
+					<ShortName>Thunder Env events-014.wav</ShortName>
+					<Path>SFX\Thunder Env events-014_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1007520723" Language="SFX">
+					<ShortName>Thunder Env events-006.wav</ShortName>
+					<Path>SFX\Thunder Env events-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1010459332" Language="SFX">
+					<ShortName>Thunder Env events-003.wav</ShortName>
+					<Path>SFX\Thunder Env events-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1016891591" Language="SFX">
+					<ShortName>S_DIA_TOR_THUNDER.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_THUNDER_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1017913663" Language="SFX">
+					<ShortName>Thunder Env events-016.wav</ShortName>
+					<Path>SFX\Thunder Env events-016_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1031163020" Language="SFX">
+					<ShortName>Thunder Env events-036.wav</ShortName>
+					<Path>SFX\Thunder Env events-036_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1036101269" Language="SFX">
+					<ShortName>Thunder Env events-012.wav</ShortName>
+					<Path>SFX\Thunder Env events-012_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1036843415" Language="SFX">
+					<ShortName>Thunder Env events-007.wav</ShortName>
+					<Path>SFX\Thunder Env events-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1044730241" Language="SFX">
+					<ShortName>Thunder Env events-044.wav</ShortName>
+					<Path>SFX\Thunder Env events-044_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1055056251" Language="SFX">
+					<ShortName>Thunder Env events-046.wav</ShortName>
+					<Path>SFX\Thunder Env events-046_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="906603238" Language="SFX">
+			<ShortName>Torture</ShortName>
+			<Path>Torture.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1223243288" Language="SFX">
+			<ShortName>VSdialog</ShortName>
+			<Path>VSdialog.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1042110684" Name="Dialog_heryouare"/>
+				<Event Id="2901257146" Name="Dialog_init"/>
+				<Event Id="3555504738" Name="Dialog_ListenPrince"/>
+				<Event Id="2750274410" Name="Dialog_Lost_liya"/>
+				<Event Id="1093683547" Name="Dialog_Princecall"/>
+				<Event Id="3710527641" Name="Dialog_Whydid"/>
+				<Event Id="1491659777" Name="Liyacalls"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="1764685" Language="SFX">
+					<ShortName>Calls1.wav</ShortName>
+					<Path>SFX\Calls1_DDC98EF4.wem</Path>
+				</File>
+				<File Id="34113952" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-006.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="77561436" Language="SFX">
+					<ShortName>Calls4.wav</ShortName>
+					<Path>SFX\Calls4_DDC98EF4.wem</Path>
+				</File>
+				<File Id="77567590" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-008.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-008_63A3FE87.wem</Path>
+				</File>
+				<File Id="84126565" Language="SFX">
+					<ShortName>S_DIA_VS_Getout.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Getout_63A3FE87.wem</Path>
+				</File>
+				<File Id="93016617" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-003.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-003_CF389F96.wem</Path>
+				</File>
+				<File Id="103330291" Language="SFX">
+					<ShortName>Liya init-001.wav</ShortName>
+					<Path>SFX\Liya init-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="121496141" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="196941266" Language="SFX">
+					<ShortName>Liya init-003.wav</ShortName>
+					<Path>SFX\Liya init-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="198788636" Language="SFX">
+					<ShortName>I'm sorry.wav</ShortName>
+					<Path>SFX\I'm sorry_63A3FE87.wem</Path>
+				</File>
+				<File Id="206771926" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-009.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-009_63A3FE87.wem</Path>
+				</File>
+				<File Id="234039479" Language="SFX">
+					<ShortName>Calls6.wav</ShortName>
+					<Path>SFX\Calls6_DDC98EF4.wem</Path>
+				</File>
+				<File Id="264191319" Language="SFX">
+					<ShortName>S_DIA_VS_Hideinthere.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Hideinthere_63A3FE87.wem</Path>
+				</File>
+				<File Id="283593798" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="292177664" Language="SFX">
+					<ShortName>S_DIA_VS_Listen Prince.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Listen Prince_63A3FE87.wem</Path>
+				</File>
+				<File Id="434206026" Language="SFX">
+					<ShortName>Calls3.wav</ShortName>
+					<Path>SFX\Calls3_DDC98EF4.wem</Path>
+				</File>
+				<File Id="533590662" Language="SFX">
+					<ShortName>S_DIA_VS_Alrightdoor.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Alrightdoor_63A3FE87.wem</Path>
+				</File>
+				<File Id="592919700" Language="SFX">
+					<ShortName>Okliya.wav</ShortName>
+					<Path>SFX\Okliya_63A3FE87.wem</Path>
+				</File>
+				<File Id="614845258" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-007.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-007_63A3FE87.wem</Path>
+				</File>
+				<File Id="623922328" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-003.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="639926184" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACIN.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACIN_63A3FE87.wem</Path>
+				</File>
+				<File Id="666673536" Language="SFX">
+					<ShortName>Calls5.wav</ShortName>
+					<Path>SFX\Calls5_DDC98EF4.wem</Path>
+				</File>
+				<File Id="670576219" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-010.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-010_63A3FE87.wem</Path>
+				</File>
+				<File Id="719710639" Language="SFX">
+					<ShortName>Mmm.wav</ShortName>
+					<Path>SFX\Mmm_63A3FE87.wem</Path>
+				</File>
+				<File Id="720166042" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-005.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="733316483" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-005.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="739581223" Language="SFX">
+					<ShortName>Calls2.wav</ShortName>
+					<Path>SFX\Calls2_DDC98EF4.wem</Path>
+				</File>
+				<File Id="765491009" Language="SFX">
+					<ShortName>On my way.wav</ShortName>
+					<Path>SFX\On my way_63A3FE87.wem</Path>
+				</File>
+				<File Id="827410737" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-004.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="827636828" Language="SFX">
+					<ShortName>Liya init-002.wav</ShortName>
+					<Path>SFX\Liya init-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="849451207" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="874248980" Language="SFX">
+					<ShortName>S_DIA_VS_Hereyouare.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Hereyouare_63A3FE87.wem</Path>
+				</File>
+				<File Id="883231183" Language="SFX">
+					<ShortName>paYes.wav</ShortName>
+					<Path>SFX\paYes_63A3FE87.wem</Path>
+				</File>
+				<File Id="896959730" Language="SFX">
+					<ShortName>S_DIA_VS_LIYACALLS-004.wav</ShortName>
+					<Path>SFX\S_DIA_VS_LIYACALLS-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="943328198" Language="SFX">
+					<ShortName>S_DIA_VS_Wherareyou-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_Wherareyou-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="958288286" Language="SFX">
+					<ShortName>I'm allright.wav</ShortName>
+					<Path>SFX\I'm allright_63A3FE87.wem</Path>
+				</File>
+				<File Id="962365256" Language="SFX">
+					<ShortName>Ok I'm right here.wav</ShortName>
+					<Path>SFX\Ok I'm right here_63A3FE87.wem</Path>
+				</File>
+				<File Id="1005411041" Language="SFX">
+					<ShortName>Ok.wav</ShortName>
+					<Path>SFX\Ok_63A3FE87.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1350668815" Language="SFX">
+			<ShortName>POCBANK</ShortName>
+			<Path>POCBANK.bnk</Path>
+			<IncludedEvents>
+				<Event Id="906520831" Name="Grab"/>
+				<Event Id="2405648188" Name="Release"/>
+				<Event Id="3749639609" Name="Start_AMB_POC"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="78091238" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="378533836" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="415785054" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="602830164" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="614686763" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="969923550" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1046163077" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERRELEASE-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERRELEASE-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1068772292" Language="SFX">
+					<ShortName>S_SFX_POC_PAPERGRAB-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_PAPERGRAB-004_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="2041901253" Language="SFX">
+			<ShortName>MUSICTORTUREBANK</ShortName>
+			<Path>MUSICTORTUREBANK.bnk</Path>
+			<IncludedEvents>
+				<Event Id="984952705" Name="Music_intro"/>
+				<Event Id="527347948" Name="Music_Knife"/>
+				<Event Id="2616261669" Name="Music_Sun"/>
+				<Event Id="3567178845" Name="Music_Thunder"/>
+				<Event Id="4184794294" Name="Outro"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="27484448" Language="SFX">
+					<ShortName>Kniferev1.wav</ShortName>
+					<Path>SFX\Kniferev1_FEB67B8E.wem</Path>
+				</File>
+				<File Id="59236879" Language="SFX">
+					<ShortName>S_MUS_DIE_TOR_INTRO.wav</ShortName>
+					<Path>SFX\S_MUS_DIE_TOR_INTRO_B2C36959.wem</Path>
+				</File>
+				<File Id="461330647" Language="SFX">
+					<ShortName>S_MUS_TOR_THUNDER.wav</ShortName>
+					<Path>SFX\S_MUS_TOR_THUNDER_367C9A2E.wem</Path>
+				</File>
+				<File Id="671002750" Language="SFX">
+					<ShortName>S_MUS_TOR_SUNv2&amp;OUTRO.wav</ShortName>
+					<Path>SFX\S_MUS_TOR_SUNv2&amp;OUTRO_13A61198.wem</Path>
+				</File>
+				<File Id="776626243" Language="SFX">
+					<ShortName>S_DIA_TOR_INTRO.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_INTRO_DDC98EF4.wem</Path>
+				</File>
+				<File Id="901811174" Language="SFX">
+					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_SUN_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="3752081500" Language="SFX">
+			<ShortName>TORTUREBANK</ShortName>
+			<Path>TORTUREBANK.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2385628198" Name="Footsteps"/>
+				<Event Id="2671209179" Name="Knife_Fail"/>
+				<Event Id="3632834637" Name="Knife_Flyby"/>
+				<Event Id="2811031212" Name="Knife_Loop_Start"/>
+				<Event Id="660322461" Name="Stop_Sun_fail"/>
+				<Event Id="8782740" Name="Sun_fail"/>
+				<Event Id="1287545852" Name="Thunder_circle"/>
+				<Event Id="477318044" Name="Thunder_fail"/>
+				<Event Id="3561017543" Name="Thunder_hit"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="4526779" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE05.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE05_93F013AD.wem</Path>
+				</File>
+				<File Id="24175894" Language="SFX">
+					<ShortName>footdi1.wav</ShortName>
+					<Path>SFX\footdi1_DDC98EF4.wem</Path>
+				</File>
+				<File Id="27220459" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-008.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-008_93F013AD.wem</Path>
+				</File>
+				<File Id="28522372" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE03.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE03_DDC98EF4.wem</Path>
+				</File>
+				<File Id="40808771" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_17.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_17_DDC98EF4.wem</Path>
+				</File>
+				<File Id="52979081" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE02.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE02_93F013AD.wem</Path>
+				</File>
+				<File Id="62804544" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-008.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="69349838" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Knife-Woosh2.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh2_DDC98EF4.wem</Path>
+				</File>
+				<File Id="73167318" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_16.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_16_63A3FE87.wem</Path>
+				</File>
+				<File Id="73860518" Language="SFX">
+					<ShortName>footdi7.wav</ShortName>
+					<Path>SFX\footdi7_DDC98EF4.wem</Path>
+				</File>
+				<File Id="81542232" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE01.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE01_93F013AD.wem</Path>
+				</File>
+				<File Id="96705369" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE07.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE07_93F013AD.wem</Path>
+				</File>
+				<File Id="103806324" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW12.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW12_93F013AD.wem</Path>
+				</File>
+				<File Id="105933373" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-010.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-010_93F013AD.wem</Path>
+				</File>
+				<File Id="109192658" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-007.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-007_93F013AD.wem</Path>
+				</File>
+				<File Id="114201107" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE08.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE08_93F013AD.wem</Path>
+				</File>
+				<File Id="126730567" Language="SFX">
+					<ShortName>Sparks thunder fail-001.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="127994370" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_05.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_05_63A3FE87.wem</Path>
+				</File>
+				<File Id="132961205" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_09.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_09_63A3FE87.wem</Path>
+				</File>
+				<File Id="138492119" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-006.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-006_93F013AD.wem</Path>
+				</File>
+				<File Id="152447386" Language="SFX">
+					<ShortName>Thunder hit 05.wav</ShortName>
+					<Path>SFX\Thunder hit 05_013B428D.wem</Path>
+				</File>
+				<File Id="158397598" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-002.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-002_93F013AD.wem</Path>
+				</File>
+				<File Id="186967052" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_08.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_08_63A3FE87.wem</Path>
+				</File>
+				<File Id="189264941" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_10.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_10_DDC98EF4.wem</Path>
+				</File>
+				<File Id="193055606" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-010.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="193317668" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE02.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE02_DDC98EF4.wem</Path>
+				</File>
+				<File Id="205915549" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW11.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW11_93F013AD.wem</Path>
+				</File>
+				<File Id="226802094" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="229998549" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_07.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_07_63A3FE87.wem</Path>
+				</File>
+				<File Id="232904417" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-004_63A3FE87.wem</Path>
+				</File>
+				<File Id="235467111" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_03.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_03_63A3FE87.wem</Path>
+				</File>
+				<File Id="244484198" Language="SFX">
+					<ShortName>S_SFX_TOR_SUNBURNLOOP-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SUNBURNLOOP-001_D8F3BD7C.wem</Path>
+				</File>
+				<File Id="248145761" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-011.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="252967211" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Knife-Woosh3.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh3_DDC98EF4.wem</Path>
+				</File>
+				<File Id="254998701" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_15.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_15_63A3FE87.wem</Path>
+				</File>
+				<File Id="274527451" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_04.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_04_63A3FE87.wem</Path>
+				</File>
+				<File Id="292636795" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE09.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE09_93F013AD.wem</Path>
+				</File>
+				<File Id="295833989" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW03.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW03_93F013AD.wem</Path>
+				</File>
+				<File Id="309361023" Language="SFX">
+					<ShortName>footdi2.wav</ShortName>
+					<Path>SFX\footdi2_DDC98EF4.wem</Path>
+				</File>
+				<File Id="315144141" Language="SFX">
+					<ShortName>Thunder hit 01.wav</ShortName>
+					<Path>SFX\Thunder hit 01_013B428D.wem</Path>
+				</File>
+				<File Id="318644905" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="325928729" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE04.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE04_DDC98EF4.wem</Path>
+				</File>
+				<File Id="333297469" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="344523151" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_12.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_12_63A3FE87.wem</Path>
+				</File>
+				<File Id="345016871" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE10.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE10_93F013AD.wem</Path>
+				</File>
+				<File Id="348405744" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-008.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-008_DDC98EF4.wem</Path>
+				</File>
+				<File Id="355457438" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW06.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW06_93F013AD.wem</Path>
+				</File>
+				<File Id="357868460" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-004.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-004_93F013AD.wem</Path>
+				</File>
+				<File Id="360995514" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-009.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-009_93F013AD.wem</Path>
+				</File>
+				<File Id="369668336" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-013.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-013_DDC98EF4.wem</Path>
+				</File>
+				<File Id="415154560" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_Knife-Woosh .wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_Knife-Woosh _DDC98EF4.wem</Path>
+				</File>
+				<File Id="418382338" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-001.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="419870567" Language="SFX">
+					<ShortName>Sparks thunder fail-004.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="422667053" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-010.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-010_DDC98EF4.wem</Path>
+				</File>
+				<File Id="423569960" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE06.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE06_93F013AD.wem</Path>
+				</File>
+				<File Id="424333817" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW05.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW05_93F013AD.wem</Path>
+				</File>
+				<File Id="429319999" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_15.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_15_DDC98EF4.wem</Path>
+				</File>
+				<File Id="436706535" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_11.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_11_DDC98EF4.wem</Path>
+				</File>
+				<File Id="440835996" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW04.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW04_93F013AD.wem</Path>
+				</File>
+				<File Id="455784063" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_14.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_14_63A3FE87.wem</Path>
+				</File>
+				<File Id="468891264" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-001_93F013AD.wem</Path>
+				</File>
+				<File Id="514741865" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-001_63A3FE87.wem</Path>
+				</File>
+				<File Id="521253662" Language="SFX">
+					<ShortName>Sparks thunder fail-003.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="533337035" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-011.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-011_DDC98EF4.wem</Path>
+				</File>
+				<File Id="553415406" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_04.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_04_DDC98EF4.wem</Path>
+				</File>
+				<File Id="559410239" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-004.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="560233774" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="563499839" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_12.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_12_DDC98EF4.wem</Path>
+				</File>
+				<File Id="565147389" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-003.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-003_63A3FE87.wem</Path>
+				</File>
+				<File Id="565636235" Language="SFX">
+					<ShortName>S_SFX_TOR_SUNBURNLOOP.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SUNBURNLOOP_D8F3BD7C.wem</Path>
+				</File>
+				<File Id="569510579" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_10.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_10_63A3FE87.wem</Path>
+				</File>
+				<File Id="576890836" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-002.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-002_86808593.wem</Path>
+				</File>
+				<File Id="593203450" Language="SFX">
+					<ShortName>Thunder hit 04.wav</ShortName>
+					<Path>SFX\Thunder hit 04_013B428D.wem</Path>
+				</File>
+				<File Id="602721650" Language="SFX">
+					<ShortName>Kité.wav</ShortName>
+					<Path>SFX\Kité_CBE74824.wem</Path>
+				</File>
+				<File Id="615082441" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_02.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_02_DDC98EF4.wem</Path>
+				</File>
+				<File Id="637111520" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE11.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE11_93F013AD.wem</Path>
+				</File>
+				<File Id="637521774" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-006.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-006_DDC98EF4.wem</Path>
+				</File>
+				<File Id="641404301" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_06.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_06_63A3FE87.wem</Path>
+				</File>
+				<File Id="643444766" Language="SFX">
+					<ShortName>footdi6.wav</ShortName>
+					<Path>SFX\footdi6_DDC98EF4.wem</Path>
+				</File>
+				<File Id="643484805" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE12.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE12_93F013AD.wem</Path>
+				</File>
+				<File Id="646605510" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW01.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW01_93F013AD.wem</Path>
+				</File>
+				<File Id="646985262" Language="SFX">
+					<ShortName>footdi9.wav</ShortName>
+					<Path>SFX\footdi9_DDC98EF4.wem</Path>
+				</File>
+				<File Id="652882334" Language="SFX">
+					<ShortName>footdi5.wav</ShortName>
+					<Path>SFX\footdi5_DDC98EF4.wem</Path>
+				</File>
+				<File Id="660652716" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_14.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_14_DDC98EF4.wem</Path>
+				</File>
+				<File Id="677632142" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-004.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-004_86808593.wem</Path>
+				</File>
+				<File Id="678432253" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_02.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_02_63A3FE87.wem</Path>
+				</File>
+				<File Id="685931883" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_01.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_01_DDC98EF4.wem</Path>
+				</File>
+				<File Id="695724788" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW08.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW08_93F013AD.wem</Path>
+				</File>
+				<File Id="696465191" Language="SFX">
+					<ShortName>Thunder hit 02.wav</ShortName>
+					<Path>SFX\Thunder hit 02_013B428D.wem</Path>
+				</File>
+				<File Id="698904503" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-005.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-005_93F013AD.wem</Path>
+				</File>
+				<File Id="711483065" Language="SFX">
+					<ShortName>Sparks thunder fail-002.wav</ShortName>
+					<Path>SFX\Sparks thunder fail-002_DDC98EF4.wem</Path>
+				</File>
+				<File Id="723862446" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-003.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-003_DDC98EF4.wem</Path>
+				</File>
+				<File Id="729933700" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW02.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW02_93F013AD.wem</Path>
+				</File>
+				<File Id="733281701" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW07.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW07_93F013AD.wem</Path>
+				</File>
+				<File Id="744668922" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_11.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_11_63A3FE87.wem</Path>
+				</File>
+				<File Id="745638615" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_09.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_09_DDC98EF4.wem</Path>
+				</File>
+				<File Id="754917493" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-004.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-004_DDC98EF4.wem</Path>
+				</File>
+				<File Id="762039758" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_17.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_17_63A3FE87.wem</Path>
+				</File>
+				<File Id="762689651" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-005.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-005_86808593.wem</Path>
+				</File>
+				<File Id="780040415" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-007.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="789636226" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_08.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_08_DDC98EF4.wem</Path>
+				</File>
+				<File Id="794216867" Language="SFX">
+					<ShortName>footdi4.wav</ShortName>
+					<Path>SFX\footdi4_DDC98EF4.wem</Path>
+				</File>
+				<File Id="802683991" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_16.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_16_DDC98EF4.wem</Path>
+				</File>
+				<File Id="811123411" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-001.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-001_DDC98EF4.wem</Path>
+				</File>
+				<File Id="816250947" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_01.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_01_63A3FE87.wem</Path>
+				</File>
+				<File Id="820982316" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-007.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-007_DDC98EF4.wem</Path>
+				</File>
+				<File Id="822877906" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_05.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_05_DDC98EF4.wem</Path>
+				</File>
+				<File Id="835293588" Language="SFX">
+					<ShortName>S_SFX_TOR_TEARLP-003.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_TEARLP-003_93F013AD.wem</Path>
+				</File>
+				<File Id="851048328" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_07.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_07_DDC98EF4.wem</Path>
+				</File>
+				<File Id="855125173" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_06.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_06_DDC98EF4.wem</Path>
+				</File>
+				<File Id="864703557" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW10.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW10_93F013AD.wem</Path>
+				</File>
+				<File Id="875690567" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE05.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE05_DDC98EF4.wem</Path>
+				</File>
+				<File Id="877417282" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-001_86808593.wem</Path>
+				</File>
+				<File Id="888730316" Language="SFX">
+					<ShortName>S_SFX_TOR_SAW09.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_SAW09_93F013AD.wem</Path>
+				</File>
+				<File Id="896024870" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-005.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-005_63A3FE87.wem</Path>
+				</File>
+				<File Id="910208607" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-015.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-015_DDC98EF4.wem</Path>
+				</File>
+				<File Id="912415545" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_13.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_13_DDC98EF4.wem</Path>
+				</File>
+				<File Id="913493235" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_13.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_13_63A3FE87.wem</Path>
+				</File>
+				<File Id="917288936" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-006.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-006_63A3FE87.wem</Path>
+				</File>
+				<File Id="924498498" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-012.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-012_DDC98EF4.wem</Path>
+				</File>
+				<File Id="933485849" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITKNIFE01.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE01_DDC98EF4.wem</Path>
+				</File>
+				<File Id="943402261" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTSTRAFE-002.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTSTRAFE-002_63A3FE87.wem</Path>
+				</File>
+				<File Id="945625114" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-014.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-014_DDC98EF4.wem</Path>
+				</File>
+				<File Id="953409729" Language="SFX">
+					<ShortName>Thunder hit 03.wav</ShortName>
+					<Path>SFX\Thunder hit 03_013B428D.wem</Path>
+				</File>
+				<File Id="960461678" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE04.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE04_93F013AD.wem</Path>
+				</File>
+				<File Id="960637719" Language="SFX">
+					<ShortName>footdi3.wav</ShortName>
+					<Path>SFX\footdi3_DDC98EF4.wem</Path>
+				</File>
+				<File Id="978504971" Language="SFX">
+					<ShortName>S_SFX_POC_FOOTS-009.wav</ShortName>
+					<Path>SFX\S_SFX_POC_FOOTS-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="983225646" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-009.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-009_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1007043541" Language="SFX">
+					<ShortName>S_SFX_DIE_TOR_HITLIYA_03.wav</ShortName>
+					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_03_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1014349826" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-005.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-005_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1015573855" Language="SFX">
+					<ShortName>footdi10.wav</ShortName>
+					<Path>SFX\footdi10_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1021719798" Language="SFX">
+					<ShortName>S_SFX_TOR_THundBuildup-003.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_THundBuildup-003_86808593.wem</Path>
+				</File>
+				<File Id="1061826691" Language="SFX">
+					<ShortName>S_SFX_TOR_RATTLE03.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_RATTLE03_93F013AD.wem</Path>
+				</File>
+				<File Id="1068841297" Language="SFX">
+					<ShortName>footdi8.wav</ShortName>
+					<Path>SFX\footdi8_DDC98EF4.wem</Path>
+				</File>
+				<File Id="1071672949" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-002.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-002_DDC98EF4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

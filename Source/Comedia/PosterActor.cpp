@@ -137,6 +137,8 @@ void APosterActor::BeginPlay()
 	FireRangeAngle = FMath::DegreesToRadians(FireRangeAngle);
 	FireRangeDistance *= FireRangeDistance; // Square
 
+
+	bOriginalIsGrabbable = bIsGrabbable;
 	//Check if Poster is door linked to another poster and set it ungrabbable if needed
 	if (DoorLinkedPoster != nullptr)
 	{
@@ -267,6 +269,9 @@ void APosterActor::UpdateChain()
 #if defined WITH_EDITOR
 			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
 #endif
+			FVector TmpLocation = _BonesBuff[BoneIndex].GetLocation();
+			TmpLocation.Z = _BonesInit[BoneIndex].GetLocation().Z;
+			_BonesBuff[BoneIndex].SetLocation(TmpLocation);
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
 
