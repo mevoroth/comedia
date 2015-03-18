@@ -171,6 +171,8 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 		{
 			Camera->SetWorldLocation(Hit.ImpactPoint);
 		}
+
+		_OriginalPivotCamRotation = FindComponentByClass<USkeletalMeshComponent>()->GetComponentRotation() - FRotator(0.0f, -90.0f, 0.0f);
 	}
 	else
 	{
@@ -180,10 +182,11 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 			ElapsedTravellingScriptedCamera -= DeltaSeconds;
 			float AlphaTravelling = (LengthTravellingBackScriptedCamera - ElapsedTravellingScriptedCamera) / LengthTravellingBackScriptedCamera;
 			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), LastCamPosition.GetLocation(), AlphaTravelling);
-			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), LastCamPosition.GetRotation(), AlphaTravelling);
-			//Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
-			Camera->SetRelativeLocationAndRotation(CurrentCamLocation, CurrentCamQuat.Rotator());
-			//Camera->SetRelativeTransform(FTransform(CurrentCamQuat, CurrentCamLocation));
+			FRotator CurrentCamRot = FMath::Lerp<FRotator>(StartTravellingPosition.GetRotation().Rotator(), _OriginalPivotCamRotation, AlphaTravelling);
+			Camera->SetRelativeLocation(CurrentCamLocation);
+			Camera->SetWorldRotation(CurrentCamRot);
+			
+			//UE_LOG(LogGPCode, Log, TEXT("Rot: %s"), *FindComponentByClass<USkeletalMeshComponent>()->RelativeRotation.ToString());
 		}
 		else
 		{
