@@ -930,9 +930,8 @@ void APosterActor::_Soldier(float DeltaSeconds)
 			LeftPoster->CorruptedFeedbackMesh->SetHiddenInGame(!bSidePosterActive, true);
 		}
 
-		UE_LOG(LogGPCode, Warning, TEXT("BEFORE CA MARCHE? : %d"), bSidePosterActive ? 1 : 0);
 		bSidePosterActive = !bSidePosterActive && RightPoster &&  SoldierDir < 0;
-		UE_LOG(LogGPCode, Warning, TEXT("CA MARCHE? : %d"), bSidePosterActive ? 1 : 0);
+
 		if (RightPoster)
 		{
 			RightPoster->CorruptedFeedbackMesh->SetVisibility(bSidePosterActive, true);
