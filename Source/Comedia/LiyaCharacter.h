@@ -178,6 +178,7 @@ private:
 	float _InitHeight;
 
 	FVector _OriginalPivotCamPosition;
+	FRotator _OriginalPivotCamRotation;
 
 	UMaterialInstanceDynamic* _PosterMaterialInst;
 
