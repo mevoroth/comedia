@@ -4,7 +4,7 @@
 #include "LowPassFilterComponent.h"
 
 
-ULowPassFilterComponent::ULowPassFilterComponent(const class FPostConstructInitializeProperties& PCIP)
+ULowPassFilterComponent::ULowPassFilterComponent(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 	, CurrentInd(-1)
 	, FrameCount(0)
