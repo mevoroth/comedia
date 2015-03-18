@@ -171,7 +171,7 @@ void AIwacLevelScriptActor::PlayerTouchByKnife_Implementation()
 {
 	CurrentNbHitKnife++;
 
-	_UpdateWounds((float)CurrentNbHitKnife / (float)NbHitKnifeBeforeDie);
+	_UpdateWounds((float)CurrentNbHitKnife / (float)(NbHitKnifeBeforeDie - 1.f), MaxWoundsKnife);
 
 	if (CurrentNbHitKnife >= NbHitKnifeBeforeDie)
 	{
@@ -183,7 +183,7 @@ void AIwacLevelScriptActor::PlayerTouchByLightning_Implementation()
 {
 	CurrentNbHitLightning++;
 
-	_UpdateWounds((float)CurrentNbHitLightning / (float)NbHitLightningBeforeDie);
+	_UpdateWounds((float)CurrentNbHitLightning / (float)(NbHitLightningBeforeDie - 1.f), MaxWoundsLightning);
 
 	if (CurrentNbHitLightning >= NbHitLightningBeforeDie)
 	{
@@ -195,7 +195,7 @@ void AIwacLevelScriptActor::PlayerTouchByIron_Implementation()
 {
 	CurrentTimeHitIron += GetWorld()->DeltaTimeSeconds;
 
-	_UpdateWounds((float)CurrentTimeHitIron / (float)TimeHitIronBeforeDie);
+	_UpdateWounds((float)CurrentTimeHitIron / (float)TimeHitIronBeforeDie, MaxWoundsIron);
 
 	if (CurrentTimeHitIron >= TimeHitIronBeforeDie)
 	{
@@ -211,12 +211,13 @@ void AIwacLevelScriptActor::PlayerFailed_Implementation()
 	PlayMatineePlayerFailed();
 }
 
-void AIwacLevelScriptActor::_UpdateWounds(float WoundAlpha)
+void AIwacLevelScriptActor::_UpdateWounds(float WoundAlpha, float MaxWounds)
 {
-	if (WoundAlpha > _PreviousPhaseWounds)
-	{
-		_CurrentWounds = FMath::Min(WoundAlpha, 1.f);
-	}
+	_CurrentWounds = FMath::Lerp(_PreviousPhaseWounds, MaxWounds, FMath::Min(WoundAlpha, 1.f));
+	//if (WoundAlpha > _PreviousPhaseWounds)
+	//{
+	//	_PreviousPhaseWounds
+	//}
 }
 
 void AIwacLevelScriptActor::ReinitCurrentPhase()
