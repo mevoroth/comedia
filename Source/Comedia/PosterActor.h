@@ -63,6 +63,9 @@ private_subobject:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
 	USkeletalMeshComponent* FeedbackMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Poster", meta = (ExposeFunctionCategories = "Mesh,Components|SkeletalMesh,Animation,Physics", AllowPrivateAccess = "true"))
+	USkeletalMeshComponent* CorruptedFeedbackMesh;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "[Comedia]Call", meta = (ExposeFunctionCategories = "Shape,Collision,Rendering,Transform", AllowPrivateAccess = true, MakeEditWidget))
 	UBoxComponent* CallTrigger;
 
@@ -176,6 +179,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
 	ARespawnZoneActor* RespawnZone;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "[Comedia]PosterPath")
+	float DelayCall;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Poster")
 	bool bIsGrabbable;
 
@@ -195,6 +201,11 @@ public:
 	TEnumAsByte<ESoldierState::Type> SoldierState;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	TEnumAsByte<ESoldierState::Type> PreviousSoldierState;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
+	float TimeBeforeSoldierActive = 1.0f;
+
+	float RemainingTimeBeforeSoldierActive = 0.0f;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Soldier")
 	bool bSoldierFlipped;
@@ -253,7 +264,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Ending")
 	ATriggerBox* EndingTrigger;
+
+	bool bOriginalIsGrabbable;
 private:
+
 	PosterState State;
 	/** Root to target distance */
 	float _MaxDistance;

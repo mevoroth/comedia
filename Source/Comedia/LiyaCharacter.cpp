@@ -26,6 +26,7 @@ ALiyaCharacter::ALiyaCharacter(const class FObjectInitializer& FOI)
 	, _CallCooldown(0.f)
 	, WalkingRatio(0.25f)
 {
+	FilterComponent = FOI.CreateDefaultSubobject<ULowPassFilterComponent>(this, TEXT("LowPassFilterGrab"));
 }
 
 void ALiyaCharacter::BeginPlay()
@@ -35,6 +36,7 @@ void ALiyaCharacter::BeginPlay()
 	//_GrabArmLength *= 2;
 	_InitHeight = GetMesh()->GetComponentLocation().Z;
 	_OriginalPivotCamPosition = Camera->RelativeLocation;
+	FilterComponent->InitRecord(3);
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -169,6 +171,8 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 		{
 			Camera->SetWorldLocation(Hit.ImpactPoint);
 		}
+
+		_OriginalPivotCamRotation = FindComponentByClass<USkeletalMeshComponent>()->GetComponentRotation() - FRotator(0.0f, -90.0f, 0.0f);
 	}
 	else
 	{
@@ -178,10 +182,11 @@ void ALiyaCharacter::_OverridingCamera(float DeltaSeconds)
 			ElapsedTravellingScriptedCamera -= DeltaSeconds;
 			float AlphaTravelling = (LengthTravellingBackScriptedCamera - ElapsedTravellingScriptedCamera) / LengthTravellingBackScriptedCamera;
 			FVector CurrentCamLocation = FMath::Lerp<FVector>(StartTravellingPosition.GetLocation(), LastCamPosition.GetLocation(), AlphaTravelling);
-			FQuat CurrentCamQuat = FQuat::Slerp(StartTravellingPosition.GetRotation(), LastCamPosition.GetRotation(), AlphaTravelling);
-			//Camera->SetWorldLocationAndRotation(CurrentCamLocation, CurrentCamQuat);
-			Camera->SetRelativeLocationAndRotation(CurrentCamLocation, CurrentCamQuat.Rotator());
-			//Camera->SetRelativeTransform(FTransform(CurrentCamQuat, CurrentCamLocation));
+			FRotator CurrentCamRot = FMath::Lerp<FRotator>(StartTravellingPosition.GetRotation().Rotator(), _OriginalPivotCamRotation, AlphaTravelling);
+			Camera->SetRelativeLocation(CurrentCamLocation);
+			Camera->SetWorldRotation(CurrentCamRot);
+			
+			//UE_LOG(LogGPCode, Log, TEXT("Rot: %s"), *FindComponentByClass<USkeletalMeshComponent>()->RelativeRotation.ToString());
 		}
 		else
 		{
@@ -307,21 +312,22 @@ void ALiyaCharacter::_ControlsMove(const FVector2D& Speed)
 		FVector GrabPivot = _GrabPivot;
 		FVector Hands = GetMesh()->GetSocketLocation(FName(TEXT("LHandSocket")));
 
-		ActFW.Z = 0.f;
-		ActFW.Normalize();
-		ActFW *= FVector::Dist(Hands, GetActorLocation());
+		//ActFW.Z = 0.f;
+		//ActFW.Normalize();
+		//ActFW *= FVector::Dist(Hands, GetActorLocation());
+		//NewPos += ActFW;
 		NewPos.Z = 0.f;
-		NewPos += ActFW;
 		GrabPivot.Z = 0.f;
-
 		float CurrentDist = FVector::Dist(NewPos, GrabPivot);
 
-		if (CurrentDist < _GrabMaxDistance || CurrentDist < _GrabPreviousDistance)
+		if (CurrentDist < _GrabMaxDistance || CurrentDist < FilterComponent->GetCurrentRecord())
 		{
 			AddMovementInput(Fw, Speed.X);
 			AddMovementInput(Right, Speed.Y);
 		}
-		_GrabPreviousDistance = CurrentDist;
+		FilterComponent->Push(CurrentDist);
+
+		//_GrabPreviousDistance = CurrentDist;
 
 		//FVector GrabPivot = GetActorLocation() + GetActorForwardVector() * _GrabArmLength;
 		//FVector Normal = GrabPivot - NewPos;
@@ -406,6 +412,8 @@ void ALiyaCharacter::NotifyGrab(float PosterMaxDistance)
 {
 	_GrabSpeedAlphaIt = 1.f;
 	_GrabMaxDistance = FMath::Sqrt(PosterMaxDistance) * 1.01f;
+	FilterComponent->Reset();
+	FilterComponent->Push(_GrabMaxDistance);
 }
 
 void ALiyaCharacter::NotifyReleasePoster()
@@ -475,7 +483,7 @@ void ALiyaCharacter::CallCharacter()
 		if (Posters.Num() == 1)
 		{
 			APosterActor* Poster = Cast<APosterActor>(Posters[0]);
-			if (LevelScript->PathMainCharacter.MoveTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster)))
+			if (LevelScript->PathMainCharacter.MoveTo(LevelScript->CurrentLevelPathGraph.GetNode(GetActorLocation(), Poster), Poster->DelayCall))
 			{
 				if (!bDialogRunning)
 				{

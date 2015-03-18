@@ -49,8 +49,11 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	FeedbackMesh->SetRelativeLocation(FVector::ZeroVector);
 	FeedbackMesh->SetVisibility(false);
 
-	//ConstructorHelpers::FObjectFinder<UMaterialInstance> MeshMaterial(TEXT("/Game/Materials/MI_Poster"));
-	//MeshMaterialInst = MeshMaterial.Object;
+	CorruptedFeedbackMesh = FOI.CreateDefaultSubobject<USkeletalMeshComponent>(this, TEXT("CorruptedFeedbackMesh"));
+	CorruptedFeedbackMesh->Activate(true);
+	CorruptedFeedbackMesh->AttachTo(PosterMesh);
+	CorruptedFeedbackMesh->SetRelativeLocation(FVector::ZeroVector);
+	CorruptedFeedbackMesh->SetVisibility(false);
 
 	DoorComponent = FOI.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("DoorComponent"));
 	DoorComponent->TranslucencySortPriority = 100;
@@ -125,15 +128,17 @@ void APosterActor::BeginPlay()
 		PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1))
 	);
 
-	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size() * 0.95f;
-	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size() * 0.95f;
+	_HeadDist = (GetGripHead() - _BonesInit[First].GetLocation()).Size();
+	_TailDist = (GetGripTail() - _BonesInit[Last].GetLocation()).Size();
 
 	//_MaxDistanceBetweenGrip = FVector::DistSquared(GetGripHead(), GetGripTail());
-	_MaxDistanceBetweenGrip = _MaxDistance;
+	_MaxDistanceBetweenGrip = _MaxDistance ;
 
 	FireRangeAngle = FMath::DegreesToRadians(FireRangeAngle);
 	FireRangeDistance *= FireRangeDistance; // Square
 
+
+	bOriginalIsGrabbable = bIsGrabbable;
 	//Check if Poster is door linked to another poster and set it ungrabbable if needed
 	if (DoorLinkedPoster != nullptr)
 	{
@@ -264,6 +269,9 @@ void APosterActor::UpdateChain()
 #if defined WITH_EDITOR
 			//DrawDebugSphere(GetWorld(), _BonesBuff[BoneIndex].GetLocation(), 10.f, 24, FColor((FMath::Rand() % 256), (FMath::Rand() % 256), (FMath::Rand() % 256)));
 #endif
+			FVector TmpLocation = _BonesBuff[BoneIndex].GetLocation();
+			TmpLocation.Z = _BonesInit[BoneIndex].GetLocation().Z;
+			_BonesBuff[BoneIndex].SetLocation(TmpLocation);
 			PosterMesh->SetBoneTransformByName(PosterMesh->GetBoneName(BoneIndex + 1), _BonesBuff[BoneIndex], EBoneSpaces::WorldSpace);
 		}
 
@@ -690,7 +698,7 @@ bool APosterActor::SoldierKills()
 	}
 
 	// Liya killed
-	if ((State & ~(GRABBABLE | HEADISROOT)) != GRABBED && IsInFireRange(Player->GetActorLocation()))
+	if ((State & ~(GRABBABLE | HEADISROOT)) != GRABBED && IsInFireRange(Player->GetActorLocation()) && RemainingTimeBeforeSoldierActive <= 0.0f)
 	{
 		OnKillLiyah();
 		return true;
@@ -832,9 +840,19 @@ void APosterActor::_Soldier(float DeltaSeconds)
 		}
 	}
 
+	//Countdown delay before soldier active
+	if (SoldierState == ESoldierState::ST_Idle)
+	{
+		RemainingTimeBeforeSoldierActive -= DeltaSeconds;
+	}
+	else if (RemainingTimeBeforeSoldierActive != TimeBeforeSoldierActive)
+	{
+		RemainingTimeBeforeSoldierActive = TimeBeforeSoldierActive;
+	}
+
 	_SoldierPreviousPos = _SoldierCurrentPos;
 	_SoldierCurrentPos = SampledSoldier;
-		
+	
 	SampledSoldier *= Nodes;
 	SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
 	FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
@@ -882,6 +900,13 @@ void APosterActor::_Soldier(float DeltaSeconds)
 		if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
 		{
 			_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
+			UStaticMeshComponent* Vision = Cast<UStaticMeshComponent>(_SoldierComponent->GetChildComponent(i));
+			if (Vision)
+			{
+				float Ratio = 1.f - FMath::Clamp(RemainingTimeBeforeSoldierActive / TimeBeforeSoldierActive, 0.f, 1.f);
+				UMaterialInstanceDynamic* Mat = Vision->CreateDynamicMaterialInstance(0);
+				Mat->SetScalarParameterValue(FName(TEXT("Opacity")), 0.5f + 0.5f * Ratio);
+			}
 			break;
 		}
 	}
@@ -889,6 +914,41 @@ void APosterActor::_Soldier(float DeltaSeconds)
 	if (_SoldierEnabled)
 	{
 		_SoldierElapsedTime += DeltaSeconds;
+
+		// Very dirty code
+		AMainLevelScriptActor* LevelScriptActor = Cast<AMainLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		PathNode* Node = LevelScriptActor->CurrentLevelPathGraph.GetLastNode(this);
+		APosterActor* LeftPoster = 0;
+		APosterActor* RightPoster = 0;
+		if (Node->RightNode)
+		{
+			RightPoster = Node->RightNode->PosterOwner;
+		}
+
+		while (Node->LeftNode && Node->LeftNode->PosterOwner == this)
+		{
+			Node = Node->LeftNode;
+		}
+		if (Node->LeftNode && Node->LeftNode->PosterOwner != this)
+		{
+			LeftPoster = Node->LeftNode->PosterOwner;
+		}
+
+		float SoldierDir = _GetSoldierDirection();
+		bool bSidePosterActive = LeftPoster && SoldierDir > 0;
+		if (LeftPoster)
+		{
+			LeftPoster->CorruptedFeedbackMesh->SetVisibility(bSidePosterActive, true);
+			LeftPoster->CorruptedFeedbackMesh->SetHiddenInGame(!bSidePosterActive, true);
+		}
+
+		bSidePosterActive = !bSidePosterActive && RightPoster &&  SoldierDir < 0;
+
+		if (RightPoster)
+		{
+			RightPoster->CorruptedFeedbackMesh->SetVisibility(bSidePosterActive, true);
+			RightPoster->CorruptedFeedbackMesh->SetHiddenInGame(!bSidePosterActive, true);
+		}
 	}
 
 	PreviousSoldierState = SoldierState;
@@ -946,7 +1006,10 @@ void APosterActor::_Reset(float DeltaSeconds)
 	int32 It = (bHeadIsRoot ? 1 : -1);
 	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
 
-	ResetAlphaNormalized -= DelayBeforeReset;
+	if (AssociatedBlockingVolume && !AssociatedBlockingVolume->GetActorEnableCollision())
+	{
+		ResetAlphaNormalized -= DelayBeforeReset;
+	}
 
 	if (ResetAlphaNormalized - DelayBetweenBones * Reverse > 1.f)
 	{

@@ -227,9 +227,17 @@ private:
 	float _CurrentWounds;
 	/** Previous wounds */
 	float _PreviousPhaseWounds;
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia] Damage")
+	float MaxWoundsKnife;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia] Damage")
+	float MaxWoundsLightning;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia] Damage")
+	float MaxWoundsIron;
 #pragma endregion Liya Wounds
+private:
 
-	void _UpdateWounds(float WoundAlpha);
+	void _UpdateWounds(float WoundAlpha, float MaxWounds);
 
 	void _TickKnifePhase(float DeltaSeconds);
 	void _TickLightningPhase(float DeltaSeconds);

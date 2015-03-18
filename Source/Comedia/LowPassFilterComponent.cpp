@@ -49,3 +49,9 @@ float ULowPassFilterComponent::GetCurrentRecord() const
 	}
 	return record / (float)Latency;
 }
+void ULowPassFilterComponent::Reset()
+{
+	check(LastValues);
+	FrameCount = 0;
+	CurrentInd = -1;
+}
