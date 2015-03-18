@@ -994,7 +994,10 @@ void APosterActor::_Reset(float DeltaSeconds)
 	int32 It = (bHeadIsRoot ? 1 : -1);
 	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
 
-	ResetAlphaNormalized -= DelayBeforeReset;
+	if (AssociatedBlockingVolume && !AssociatedBlockingVolume->GetActorEnableCollision())
+	{
+		ResetAlphaNormalized -= DelayBeforeReset;
+	}
 
 	if (ResetAlphaNormalized - DelayBetweenBones * Reverse > 1.f)
 	{
