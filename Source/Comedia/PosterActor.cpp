@@ -847,7 +847,7 @@ void APosterActor::_Soldier(float DeltaSeconds)
 
 	_SoldierPreviousPos = _SoldierCurrentPos;
 	_SoldierCurrentPos = SampledSoldier;
-		
+	
 	SampledSoldier *= Nodes;
 	SampledSoldier = FMath::Clamp(SampledSoldier, 0.f, Nodes);
 	FVector A = PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(FMath::FloorToInt(SampledSoldier) + 1));
@@ -895,6 +895,13 @@ void APosterActor::_Soldier(float DeltaSeconds)
 		if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
 		{
 			_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
+			UStaticMeshComponent* Vision = Cast<UStaticMeshComponent>(_SoldierComponent->GetChildComponent(i));
+			if (Vision)
+			{
+				float Ratio = 1.f - FMath::Clamp(RemainingTimeBeforeSoldierActive / TimeBeforeSoldierActive, 0.f, 1.f);
+				UMaterialInstanceDynamic* Mat = Vision->CreateDynamicMaterialInstance(0);
+				Mat->SetScalarParameterValue(FName(TEXT("Opacity")), 0.5f + 0.5f * Ratio);
+			}
 			break;
 		}
 	}
@@ -994,7 +1001,10 @@ void APosterActor::_Reset(float DeltaSeconds)
 	int32 It = (bHeadIsRoot ? 1 : -1);
 	int32 Reverse = PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 2;
 
-	ResetAlphaNormalized -= DelayBeforeReset;
+	if (AssociatedBlockingVolume && !AssociatedBlockingVolume->GetActorEnableCollision())
+	{
+		ResetAlphaNormalized -= DelayBeforeReset;
+	}
 
 	if (ResetAlphaNormalized - DelayBetweenBones * Reverse > 1.f)
 	{
