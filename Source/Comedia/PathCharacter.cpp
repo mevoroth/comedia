@@ -284,7 +284,7 @@ void PathCharacter::_CrossNextNode()
 					LastCrossedNode->PosterOwner->PrinceGoThroughDoor(LastCrossedNode->GetNodeLocation());
 					LinkedNode->NodeType = LastCrossedNode->NodeType = ENodeType::NT_BasicNode;
 					//Set poster grabbable when character go through a poster
-					LastCrossedNode->PosterOwner->bIsGrabbable = true;
+					LastCrossedNode->PosterOwner->bIsGrabbable = LastCrossedNode->PosterOwner->bOriginalIsGrabbable;
 
 					SetCharacterNode(LinkedNode);
 					if (LinkedNode->RightNode != nullptr && LinkedNode->RightNode->NodeType != ENodeType::NT_SideNode)

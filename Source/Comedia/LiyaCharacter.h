@@ -4,6 +4,7 @@
 
 #include "LiyaCamera.h"
 #include "RespawnZoneActor.h"
+#include "LowPassFilterComponent.h"
 
 #include "GameFramework/Character.h"
 #include "LiyaCharacter.generated.h"
@@ -163,6 +164,7 @@ private:
 	float _Rotation;
 	bool _bWalking;
 
+	ULowPassFilterComponent* FilterComponent;
 	FVector _GrabPivot;
 	float _GrabMaxDistance;
 	float _GrabPreviousDistance;
@@ -178,6 +180,7 @@ private:
 	float _InitHeight;
 
 	FVector _OriginalPivotCamPosition;
+	FRotator _OriginalPivotCamRotation;
 
 	UMaterialInstanceDynamic* _PosterMaterialInst;
 
