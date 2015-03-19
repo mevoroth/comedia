@@ -110,7 +110,15 @@ void ALiyaCharacter::Tick(float DeltaSeconds)
 
 	_OverridingCamera(DeltaSeconds);
 
-	_OverridingAudioListener();
+	switch (OverrideType)
+	{
+	case EListenerOverrideType::COT_BetweenCamAndLiya:
+		_OverridingAudioListener();
+		break;
+	default: // None
+		_AttachAudioListenerToLiya();
+		break;
+	}
 
 	_CallCooldown -= DeltaSeconds;
 
@@ -138,6 +146,15 @@ void ALiyaCharacter::_OverridingAudioListener()
 	{
 		FVector AudioListenerPosition = (CameraLocation + GetActorLocation()) / 2.0f;
 		PlayerController->SetAudioListenerLocation(AudioListenerPosition);
+	}
+}
+
+void ALiyaCharacter::_AttachAudioListenerToLiya()
+{
+	AIwacPlayerController* PlayerController = Cast<AIwacPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PlayerController)
+	{
+		PlayerController->SetAudioListenerLocation(GetActorLocation());
 	}
 }
 
