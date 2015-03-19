@@ -207,7 +207,6 @@ void AIwacLevelScriptActor::PlayerFailed_Implementation()
 {
 	UE_LOG(LogGPCode, Log, TEXT("Player failed!"));
 	bPlayerHasFailed = true;
-	_CurrentWounds = _PreviousPhaseWounds;
 	PlayMatineePlayerFailed();
 }
 
@@ -218,6 +217,17 @@ void AIwacLevelScriptActor::_UpdateWounds(float WoundAlpha, float MaxWounds)
 	//{
 	//	_PreviousPhaseWounds
 	//}
+}
+
+void AIwacLevelScriptActor::ResetDamage()
+{
+	_CurrentWounds = _PreviousPhaseWounds;
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (Character)
+	{
+		UMaterialInstanceDynamic* LiyaMat = Character->GetMesh()->CreateDynamicMaterialInstance(0);
+		LiyaMat->SetScalarParameterValue(FName(TEXT("WoundAlpha")), _CurrentWounds);
+	}
 }
 
 void AIwacLevelScriptActor::ReinitCurrentPhase()
