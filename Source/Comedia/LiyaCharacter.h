@@ -9,6 +9,16 @@
 #include "GameFramework/Character.h"
 #include "LiyaCharacter.generated.h"
 
+UENUM(BlueprintType)
+namespace EListenerOverrideType
+{
+	enum Type
+	{
+		COT_None				UMETA(DisplayName = "No override"),
+		COT_BetweenCamAndLiya	UMETA(DisplayName = "Between Camera and Liya")
+	};
+}
+
 /**
  * 
  */
@@ -109,6 +119,11 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	void UpdateGrabPivot(const FVector& GrabPivot);
 #pragma endregion Grab Events
 
+#pragma region Sound
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Sound")
+	TEnumAsByte<EListenerOverrideType::Type> OverrideType;
+#pragma endregion Sound
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
 	virtual void LeftFootStep(const FVector& Pos);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Events")
@@ -188,6 +203,7 @@ private:
 	void _LerpGrab(float DeltaSeconds);
 	void _OverridingCamera(float DeltaSeconds);
 	void _OverridingAudioListener();
+	void _AttachAudioListenerToLiya();
 
 	void _ControlsMove(const FVector2D& Speed);
 };
