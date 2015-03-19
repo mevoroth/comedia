@@ -202,6 +202,9 @@ class COMEDIA_API AIwacLevelScriptActor : public ALevelScriptActor
 	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
 	void ReinitCurrentPhase();
 
+	UFUNCTION(BlueprintCallable, Category = "[Comedia] TorturePhase")
+	void ResetDamage();
+
 	bool bFirstIronSpawn;
 
 private:

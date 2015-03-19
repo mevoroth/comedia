@@ -327,6 +327,7 @@ void APosterActor::SetEffector(const FTransform& Effector)
 
 void APosterActor::Grabbing(bool Grabbing)
 {
+	//UE_LOG(LogGPCode, Warning, TEXT("Grabbing Called : %s : %d"), *GetName(), Grabbing ? 1 : 0);
 	ALiyaCharacter* Character = (ALiyaCharacter*)GetWorld()->GetFirstPlayerController()->GetCharacter();
 	if ((State & GRABBABLE) && Grabbing && bIsGrabbable)
 	{
@@ -423,6 +424,7 @@ void APosterActor::Grabbing(bool Grabbing)
 
 void APosterActor::InRange(bool HeadIsRoot)
 {
+	//UE_LOG(LogGPCode, Warning, TEXT("InRange Called : %s : %d"), *GetName(), HeadIsRoot ? 1 : 0);
 	if (!bIsGrabbable)
 	{
 		return;
@@ -454,6 +456,7 @@ void APosterActor::InRange(bool HeadIsRoot)
 
 void APosterActor::OutRange()
 {
+	//UE_LOG(LogGPCode, Warning, TEXT("OutRange called : %s"), *GetName());
 	if (!bIsGrabbable)
 	{
 		return;
@@ -472,6 +475,7 @@ void APosterActor::OutRange()
 
 void APosterActor::Stick(bool Sticked)
 {
+	//UE_LOG(LogGPCode, Warning, TEXT("Stick Called : %s : %d"), *GetName(), Sticked ? 1 : 0);
 	switch (State & ~(GRABBABLE | HEADISROOT))
 	{
 	case GRABBED:
@@ -480,7 +484,7 @@ void APosterActor::Stick(bool Sticked)
 			State = (PosterState)((State & HEADISROOT) | ONSTICK);
 		}
 		break;
-	case INIT:
+	//case INIT:
 	case STICKED:
 		if (!Sticked)
 		{
@@ -509,6 +513,8 @@ void APosterActor::Tick(float DeltaSeconds)
 	check(GetWorld());
 
 	Super::Tick(DeltaSeconds);
+
+	//UE_LOG(LogGPCode, Warning, TEXT("%s : %d"), *GetName(), State & ~(GRABBABLE | HEADISROOT));
 
 	if (EndingTrigger)
 	{
@@ -754,6 +760,7 @@ bool APosterActor::PrinceIsInFireRange()
 					//DrawDebugSphere(GetWorld(), PrincePos, 200.f, 64, FColor::Red);
 					if (IsInFireRange(PrincePos))
 					{
+						UE_LOG(LogGPCode, Warning, TEXT("PUTAIN DE CODE"));
 						return true;
 					}
 					break;
@@ -765,6 +772,7 @@ bool APosterActor::PrinceIsInFireRange()
 		// Prince is in same poster
 		if (PrincePosition >= 0.f && PrincePosition <= 1.f)
 		{
+			UE_LOG(LogGPCode, Warning, TEXT("ENCULAY"));
 			return true;
 		}
 
@@ -792,6 +800,7 @@ bool APosterActor::PrinceIsInFireRange()
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
 				&& _LastOrientation * SoldierDir >  0 && SoldierDir > 0)
 			{
+				UE_LOG(LogGPCode, Warning, TEXT("PENIS"));
 				return true;
 			}
 		}
@@ -803,6 +812,7 @@ bool APosterActor::PrinceIsInFireRange()
 			if (PrincePosition >= 0.f && PrincePosition <= 1.f
 				&& _LastOrientation * SoldierDir > 0 && SoldierDir < 0)
 			{
+				UE_LOG(LogGPCode, Warning, TEXT("CHATTE"));
 				return true;
 			}
 		}
