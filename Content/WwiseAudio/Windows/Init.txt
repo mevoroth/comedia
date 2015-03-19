@@ -5,13 +5,19 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	900140120	Monrovia			\Default Work Unit\Master Audio Bus\Monrovia	
 	1351780234	LoudSFX			\Default Work Unit\Master Audio Bus\HDR BUS\LoudSFX	
 	1404066300	Ambiances			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances	
+	1467963117	Weapon2			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Weapon2	
+	1838596002	Cinematiq			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq	
 	2128182023	Distant rev			\Default Work Unit\Master Audio Bus\Monrovia\Distant rev	
+	2277428620	Low SFX			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Low SFX	
 	2376466361	Other			\Default Work Unit\Master Audio Bus\HDR BUS\Other	
 	2470532526	Knife loop			\Default Work Unit\Master Audio Bus\HDR BUS\Knife loop	
+	3170124113	Voice			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Voice	
 	3224081837	Normal SFX			\Default Work Unit\Master Audio Bus\HDR BUS\Normal SFX	
 	3430673687	Paper Bus			\Default Work Unit\Master Audio Bus\Monrovia\Paper Bus	
 	3472939855	Voice bus			\Default Work Unit\Master Audio Bus\Monrovia\Voice bus	
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+	3893417221	Weapon			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Weapon	
+	3991942870	Music			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Music	
 	4236861272	Dialogs			\Default Work Unit\Master Audio Bus\HDR BUS\Dialogs	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes

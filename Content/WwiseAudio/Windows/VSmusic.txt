@@ -22,11 +22,11 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	3942776840	MusicCueOrchestra			\Default Work Unit\MusicCueOrchestra	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	103516656	outro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\outro_3353F714.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Cinematic\Outro\outro		1659438
 	143456646	Intro_Metal3rev	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Metal3rev_5FF60323.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Metal3rev		6797882
 	256523319	Intro_GroundBass	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_GroundBass_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_GroundBass		6711758
 	484512425	Intro_Windbells	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Windbells_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Windbells		6521951
 	579602903	Corrupt_orchestra	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_orchestra_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_orchestra		8529483
+	671537638	outro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Cinematic VS_B2C81D54.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Cinematic\Outro\outro		1638969
 	691790231	Intro_Metal4rev	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Metal4rev_5FF60323.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Metal4rev		6873713
 	698322882	Intro_Misc	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Intro_Misc_73A26916.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Intro\Intro\Intro_Misc		7500736
 	753405024	Corrupt_Bells	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Corrupt_Bells_4AF0AF3A.wem		\Interactive Music Hierarchy\Default Work Unit\VS\Main theme\Main Theme\Corrupt_Bells		7252751
