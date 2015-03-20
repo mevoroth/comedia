@@ -222,7 +222,10 @@ private:
 
 	float _RemainingTime;
 	ACharacter* _PlayerCharacter;
+public:
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "[Comedia] IronPhase")
 	AIronActor* _SpawnedIronActor;
+private:
 
 
 #pragma region Liya Wounds

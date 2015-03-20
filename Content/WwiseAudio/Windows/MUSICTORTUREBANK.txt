@@ -5,11 +5,19 @@ Event	ID	Name			Wwise Object Path	Notes
 	3567178845	Music_Thunder			\Default Work Unit\Torture\Music_Thunder	
 	4184794294	Outro			\Default Work Unit\Torture\Outro	
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3514092254	Sunburn_time			\Default Work Unit\Sunburn_time	
+
+Effect plug-ins	ID	Name	Type				Notes
+	113368125	Wwise Time Stretch (Custom)	Wwise Time Stretch			
+	346482169	Wwise Guitar Distortion (Custom)	Wwise Guitar Distortion			
+	1459522457	Brick_Wall_Minus_1dB_Peak_Fast_Release	Wwise Peak Limiter			
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	27484448	Kniferev1	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Kniferev1_E81B0A92.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Knife\Knife\Kniferev1		3408445
 	59236879	Knife music intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_DIE_TOR_INTRO_5DAE68DD.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Intro\Intro\Knife music intro		989473
 	461330647	S_MUS_TOR_THUNDER	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_THUNDER_11182432.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Thunder\Thunder\S_MUS_TOR_THUNDER		4308515
 	671002750	S_MUS_TOR_SUN	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_SUNv2&OUTRO_84C9299C.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\S_MUS_TOR_SUN		8998084
-	776626243	S_DIA_TOR_Intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_INTRO_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Global torture\Dialogs\S_DIA_TOR_Intro		993749
-	901811174	S_DIA_TOR_Sun	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_SUN_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Global torture\Dialogs\S_DIA_TOR_Sun		580686
+	776626243	S_DIA_TOR_Intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_INTRO_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Torture\Global torture\Dialogs\S_DIA_TOR_Intro		993749
+	901811174	S_DIA_TOR_Sun	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_SUN_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Torture\Global torture\Dialogs\S_DIA_TOR_Sun		580686
 
