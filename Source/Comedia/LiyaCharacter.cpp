@@ -37,6 +37,7 @@ void ALiyaCharacter::BeginPlay()
 	_InitHeight = GetMesh()->GetComponentLocation().Z;
 	_OriginalPivotCamPosition = Camera->RelativeLocation;
 	FilterComponent->InitRecord(3);
+	OriginalCallCooldown = CallCooldown;
 }
 
 void ALiyaCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
