@@ -754,7 +754,7 @@ bool APosterActor::PrinceIsInFireRange()
 				{
 					FVector PrincePosterHead = Poster->PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(1));
 					FVector PrincePosterTail = Poster->PosterMesh->GetBoneLocation(PosterMesh->GetBoneName(PosterMesh->SkeletalMesh->RefSkeleton.GetNum() - 1));
-					FVector PrincePos = FMath::Lerp<FVector>(PrincePosterHead, PrincePosterTail, PrincePosition);
+					FVector PrincePos = FMath::Lerp<FVector>(PrincePosterTail, PrincePosterHead, PrincePosition);
 					//UE_LOG(LogGPCode, Warning, TEXT("PRINCE MY BALLZ"));
 					//UE_LOG(LogGPCode, Warning, TEXT("%s"), *Poster->GetName());
 					//DrawDebugSphere(GetWorld(), PrincePos, 200.f, 64, FColor::Red);

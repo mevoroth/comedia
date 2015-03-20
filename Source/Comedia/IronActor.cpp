@@ -3,6 +3,7 @@
 #include "Comedia.h"
 #include "IwacLevelScriptActor.h"
 #include "IronActor.h"
+#include "LiyaCharacter.h"
 
 AIronActor::AIronActor(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -29,4 +30,20 @@ void AIronActor::UpdateFirstSpawnState()
 			bFirstSpawn = LevelScriptActor->bFirstIronSpawn;
 		}
 	}
+}
+
+float AIronActor::GetSpatialization() const
+{
+	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+
+	if (Character)
+	{
+		FVector Dir = (GetLiyaTree() - GetActorLocation()).SafeNormal();
+		FVector LiyaDir = (Character->GetActorLocation() - GetLiyaTree()).SafeNormal();
+		float DotDir = FVector::DotProduct(Dir, LiyaDir);
+		float DotDirLeft = FVector::DotProduct(Dir.RotateAngleAxis(5.f, FVector::UpVector), LiyaDir);
+		return (DotDirLeft < DotDir ? -1.f : 1.f);
+	}
+
+	return 0.f;
 }
