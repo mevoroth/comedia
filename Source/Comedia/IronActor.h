@@ -28,7 +28,7 @@ public:
 	void UpdateFirstSpawnState();
 
 	UFUNCTION(BlueprintCallable, Category = "[Comedia]Iron Property")
-	float GetSpatialization() const;
+	FName GetSpatialization() const;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Iron")
 	FVector GetLiyaTree() const;

@@ -32,7 +32,7 @@ void AIronActor::UpdateFirstSpawnState()
 	}
 }
 
-float AIronActor::GetSpatialization() const
+FName AIronActor::GetSpatialization() const
 {
 	ALiyaCharacter* Character = Cast<ALiyaCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 
@@ -42,8 +42,15 @@ float AIronActor::GetSpatialization() const
 		FVector LiyaDir = (Character->GetActorLocation() - GetLiyaTree()).SafeNormal();
 		float DotDir = FVector::DotProduct(Dir, LiyaDir);
 		float DotDirLeft = FVector::DotProduct(Dir.RotateAngleAxis(5.f, FVector::UpVector), LiyaDir);
-		return (DotDirLeft < DotDir ? -1.f : 1.f);
+		if (DotDirLeft < DotDir)
+		{
+			return FName(TEXT("Left"));
+		}
+		else
+		{
+			return FName(TEXT("Right"));
+		}
 	}
 
-	return 0.f;
+	return TEXT("");
 }
