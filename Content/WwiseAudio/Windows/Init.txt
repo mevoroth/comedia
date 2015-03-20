@@ -26,6 +26,7 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 	702543394	Tunnels			\Default Work Unit\Master Audio Bus\Monrovia\Tunnels	
 	1852546347	REV_DIALOG			\Default Work Unit\Master Audio Bus\HDR BUS\Dialogs\REV_DIALOG	
 	3610144935	ReverbAmb			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances\ReverbAmb	
+	3771068084	Reverb_longdeath			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_longdeath	
 	4145015068	Reverb_house			\Default Work Unit\Master Audio Bus\Monrovia\Reverb_house	
 
 Effect plug-ins	ID	Name	Type				Notes

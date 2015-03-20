@@ -1167,6 +1167,7 @@
 				<Event Id="1093683547" Name="Dialog_Princecall"/>
 				<Event Id="3710527641" Name="Dialog_Whydid"/>
 				<Event Id="1491659777" Name="Liyacalls"/>
+				<Event Id="3766461940" Name="Liyadeath"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="1764685" Language="SFX">
@@ -1201,6 +1202,10 @@
 					<ShortName>S_DIA_VS_Wherareyou-002.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Wherareyou-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="158093855" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiya-002.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiya-002_5A140B9B.wem</Path>
+				</File>
 				<File Id="196941266" Language="SFX">
 					<ShortName>Liya init-003.wav</ShortName>
 					<Path>SFX\Liya init-003_5A140B9B.wem</Path>
@@ -1229,9 +1234,21 @@
 					<ShortName>S_DIA_VS_Listen Prince.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Listen Prince_5A140B9B.wem</Path>
 				</File>
+				<File Id="294505948" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiyagun.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiyagun_5A140B9B.wem</Path>
+				</File>
 				<File Id="434206026" Language="SFX">
 					<ShortName>Calls3.wav</ShortName>
 					<Path>SFX\Calls3_9209B708.wem</Path>
+				</File>
+				<File Id="490403827" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiyagun1.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiyagun1_5A140B9B.wem</Path>
+				</File>
+				<File Id="502221411" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiyagun2.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiyagun2_5A140B9B.wem</Path>
 				</File>
 				<File Id="533590662" Language="SFX">
 					<ShortName>S_DIA_VS_Alrightdoor.wav</ShortName>
@@ -1252,6 +1269,10 @@
 				<File Id="639926184" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACIN.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACIN_CFDF7931.wem</Path>
+				</File>
+				<File Id="658841617" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiyagun3.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiyagun3_5A140B9B.wem</Path>
 				</File>
 				<File Id="666673536" Language="SFX">
 					<ShortName>Calls5.wav</ShortName>
@@ -1281,6 +1302,14 @@
 					<ShortName>On my way.wav</ShortName>
 					<Path>SFX\On my way_5A140B9B.wem</Path>
 				</File>
+				<File Id="787723212" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiya-004.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiya-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="788201902" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiya-001.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiya-001_5A140B9B.wem</Path>
+				</File>
 				<File Id="827410737" Language="SFX">
 					<ShortName>S_DIA_VS_Wherareyou-004.wav</ShortName>
 					<Path>SFX\S_DIA_VS_Wherareyou-004_5A140B9B.wem</Path>
@@ -1304,6 +1333,10 @@
 				<File Id="896959730" Language="SFX">
 					<ShortName>S_DIA_VS_LIYACALLS-004.wav</ShortName>
 					<Path>SFX\S_DIA_VS_LIYACALLS-004_5A140B9B.wem</Path>
+				</File>
+				<File Id="934061351" Language="SFX">
+					<ShortName>S_DIA_VS_DeathLiya-003.wav</ShortName>
+					<Path>SFX\S_DIA_VS_DeathLiya-003_5A140B9B.wem</Path>
 				</File>
 				<File Id="943328198" Language="SFX">
 					<ShortName>S_DIA_VS_Wherareyou-001.wav</ShortName>
@@ -1438,6 +1471,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITKNIFE03.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE03_9209B708.wem</Path>
 				</File>
+				<File Id="37195708" Language="SFX">
+					<ShortName>Pokerclosing03.wav</ShortName>
+					<Path>SFX\Pokerclosing03_9209B708.wem</Path>
+				</File>
 				<File Id="40808771" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_17.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_17_9209B708.wem</Path>
@@ -1502,6 +1539,10 @@
 					<ShortName>S_SFX_TOR_TEARLP-006.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-006_834051F9.wem</Path>
 				</File>
+				<File Id="149834230" Language="SFX">
+					<ShortName>EnteringzoneLR.wav</ShortName>
+					<Path>SFX\EnteringzoneLR_9209B708.wem</Path>
+				</File>
 				<File Id="152447386" Language="SFX">
 					<ShortName>Thunder hit 05.wav</ShortName>
 					<Path>SFX\Thunder hit 05_391988D9.wem</Path>
@@ -1546,10 +1587,6 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_03.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_03_5A140B9B.wem</Path>
 				</File>
-				<File Id="244484198" Language="SFX">
-					<ShortName>S_SFX_TOR_SUNBURNLOOP-001.wav</ShortName>
-					<Path>SFX\S_SFX_TOR_SUNBURNLOOP-001_29503F80.wem</Path>
-				</File>
 				<File Id="248145761" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-011.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTS-011_9209B708.wem</Path>
@@ -1561,6 +1598,10 @@
 				<File Id="254998701" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_15.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_15_5A140B9B.wem</Path>
+				</File>
+				<File Id="267443520" Language="SFX">
+					<ShortName>BurningloopHard.wav</ShortName>
+					<Path>SFX\BurningloopHard_43EDBD1A.wem</Path>
 				</File>
 				<File Id="274527451" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_04.wav</ShortName>
@@ -1577,6 +1618,10 @@
 				<File Id="309361023" Language="SFX">
 					<ShortName>footdi2.wav</ShortName>
 					<Path>SFX\footdi2_9209B708.wem</Path>
+				</File>
+				<File Id="310774228" Language="SFX">
+					<ShortName>BurningloopSoft.wav</ShortName>
+					<Path>SFX\BurningloopSoft_43EDBD1A.wem</Path>
 				</File>
 				<File Id="315144141" Language="SFX">
 					<ShortName>Thunder hit 01.wav</ShortName>
@@ -1654,6 +1699,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_11.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_11_9209B708.wem</Path>
 				</File>
+				<File Id="440272897" Language="SFX">
+					<ShortName>Pokerclosing07.wav</ShortName>
+					<Path>SFX\Pokerclosing07_9209B708.wem</Path>
+				</File>
 				<File Id="440835996" Language="SFX">
 					<ShortName>S_SFX_TOR_SAW04.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SAW04_834051F9.wem</Path>
@@ -1698,9 +1747,9 @@
 					<ShortName>S_SFX_POC_FOOTSTRAFE-003.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTSTRAFE-003_9209B708.wem</Path>
 				</File>
-				<File Id="565636235" Language="SFX">
-					<ShortName>S_SFX_TOR_SUNBURNLOOP.wav</ShortName>
-					<Path>SFX\S_SFX_TOR_SUNBURNLOOP_29503F80.wem</Path>
+				<File Id="566215564" Language="SFX">
+					<ShortName>BurningloopMid.wav</ShortName>
+					<Path>SFX\BurningloopMid_43EDBD1A.wem</Path>
 				</File>
 				<File Id="569510579" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_10.wav</ShortName>
@@ -1718,6 +1767,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_02.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_02_9209B708.wem</Path>
 				</File>
+				<File Id="621014217" Language="SFX">
+					<ShortName>Pokerclosing06.wav</ShortName>
+					<Path>SFX\Pokerclosing06_9209B708.wem</Path>
+				</File>
 				<File Id="637111520" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE11.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_RATTLE11_834051F9.wem</Path>
@@ -1729,6 +1782,14 @@
 				<File Id="641404301" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_06.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_06_5A140B9B.wem</Path>
+				</File>
+				<File Id="642618979" Language="SFX">
+					<ShortName>Pokerclosing05.wav</ShortName>
+					<Path>SFX\Pokerclosing05_9209B708.wem</Path>
+				</File>
+				<File Id="643220236" Language="SFX">
+					<ShortName>EnteringzoneLR-001.wav</ShortName>
+					<Path>SFX\EnteringzoneLR-001_9209B708.wem</Path>
 				</File>
 				<File Id="643444766" Language="SFX">
 					<ShortName>footdi6.wav</ShortName>
@@ -1773,6 +1834,10 @@
 				<File Id="698904503" Language="SFX">
 					<ShortName>S_SFX_TOR_TEARLP-005.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-005_834051F9.wem</Path>
+				</File>
+				<File Id="705411399" Language="SFX">
+					<ShortName>Pokerclosing02.wav</ShortName>
+					<Path>SFX\Pokerclosing02_9209B708.wem</Path>
 				</File>
 				<File Id="711483065" Language="SFX">
 					<ShortName>Sparks thunder fail-002.wav</ShortName>
@@ -1842,6 +1907,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_05.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_05_9209B708.wem</Path>
 				</File>
+				<File Id="828806399" Language="SFX">
+					<ShortName>Pokerclosing04.wav</ShortName>
+					<Path>SFX\Pokerclosing04_9209B708.wem</Path>
+				</File>
 				<File Id="835293588" Language="SFX">
 					<ShortName>S_SFX_TOR_TEARLP-003.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-003_834051F9.wem</Path>
@@ -1861,6 +1930,10 @@
 				<File Id="875690567" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITKNIFE05.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE05_9209B708.wem</Path>
+				</File>
+				<File Id="877000442" Language="SFX">
+					<ShortName>Pokerclosing08.wav</ShortName>
+					<Path>SFX\Pokerclosing08_9209B708.wem</Path>
 				</File>
 				<File Id="877417282" Language="SFX">
 					<ShortName>S_SFX_TOR_THundBuildup-001.wav</ShortName>
@@ -1941,6 +2014,10 @@
 				<File Id="1021719798" Language="SFX">
 					<ShortName>S_SFX_TOR_THundBuildup-003.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_THundBuildup-003_E566A47F.wem</Path>
+				</File>
+				<File Id="1035645381" Language="SFX">
+					<ShortName>Pokerclosing01.wav</ShortName>
+					<Path>SFX\Pokerclosing01_9209B708.wem</Path>
 				</File>
 				<File Id="1061826691" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE03.wav</ShortName>
