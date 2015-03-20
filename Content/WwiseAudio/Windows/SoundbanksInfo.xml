@@ -1102,6 +1102,10 @@
 					<ShortName>Thunder Env events-002.wav</ShortName>
 					<Path>SFX\Thunder Env events-002_9209B708.wem</Path>
 				</File>
+				<File Id="901811174" Language="SFX">
+					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_SUN_9209B708.wem</Path>
+				</File>
 				<File Id="902529822" Language="SFX">
 					<ShortName>Thunder Env events-039.wav</ShortName>
 					<Path>SFX\Thunder Env events-039_9209B708.wem</Path>
@@ -1426,6 +1430,10 @@
 					<ShortName>S_MUS_TOR_THUNDER.wav</ShortName>
 					<Path>SFX\S_MUS_TOR_THUNDER_11182432.wem</Path>
 				</File>
+				<File Id="528393396" Language="SFX">
+					<ShortName>S_SFX_TOR_IronGroundv2.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronGroundv2_820C42F8.wem</Path>
+				</File>
 				<File Id="671002750" Language="SFX">
 					<ShortName>S_MUS_TOR_SUNv2&amp;OUTRO.wav</ShortName>
 					<Path>SFX\S_MUS_TOR_SUNv2&amp;OUTRO_84C9299C.wem</Path>
@@ -1434,10 +1442,6 @@
 					<ShortName>S_DIA_TOR_INTRO.wav</ShortName>
 					<Path>SFX\S_DIA_TOR_INTRO_9209B708.wem</Path>
 				</File>
-				<File Id="901811174" Language="SFX">
-					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
-					<Path>SFX\S_DIA_TOR_SUN_9209B708.wem</Path>
-				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="3752081500" Language="SFX">
@@ -1445,6 +1449,7 @@
 			<Path>TORTUREBANK.bnk</Path>
 			<IncludedEvents>
 				<Event Id="2385628198" Name="Footsteps"/>
+				<Event Id="3832630646" Name="Ironsky"/>
 				<Event Id="2671209179" Name="Knife_Fail"/>
 				<Event Id="3632834637" Name="Knife_Flyby"/>
 				<Event Id="2811031212" Name="Knife_Loop_Start"/>
@@ -1458,6 +1463,14 @@
 				<File Id="4526779" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE05.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_RATTLE05_834051F9.wem</Path>
+				</File>
+				<File Id="15839152" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-009.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-009_9209B708.wem</Path>
+				</File>
+				<File Id="17711184" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-005.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-005_9209B708.wem</Path>
 				</File>
 				<File Id="24175894" Language="SFX">
 					<ShortName>footdi1.wav</ShortName>
@@ -1475,6 +1488,10 @@
 					<ShortName>Pokerclosing03.wav</ShortName>
 					<Path>SFX\Pokerclosing03_9209B708.wem</Path>
 				</File>
+				<File Id="40050787" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-010.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-010_9209B708.wem</Path>
+				</File>
 				<File Id="40808771" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_17.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_17_9209B708.wem</Path>
@@ -1482,6 +1499,10 @@
 				<File Id="52979081" Language="SFX">
 					<ShortName>S_SFX_TOR_RATTLE02.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_RATTLE02_834051F9.wem</Path>
+				</File>
+				<File Id="62676202" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-005.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-005_9209B708.wem</Path>
 				</File>
 				<File Id="62804544" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-008.wav</ShortName>
@@ -1531,6 +1552,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_05.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_05_5A140B9B.wem</Path>
 				</File>
+				<File Id="131485375" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-002.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-002_9209B708.wem</Path>
+				</File>
 				<File Id="132961205" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_09.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_09_5A140B9B.wem</Path>
@@ -1538,6 +1563,10 @@
 				<File Id="138492119" Language="SFX">
 					<ShortName>S_SFX_TOR_TEARLP-006.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-006_834051F9.wem</Path>
+				</File>
+				<File Id="143728248" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-004.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-004_9209B708.wem</Path>
 				</File>
 				<File Id="149834230" Language="SFX">
 					<ShortName>EnteringzoneLR.wav</ShortName>
@@ -1566,6 +1595,10 @@
 				<File Id="193317668" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITKNIFE02.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITKNIFE02_9209B708.wem</Path>
+				</File>
+				<File Id="201005575" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-006.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-006_9209B708.wem</Path>
 				</File>
 				<File Id="205915549" Language="SFX">
 					<ShortName>S_SFX_TOR_SAW11.wav</ShortName>
@@ -1598,6 +1631,10 @@
 				<File Id="254998701" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_15.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_15_5A140B9B.wem</Path>
+				</File>
+				<File Id="256592937" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-010.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-010_9209B708.wem</Path>
 				</File>
 				<File Id="267443520" Language="SFX">
 					<ShortName>BurningloopHard.wav</ShortName>
@@ -1639,6 +1676,10 @@
 					<ShortName>S_SFX_POC_FOOTS-003.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTS-003_9209B708.wem</Path>
 				</File>
+				<File Id="338337293" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-006.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-006_9209B708.wem</Path>
+				</File>
 				<File Id="344523151" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_12.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_12_5A140B9B.wem</Path>
@@ -1663,9 +1704,21 @@
 					<ShortName>S_SFX_TOR_TEARLP-009.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-009_834051F9.wem</Path>
 				</File>
+				<File Id="361964711" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-001_9209B708.wem</Path>
+				</File>
+				<File Id="364179694" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-008.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-008_9209B708.wem</Path>
+				</File>
 				<File Id="369668336" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTS-013.wav</ShortName>
 					<Path>SFX\S_SFX_POC_FOOTS-013_9209B708.wem</Path>
+				</File>
+				<File Id="382545356" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-003.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-003_9209B708.wem</Path>
 				</File>
 				<File Id="415154560" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_Knife-Woosh .wav</ShortName>
@@ -1695,6 +1748,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_15.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_15_9209B708.wem</Path>
 				</File>
+				<File Id="434517556" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-004.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-004_9209B708.wem</Path>
+				</File>
 				<File Id="436706535" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_11.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_11_9209B708.wem</Path>
@@ -1707,13 +1764,29 @@
 					<ShortName>S_SFX_TOR_SAW04.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_SAW04_834051F9.wem</Path>
 				</File>
+				<File Id="452207463" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-001.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-001_9209B708.wem</Path>
+				</File>
 				<File Id="455784063" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_14.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_14_5A140B9B.wem</Path>
 				</File>
+				<File Id="467470724" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-011.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-011_9209B708.wem</Path>
+				</File>
 				<File Id="468891264" Language="SFX">
 					<ShortName>S_SFX_TOR_TEARLP-001.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_TEARLP-001_834051F9.wem</Path>
+				</File>
+				<File Id="498735183" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-003.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-003_9209B708.wem</Path>
+				</File>
+				<File Id="502355417" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-009.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-009_9209B708.wem</Path>
 				</File>
 				<File Id="514741865" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-001.wav</ShortName>
@@ -1726,6 +1799,10 @@
 				<File Id="533337035" Language="SFX">
 					<ShortName>S_SFX_LIYASDRESS-011.wav</ShortName>
 					<Path>SFX\S_SFX_LIYASDRESS-011_9209B708.wem</Path>
+				</File>
+				<File Id="533431767" Language="SFX">
+					<ShortName>Earthquake With Tremors.wav</ShortName>
+					<Path>SFX\Earthquake With Tremors_7D02E003.wem</Path>
 				</File>
 				<File Id="553415406" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_04.wav</ShortName>
@@ -1758,6 +1835,10 @@
 				<File Id="576890836" Language="SFX">
 					<ShortName>S_SFX_TOR_THundBuildup-002.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_THundBuildup-002_E566A47F.wem</Path>
+				</File>
+				<File Id="584887573" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyA-007.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyA-007_9209B708.wem</Path>
 				</File>
 				<File Id="593203450" Language="SFX">
 					<ShortName>Thunder hit 04.wav</ShortName>
@@ -1815,6 +1896,10 @@
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_14.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_14_9209B708.wem</Path>
 				</File>
+				<File Id="672363033" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-002.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-002_9209B708.wem</Path>
+				</File>
 				<File Id="677632142" Language="SFX">
 					<ShortName>S_SFX_TOR_THundBuildup-004.wav</ShortName>
 					<Path>SFX\S_SFX_TOR_THundBuildup-004_E566A47F.wem</Path>
@@ -1866,6 +1951,10 @@
 				<File Id="754917493" Language="SFX">
 					<ShortName>S_SFX_LIYASDRESS-004.wav</ShortName>
 					<Path>SFX\S_SFX_LIYASDRESS-004_9209B708.wem</Path>
+				</File>
+				<File Id="758146399" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-008.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-008_9209B708.wem</Path>
 				</File>
 				<File Id="762039758" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_17.wav</ShortName>
@@ -1958,6 +2047,10 @@
 				<File Id="913493235" Language="SFX">
 					<ShortName>S_SFX_DIE_TOR_HITLIYA_13.wav</ShortName>
 					<Path>SFX\S_SFX_DIE_TOR_HITLIYA_13_5A140B9B.wem</Path>
+				</File>
+				<File Id="913740091" Language="SFX">
+					<ShortName>S_SFX_TOR_IronskyB-007.wav</ShortName>
+					<Path>SFX\S_SFX_TOR_IronskyB-007_9209B708.wem</Path>
 				</File>
 				<File Id="917288936" Language="SFX">
 					<ShortName>S_SFX_POC_FOOTSTRAFE-006.wav</ShortName>
