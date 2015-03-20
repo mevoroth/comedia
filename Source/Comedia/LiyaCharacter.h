@@ -80,6 +80,9 @@ class COMEDIA_API ALiyaCharacter : public ACharacter
 	float CallCooldown;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
+	float OriginalCallCooldown;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "[Comedia]Settings")
 	float WalkingRatio;
 #pragma endregion GD Settings
 
