@@ -31,5 +31,8 @@ public:
 	FName GetSpatialization() const;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Iron")
+	FVector GetDirection() const;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Iron")
 	FVector GetLiyaTree() const;
 };

@@ -38,17 +38,18 @@ FName AIronActor::GetSpatialization() const
 
 	if (Character)
 	{
-		FVector Dir = (GetLiyaTree() - GetActorLocation()).SafeNormal();
+		FVector Dir = GetDirection();
 		FVector LiyaDir = (Character->GetActorLocation() - GetLiyaTree()).SafeNormal();
 		float DotDir = FVector::DotProduct(Dir, LiyaDir);
 		float DotDirLeft = FVector::DotProduct(Dir.RotateAngleAxis(5.f, FVector::UpVector), LiyaDir);
+
 		if (DotDirLeft < DotDir)
 		{
-			return FName(TEXT("Left"));
+			return FName(TEXT("Right"));
 		}
 		else
 		{
-			return FName(TEXT("Right"));
+			return FName(TEXT("Left"));
 		}
 	}
 
