@@ -1,6 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
-	2145862855	Chantfemme			\Default Work Unit\VS\Chantfemme	
-	3157003241	Test			\Default Work Unit\VS\Test	
+	2145862855	Chantfemme			\Default Work Unit\VS\Houses\Chantfemme	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	110868348	Chant femme-011	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Chant femme-011_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Chant femme\Chant femme-011		115443
