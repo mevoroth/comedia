@@ -34,6 +34,9 @@ class COMEDIA_API AKnifeCharacter : public ACharacter
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
 	void OnKnifeDestroy();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void OnKnifeKill();
+
 private:
 	TSubclassOf<AActor> _TrailClass;
 
@@ -41,7 +44,7 @@ private:
 
 	float _TrailLength;
 
-	void _DestroyKnife();
+	void _DestroyKnife(bool bPlayerTouched);
 
 	void _SpawnTrail();
 };

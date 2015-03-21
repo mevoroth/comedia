@@ -57,7 +57,7 @@ void AKnifeCharacter::Tick(float DeltaSeconds)
 		//Check if distance player/knife more than ComputedRadiusSpawnKnifeArea and if player is behind knife
 		if ((GetWorld()->GetFirstPlayerController()->GetCharacter()->GetActorLocation() - GetActorLocation()).Size() > IwacLevelScript->ComputedRadiusSpawnKnifeArea && AngleForwardToPlayer > 90.0f)
 		{
-			_DestroyKnife();
+			_DestroyKnife(false);
 		}
 	}
 
@@ -93,7 +93,7 @@ void AKnifeCharacter::ReceiveHit(class UPrimitiveComponent* MyComp, AActor* Othe
 			IwacLevelScript->PlayerTouchByKnife();
 		}
 
-		_DestroyKnife();
+		_DestroyKnife(true);
 	}
 }
 
@@ -102,7 +102,7 @@ void AKnifeCharacter::InitOriginalPosition()
 	_LastDecalPosition = GetActorLocation();
 }
 
-void AKnifeCharacter::_DestroyKnife()
+void AKnifeCharacter::_DestroyKnife(bool bPlayerTouched)
 {
 	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 	if (IwacLevelScript)
@@ -110,7 +110,14 @@ void AKnifeCharacter::_DestroyKnife()
 		//UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
 		IwacLevelScript->bHasKnifeSpawned = false;
 		//GetWorld()->DestroyActor(this);
-		OnKnifeDestroy();
+		if (bPlayerTouched)
+		{
+			OnKnifeKill();
+		}
+		else
+		{
+			OnKnifeDestroy();
+		}
 	}
 }
 
