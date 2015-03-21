@@ -109,7 +109,8 @@ void AKnifeCharacter::_DestroyKnife()
 	{
 		//UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
 		IwacLevelScript->bHasKnifeSpawned = false;
-		GetWorld()->DestroyActor(this);
+		//GetWorld()->DestroyActor(this);
+		OnKnifeDestroy();
 	}
 }
 

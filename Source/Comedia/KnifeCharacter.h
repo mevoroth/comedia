@@ -31,6 +31,9 @@ class COMEDIA_API AKnifeCharacter : public ACharacter
 
 	void InitOriginalPosition();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia] Events")
+	void OnKnifeDestroy();
+
 private:
 	TSubclassOf<AActor> _TrailClass;
 
