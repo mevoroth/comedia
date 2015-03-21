@@ -137,6 +137,10 @@ public:
 	virtual bool OnSoldierWalk(const FVector& Position);
 	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Soldier")
 	virtual bool OnSoldierStopWalking();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Soldier")
+	virtual bool OnConeInactive();
+	UFUNCTION(BlueprintImplementableEvent, Category = "[Comedia]Soldier")
+	virtual bool OnConeActive();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
 	void OnKillLiyah();
 	UFUNCTION(BlueprintNativeEvent, Category = "[Comedia]Soldier")
@@ -266,6 +270,8 @@ public:
 	ATriggerBox* EndingTrigger;
 
 	bool bOriginalIsGrabbable;
+
+	bool bVisionIsActive;
 private:
 
 	PosterState State;

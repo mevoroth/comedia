@@ -42,6 +42,8 @@ private:
 
 	FVector _LastDecalPosition;
 
+	bool _bKnifeActive;
+
 	float _TrailLength;
 
 	void _DestroyKnife(bool bPlayerTouched);

@@ -15,6 +15,8 @@ AKnifeCharacter::AKnifeCharacter(const class FObjectInitializer& PCIP)
 
 	//Enable tick function
 	PrimaryActorTick.bCanEverTick = true;
+
+	_bKnifeActive = true;
 }
 
 void AKnifeCharacter::Tick(float DeltaSeconds)
@@ -82,7 +84,7 @@ void AKnifeCharacter::ReceiveHit(class UPrimitiveComponent* MyComp, AActor* Othe
 	Super::ReceiveHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
 	//Check if receive hit from player
-	if (Cast<ALiyaCharacter>(Other))
+	if (Cast<ALiyaCharacter>(Other) && _bKnifeActive)
 	{
 		UE_LOG(LogGPCode, Log, TEXT("Knife collide with player"));
 
@@ -104,19 +106,23 @@ void AKnifeCharacter::InitOriginalPosition()
 
 void AKnifeCharacter::_DestroyKnife(bool bPlayerTouched)
 {
-	AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-	if (IwacLevelScript)
+	if (_bKnifeActive)
 	{
-		//UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
-		IwacLevelScript->bHasKnifeSpawned = false;
-		//GetWorld()->DestroyActor(this);
-		if (bPlayerTouched)
+		AIwacLevelScriptActor* IwacLevelScript = Cast<AIwacLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		if (IwacLevelScript)
 		{
-			OnKnifeKill();
-		}
-		else
-		{
-			OnKnifeDestroy();
+			//UE_LOG(LogGPCode, Log, TEXT("Destroy Knife"));
+			IwacLevelScript->bHasKnifeSpawned = false;
+			_bKnifeActive = false;
+			//GetWorld()->DestroyActor(this);
+			if (bPlayerTouched)
+			{
+				OnKnifeKill();
+			}
+			else
+			{
+				OnKnifeDestroy();
+			}
 		}
 	}
 }

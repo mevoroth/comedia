@@ -35,6 +35,7 @@ APosterActor::APosterActor(const FObjectInitializer& FOI)
 	, _WayFound(false)
 	, DetachThreshold(10000.f)
 	, _bResetHeadIsRoot(false)
+	, bVisionIsActive(false)
 {
 	PosterRoot = FOI.CreateDefaultSubobject<USceneComponent>(this, TEXT("PosterRoot"));
 	RootComponent = PosterRoot;
@@ -909,7 +910,18 @@ void APosterActor::_Soldier(float DeltaSeconds)
 	{
 		if (_SoldierComponent->GetChildComponent(i)->GetName() == FString(TEXT("Vision")))
 		{
-			_SoldierComponent->GetChildComponent(i)->SetVisibility(((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true, true);
+			bool bVisibility = ((State & GRABBED) != 0) || ToggleCount % 2 == 0 ? false : true;
+			_SoldierComponent->GetChildComponent(i)->SetVisibility(bVisibility, true);
+			if (!bVisionIsActive && bVisibility)
+			{
+				OnConeActive();
+				bVisionIsActive = true;
+			}
+			else if (bVisionIsActive && !bVisibility)
+			{
+				OnConeInactive();
+				bVisionIsActive = false;
+			}
 			UStaticMeshComponent* Vision = Cast<UStaticMeshComponent>(_SoldierComponent->GetChildComponent(i));
 			if (Vision)
 			{
