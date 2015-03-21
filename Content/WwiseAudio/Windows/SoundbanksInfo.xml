@@ -1701,6 +1701,10 @@
 					<ShortName>S_DIA_TOR_INTRO.wav</ShortName>
 					<Path>SFX\S_DIA_TOR_INTRO_9209B708.wem</Path>
 				</File>
+				<File Id="888132214" Language="SFX">
+					<ShortName>Explosions - Explosion Medium Dirt Clusters.wav</ShortName>
+					<Path>SFX\Explosions - Explosion Medium Dirt Clusters_0B4E9AE8.wem</Path>
+				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="3752081500" Language="SFX">
@@ -1809,7 +1813,7 @@
 				</File>
 				<File Id="152447386" Language="SFX">
 					<ShortName>Thunder hit 05.wav</ShortName>
-					<Path>SFX\Thunder hit 05_391988D9.wem</Path>
+					<Path>SFX\Thunder hit 05_A0F19287.wem</Path>
 				</File>
 				<File Id="158397598" Language="SFX">
 					<ShortName>S_SFX_TOR_TEARLP-002.wav</ShortName>
@@ -2033,7 +2037,7 @@
 				</File>
 				<File Id="593203450" Language="SFX">
 					<ShortName>Thunder hit 04.wav</ShortName>
-					<Path>SFX\Thunder hit 04_391988D9.wem</Path>
+					<Path>SFX\Thunder hit 04_85707B0A.wem</Path>
 				</File>
 				<File Id="596530715" Language="SFX">
 					<ShortName>IRONDESCENT.wav</ShortName>
