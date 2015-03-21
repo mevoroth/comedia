@@ -22,6 +22,7 @@
 				<Event Id="3070694524" Name="Cin_Sweepshot"/>
 				<Event Id="2108780406" Name="Conescast"/>
 				<Event Id="1653961176" Name="Corpseflies"/>
+				<Event Id="3470499176" Name="Dia_Tor_Sun"/>
 				<Event Id="546651181" Name="Dog"/>
 				<Event Id="3129425356" Name="Endscene"/>
 				<Event Id="3049293586" Name="Footsteps_Prince"/>
@@ -939,6 +940,10 @@
 					<ShortName>S_SFX_POC_PAPERSEQ-014.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERSEQ-014_9209B708.wem</Path>
 				</File>
+				<File Id="901811174" Language="SFX">
+					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
+					<Path>SFX\S_DIA_TOR_SUN_D78E6736.wem</Path>
+				</File>
 				<File Id="902722613" Language="SFX">
 					<ShortName>FIltered_SewingC-004.wav</ShortName>
 					<Path>SFX\FIltered_SewingC-004_9209B708.wem</Path>
@@ -1382,10 +1387,6 @@
 					<ShortName>Thunder Env events-002.wav</ShortName>
 					<Path>SFX\Thunder Env events-002_9209B708.wem</Path>
 				</File>
-				<File Id="901811174" Language="SFX">
-					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
-					<Path>SFX\S_DIA_TOR_SUN_9209B708.wem</Path>
-				</File>
 				<File Id="902529822" Language="SFX">
 					<ShortName>Thunder Env events-039.wav</ShortName>
 					<Path>SFX\Thunder Env events-039_9209B708.wem</Path>
@@ -1408,7 +1409,7 @@
 				</File>
 				<File Id="1016891591" Language="SFX">
 					<ShortName>S_DIA_TOR_THUNDER.wav</ShortName>
-					<Path>SFX\S_DIA_TOR_THUNDER_9209B708.wem</Path>
+					<Path>SFX\S_DIA_TOR_THUNDER_D78E6736.wem</Path>
 				</File>
 				<File Id="1017913663" Language="SFX">
 					<ShortName>Thunder Env events-016.wav</ShortName>
@@ -1716,7 +1717,7 @@
 				</File>
 				<File Id="776626243" Language="SFX">
 					<ShortName>S_DIA_TOR_INTRO.wav</ShortName>
-					<Path>SFX\S_DIA_TOR_INTRO_9209B708.wem</Path>
+					<Path>SFX\S_DIA_TOR_INTRO_C202BF52.wem</Path>
 				</File>
 				<File Id="888132214" Language="SFX">
 					<ShortName>Explosions - Explosion Medium Dirt Clusters.wav</ShortName>
