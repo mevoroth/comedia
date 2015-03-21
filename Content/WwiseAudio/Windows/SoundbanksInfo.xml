@@ -20,6 +20,7 @@
 				<Event Id="2481220117" Name="Cin_Lostbullets"/>
 				<Event Id="2259368400" Name="Cin_Oneshot_Prince"/>
 				<Event Id="3070694524" Name="Cin_Sweepshot"/>
+				<Event Id="2108780406" Name="Conescast"/>
 				<Event Id="1653961176" Name="Corpseflies"/>
 				<Event Id="546651181" Name="Dog"/>
 				<Event Id="3129425356" Name="Endscene"/>
@@ -477,6 +478,10 @@
 				<File Id="375810154" Language="SFX">
 					<ShortName>Tearheavy-012.wav</ShortName>
 					<Path>SFX\Tearheavy-012_5A140B9B.wem</Path>
+				</File>
+				<File Id="379719138" Language="SFX">
+					<ShortName>S_SFX_VS_TigerCones-002.wav</ShortName>
+					<Path>SFX\S_SFX_VS_TigerCones-002_9209B708.wem</Path>
 				</File>
 				<File Id="381862445" Language="SFX">
 					<ShortName>WarassetsAK47-1 Single Shots 01 6x 08-001.wav</ShortName>
@@ -986,6 +991,10 @@
 					<ShortName>Tearmed-010.wav</ShortName>
 					<Path>SFX\Tearmed-010_5A140B9B.wem</Path>
 				</File>
+				<File Id="957366137" Language="SFX">
+					<ShortName>S_SFX_VS_TigerCones-001.wav</ShortName>
+					<Path>SFX\S_SFX_VS_TigerCones-001_9209B708.wem</Path>
+				</File>
 				<File Id="973649855" Language="SFX">
 					<ShortName>Tearmed-006.wav</ShortName>
 					<Path>SFX\Tearmed-006_5A140B9B.wem</Path>
@@ -1022,6 +1031,10 @@
 					<ShortName>Fliesloop.wav</ShortName>
 					<Path>SFX\Fliesloop_12E227A4.wem</Path>
 				</File>
+				<File Id="1024348856" Language="SFX">
+					<ShortName>S_SFX_VS_TigerCones-003.wav</ShortName>
+					<Path>SFX\S_SFX_VS_TigerCones-003_9209B708.wem</Path>
+				</File>
 				<File Id="1024672738" Language="SFX">
 					<ShortName>Tearlight-013.wav</ShortName>
 					<Path>SFX\Tearlight-013_7569AE4A.wem</Path>
@@ -1053,6 +1066,10 @@
 				<File Id="1044845292" Language="SFX">
 					<ShortName>Tearheavy-015.wav</ShortName>
 					<Path>SFX\Tearheavy-015_5A140B9B.wem</Path>
+				</File>
+				<File Id="1045009517" Language="SFX">
+					<ShortName>S_SFX_VS_TigerCones-004.wav</ShortName>
+					<Path>SFX\S_SFX_VS_TigerCones-004_9209B708.wem</Path>
 				</File>
 				<File Id="1048637340" Language="SFX">
 					<ShortName>FIltered_FISTS.wav</ShortName>
