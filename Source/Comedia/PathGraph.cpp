@@ -102,34 +102,36 @@ void PathGraph::UpdatePosterNodes(APosterActor* Poster)
 	PathNode** PtrHeadPosterNode = MapHeadNodes.Find(Poster);
 	if (PtrHeadPosterNode != nullptr)
 	{
-		//Break left link with other poster
-		if ((*PtrHeadPosterNode)->LeftNode != nullptr)
-		{
-			if ((*PtrHeadPosterNode)->LeftNode->RightNode == (*PtrHeadPosterNode))
-			{
-				(*PtrHeadPosterNode)->LeftNode->RightNode = nullptr;
-			}
-			else
-			{
-				(*PtrHeadPosterNode)->LeftNode->LeftNode = nullptr;
-			}
-			(*PtrHeadPosterNode)->LeftNode = nullptr;
-		}
+		(*PtrHeadPosterNode)->LeftNode = nullptr;
+		GetLastNode(Poster)->RightNode = nullptr;
+		////Break left link with other poster
+		//if ((*PtrHeadPosterNode)->LeftNode != nullptr)
+		//{
+		//	if ((*PtrHeadPosterNode)->LeftNode->RightNode == (*PtrHeadPosterNode))
+		//	{
+		//		(*PtrHeadPosterNode)->LeftNode->RightNode = nullptr;
+		//	}
+		//	else
+		//	{
+		//		(*PtrHeadPosterNode)->LeftNode->LeftNode = nullptr;
+		//	}
+		//	(*PtrHeadPosterNode)->LeftNode = nullptr;
+		//}
 
-		//Break right link with other poster
-		PathNode* LastNodePoster = GetLastNode(Poster);
-		if (LastNodePoster != nullptr && LastNodePoster->RightNode != nullptr)
-		{
-			if (LastNodePoster->RightNode->LeftNode == LastNodePoster)
-			{
-				LastNodePoster->RightNode->LeftNode = nullptr;
-			}
-			else
-			{
-				LastNodePoster->RightNode->RightNode = nullptr;
-			}
-			LastNodePoster->RightNode = nullptr;
-		}
+		////Break right link with other poster
+		//PathNode* LastNodePoster = GetLastNode(Poster);
+		//if (LastNodePoster != nullptr && LastNodePoster->RightNode != nullptr)
+		//{
+		//	if (LastNodePoster->RightNode->LeftNode == LastNodePoster)
+		//	{
+		//		LastNodePoster->RightNode->LeftNode = nullptr;
+		//	}
+		//	else
+		//	{
+		//		LastNodePoster->RightNode->RightNode = nullptr;
+		//	}
+		//	LastNodePoster->RightNode = nullptr;
+		//}
 
 		//Update Head
 		bool bLinkOtherPosterHead = false;
