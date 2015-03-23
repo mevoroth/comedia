@@ -28,6 +28,7 @@
 				<Event Id="3049293586" Name="Footsteps_Prince"/>
 				<Event Id="3013141810" Name="Footsteps_Prince_Discreet"/>
 				<Event Id="915067390" Name="Hen"/>
+				<Event Id="3208189939" Name="Le_pioupiou"/>
 				<Event Id="2926330653" Name="Mess"/>
 				<Event Id="415739490" Name="moving_corpse"/>
 				<Event Id="246825020" Name="Moving_soldier"/>
@@ -336,6 +337,10 @@
 					<ShortName>FIltered_Dog-003.wav</ShortName>
 					<Path>SFX\FIltered_Dog-003_9209B708.wem</Path>
 				</File>
+				<File Id="249951061" Language="SFX">
+					<ShortName>Piu-003.wav</ShortName>
+					<Path>SFX\Piu-003_9209B708.wem</Path>
+				</File>
 				<File Id="259003074" Language="SFX">
 					<ShortName>WarassetsStandboeller Small Distant-003.wav</ShortName>
 					<Path>SFX\WarassetsStandboeller Small Distant-003_5A140B9B.wem</Path>
@@ -480,6 +485,14 @@
 					<ShortName>Tearheavy-012.wav</ShortName>
 					<Path>SFX\Tearheavy-012_5A140B9B.wem</Path>
 				</File>
+				<File Id="375820829" Language="SFX">
+					<ShortName>Piu-004.wav</ShortName>
+					<Path>SFX\Piu-004_9209B708.wem</Path>
+				</File>
+				<File Id="377611749" Language="SFX">
+					<ShortName>Fly3.wav</ShortName>
+					<Path>SFX\Fly3_9209B708.wem</Path>
+				</File>
 				<File Id="379719138" Language="SFX">
 					<ShortName>S_SFX_VS_TigerCones-002.wav</ShortName>
 					<Path>SFX\S_SFX_VS_TigerCones-002_9209B708.wem</Path>
@@ -607,6 +620,10 @@
 				<File Id="523776118" Language="SFX">
 					<ShortName>WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001.wav</ShortName>
 					<Path>SFX\WarassetsS&amp;W Model 66 Single Shots 01 6x 06-001_5A140B9B.wem</Path>
+				</File>
+				<File Id="533337035" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-011.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-011_9209B708.wem</Path>
 				</File>
 				<File Id="533805615" Language="SFX">
 					<ShortName>Explosion Cannon Fire 02.wav</ShortName>
@@ -764,6 +781,10 @@
 					<ShortName>Moving_soldier-003.wav</ShortName>
 					<Path>SFX\Moving_soldier-003_5A140B9B.wem</Path>
 				</File>
+				<File Id="711329866" Language="SFX">
+					<ShortName>Piu-001.wav</ShortName>
+					<Path>SFX\Piu-001_9209B708.wem</Path>
+				</File>
 				<File Id="712780750" Language="SFX">
 					<ShortName>WarassetsAK47-2 Bursts 9x 05-003.wav</ShortName>
 					<Path>SFX\WarassetsAK47-2 Bursts 9x 05-003_5A140B9B.wem</Path>
@@ -775,6 +796,10 @@
 				<File Id="713371464" Language="SFX">
 					<ShortName>FIltered_MESS-003.wav</ShortName>
 					<Path>SFX\FIltered_MESS-003_9209B708.wem</Path>
+				</File>
+				<File Id="723862446" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-003.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-003_9209B708.wem</Path>
 				</File>
 				<File Id="733082762" Language="SFX">
 					<ShortName>WarassetsBoulder Explosion-003.wav</ShortName>
@@ -852,6 +877,10 @@
 					<ShortName>Tearheavy-007.wav</ShortName>
 					<Path>SFX\Tearheavy-007_5A140B9B.wem</Path>
 				</File>
+				<File Id="820982316" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-007.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-007_9209B708.wem</Path>
+				</File>
 				<File Id="823799610" Language="SFX">
 					<ShortName>S_SFX_VS_CIN_AkOneshotPrince.wav</ShortName>
 					<Path>SFX\S_SFX_VS_CIN_AkOneshotPrince_5C9A0ED7.wem</Path>
@@ -883,6 +912,10 @@
 				<File Id="854569430" Language="SFX">
 					<ShortName>Moving_soldier-002.wav</ShortName>
 					<Path>SFX\Moving_soldier-002_5A140B9B.wem</Path>
+				</File>
+				<File Id="859901820" Language="SFX">
+					<ShortName>FLy.wav</ShortName>
+					<Path>SFX\FLy_9209B708.wem</Path>
 				</File>
 				<File Id="863517882" Language="SFX">
 					<ShortName>S_SFX_VS_Stickback2.wav</ShortName>
@@ -936,9 +969,17 @@
 					<ShortName>Tearlight-002.wav</ShortName>
 					<Path>SFX\Tearlight-002_5A140B9B.wem</Path>
 				</File>
+				<File Id="897545716" Language="SFX">
+					<ShortName>Piu-002.wav</ShortName>
+					<Path>SFX\Piu-002_9209B708.wem</Path>
+				</File>
 				<File Id="898758585" Language="SFX">
 					<ShortName>S_SFX_POC_PAPERSEQ-014.wav</ShortName>
 					<Path>SFX\S_SFX_POC_PAPERSEQ-014_9209B708.wem</Path>
+				</File>
+				<File Id="900671001" Language="SFX">
+					<ShortName>Fly2.wav</ShortName>
+					<Path>SFX\Fly2_9209B708.wem</Path>
 				</File>
 				<File Id="901811174" Language="SFX">
 					<ShortName>S_DIA_TOR_SUN.wav</ShortName>
@@ -1003,6 +1044,10 @@
 				<File Id="973649855" Language="SFX">
 					<ShortName>Tearmed-006.wav</ShortName>
 					<Path>SFX\Tearmed-006_5A140B9B.wem</Path>
+				</File>
+				<File Id="983225646" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-009.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-009_9209B708.wem</Path>
 				</File>
 				<File Id="992807401" Language="SFX">
 					<ShortName>FIltered_SPEECH-001.wav</ShortName>
@@ -1095,6 +1140,10 @@
 				<File Id="1067278692" Language="SFX">
 					<ShortName>Tearlight-014.wav</ShortName>
 					<Path>SFX\Tearlight-014_5A140B9B.wem</Path>
+				</File>
+				<File Id="1071672949" Language="SFX">
+					<ShortName>S_SFX_LIYASDRESS-002.wav</ShortName>
+					<Path>SFX\S_SFX_LIYASDRESS-002_9209B708.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
