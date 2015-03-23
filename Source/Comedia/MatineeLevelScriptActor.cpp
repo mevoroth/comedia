@@ -13,11 +13,7 @@ AMatineeLevelScriptActor::AMatineeLevelScriptActor(const FObjectInitializer& FOI
 
 bool AMatineeLevelScriptActor::TickFlipbook(float DeltaSeconds, float& CurrentFrame)
 {
-	if (1.f / DeltaSeconds > _FrameRate)
-	{
-		DeltaSeconds = 1.f / _FrameRate;
-	}
-	_ElapsedTime += DeltaSeconds;
+	_ElapsedTime += DeltaSeconds * 0.75f;
 	if (_ElapsedTime >= _Length)
 	{
 		_ElapsedTime -= _Length;

@@ -7,6 +7,7 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	1404066300	Ambiances			\Default Work Unit\Master Audio Bus\HDR BUS\Ambiances	
 	1467963117	Weapon2			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Weapon2	
 	1838596002	Cinematiq			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq	
+	1859188355	Iron			\Default Work Unit\Master Audio Bus\HDR BUS\Iron	
 	2128182023	Distant rev			\Default Work Unit\Master Audio Bus\Monrovia\Distant rev	
 	2277428620	Low SFX			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Low SFX	
 	2376466361	Other			\Default Work Unit\Master Audio Bus\HDR BUS\Other	
