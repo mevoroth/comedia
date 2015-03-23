@@ -24,6 +24,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3129425356	Endscene			\Default Work Unit\VS\Endscene	
 	3231829122	Cin_Burstshot_Prince			\Default Work Unit\VS\Cin_Burstshot_Prince	
 	3287955815	Cin_Dyingsoldier			\Default Work Unit\VS\Cin_Dyingsoldier	
+	3470499176	Dia_Tor_Sun			\Default Work Unit\Torture\Dia_Tor_Sun	
 	3815088494	Stop_soldier			\Default Work Unit\VS\Stop_soldier	
 	4007042535	TP_PRINCE			\Default Work Unit\VS\TP_PRINCE	
 
@@ -263,6 +264,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	885351302	S_SFX_VS_Stickback	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_VS_Stickback_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Affiches\Handling\Stick\S_SFX_VS_Stickback		34539
 	895222826	Tearlight-002	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Tearlight-002_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Affiches\Handling\Tearing\0 30\Tearlight-002		109059
 	898758585	S_SFX_POC_PAPERSEQ-014	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_POC_PAPERSEQ-014_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Affiches\Handling\Paperseq\S_SFX_POC_PAPERSEQ-014		29200
+	901811174	S_DIA_TOR_Sun	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_SUN_D78E6736.wem		\Actor-Mixer Hierarchy\Default Work Unit\Torture\Global torture\Dialogs\S_DIA_TOR_Sun		580798
 	902722613	FIltered_SewingC-004	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\FIltered_SewingC-004_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Sewinghouse\Sewingc\FIltered_SewingC-004		145598
 	905012821	Tearheavy-006	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Tearheavy-006_5A140B9B.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Affiches\Handling\Tearing\61 100\Tearheavy-006		119235
 	905562472	FIltered_Dog-005	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\FIltered_Dog-005_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\VS\Ambiances\Ambiantsounds\Dog\FIltered_Dog-005		105777

@@ -15,6 +15,7 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	3224081837	Normal SFX			\Default Work Unit\Master Audio Bus\HDR BUS\Normal SFX	
 	3430673687	Paper Bus			\Default Work Unit\Master Audio Bus\Monrovia\Paper Bus	
 	3472939855	Voice bus			\Default Work Unit\Master Audio Bus\Monrovia\Voice bus	
+	3518279182	Burning			\Default Work Unit\Master Audio Bus\HDR BUS\Burning	
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 	3893417221	Weapon			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Weapon	
 	3991942870	Music			\Default Work Unit\Master Audio Bus\Monrovia\Cinematiq\Music	

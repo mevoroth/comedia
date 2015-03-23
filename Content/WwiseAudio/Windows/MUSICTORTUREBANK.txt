@@ -6,7 +6,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	4184794294	Outro			\Default Work Unit\Torture\Outro	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	3514092254	Sunburn_time			\Default Work Unit\Sunburn_time	
+	364469942	Sunburn_time_music			\Default Work Unit\Sunburn_time_music	
 
 Effect plug-ins	ID	Name	Type				Notes
 	113368125	Wwise Time Stretch (Custom)	Wwise Time Stretch			
@@ -19,6 +19,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	461330647	S_MUS_TOR_THUNDER	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_THUNDER_11182432.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Thunder\Thunder\S_MUS_TOR_THUNDER		4308515
 	528393396	Ironground	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_SFX_TOR_IronGroundv2_820C42F8.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\Ironground		104510
 	671002750	S_MUS_TOR_SUN	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_MUS_TOR_SUNv2&OUTRO_84C9299C.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Transit_Thunder_Sun\Sun\S_MUS_TOR_SUN		8998084
-	776626243	S_DIA_TOR_Intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_INTRO_9209B708.wem		\Actor-Mixer Hierarchy\Default Work Unit\Torture\Global torture\Dialogs\S_DIA_TOR_Intro		993749
+	776626243	S_DIA_TOR_Intro	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\S_DIA_TOR_INTRO_C202BF52.wem		\Actor-Mixer Hierarchy\Default Work Unit\Torture\Global torture\Dialogs\S_DIA_TOR_Intro		993873
 	888132214	Dirt Clusters	C:\Users\louis-marie.alet\Documents\WwiseProjects\TEST PAPIER DECHIRE\.cache\Windows\SFX\Explosions - Explosion Medium Dirt Clusters_0B4E9AE8.wem		\Interactive Music Hierarchy\Default Work Unit\Phase switch\Sun\Sun\Dirt Clusters		128657
 
